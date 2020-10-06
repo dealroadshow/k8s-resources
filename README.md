@@ -1,4 +1,4 @@
-#Dealroadshow k8s resources
+# Dealroadshow k8s resources
 
 This repository contains PHP classes, corresponding to Kubernetes API definitions.
 Classes in this repository are generated with [kodegen](https://github.com/dealroadshow/kodegen)
