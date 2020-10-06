@@ -1,0 +1,754 @@
+<?php 
+
+namespace Dealroadshow\K8S\Data;
+
+use Dealroadshow\K8S\Data\Collection\ContainerList;
+use Dealroadshow\K8S\Data\Collection\EphemeralContainerList;
+use Dealroadshow\K8S\Data\Collection\HostAliasList;
+use Dealroadshow\K8S\Data\Collection\LocalObjectReferenceList;
+use Dealroadshow\K8S\Data\Collection\PodReadinessGateList;
+use Dealroadshow\K8S\Data\Collection\QuantityMap;
+use Dealroadshow\K8S\Data\Collection\StringMap;
+use Dealroadshow\K8S\Data\Collection\TolerationList;
+use Dealroadshow\K8S\Data\Collection\TopologySpreadConstraintList;
+use Dealroadshow\K8S\Data\Collection\VolumeList;
+use JsonSerializable;
+
+/**
+ * PodSpec is a description of a pod.
+ */
+class PodSpec implements JsonSerializable
+{
+    /**
+     * Optional duration in seconds the pod may be active on the node relative to
+     * StartTime before the system will actively try to mark it failed and kill
+     * associated containers. Value must be a positive integer.
+     *
+     * @var int|null
+     */
+    private ?int $activeDeadlineSeconds = null;
+
+    /**
+     * If specified, the pod's scheduling constraints
+     */
+    private Affinity $affinity;
+
+    /**
+     * AutomountServiceAccountToken indicates whether a service account token should be
+     * automatically mounted.
+     *
+     * @var bool|null
+     */
+    private ?bool $automountServiceAccountToken = null;
+
+    /**
+     * List of containers belonging to the pod. Containers cannot currently be added or
+     * removed. There must be at least one container in a Pod. Cannot be updated.
+     */
+    private ContainerList $containers;
+
+    /**
+     * Specifies the DNS parameters of a pod. Parameters specified here will be merged
+     * to the generated DNS configuration based on DNSPolicy.
+     */
+    private PodDNSConfig $dnsConfig;
+
+    /**
+     * Set DNS policy for the pod. Defaults to "ClusterFirst". Valid values are
+     * 'ClusterFirstWithHostNet', 'ClusterFirst', 'Default' or 'None'. DNS parameters
+     * given in DNSConfig will be merged with the policy selected with DNSPolicy. To
+     * have DNS options set along with hostNetwork, you have to specify DNS policy
+     * explicitly to 'ClusterFirstWithHostNet'.
+     *
+     * @var string|null
+     */
+    private ?string $dnsPolicy = null;
+
+    /**
+     * EnableServiceLinks indicates whether information about services should be
+     * injected into pod's environment variables, matching the syntax of Docker links.
+     * Optional: Defaults to true.
+     *
+     * @var bool|null
+     */
+    private ?bool $enableServiceLinks = null;
+
+    /**
+     * List of ephemeral containers run in this pod. Ephemeral containers may be run in
+     * an existing pod to perform user-initiated actions such as debugging. This list
+     * cannot be specified when creating a pod, and it cannot be modified by updating
+     * the pod spec. In order to add an ephemeral container to an existing pod, use the
+     * pod's ephemeralcontainers subresource. This field is alpha-level and is only
+     * honored by servers that enable the EphemeralContainers feature.
+     */
+    private EphemeralContainerList $ephemeralContainers;
+
+    /**
+     * HostAliases is an optional list of hosts and IPs that will be injected into the
+     * pod's hosts file if specified. This is only valid for non-hostNetwork pods.
+     */
+    private HostAliasList $hostAliases;
+
+    /**
+     * Use the host's ipc namespace. Optional: Default to false.
+     *
+     * @var bool|null
+     */
+    private ?bool $hostIPC = null;
+
+    /**
+     * Host networking requested for this pod. Use the host's network namespace. If
+     * this option is set, the ports that will be used must be specified. Default to
+     * false.
+     *
+     * @var bool|null
+     */
+    private ?bool $hostNetwork = null;
+
+    /**
+     * Use the host's pid namespace. Optional: Default to false.
+     *
+     * @var bool|null
+     */
+    private ?bool $hostPID = null;
+
+    /**
+     * Specifies the hostname of the Pod If not specified, the pod's hostname will be
+     * set to a system-defined value.
+     *
+     * @var string|null
+     */
+    private ?string $hostname = null;
+
+    /**
+     * ImagePullSecrets is an optional list of references to secrets in the same
+     * namespace to use for pulling any of the images used by this PodSpec. If
+     * specified, these secrets will be passed to individual puller implementations for
+     * them to use. For example, in the case of docker, only DockerConfig type secrets
+     * are honored. More info:
+     * https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
+     */
+    private LocalObjectReferenceList $imagePullSecrets;
+
+    /**
+     * List of initialization containers belonging to the pod. Init containers are
+     * executed in order prior to containers being started. If any init container
+     * fails, the pod is considered to have failed and is handled according to its
+     * restartPolicy. The name for an init container or normal container must be unique
+     * among all containers. Init containers may not have Lifecycle actions, Readiness
+     * probes, Liveness probes, or Startup probes. The resourceRequirements of an init
+     * container are taken into account during scheduling by finding the highest
+     * request/limit for each resource type, and then using the max of of that value or
+     * the sum of the normal containers. Limits are applied to init containers in a
+     * similar fashion. Init containers cannot currently be added or removed. Cannot be
+     * updated. More info:
+     * https://kubernetes.io/docs/concepts/workloads/pods/init-containers/
+     */
+    private ContainerList $initContainers;
+
+    /**
+     * NodeName is a request to schedule this pod onto a specific node. If it is
+     * non-empty, the scheduler simply schedules this pod onto that node, assuming that
+     * it fits resource requirements.
+     *
+     * @var string|null
+     */
+    private ?string $nodeName = null;
+
+    /**
+     * NodeSelector is a selector which must be true for the pod to fit on a node.
+     * Selector which must match a node's labels for the pod to be scheduled on that
+     * node. More info:
+     * https://kubernetes.io/docs/concepts/configuration/assign-pod-node/
+     */
+    private StringMap $nodeSelector;
+
+    /**
+     * Overhead represents the resource overhead associated with running a pod for a
+     * given RuntimeClass. This field will be autopopulated at admission time by the
+     * RuntimeClass admission controller. If the RuntimeClass admission controller is
+     * enabled, overhead must not be set in Pod create requests. The RuntimeClass
+     * admission controller will reject Pod create requests which have the overhead
+     * already set. If RuntimeClass is configured and selected in the PodSpec, Overhead
+     * will be set to the value defined in the corresponding RuntimeClass, otherwise it
+     * will remain unset and treated as zero. More info:
+     * https://git.k8s.io/enhancements/keps/sig-node/20190226-pod-overhead.md This
+     * field is alpha-level as of Kubernetes v1.16, and is only honored by servers that
+     * enable the PodOverhead feature.
+     */
+    private QuantityMap $overhead;
+
+    /**
+     * PreemptionPolicy is the Policy for preempting pods with lower priority. One of
+     * Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. This
+     * field is alpha-level and is only honored by servers that enable the
+     * NonPreemptingPriority feature.
+     *
+     * @var string|null
+     */
+    private ?string $preemptionPolicy = null;
+
+    /**
+     * The priority value. Various system components use this field to find the
+     * priority of the pod. When Priority Admission Controller is enabled, it prevents
+     * users from setting this field. The admission controller populates this field
+     * from PriorityClassName. The higher the value, the higher the priority.
+     *
+     * @var int|null
+     */
+    private ?int $priority = null;
+
+    /**
+     * If specified, indicates the pod's priority. "system-node-critical" and
+     * "system-cluster-critical" are two special keywords which indicate the highest
+     * priorities with the former being the highest priority. Any other name must be
+     * defined by creating a PriorityClass object with that name. If not specified, the
+     * pod priority will be default or zero if there is no default.
+     *
+     * @var string|null
+     */
+    private ?string $priorityClassName = null;
+
+    /**
+     * If specified, all readiness gates will be evaluated for pod readiness. A pod is
+     * ready when all its containers are ready AND all conditions specified in the
+     * readiness gates have status equal to "True" More info:
+     * https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md
+     */
+    private PodReadinessGateList $readinessGates;
+
+    /**
+     * Restart policy for all containers within the pod. One of Always, OnFailure,
+     * Never. Default to Always. More info:
+     * https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
+     *
+     * @var string|null
+     */
+    private ?string $restartPolicy = null;
+
+    /**
+     * RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group, which
+     * should be used to run this pod.  If no RuntimeClass resource matches the named
+     * class, the pod will not be run. If unset or empty, the "legacy" RuntimeClass
+     * will be used, which is an implicit class with an empty definition that uses the
+     * default runtime handler. More info:
+     * https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md This is a beta
+     * feature as of Kubernetes v1.14.
+     *
+     * @var string|null
+     */
+    private ?string $runtimeClassName = null;
+
+    /**
+     * If specified, the pod will be dispatched by specified scheduler. If not
+     * specified, the pod will be dispatched by default scheduler.
+     *
+     * @var string|null
+     */
+    private ?string $schedulerName = null;
+
+    /**
+     * SecurityContext holds pod-level security attributes and common container
+     * settings. Optional: Defaults to empty.  See type description for default values
+     * of each field.
+     */
+    private PodSecurityContext $securityContext;
+
+    /**
+     * DeprecatedServiceAccount is a depreciated alias for ServiceAccountName.
+     * Deprecated: Use serviceAccountName instead.
+     *
+     * @var string|null
+     */
+    private ?string $serviceAccount = null;
+
+    /**
+     * ServiceAccountName is the name of the ServiceAccount to use to run this pod.
+     * More info:
+     * https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+     *
+     * @var string|null
+     */
+    private ?string $serviceAccountName = null;
+
+    /**
+     * Share a single process namespace between all of the containers in a pod. When
+     * this is set containers will be able to view and signal processes from other
+     * containers in the same pod, and the first process in each container will not be
+     * assigned PID 1. HostPID and ShareProcessNamespace cannot both be set. Optional:
+     * Default to false. This field is beta-level and may be disabled with the
+     * PodShareProcessNamespace feature.
+     *
+     * @var bool|null
+     */
+    private ?bool $shareProcessNamespace = null;
+
+    /**
+     * If specified, the fully qualified Pod hostname will be
+     * "<hostname>.<subdomain>.<pod namespace>.svc.<cluster domain>". If not specified,
+     * the pod will not have a domainname at all.
+     *
+     * @var string|null
+     */
+    private ?string $subdomain = null;
+
+    /**
+     * Optional duration in seconds the pod needs to terminate gracefully. May be
+     * decreased in delete request. Value must be non-negative integer. The value zero
+     * indicates delete immediately. If this value is nil, the default grace period
+     * will be used instead. The grace period is the duration in seconds after the
+     * processes running in the pod are sent a termination signal and the time when the
+     * processes are forcibly halted with a kill signal. Set this value longer than the
+     * expected cleanup time for your process. Defaults to 30 seconds.
+     *
+     * @var int|null
+     */
+    private ?int $terminationGracePeriodSeconds = null;
+
+    /**
+     * If specified, the pod's tolerations.
+     */
+    private TolerationList $tolerations;
+
+    /**
+     * TopologySpreadConstraints describes how a group of pods ought to spread across
+     * topology domains. Scheduler will schedule pods in a way which abides by the
+     * constraints. This field is alpha-level and is only honored by clusters that
+     * enables the EvenPodsSpread feature. All topologySpreadConstraints are ANDed.
+     */
+    private TopologySpreadConstraintList $topologySpreadConstraints;
+
+    /**
+     * List of volumes that can be mounted by containers belonging to the pod. More
+     * info: https://kubernetes.io/docs/concepts/storage/volumes
+     */
+    private VolumeList $volumes;
+
+    public function __construct()
+    {
+        $this->affinity = new Affinity();
+        $this->containers = new ContainerList();
+        $this->dnsConfig = new PodDNSConfig();
+        $this->ephemeralContainers = new EphemeralContainerList();
+        $this->hostAliases = new HostAliasList();
+        $this->imagePullSecrets = new LocalObjectReferenceList();
+        $this->initContainers = new ContainerList();
+        $this->nodeSelector = new StringMap();
+        $this->overhead = new QuantityMap();
+        $this->readinessGates = new PodReadinessGateList();
+        $this->securityContext = new PodSecurityContext();
+        $this->tolerations = new TolerationList();
+        $this->topologySpreadConstraints = new TopologySpreadConstraintList();
+        $this->volumes = new VolumeList();
+    }
+
+    public function affinity(): Affinity
+    {
+        return $this->affinity;
+    }
+
+    public function containers(): ContainerList
+    {
+        return $this->containers;
+    }
+
+    public function dnsConfig(): PodDNSConfig
+    {
+        return $this->dnsConfig;
+    }
+
+    public function ephemeralContainers(): EphemeralContainerList
+    {
+        return $this->ephemeralContainers;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getActiveDeadlineSeconds(): ?int
+    {
+        return $this->activeDeadlineSeconds;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getAutomountServiceAccountToken(): ?bool
+    {
+        return $this->automountServiceAccountToken;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDnsPolicy(): ?string
+    {
+        return $this->dnsPolicy;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getEnableServiceLinks(): ?bool
+    {
+        return $this->enableServiceLinks;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getHostIPC(): ?bool
+    {
+        return $this->hostIPC;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getHostNetwork(): ?bool
+    {
+        return $this->hostNetwork;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getHostPID(): ?bool
+    {
+        return $this->hostPID;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getHostname(): ?string
+    {
+        return $this->hostname;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getNodeName(): ?string
+    {
+        return $this->nodeName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPreemptionPolicy(): ?string
+    {
+        return $this->preemptionPolicy;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getPriority(): ?int
+    {
+        return $this->priority;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPriorityClassName(): ?string
+    {
+        return $this->priorityClassName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRestartPolicy(): ?string
+    {
+        return $this->restartPolicy;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getRuntimeClassName(): ?string
+    {
+        return $this->runtimeClassName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSchedulerName(): ?string
+    {
+        return $this->schedulerName;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getServiceAccount(): ?string
+    {
+        return $this->serviceAccount;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getServiceAccountName(): ?string
+    {
+        return $this->serviceAccountName;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getShareProcessNamespace(): ?bool
+    {
+        return $this->shareProcessNamespace;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getSubdomain(): ?string
+    {
+        return $this->subdomain;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getTerminationGracePeriodSeconds(): ?int
+    {
+        return $this->terminationGracePeriodSeconds;
+    }
+
+    public function hostAliases(): HostAliasList
+    {
+        return $this->hostAliases;
+    }
+
+    public function imagePullSecrets(): LocalObjectReferenceList
+    {
+        return $this->imagePullSecrets;
+    }
+
+    public function initContainers(): ContainerList
+    {
+        return $this->initContainers;
+    }
+
+    public function nodeSelector(): StringMap
+    {
+        return $this->nodeSelector;
+    }
+
+    public function overhead(): QuantityMap
+    {
+        return $this->overhead;
+    }
+
+    public function readinessGates(): PodReadinessGateList
+    {
+        return $this->readinessGates;
+    }
+
+    public function securityContext(): PodSecurityContext
+    {
+        return $this->securityContext;
+    }
+
+    public function setActiveDeadlineSeconds(int $activeDeadlineSeconds): self
+    {
+        $this->activeDeadlineSeconds = $activeDeadlineSeconds;
+
+        return $this;
+    }
+
+    public function setAutomountServiceAccountToken(bool $automountServiceAccountToken): self
+    {
+        $this->automountServiceAccountToken = $automountServiceAccountToken;
+
+        return $this;
+    }
+
+    public function setDnsPolicy(string $dnsPolicy): self
+    {
+        $this->dnsPolicy = $dnsPolicy;
+
+        return $this;
+    }
+
+    public function setEnableServiceLinks(bool $enableServiceLinks): self
+    {
+        $this->enableServiceLinks = $enableServiceLinks;
+
+        return $this;
+    }
+
+    public function setHostIPC(bool $hostIPC): self
+    {
+        $this->hostIPC = $hostIPC;
+
+        return $this;
+    }
+
+    public function setHostNetwork(bool $hostNetwork): self
+    {
+        $this->hostNetwork = $hostNetwork;
+
+        return $this;
+    }
+
+    public function setHostPID(bool $hostPID): self
+    {
+        $this->hostPID = $hostPID;
+
+        return $this;
+    }
+
+    public function setHostname(string $hostname): self
+    {
+        $this->hostname = $hostname;
+
+        return $this;
+    }
+
+    public function setNodeName(string $nodeName): self
+    {
+        $this->nodeName = $nodeName;
+
+        return $this;
+    }
+
+    public function setPreemptionPolicy(string $preemptionPolicy): self
+    {
+        $this->preemptionPolicy = $preemptionPolicy;
+
+        return $this;
+    }
+
+    public function setPriority(int $priority): self
+    {
+        $this->priority = $priority;
+
+        return $this;
+    }
+
+    public function setPriorityClassName(string $priorityClassName): self
+    {
+        $this->priorityClassName = $priorityClassName;
+
+        return $this;
+    }
+
+    public function setRestartPolicy(string $restartPolicy): self
+    {
+        $this->restartPolicy = $restartPolicy;
+
+        return $this;
+    }
+
+    public function setRuntimeClassName(string $runtimeClassName): self
+    {
+        $this->runtimeClassName = $runtimeClassName;
+
+        return $this;
+    }
+
+    public function setSchedulerName(string $schedulerName): self
+    {
+        $this->schedulerName = $schedulerName;
+
+        return $this;
+    }
+
+    public function setServiceAccount(string $serviceAccount): self
+    {
+        $this->serviceAccount = $serviceAccount;
+
+        return $this;
+    }
+
+    public function setServiceAccountName(string $serviceAccountName): self
+    {
+        $this->serviceAccountName = $serviceAccountName;
+
+        return $this;
+    }
+
+    public function setShareProcessNamespace(bool $shareProcessNamespace): self
+    {
+        $this->shareProcessNamespace = $shareProcessNamespace;
+
+        return $this;
+    }
+
+    public function setSubdomain(string $subdomain): self
+    {
+        $this->subdomain = $subdomain;
+
+        return $this;
+    }
+
+    public function setTerminationGracePeriodSeconds(int $terminationGracePeriodSeconds): self
+    {
+        $this->terminationGracePeriodSeconds = $terminationGracePeriodSeconds;
+
+        return $this;
+    }
+
+    public function tolerations(): TolerationList
+    {
+        return $this->tolerations;
+    }
+
+    public function topologySpreadConstraints(): TopologySpreadConstraintList
+    {
+        return $this->topologySpreadConstraints;
+    }
+
+    public function volumes(): VolumeList
+    {
+        return $this->volumes;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'activeDeadlineSeconds' => $this->activeDeadlineSeconds,
+            'affinity' => $this->affinity,
+            'automountServiceAccountToken' => $this->automountServiceAccountToken,
+            'containers' => $this->containers,
+            'dnsConfig' => $this->dnsConfig,
+            'dnsPolicy' => $this->dnsPolicy,
+            'enableServiceLinks' => $this->enableServiceLinks,
+            'ephemeralContainers' => $this->ephemeralContainers,
+            'hostAliases' => $this->hostAliases,
+            'hostIPC' => $this->hostIPC,
+            'hostNetwork' => $this->hostNetwork,
+            'hostPID' => $this->hostPID,
+            'hostname' => $this->hostname,
+            'imagePullSecrets' => $this->imagePullSecrets,
+            'initContainers' => $this->initContainers,
+            'nodeName' => $this->nodeName,
+            'nodeSelector' => $this->nodeSelector,
+            'overhead' => $this->overhead,
+            'preemptionPolicy' => $this->preemptionPolicy,
+            'priority' => $this->priority,
+            'priorityClassName' => $this->priorityClassName,
+            'readinessGates' => $this->readinessGates,
+            'restartPolicy' => $this->restartPolicy,
+            'runtimeClassName' => $this->runtimeClassName,
+            'schedulerName' => $this->schedulerName,
+            'securityContext' => $this->securityContext,
+            'serviceAccount' => $this->serviceAccount,
+            'serviceAccountName' => $this->serviceAccountName,
+            'shareProcessNamespace' => $this->shareProcessNamespace,
+            'subdomain' => $this->subdomain,
+            'terminationGracePeriodSeconds' => $this->terminationGracePeriodSeconds,
+            'tolerations' => $this->tolerations,
+            'topologySpreadConstraints' => $this->topologySpreadConstraints,
+            'volumes' => $this->volumes,
+        ];
+    }
+}

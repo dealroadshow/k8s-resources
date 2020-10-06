@@ -1,0 +1,139 @@
+<?php 
+
+namespace Dealroadshow\K8S\API\Scheduling;
+
+use Dealroadshow\K8S\APIResourceInterface;
+use Dealroadshow\K8S\Data\ObjectMeta;
+
+/**
+ * PriorityClass defines mapping from a priority class name to the priority integer
+ * value. The value can be any valid integer.
+ */
+class PriorityClass implements APIResourceInterface
+{
+    const API_VERSION = 'scheduling.k8s.io/v1';
+    const KIND = 'PriorityClass';
+
+    /**
+     * description is an arbitrary string that usually provides guidelines on when this
+     * priority class should be used.
+     *
+     * @var string|null
+     */
+    private ?string $description = null;
+
+    /**
+     * globalDefault specifies whether this PriorityClass should be considered as the
+     * default priority for pods that do not have any priority class. Only one
+     * PriorityClass can be marked as `globalDefault`. However, if more than one
+     * PriorityClasses exists with their `globalDefault` field set to true, the
+     * smallest value of such global default PriorityClasses will be used as the
+     * default priority.
+     *
+     * @var bool|null
+     */
+    private ?bool $globalDefault = null;
+
+    /**
+     * Standard object's metadata. More info:
+     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
+    private ObjectMeta $metadata;
+
+    /**
+     * PreemptionPolicy is the Policy for preempting pods with lower priority. One of
+     * Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. This
+     * field is alpha-level and is only honored by servers that enable the
+     * NonPreemptingPriority feature.
+     *
+     * @var string|null
+     */
+    private ?string $preemptionPolicy = null;
+
+    /**
+     * The value of this priority class. This is the actual priority that pods receive
+     * when they have the name of this class in their pod spec.
+     */
+    private int $value;
+
+    public function __construct(int $value)
+    {
+        $this->metadata = new ObjectMeta();
+        $this->value = $value;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return bool|null
+     */
+    public function getGlobalDefault(): ?bool
+    {
+        return $this->globalDefault;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getPreemptionPolicy(): ?string
+    {
+        return $this->preemptionPolicy;
+    }
+
+    public function getValue(): int
+    {
+        return $this->value;
+    }
+
+    public function metadata(): ObjectMeta
+    {
+        return $this->metadata;
+    }
+
+    public function setDescription(string $description): self
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    public function setGlobalDefault(bool $globalDefault): self
+    {
+        $this->globalDefault = $globalDefault;
+
+        return $this;
+    }
+
+    public function setPreemptionPolicy(string $preemptionPolicy): self
+    {
+        $this->preemptionPolicy = $preemptionPolicy;
+
+        return $this;
+    }
+
+    public function setValue(int $value): self
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'apiVersion' => self::API_VERSION,
+            'kind' => self::KIND,
+            'description' => $this->description,
+            'globalDefault' => $this->globalDefault,
+            'metadata' => $this->metadata,
+            'preemptionPolicy' => $this->preemptionPolicy,
+            'value' => $this->value,
+        ];
+    }
+}

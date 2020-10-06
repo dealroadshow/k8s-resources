@@ -1,0 +1,76 @@
+<?php 
+
+namespace Dealroadshow\K8S\API\Auditregistration;
+
+use Dealroadshow\K8S\APIResourceListInterface;
+use Dealroadshow\K8S\Data\ListMeta;
+
+/**
+ * AuditSinkList is a list of AuditSink items.
+ */
+class AuditSinkList implements APIResourceListInterface
+{
+    const API_VERSION = 'auditregistration.k8s.io/v1alpha1';
+    const KIND = 'AuditSinkList';
+
+    /**
+     * @var AuditSink[]|array
+     */
+    private array $items = [];
+    private ListMeta $metadata;
+
+    public function __construct()
+    {
+        $this->items = [];
+        $this->metadata = new ListMeta();
+    }
+
+    public function add(AuditSink $value): self
+    {
+        $this->items[] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @var AuditSink[]|array $items
+     *
+     * @return self
+     */
+    public function addAll(array $items): self
+    {
+        $this->items = array_merge($this->items, $items);
+
+        return $this;
+    }
+
+    /**
+     * @return AuditSink[]|array
+     */
+    public function all(): array
+    {
+        return $this->items;
+    }
+
+    public function clear(): self
+    {
+        $this->items = [];
+
+        return $this;
+    }
+
+    public function metadata(): ListMeta
+    {
+        return $this->metadata;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'apiVersion' => self::API_VERSION,
+            'kind' => self::KIND,
+            'items' => $this->items,
+            'metadata' => $this->metadata,
+        ];
+    }
+}

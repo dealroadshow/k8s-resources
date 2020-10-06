@@ -1,0 +1,80 @@
+<?php 
+
+namespace Dealroadshow\K8S\API\Discovery;
+
+use Dealroadshow\K8S\APIResourceListInterface;
+use Dealroadshow\K8S\Data\ListMeta;
+
+/**
+ * EndpointSliceList represents a list of endpoint slices
+ */
+class EndpointSliceList implements APIResourceListInterface
+{
+    const API_VERSION = 'discovery.k8s.io/v1alpha1';
+    const KIND = 'EndpointSliceList';
+
+    /**
+     * @var EndpointSlice[]|array
+     */
+    private array $items = [];
+
+    /**
+     * Standard list metadata.
+     */
+    private ListMeta $metadata;
+
+    public function __construct()
+    {
+        $this->items = [];
+        $this->metadata = new ListMeta();
+    }
+
+    public function add(EndpointSlice $value): self
+    {
+        $this->items[] = $value;
+
+        return $this;
+    }
+
+    /**
+     * @var EndpointSlice[]|array $items
+     *
+     * @return self
+     */
+    public function addAll(array $items): self
+    {
+        $this->items = array_merge($this->items, $items);
+
+        return $this;
+    }
+
+    /**
+     * @return EndpointSlice[]|array
+     */
+    public function all(): array
+    {
+        return $this->items;
+    }
+
+    public function clear(): self
+    {
+        $this->items = [];
+
+        return $this;
+    }
+
+    public function metadata(): ListMeta
+    {
+        return $this->metadata;
+    }
+
+    public function jsonSerialize()
+    {
+        return [
+            'apiVersion' => self::API_VERSION,
+            'kind' => self::KIND,
+            'items' => $this->items,
+            'metadata' => $this->metadata,
+        ];
+    }
+}

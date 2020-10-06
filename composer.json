@@ -1,0 +1,23 @@
+{
+    "name": "dealroadshow/k8s-resources",
+    "description": "PHP definitions of Kubernetes API resources",
+    "type": "library",
+    "require": {
+        "php": "^7.4",
+        "ext-json": "*"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Petr Buchin",
+            "email": "petrbuchyn@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Dealroadshow\\K8S\\": "src/"
+        }
+    }
+}
