@@ -27,19 +27,15 @@ class ObjectMeta implements JsonSerializable
      * resources with same name and namespace in different clusters. This field is not
      * set anywhere right now and apiserver is going to ignore it if set in create or
      * update request.
-     *
-     * @var string|null
      */
-    private ?string $clusterName = null;
+    private string|null $clusterName = null;
 
     /**
      * Number of seconds allowed for this object to gracefully terminate before it will
      * be removed from the system. Only set when deletionTimestamp is also set. May
      * only be shortened. Read-only.
-     *
-     * @var int|null
      */
-    private ?int $deletionGracePeriodSeconds = null;
+    private int|null $deletionGracePeriodSeconds = null;
 
     /**
      * Must be empty before the object is deleted from the registry. Each entry is an
@@ -65,10 +61,8 @@ class ObjectMeta implements JsonSerializable
      *
      * Applied only if Name is not specified. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#idempotency
-     *
-     * @var string|null
      */
-    private ?string $generateName = null;
+    private string|null $generateName = null;
 
     /**
      * Map of string keys and values that can be used to organize and categorize (scope
@@ -93,10 +87,8 @@ class ObjectMeta implements JsonSerializable
      * appropriate name automatically. Name is primarily intended for creation
      * idempotence and configuration definition. Cannot be updated. More info:
      * http://kubernetes.io/docs/user-guide/identifiers#names
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * Namespace defines the space within each name must be unique. An empty namespace
@@ -106,10 +98,8 @@ class ObjectMeta implements JsonSerializable
      *
      * Must be a DNS_LABEL. Cannot be updated. More info:
      * http://kubernetes.io/docs/user-guide/namespaces
-     *
-     * @var string|null
      */
-    private ?string $namespace = null;
+    private string|null $namespace = null;
 
     /**
      * List of objects depended by this object. If ALL objects in the list have been
@@ -138,42 +128,27 @@ class ObjectMeta implements JsonSerializable
         return $this->finalizers;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getClusterName(): ?string
+    public function getClusterName(): string|null
     {
         return $this->clusterName;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getDeletionGracePeriodSeconds(): ?int
+    public function getDeletionGracePeriodSeconds(): int|null
     {
         return $this->deletionGracePeriodSeconds;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getGenerateName(): ?string
+    public function getGenerateName(): string|null
     {
         return $this->generateName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNamespace(): ?string
+    public function getNamespace(): string|null
     {
         return $this->namespace;
     }
@@ -228,7 +203,7 @@ class ObjectMeta implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'annotations' => $this->annotations,

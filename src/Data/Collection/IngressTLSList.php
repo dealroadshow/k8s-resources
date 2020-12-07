@@ -8,7 +8,7 @@ use JsonSerializable;
 class IngressTLSList implements JsonSerializable
 {
     /**
-     * @var IngressTLS[]|array
+     * @var IngressTLS[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class IngressTLSList implements JsonSerializable
     }
 
     /**
-     * @var IngressTLS[]|array $items
+     * @var IngressTLS[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class IngressTLSList implements JsonSerializable
     }
 
     /**
-     * @return IngressTLS[]|array
+     * @return IngressTLS[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class IngressTLSList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

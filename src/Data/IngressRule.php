@@ -23,10 +23,8 @@ class IngressRule implements JsonSerializable
      * Both these may change in the future. Incoming requests are matched against the
      * host before the IngressRuleValue. If the host is unspecified, the Ingress routes
      * all traffic based on the specified IngressRuleValue.
-     *
-     * @var string|null
      */
-    private ?string $host = null;
+    private string|null $host = null;
     private HTTPIngressRuleValue $http;
 
     public function __construct()
@@ -34,10 +32,7 @@ class IngressRule implements JsonSerializable
         $this->http = new HTTPIngressRuleValue();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHost(): ?string
+    public function getHost(): string|null
     {
         return $this->host;
     }
@@ -54,7 +49,7 @@ class IngressRule implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'host' => $this->host,

@@ -14,7 +14,7 @@ class EndpointSliceList implements APIResourceListInterface
     const KIND = 'EndpointSliceList';
 
     /**
-     * @var EndpointSlice[]|array
+     * @var EndpointSlice[]
      */
     private array $items = [];
 
@@ -37,7 +37,7 @@ class EndpointSliceList implements APIResourceListInterface
     }
 
     /**
-     * @var EndpointSlice[]|array $items
+     * @var EndpointSlice[] $items
      *
      * @return self
      */
@@ -49,7 +49,7 @@ class EndpointSliceList implements APIResourceListInterface
     }
 
     /**
-     * @return EndpointSlice[]|array
+     * @return EndpointSlice[]
      */
     public function all(): array
     {
@@ -68,7 +68,7 @@ class EndpointSliceList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

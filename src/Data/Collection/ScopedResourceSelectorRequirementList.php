@@ -8,7 +8,7 @@ use JsonSerializable;
 class ScopedResourceSelectorRequirementList implements JsonSerializable
 {
     /**
-     * @var ScopedResourceSelectorRequirement[]|array
+     * @var ScopedResourceSelectorRequirement[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class ScopedResourceSelectorRequirementList implements JsonSerializable
     }
 
     /**
-     * @var ScopedResourceSelectorRequirement[]|array $items
+     * @var ScopedResourceSelectorRequirement[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class ScopedResourceSelectorRequirementList implements JsonSerializable
     }
 
     /**
-     * @return ScopedResourceSelectorRequirement[]|array
+     * @return ScopedResourceSelectorRequirement[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class ScopedResourceSelectorRequirementList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

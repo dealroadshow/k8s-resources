@@ -52,10 +52,8 @@ class RuleWithOperations implements JsonSerializable
      * that only namespaced resources will match this rule. "*" means that there are no
      * scope restrictions. Subresources match the scope of their parent resource.
      * Default is "*".
-     *
-     * @var string|null
      */
-    private ?string $scope = null;
+    private string|null $scope = null;
 
     public function __construct()
     {
@@ -75,10 +73,7 @@ class RuleWithOperations implements JsonSerializable
         return $this->apiVersions;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getScope(): ?string
+    public function getScope(): string|null
     {
         return $this->scope;
     }
@@ -100,7 +95,7 @@ class RuleWithOperations implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiGroups' => $this->apiGroups,

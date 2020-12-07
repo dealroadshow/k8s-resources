@@ -14,7 +14,7 @@ class EndpointsList implements APIResourceListInterface
     const KIND = 'EndpointsList';
 
     /**
-     * @var Endpoints[]|array
+     * @var Endpoints[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class EndpointsList implements APIResourceListInterface
     }
 
     /**
-     * @var Endpoints[]|array $items
+     * @var Endpoints[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class EndpointsList implements APIResourceListInterface
     }
 
     /**
-     * @return Endpoints[]|array
+     * @return Endpoints[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class EndpointsList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

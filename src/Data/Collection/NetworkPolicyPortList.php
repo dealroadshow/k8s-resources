@@ -8,7 +8,7 @@ use JsonSerializable;
 class NetworkPolicyPortList implements JsonSerializable
 {
     /**
-     * @var NetworkPolicyPort[]|array
+     * @var NetworkPolicyPort[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class NetworkPolicyPortList implements JsonSerializable
     }
 
     /**
-     * @var NetworkPolicyPort[]|array $items
+     * @var NetworkPolicyPort[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class NetworkPolicyPortList implements JsonSerializable
     }
 
     /**
-     * @return NetworkPolicyPort[]|array
+     * @return NetworkPolicyPort[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class NetworkPolicyPortList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

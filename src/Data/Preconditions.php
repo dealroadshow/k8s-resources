@@ -12,34 +12,24 @@ class Preconditions implements JsonSerializable
 {
     /**
      * Specifies the target ResourceVersion
-     *
-     * @var string|null
      */
-    private ?string $resourceVersion = null;
+    private string|null $resourceVersion = null;
 
     /**
      * Specifies the target UID.
-     *
-     * @var string|null
      */
-    private ?string $uid = null;
+    private string|null $uid = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getResourceVersion(): ?string
+    public function getResourceVersion(): string|null
     {
         return $this->resourceVersion;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUid(): ?string
+    public function getUid(): string|null
     {
         return $this->uid;
     }
@@ -58,7 +48,7 @@ class Preconditions implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'resourceVersion' => $this->resourceVersion,

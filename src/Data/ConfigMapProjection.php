@@ -30,35 +30,25 @@ class ConfigMapProjection implements JsonSerializable
     /**
      * Name of the referent. More info:
      * https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * Specify whether the ConfigMap or its keys must be defined
-     *
-     * @var bool|null
      */
-    private ?bool $optional = null;
+    private bool|null $optional = null;
 
     public function __construct()
     {
         $this->items = new KeyToPathList();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getOptional(): ?bool
+    public function getOptional(): bool|null
     {
         return $this->optional;
     }
@@ -82,7 +72,7 @@ class ConfigMapProjection implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'items' => $this->items,

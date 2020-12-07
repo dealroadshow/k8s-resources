@@ -14,7 +14,7 @@ class NamespaceList implements APIResourceListInterface
     const KIND = 'NamespaceList';
 
     /**
-     * @var KubernetesNamespace[]|array
+     * @var KubernetesNamespace[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class NamespaceList implements APIResourceListInterface
     }
 
     /**
-     * @var KubernetesNamespace[]|array $items
+     * @var KubernetesNamespace[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class NamespaceList implements APIResourceListInterface
     }
 
     /**
-     * @return KubernetesNamespace[]|array
+     * @return KubernetesNamespace[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class NamespaceList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

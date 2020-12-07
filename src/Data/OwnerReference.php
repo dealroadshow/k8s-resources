@@ -21,17 +21,13 @@ class OwnerReference implements JsonSerializable
      * cannot be deleted from the key-value store until this reference is removed.
      * Defaults to false. To set this field, a user needs "delete" permission of the
      * owner, otherwise 422 (Unprocessable Entity) will be returned.
-     *
-     * @var bool|null
      */
-    private ?bool $blockOwnerDeletion = null;
+    private bool|null $blockOwnerDeletion = null;
 
     /**
      * If true, this reference points to the managing controller.
-     *
-     * @var bool|null
      */
-    private ?bool $controller = null;
+    private bool|null $controller = null;
 
     /**
      * Kind of the referent. More info:
@@ -64,18 +60,12 @@ class OwnerReference implements JsonSerializable
         return $this->apiVersion;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getBlockOwnerDeletion(): ?bool
+    public function getBlockOwnerDeletion(): bool|null
     {
         return $this->blockOwnerDeletion;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getController(): ?bool
+    public function getController(): bool|null
     {
         return $this->controller;
     }
@@ -137,7 +127,7 @@ class OwnerReference implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => $this->apiVersion,

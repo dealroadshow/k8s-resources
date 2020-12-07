@@ -2,7 +2,7 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\Data\Collection\QuantityMap;
+use Dealroadshow\K8S\Data\Collection\StringOrFloatMap;
 use JsonSerializable;
 
 /**
@@ -15,18 +15,18 @@ class LimitRangeItem implements JsonSerializable
      * Default resource requirement limit value by resource name if resource limit is
      * omitted.
      */
-    private QuantityMap $default;
+    private StringOrFloatMap $default;
 
     /**
      * DefaultRequest is the default resource requirement request value by resource
      * name if resource request is omitted.
      */
-    private QuantityMap $defaultRequest;
+    private StringOrFloatMap $defaultRequest;
 
     /**
      * Max usage constraints on this kind by resource name.
      */
-    private QuantityMap $max;
+    private StringOrFloatMap $max;
 
     /**
      * MaxLimitRequestRatio if specified, the named resource must have a request and
@@ -34,58 +34,53 @@ class LimitRangeItem implements JsonSerializable
      * equal to the enumerated value; this represents the max burst for the named
      * resource.
      */
-    private QuantityMap $maxLimitRequestRatio;
+    private StringOrFloatMap $maxLimitRequestRatio;
 
     /**
      * Min usage constraints on this kind by resource name.
      */
-    private QuantityMap $min;
+    private StringOrFloatMap $min;
 
     /**
      * Type of resource that this limit applies to.
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     public function __construct()
     {
-        $this->default = new QuantityMap();
-        $this->defaultRequest = new QuantityMap();
-        $this->max = new QuantityMap();
-        $this->maxLimitRequestRatio = new QuantityMap();
-        $this->min = new QuantityMap();
+        $this->default = new StringOrFloatMap();
+        $this->defaultRequest = new StringOrFloatMap();
+        $this->max = new StringOrFloatMap();
+        $this->maxLimitRequestRatio = new StringOrFloatMap();
+        $this->min = new StringOrFloatMap();
     }
 
-    public function default(): QuantityMap
+    public function default(): StringOrFloatMap
     {
         return $this->default;
     }
 
-    public function defaultRequest(): QuantityMap
+    public function defaultRequest(): StringOrFloatMap
     {
         return $this->defaultRequest;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
 
-    public function max(): QuantityMap
+    public function max(): StringOrFloatMap
     {
         return $this->max;
     }
 
-    public function maxLimitRequestRatio(): QuantityMap
+    public function maxLimitRequestRatio(): StringOrFloatMap
     {
         return $this->maxLimitRequestRatio;
     }
 
-    public function min(): QuantityMap
+    public function min(): StringOrFloatMap
     {
         return $this->min;
     }
@@ -97,7 +92,7 @@ class LimitRangeItem implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'default' => $this->default,

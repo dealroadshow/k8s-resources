@@ -15,7 +15,7 @@ class ComponentStatusList implements APIResourceListInterface
     const KIND = 'ComponentStatusList';
 
     /**
-     * @var ComponentStatus[]|array
+     * @var ComponentStatus[]
      */
     private array $items = [];
 
@@ -39,7 +39,7 @@ class ComponentStatusList implements APIResourceListInterface
     }
 
     /**
-     * @var ComponentStatus[]|array $items
+     * @var ComponentStatus[] $items
      *
      * @return self
      */
@@ -51,7 +51,7 @@ class ComponentStatusList implements APIResourceListInterface
     }
 
     /**
-     * @return ComponentStatus[]|array
+     * @return ComponentStatus[]
      */
     public function all(): array
     {
@@ -70,7 +70,7 @@ class ComponentStatusList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

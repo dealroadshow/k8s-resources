@@ -89,7 +89,7 @@ class CSINodeDriver implements JsonSerializable
         return $this->topologyKeys;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'allocatable' => $this->allocatable,

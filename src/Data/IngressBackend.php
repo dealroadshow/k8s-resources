@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\IntOrString;
 use JsonSerializable;
 
 /**
@@ -18,9 +17,9 @@ class IngressBackend implements JsonSerializable
     /**
      * Specifies the port of the referenced service.
      */
-    private IntOrString $servicePort;
+    private string|int $servicePort;
 
-    public function __construct(string $serviceName, IntOrString $servicePort)
+    public function __construct(string $serviceName, string|int $servicePort)
     {
         $this->serviceName = $serviceName;
         $this->servicePort = $servicePort;
@@ -31,7 +30,7 @@ class IngressBackend implements JsonSerializable
         return $this->serviceName;
     }
 
-    public function getServicePort(): IntOrString
+    public function getServicePort(): string|int
     {
         return $this->servicePort;
     }
@@ -43,14 +42,14 @@ class IngressBackend implements JsonSerializable
         return $this;
     }
 
-    public function setServicePort(IntOrString $servicePort): self
+    public function setServicePort(string|int $servicePort): self
     {
         $this->servicePort = $servicePort;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'serviceName' => $this->serviceName,

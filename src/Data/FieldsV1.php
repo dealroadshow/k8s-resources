@@ -24,7 +24,7 @@ class FieldsV1 implements JsonSerializable
     {
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
         ];

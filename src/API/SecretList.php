@@ -14,7 +14,7 @@ class SecretList implements APIResourceListInterface
     const KIND = 'SecretList';
 
     /**
-     * @var Secret[]|array
+     * @var Secret[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class SecretList implements APIResourceListInterface
     }
 
     /**
-     * @var Secret[]|array $items
+     * @var Secret[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class SecretList implements APIResourceListInterface
     }
 
     /**
-     * @return Secret[]|array
+     * @return Secret[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class SecretList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

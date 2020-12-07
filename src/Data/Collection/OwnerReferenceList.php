@@ -8,7 +8,7 @@ use JsonSerializable;
 class OwnerReferenceList implements JsonSerializable
 {
     /**
-     * @var OwnerReference[]|array
+     * @var OwnerReference[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class OwnerReferenceList implements JsonSerializable
     }
 
     /**
-     * @var OwnerReference[]|array $items
+     * @var OwnerReference[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class OwnerReferenceList implements JsonSerializable
     }
 
     /**
-     * @return OwnerReference[]|array
+     * @return OwnerReference[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class OwnerReferenceList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

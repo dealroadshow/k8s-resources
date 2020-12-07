@@ -8,7 +8,7 @@ use JsonSerializable;
 class ManagedFieldsEntryList implements JsonSerializable
 {
     /**
-     * @var ManagedFieldsEntry[]|array
+     * @var ManagedFieldsEntry[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class ManagedFieldsEntryList implements JsonSerializable
     }
 
     /**
-     * @var ManagedFieldsEntry[]|array $items
+     * @var ManagedFieldsEntry[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class ManagedFieldsEntryList implements JsonSerializable
     }
 
     /**
-     * @return ManagedFieldsEntry[]|array
+     * @return ManagedFieldsEntry[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class ManagedFieldsEntryList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

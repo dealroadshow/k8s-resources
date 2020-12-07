@@ -21,10 +21,8 @@ class GlusterfsPersistentVolumeSource implements JsonSerializable
      * field is empty, the EndpointNamespace defaults to the same namespace as the
      * bound PVC. More info:
      * https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
-     *
-     * @var string|null
      */
-    private ?string $endpointsNamespace = null;
+    private string|null $endpointsNamespace = null;
 
     /**
      * Path is the Glusterfs volume path. More info:
@@ -36,10 +34,8 @@ class GlusterfsPersistentVolumeSource implements JsonSerializable
      * ReadOnly here will force the Glusterfs volume to be mounted with read-only
      * permissions. Defaults to false. More info:
      * https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     public function __construct(string $endpoints, string $path)
     {
@@ -52,10 +48,7 @@ class GlusterfsPersistentVolumeSource implements JsonSerializable
         return $this->endpoints;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getEndpointsNamespace(): ?string
+    public function getEndpointsNamespace(): string|null
     {
         return $this->endpointsNamespace;
     }
@@ -65,10 +58,7 @@ class GlusterfsPersistentVolumeSource implements JsonSerializable
         return $this->path;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -101,7 +91,7 @@ class GlusterfsPersistentVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'endpoints' => $this->endpoints,

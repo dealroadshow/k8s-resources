@@ -8,7 +8,7 @@ use JsonSerializable;
 class StatusCauseList implements JsonSerializable
 {
     /**
-     * @var StatusCause[]|array
+     * @var StatusCause[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class StatusCauseList implements JsonSerializable
     }
 
     /**
-     * @var StatusCause[]|array $items
+     * @var StatusCause[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class StatusCauseList implements JsonSerializable
     }
 
     /**
-     * @return StatusCause[]|array
+     * @return StatusCause[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class StatusCauseList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

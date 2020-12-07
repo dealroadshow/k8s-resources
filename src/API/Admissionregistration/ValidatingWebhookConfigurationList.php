@@ -14,7 +14,7 @@ class ValidatingWebhookConfigurationList implements APIResourceListInterface
     const KIND = 'ValidatingWebhookConfigurationList';
 
     /**
-     * @var ValidatingWebhookConfiguration[]|array
+     * @var ValidatingWebhookConfiguration[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class ValidatingWebhookConfigurationList implements APIResourceListInterface
     }
 
     /**
-     * @var ValidatingWebhookConfiguration[]|array $items
+     * @var ValidatingWebhookConfiguration[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class ValidatingWebhookConfigurationList implements APIResourceListInterface
     }
 
     /**
-     * @return ValidatingWebhookConfiguration[]|array
+     * @return ValidatingWebhookConfiguration[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class ValidatingWebhookConfigurationList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

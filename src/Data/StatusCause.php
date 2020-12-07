@@ -19,51 +19,36 @@ class StatusCause implements JsonSerializable
      * Examples:
      *   "name" - the field "name" on the current resource
      *   "items[0].name" - the field "name" on the first array entry in "items"
-     *
-     * @var string|null
      */
-    private ?string $field = null;
+    private string|null $field = null;
 
     /**
      * A human-readable description of the cause of the error.  This field may be
      * presented as-is to a reader.
-     *
-     * @var string|null
      */
-    private ?string $message = null;
+    private string|null $message = null;
 
     /**
      * A machine-readable description of the cause of the error. If this value is empty
      * there is no information available.
-     *
-     * @var string|null
      */
-    private ?string $reason = null;
+    private string|null $reason = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getField(): ?string
+    public function getField(): string|null
     {
         return $this->field;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMessage(): ?string
+    public function getMessage(): string|null
     {
         return $this->message;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getReason(): ?string
+    public function getReason(): string|null
     {
         return $this->reason;
     }
@@ -89,7 +74,7 @@ class StatusCause implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'field' => $this->field,

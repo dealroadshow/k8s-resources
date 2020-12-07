@@ -8,7 +8,7 @@ use JsonSerializable;
 class VolumeDeviceList implements JsonSerializable
 {
     /**
-     * @var VolumeDevice[]|array
+     * @var VolumeDevice[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class VolumeDeviceList implements JsonSerializable
     }
 
     /**
-     * @var VolumeDevice[]|array $items
+     * @var VolumeDevice[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class VolumeDeviceList implements JsonSerializable
     }
 
     /**
-     * @return VolumeDevice[]|array
+     * @return VolumeDevice[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class VolumeDeviceList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

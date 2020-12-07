@@ -16,10 +16,8 @@ class Status implements APIResourceListInterface
 
     /**
      * Suggested HTTP return code for this status, 0 if not set.
-     *
-     * @var int|null
      */
-    private ?int $code = null;
+    private int|null $code = null;
 
     /**
      * Extended data associated with the reason.  Each reason may define its own
@@ -30,10 +28,8 @@ class Status implements APIResourceListInterface
 
     /**
      * A human-readable description of the status of this operation.
-     *
-     * @var string|null
      */
-    private ?string $message = null;
+    private string|null $message = null;
 
     /**
      * Standard list metadata. More info:
@@ -45,10 +41,8 @@ class Status implements APIResourceListInterface
      * A machine-readable description of why this operation is in the "Failure" status.
      * If this value is empty there is no information available. A Reason clarifies an
      * HTTP status code but does not override it.
-     *
-     * @var string|null
      */
-    private ?string $reason = null;
+    private string|null $reason = null;
 
     public function __construct()
     {
@@ -61,26 +55,17 @@ class Status implements APIResourceListInterface
         return $this->details;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getCode(): ?int
+    public function getCode(): int|null
     {
         return $this->code;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMessage(): ?string
+    public function getMessage(): string|null
     {
         return $this->message;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getReason(): ?string
+    public function getReason(): string|null
     {
         return $this->reason;
     }
@@ -111,7 +96,7 @@ class Status implements APIResourceListInterface
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

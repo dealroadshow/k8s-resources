@@ -27,7 +27,7 @@ class NamespaceSpec implements JsonSerializable
         return $this->finalizers;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'finalizers' => $this->finalizers,

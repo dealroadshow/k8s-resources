@@ -47,7 +47,7 @@ class NetworkPolicyIngressRule implements JsonSerializable
         return $this->ports;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'from' => $this->from,

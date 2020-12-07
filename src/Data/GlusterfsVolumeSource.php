@@ -26,10 +26,8 @@ class GlusterfsVolumeSource implements JsonSerializable
      * ReadOnly here will force the Glusterfs volume to be mounted with read-only
      * permissions. Defaults to false. More info:
      * https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     public function __construct(string $endpoints, string $path)
     {
@@ -47,10 +45,7 @@ class GlusterfsVolumeSource implements JsonSerializable
         return $this->path;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -76,7 +71,7 @@ class GlusterfsVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'endpoints' => $this->endpoints,

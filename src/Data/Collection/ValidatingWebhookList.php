@@ -8,7 +8,7 @@ use JsonSerializable;
 class ValidatingWebhookList implements JsonSerializable
 {
     /**
-     * @var ValidatingWebhook[]|array
+     * @var ValidatingWebhook[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class ValidatingWebhookList implements JsonSerializable
     }
 
     /**
-     * @var ValidatingWebhook[]|array $items
+     * @var ValidatingWebhook[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class ValidatingWebhookList implements JsonSerializable
     }
 
     /**
-     * @return ValidatingWebhook[]|array
+     * @return ValidatingWebhook[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class ValidatingWebhookList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -8,7 +8,7 @@ use JsonSerializable;
 class CustomResourceColumnDefinitionList implements JsonSerializable
 {
     /**
-     * @var CustomResourceColumnDefinition[]|array
+     * @var CustomResourceColumnDefinition[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class CustomResourceColumnDefinitionList implements JsonSerializable
     }
 
     /**
-     * @var CustomResourceColumnDefinition[]|array $items
+     * @var CustomResourceColumnDefinition[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class CustomResourceColumnDefinitionList implements JsonSerializable
     }
 
     /**
-     * @return CustomResourceColumnDefinition[]|array
+     * @return CustomResourceColumnDefinition[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class CustomResourceColumnDefinitionList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

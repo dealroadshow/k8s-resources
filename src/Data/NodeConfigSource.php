@@ -12,19 +12,14 @@ class NodeConfigSource implements JsonSerializable
 {
     /**
      * ConfigMap is a reference to a Node's ConfigMap
-     *
-     * @var ConfigMapNodeConfigSource|null
      */
-    private ?ConfigMapNodeConfigSource $configMap = null;
+    private ConfigMapNodeConfigSource|null $configMap = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return ConfigMapNodeConfigSource|null
-     */
-    public function getConfigMap(): ?ConfigMapNodeConfigSource
+    public function getConfigMap(): ConfigMapNodeConfigSource|null
     {
         return $this->configMap;
     }
@@ -36,7 +31,7 @@ class NodeConfigSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'configMap' => $this->configMap,

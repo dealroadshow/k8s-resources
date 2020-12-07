@@ -15,10 +15,8 @@ class DeleteOptions implements JsonSerializable
      * Servers should convert recognized schemas to the latest internal value, and may
      * reject unrecognized values. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
-     *
-     * @var string|null
      */
-    private ?string $apiVersion = null;
+    private string|null $apiVersion = null;
 
     /**
      * When present, indicates that modifications should not be persisted. An invalid
@@ -33,30 +31,24 @@ class DeleteOptions implements JsonSerializable
      * non-negative integer. The value zero indicates delete immediately. If this value
      * is nil, the default grace period for the specified type will be used. Defaults
      * to a per object value if not specified. zero means delete immediately.
-     *
-     * @var int|null
      */
-    private ?int $gracePeriodSeconds = null;
+    private int|null $gracePeriodSeconds = null;
 
     /**
      * Kind is a string value representing the REST resource this object represents.
      * Servers may infer this from the endpoint the client submits requests to. Cannot
      * be updated. In CamelCase. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-     *
-     * @var string|null
      */
-    private ?string $kind = null;
+    private string|null $kind = null;
 
     /**
      * Deprecated: please use the PropagationPolicy, this field will be deprecated in
      * 1.7. Should the dependent objects be orphaned. If true/false, the "orphan"
      * finalizer will be added to/removed from the object's finalizers list. Either
      * this field or PropagationPolicy may be set, but not both.
-     *
-     * @var bool|null
      */
-    private ?bool $orphanDependents = null;
+    private bool|null $orphanDependents = null;
 
     /**
      * Must be fulfilled before a deletion is carried out. If not possible, a 409
@@ -72,10 +64,8 @@ class DeleteOptions implements JsonSerializable
      * 'Background' - allow the garbage collector to delete the dependents in the
      * background; 'Foreground' - a cascading policy that deletes all dependents in the
      * foreground.
-     *
-     * @var string|null
      */
-    private ?string $propagationPolicy = null;
+    private string|null $propagationPolicy = null;
 
     public function __construct()
     {
@@ -88,42 +78,27 @@ class DeleteOptions implements JsonSerializable
         return $this->dryRun;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getApiVersion(): ?string
+    public function getApiVersion(): string|null
     {
         return $this->apiVersion;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getGracePeriodSeconds(): ?int
+    public function getGracePeriodSeconds(): int|null
     {
         return $this->gracePeriodSeconds;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getKind(): ?string
+    public function getKind(): string|null
     {
         return $this->kind;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getOrphanDependents(): ?bool
+    public function getOrphanDependents(): bool|null
     {
         return $this->orphanDependents;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPropagationPolicy(): ?string
+    public function getPropagationPolicy(): string|null
     {
         return $this->propagationPolicy;
     }
@@ -168,7 +143,7 @@ class DeleteOptions implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => $this->apiVersion,

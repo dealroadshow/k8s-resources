@@ -8,7 +8,7 @@ use JsonSerializable;
 class TopologySpreadConstraintList implements JsonSerializable
 {
     /**
-     * @var TopologySpreadConstraint[]|array
+     * @var TopologySpreadConstraint[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class TopologySpreadConstraintList implements JsonSerializable
     }
 
     /**
-     * @var TopologySpreadConstraint[]|array $items
+     * @var TopologySpreadConstraint[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class TopologySpreadConstraintList implements JsonSerializable
     }
 
     /**
-     * @return TopologySpreadConstraint[]|array
+     * @return TopologySpreadConstraint[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class TopologySpreadConstraintList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

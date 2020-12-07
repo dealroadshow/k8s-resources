@@ -13,17 +13,13 @@ class DeploymentSpec implements JsonSerializable
      * Minimum number of seconds for which a newly created pod should be ready without
      * any of its container crashing, for it to be considered available. Defaults to 0
      * (pod will be considered available as soon as it is ready)
-     *
-     * @var int|null
      */
-    private ?int $minReadySeconds = null;
+    private int|null $minReadySeconds = null;
 
     /**
      * Indicates that the deployment is paused.
-     *
-     * @var bool|null
      */
-    private ?bool $paused = null;
+    private bool|null $paused = null;
 
     /**
      * The maximum time in seconds for a deployment to make progress before it is
@@ -31,26 +27,20 @@ class DeploymentSpec implements JsonSerializable
      * failed deployments and a condition with a ProgressDeadlineExceeded reason will
      * be surfaced in the deployment status. Note that progress will not be estimated
      * during the time a deployment is paused. Defaults to 600s.
-     *
-     * @var int|null
      */
-    private ?int $progressDeadlineSeconds = null;
+    private int|null $progressDeadlineSeconds = null;
 
     /**
      * Number of desired pods. This is a pointer to distinguish between explicit zero
      * and not specified. Defaults to 1.
-     *
-     * @var int|null
      */
-    private ?int $replicas = null;
+    private int|null $replicas = null;
 
     /**
      * The number of old ReplicaSets to retain to allow rollback. This is a pointer to
      * distinguish between explicit zero and not specified. Defaults to 10.
-     *
-     * @var int|null
      */
-    private ?int $revisionHistoryLimit = null;
+    private int|null $revisionHistoryLimit = null;
 
     /**
      * Label selector for pods. Existing ReplicaSets whose pods are selected by this
@@ -76,42 +66,27 @@ class DeploymentSpec implements JsonSerializable
         $this->template = new PodTemplateSpec();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getMinReadySeconds(): ?int
+    public function getMinReadySeconds(): int|null
     {
         return $this->minReadySeconds;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getPaused(): ?bool
+    public function getPaused(): bool|null
     {
         return $this->paused;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getProgressDeadlineSeconds(): ?int
+    public function getProgressDeadlineSeconds(): int|null
     {
         return $this->progressDeadlineSeconds;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getReplicas(): ?int
+    public function getReplicas(): int|null
     {
         return $this->replicas;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getRevisionHistoryLimit(): ?int
+    public function getRevisionHistoryLimit(): int|null
     {
         return $this->revisionHistoryLimit;
     }
@@ -166,7 +141,7 @@ class DeploymentSpec implements JsonSerializable
         return $this->template;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'minReadySeconds' => $this->minReadySeconds,

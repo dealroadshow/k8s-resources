@@ -12,17 +12,13 @@ class JobSpec implements JsonSerializable
     /**
      * Specifies the duration in seconds relative to the startTime that the job may be
      * active before the system tries to terminate it; value must be positive integer
-     *
-     * @var int|null
      */
-    private ?int $activeDeadlineSeconds = null;
+    private int|null $activeDeadlineSeconds = null;
 
     /**
      * Specifies the number of retries before marking this job failed. Defaults to 6
-     *
-     * @var int|null
      */
-    private ?int $backoffLimit = null;
+    private int|null $backoffLimit = null;
 
     /**
      * Specifies the desired number of successfully finished pods the job should be run
@@ -31,10 +27,8 @@ class JobSpec implements JsonSerializable
      * that parallelism is limited to 1 and the success of that pod signals the success
      * of the job. More info:
      * https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
-     *
-     * @var int|null
      */
-    private ?int $completions = null;
+    private int|null $completions = null;
 
     /**
      * manualSelector controls generation of pod labels and pod selectors. Leave
@@ -46,10 +40,8 @@ class JobSpec implements JsonSerializable
      * `manualSelector=true` in jobs that were created with the old
      * `extensions/v1beta1` API. More info:
      * https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/#specifying-your-own-pod-selector
-     *
-     * @var bool|null
      */
-    private ?bool $manualSelector = null;
+    private bool|null $manualSelector = null;
 
     /**
      * Specifies the maximum desired number of pods the job should run at any given
@@ -57,10 +49,8 @@ class JobSpec implements JsonSerializable
      * number when ((.spec.completions - .status.successful) < .spec.parallelism), i.e.
      * when the work left to do is less than max parallelism. More info:
      * https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
-     *
-     * @var int|null
      */
-    private ?int $parallelism = null;
+    private int|null $parallelism = null;
 
     /**
      * A label query over pods that should match the pod count. Normally, the system
@@ -84,10 +74,8 @@ class JobSpec implements JsonSerializable
      * set to zero, the Job becomes eligible to be deleted immediately after it
      * finishes. This field is alpha-level and is only honored by servers that enable
      * the TTLAfterFinished feature.
-     *
-     * @var int|null
      */
-    private ?int $ttlSecondsAfterFinished = null;
+    private int|null $ttlSecondsAfterFinished = null;
 
     public function __construct()
     {
@@ -95,50 +83,32 @@ class JobSpec implements JsonSerializable
         $this->template = new PodTemplateSpec();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getActiveDeadlineSeconds(): ?int
+    public function getActiveDeadlineSeconds(): int|null
     {
         return $this->activeDeadlineSeconds;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getBackoffLimit(): ?int
+    public function getBackoffLimit(): int|null
     {
         return $this->backoffLimit;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getCompletions(): ?int
+    public function getCompletions(): int|null
     {
         return $this->completions;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getManualSelector(): ?bool
+    public function getManualSelector(): bool|null
     {
         return $this->manualSelector;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getParallelism(): ?int
+    public function getParallelism(): int|null
     {
         return $this->parallelism;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTtlSecondsAfterFinished(): ?int
+    public function getTtlSecondsAfterFinished(): int|null
     {
         return $this->ttlSecondsAfterFinished;
     }
@@ -195,7 +165,7 @@ class JobSpec implements JsonSerializable
         return $this->template;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'activeDeadlineSeconds' => $this->activeDeadlineSeconds,

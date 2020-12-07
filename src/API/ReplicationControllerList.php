@@ -14,7 +14,7 @@ class ReplicationControllerList implements APIResourceListInterface
     const KIND = 'ReplicationControllerList';
 
     /**
-     * @var ReplicationController[]|array
+     * @var ReplicationController[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class ReplicationControllerList implements APIResourceListInterface
     }
 
     /**
-     * @var ReplicationController[]|array $items
+     * @var ReplicationController[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class ReplicationControllerList implements APIResourceListInterface
     }
 
     /**
-     * @return ReplicationController[]|array
+     * @return ReplicationController[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class ReplicationControllerList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

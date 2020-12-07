@@ -14,7 +14,7 @@ class ServiceAccountList implements APIResourceListInterface
     const KIND = 'ServiceAccountList';
 
     /**
-     * @var ServiceAccount[]|array
+     * @var ServiceAccount[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class ServiceAccountList implements APIResourceListInterface
     }
 
     /**
-     * @var ServiceAccount[]|array $items
+     * @var ServiceAccount[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class ServiceAccountList implements APIResourceListInterface
     }
 
     /**
-     * @return ServiceAccount[]|array
+     * @return ServiceAccount[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class ServiceAccountList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

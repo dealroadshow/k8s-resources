@@ -12,10 +12,8 @@ class CustomResourceDefinitionSpec implements JsonSerializable
 {
     /**
      * conversion defines conversion settings for the CRD.
-     *
-     * @var CustomResourceConversion|null
      */
-    private ?CustomResourceConversion $conversion = null;
+    private CustomResourceConversion|null $conversion = null;
 
     /**
      * group is the API group of the defined custom resource. The custom resources are
@@ -37,10 +35,8 @@ class CustomResourceDefinitionSpec implements JsonSerializable
      * `spec.versions[*].schema.openAPIV3Schema`. See
      * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#pruning-versus-preserving-unknown-fields
      * for details.
-     *
-     * @var bool|null
      */
-    private ?bool $preserveUnknownFields = null;
+    private bool|null $preserveUnknownFields = null;
 
     /**
      * scope indicates whether the defined custom resource is cluster- or
@@ -71,10 +67,7 @@ class CustomResourceDefinitionSpec implements JsonSerializable
         $this->versions = new CustomResourceDefinitionVersionList();
     }
 
-    /**
-     * @return CustomResourceConversion|null
-     */
-    public function getConversion(): ?CustomResourceConversion
+    public function getConversion(): CustomResourceConversion|null
     {
         return $this->conversion;
     }
@@ -89,10 +82,7 @@ class CustomResourceDefinitionSpec implements JsonSerializable
         return $this->names;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getPreserveUnknownFields(): ?bool
+    public function getPreserveUnknownFields(): bool|null
     {
         return $this->preserveUnknownFields;
     }
@@ -142,7 +132,7 @@ class CustomResourceDefinitionSpec implements JsonSerializable
         return $this->versions;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'conversion' => $this->conversion,

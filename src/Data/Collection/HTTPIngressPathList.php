@@ -8,7 +8,7 @@ use JsonSerializable;
 class HTTPIngressPathList implements JsonSerializable
 {
     /**
-     * @var HTTPIngressPath[]|array
+     * @var HTTPIngressPath[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class HTTPIngressPathList implements JsonSerializable
     }
 
     /**
-     * @var HTTPIngressPath[]|array $items
+     * @var HTTPIngressPath[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class HTTPIngressPathList implements JsonSerializable
     }
 
     /**
-     * @return HTTPIngressPath[]|array
+     * @return HTTPIngressPath[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class HTTPIngressPathList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

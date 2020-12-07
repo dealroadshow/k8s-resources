@@ -14,7 +14,7 @@ class VolumeAttachmentList implements APIResourceListInterface
     const KIND = 'VolumeAttachmentList';
 
     /**
-     * @var VolumeAttachment[]|array
+     * @var VolumeAttachment[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class VolumeAttachmentList implements APIResourceListInterface
     }
 
     /**
-     * @var VolumeAttachment[]|array $items
+     * @var VolumeAttachment[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class VolumeAttachmentList implements APIResourceListInterface
     }
 
     /**
-     * @return VolumeAttachment[]|array
+     * @return VolumeAttachment[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class VolumeAttachmentList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

@@ -11,68 +11,48 @@ class EnvVarSource implements JsonSerializable
 {
     /**
      * Selects a key of a ConfigMap.
-     *
-     * @var ConfigMapKeySelector|null
      */
-    private ?ConfigMapKeySelector $configMapKeyRef = null;
+    private ConfigMapKeySelector|null $configMapKeyRef = null;
 
     /**
      * Selects a field of the pod: supports metadata.name, metadata.namespace,
      * metadata.labels, metadata.annotations, spec.nodeName, spec.serviceAccountName,
      * status.hostIP, status.podIP.
-     *
-     * @var ObjectFieldSelector|null
      */
-    private ?ObjectFieldSelector $fieldRef = null;
+    private ObjectFieldSelector|null $fieldRef = null;
 
     /**
      * Selects a resource of the container: only resources limits and requests
      * (limits.cpu, limits.memory, limits.ephemeral-storage, requests.cpu,
      * requests.memory and requests.ephemeral-storage) are currently supported.
-     *
-     * @var ResourceFieldSelector|null
      */
-    private ?ResourceFieldSelector $resourceFieldRef = null;
+    private ResourceFieldSelector|null $resourceFieldRef = null;
 
     /**
      * Selects a key of a secret in the pod's namespace
-     *
-     * @var SecretKeySelector|null
      */
-    private ?SecretKeySelector $secretKeyRef = null;
+    private SecretKeySelector|null $secretKeyRef = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return ConfigMapKeySelector|null
-     */
-    public function getConfigMapKeyRef(): ?ConfigMapKeySelector
+    public function getConfigMapKeyRef(): ConfigMapKeySelector|null
     {
         return $this->configMapKeyRef;
     }
 
-    /**
-     * @return ObjectFieldSelector|null
-     */
-    public function getFieldRef(): ?ObjectFieldSelector
+    public function getFieldRef(): ObjectFieldSelector|null
     {
         return $this->fieldRef;
     }
 
-    /**
-     * @return ResourceFieldSelector|null
-     */
-    public function getResourceFieldRef(): ?ResourceFieldSelector
+    public function getResourceFieldRef(): ResourceFieldSelector|null
     {
         return $this->resourceFieldRef;
     }
 
-    /**
-     * @return SecretKeySelector|null
-     */
-    public function getSecretKeyRef(): ?SecretKeySelector
+    public function getSecretKeyRef(): SecretKeySelector|null
     {
         return $this->secretKeyRef;
     }
@@ -105,7 +85,7 @@ class EnvVarSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'configMapKeyRef' => $this->configMapKeyRef,

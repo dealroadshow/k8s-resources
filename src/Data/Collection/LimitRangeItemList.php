@@ -8,7 +8,7 @@ use JsonSerializable;
 class LimitRangeItemList implements JsonSerializable
 {
     /**
-     * @var LimitRangeItem[]|array
+     * @var LimitRangeItem[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class LimitRangeItemList implements JsonSerializable
     }
 
     /**
-     * @var LimitRangeItem[]|array $items
+     * @var LimitRangeItem[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class LimitRangeItemList implements JsonSerializable
     }
 
     /**
-     * @return LimitRangeItem[]|array
+     * @return LimitRangeItem[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class LimitRangeItemList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

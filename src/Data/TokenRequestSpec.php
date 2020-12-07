@@ -31,10 +31,8 @@ class TokenRequestSpec implements JsonSerializable
      * ExpirationSeconds is the requested duration of validity of the request. The
      * token issuer may return a token with a different validity duration so a client
      * needs to check the 'expiration' field in a response.
-     *
-     * @var int|null
      */
-    private ?int $expirationSeconds = null;
+    private int|null $expirationSeconds = null;
 
     public function __construct()
     {
@@ -52,10 +50,7 @@ class TokenRequestSpec implements JsonSerializable
         return $this->boundObjectRef;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getExpirationSeconds(): ?int
+    public function getExpirationSeconds(): int|null
     {
         return $this->expirationSeconds;
     }
@@ -67,7 +62,7 @@ class TokenRequestSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'audiences' => $this->audiences,

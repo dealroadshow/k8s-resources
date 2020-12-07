@@ -37,18 +37,14 @@ class SubjectAccessReviewSpec implements JsonSerializable
 
     /**
      * UID information about the requesting user.
-     *
-     * @var string|null
      */
-    private ?string $uid = null;
+    private string|null $uid = null;
 
     /**
      * User is the user you're testing for. If you specify "User" but not "Groups",
      * then is it interpreted as "What if User were not a member of any groups
-     *
-     * @var string|null
      */
-    private ?string $user = null;
+    private string|null $user = null;
 
     public function __construct()
     {
@@ -63,18 +59,12 @@ class SubjectAccessReviewSpec implements JsonSerializable
         return $this->extra;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUid(): ?string
+    public function getUid(): string|null
     {
         return $this->uid;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUser(): ?string
+    public function getUser(): string|null
     {
         return $this->user;
     }
@@ -108,7 +98,7 @@ class SubjectAccessReviewSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'extra' => $this->extra,

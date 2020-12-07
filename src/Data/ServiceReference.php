@@ -22,19 +22,15 @@ class ServiceReference implements JsonSerializable
     /**
      * `path` is an optional URL path which will be sent in any request to this
      * service.
-     *
-     * @var string|null
      */
-    private ?string $path = null;
+    private string|null $path = null;
 
     /**
      * If specified, the port on the service that hosting webhook. Default to 443 for
      * backward compatibility. `port` should be a valid port number (1-65535,
      * inclusive).
-     *
-     * @var int|null
      */
-    private ?int $port = null;
+    private int|null $port = null;
 
     public function __construct(string $name, string $namespace)
     {
@@ -52,18 +48,12 @@ class ServiceReference implements JsonSerializable
         return $this->namespace;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPath(): ?string
+    public function getPath(): string|null
     {
         return $this->path;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getPort(): ?int
+    public function getPort(): int|null
     {
         return $this->port;
     }
@@ -96,7 +86,7 @@ class ServiceReference implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => $this->name,

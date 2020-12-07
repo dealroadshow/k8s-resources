@@ -31,18 +31,14 @@ class ConfigMapNodeConfigSource implements JsonSerializable
     /**
      * ResourceVersion is the metadata.ResourceVersion of the referenced ConfigMap.
      * This field is forbidden in Node.Spec, and required in Node.Status.
-     *
-     * @var string|null
      */
-    private ?string $resourceVersion = null;
+    private string|null $resourceVersion = null;
 
     /**
      * UID is the metadata.UID of the referenced ConfigMap. This field is forbidden in
      * Node.Spec, and required in Node.Status.
-     *
-     * @var string|null
      */
-    private ?string $uid = null;
+    private string|null $uid = null;
 
     public function __construct(string $kubeletConfigKey, string $name, string $namespace)
     {
@@ -66,18 +62,12 @@ class ConfigMapNodeConfigSource implements JsonSerializable
         return $this->namespace;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getResourceVersion(): ?string
+    public function getResourceVersion(): string|null
     {
         return $this->resourceVersion;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUid(): ?string
+    public function getUid(): string|null
     {
         return $this->uid;
     }
@@ -117,7 +107,7 @@ class ConfigMapNodeConfigSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'kubeletConfigKey' => $this->kubeletConfigKey,

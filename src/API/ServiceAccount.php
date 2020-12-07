@@ -21,10 +21,8 @@ class ServiceAccount implements APIResourceInterface
      * AutomountServiceAccountToken indicates whether pods running as this service
      * account should have an API token automatically mounted. Can be overridden at the
      * pod level.
-     *
-     * @var bool|null
      */
-    private ?bool $automountServiceAccountToken = null;
+    private bool|null $automountServiceAccountToken = null;
 
     /**
      * ImagePullSecrets is a list of references to secrets in the same namespace to use
@@ -55,10 +53,7 @@ class ServiceAccount implements APIResourceInterface
         $this->secrets = new ObjectReferenceList();
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getAutomountServiceAccountToken(): ?bool
+    public function getAutomountServiceAccountToken(): bool|null
     {
         return $this->automountServiceAccountToken;
     }
@@ -85,7 +80,7 @@ class ServiceAccount implements APIResourceInterface
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

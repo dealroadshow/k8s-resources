@@ -50,7 +50,7 @@ class VolumeDevice implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'devicePath' => $this->devicePath,

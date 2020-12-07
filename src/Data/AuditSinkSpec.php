@@ -43,7 +43,7 @@ class AuditSinkSpec implements JsonSerializable
         return $this->webhook;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'policy' => $this->policy,

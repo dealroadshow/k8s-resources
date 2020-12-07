@@ -14,7 +14,7 @@ class RoleBindingList implements APIResourceListInterface
     const KIND = 'RoleBindingList';
 
     /**
-     * @var RoleBinding[]|array
+     * @var RoleBinding[]
      */
     private array $items = [];
 
@@ -37,7 +37,7 @@ class RoleBindingList implements APIResourceListInterface
     }
 
     /**
-     * @var RoleBinding[]|array $items
+     * @var RoleBinding[] $items
      *
      * @return self
      */
@@ -49,7 +49,7 @@ class RoleBindingList implements APIResourceListInterface
     }
 
     /**
-     * @return RoleBinding[]|array
+     * @return RoleBinding[]
      */
     public function all(): array
     {
@@ -68,7 +68,7 @@ class RoleBindingList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

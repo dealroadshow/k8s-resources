@@ -21,10 +21,8 @@ class CustomResourceSubresourceScale implements JsonSerializable
      * If there is no value under the given path in the custom resource, the
      * `status.selector` value in the `/scale` subresource will default to the empty
      * string.
-     *
-     * @var string|null
      */
-    private ?string $labelSelectorPath = null;
+    private string|null $labelSelectorPath = null;
 
     /**
      * specReplicasPath defines the JSON path inside of a custom resource that
@@ -50,10 +48,7 @@ class CustomResourceSubresourceScale implements JsonSerializable
         $this->statusReplicasPath = $statusReplicasPath;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLabelSelectorPath(): ?string
+    public function getLabelSelectorPath(): string|null
     {
         return $this->labelSelectorPath;
     }
@@ -89,7 +84,7 @@ class CustomResourceSubresourceScale implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'labelSelectorPath' => $this->labelSelectorPath,

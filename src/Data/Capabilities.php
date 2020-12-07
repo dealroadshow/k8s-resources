@@ -36,7 +36,7 @@ class Capabilities implements JsonSerializable
         return $this->drop;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'add' => $this->add,

@@ -28,7 +28,7 @@ class HTTPIngressRuleValue implements JsonSerializable
         return $this->paths;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'paths' => $this->paths,

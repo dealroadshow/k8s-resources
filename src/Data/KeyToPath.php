@@ -19,10 +19,8 @@ class KeyToPath implements JsonSerializable
      * not specified, the volume defaultMode will be used. This might be in conflict
      * with other options that affect the file mode, like fsGroup, and the result can
      * be other mode bits set.
-     *
-     * @var int|null
      */
-    private ?int $mode = null;
+    private int|null $mode = null;
 
     /**
      * The relative path of the file to map the key to. May not be an absolute path.
@@ -41,10 +39,7 @@ class KeyToPath implements JsonSerializable
         return $this->key;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getMode(): ?int
+    public function getMode(): int|null
     {
         return $this->mode;
     }
@@ -75,7 +70,7 @@ class KeyToPath implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'key' => $this->key,

@@ -14,7 +14,7 @@ class PodTemplateList implements APIResourceListInterface
     const KIND = 'PodTemplateList';
 
     /**
-     * @var PodTemplate[]|array
+     * @var PodTemplate[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class PodTemplateList implements APIResourceListInterface
     }
 
     /**
-     * @var PodTemplate[]|array $items
+     * @var PodTemplate[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class PodTemplateList implements APIResourceListInterface
     }
 
     /**
-     * @return PodTemplate[]|array
+     * @return PodTemplate[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class PodTemplateList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

@@ -72,7 +72,7 @@ class PodPresetSpec implements JsonSerializable
         return $this->volumes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'env' => $this->env,

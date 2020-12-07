@@ -21,20 +21,15 @@ class FSGroupStrategyOptions implements JsonSerializable
     /**
      * rule is the strategy that will dictate what FSGroup is used in the
      * SecurityContext.
-     *
-     * @var string|null
      */
-    private ?string $rule = null;
+    private string|null $rule = null;
 
     public function __construct()
     {
         $this->ranges = new IDRangeList();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRule(): ?string
+    public function getRule(): string|null
     {
         return $this->rule;
     }
@@ -51,7 +46,7 @@ class FSGroupStrategyOptions implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'ranges' => $this->ranges,

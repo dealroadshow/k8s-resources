@@ -14,7 +14,7 @@ class ReplicaSetList implements APIResourceListInterface
     const KIND = 'ReplicaSetList';
 
     /**
-     * @var ReplicaSet[]|array
+     * @var ReplicaSet[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class ReplicaSetList implements APIResourceListInterface
     }
 
     /**
-     * @var ReplicaSet[]|array $items
+     * @var ReplicaSet[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class ReplicaSetList implements APIResourceListInterface
     }
 
     /**
-     * @return ReplicaSet[]|array
+     * @return ReplicaSet[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class ReplicaSetList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

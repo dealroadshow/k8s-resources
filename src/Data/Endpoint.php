@@ -30,10 +30,8 @@ class Endpoint implements JsonSerializable
      * distinguish endpoints from each other (e.g. in DNS names). Multiple endpoints
      * which use the same hostname should be considered fungible (e.g. multiple A
      * values in DNS). Must pass DNS Label (RFC 1123) validation.
-     *
-     * @var string|null
      */
-    private ?string $hostname = null;
+    private string|null $hostname = null;
 
     /**
      * targetRef is a reference to a Kubernetes object that represents this endpoint.
@@ -74,10 +72,7 @@ class Endpoint implements JsonSerializable
         return $this->conditions;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHostname(): ?string
+    public function getHostname(): string|null
     {
         return $this->hostname;
     }
@@ -99,7 +94,7 @@ class Endpoint implements JsonSerializable
         return $this->topology;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'addresses' => $this->addresses,

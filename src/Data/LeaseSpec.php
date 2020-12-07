@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\MicroTime;
 use JsonSerializable;
 
 /**
@@ -12,86 +11,61 @@ class LeaseSpec implements JsonSerializable
 {
     /**
      * acquireTime is a time when the current lease was acquired.
-     *
-     * @var MicroTime|null
      */
-    private ?MicroTime $acquireTime = null;
+    private DateTimeInterface|null $acquireTime = null;
 
     /**
      * holderIdentity contains the identity of the holder of a current lease.
-     *
-     * @var string|null
      */
-    private ?string $holderIdentity = null;
+    private string|null $holderIdentity = null;
 
     /**
      * leaseDurationSeconds is a duration that candidates for a lease need to wait to
      * force acquire it. This is measure against time of last observed RenewTime.
-     *
-     * @var int|null
      */
-    private ?int $leaseDurationSeconds = null;
+    private int|null $leaseDurationSeconds = null;
 
     /**
      * leaseTransitions is the number of transitions of a lease between holders.
-     *
-     * @var int|null
      */
-    private ?int $leaseTransitions = null;
+    private int|null $leaseTransitions = null;
 
     /**
      * renewTime is a time when the current holder of a lease has last updated the
      * lease.
-     *
-     * @var MicroTime|null
      */
-    private ?MicroTime $renewTime = null;
+    private DateTimeInterface|null $renewTime = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return MicroTime|null
-     */
-    public function getAcquireTime(): ?MicroTime
+    public function getAcquireTime(): DateTimeInterface|null
     {
         return $this->acquireTime;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHolderIdentity(): ?string
+    public function getHolderIdentity(): string|null
     {
         return $this->holderIdentity;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getLeaseDurationSeconds(): ?int
+    public function getLeaseDurationSeconds(): int|null
     {
         return $this->leaseDurationSeconds;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getLeaseTransitions(): ?int
+    public function getLeaseTransitions(): int|null
     {
         return $this->leaseTransitions;
     }
 
-    /**
-     * @return MicroTime|null
-     */
-    public function getRenewTime(): ?MicroTime
+    public function getRenewTime(): DateTimeInterface|null
     {
         return $this->renewTime;
     }
 
-    public function setAcquireTime(MicroTime $acquireTime): self
+    public function setAcquireTime(DateTimeInterface $acquireTime): self
     {
         $this->acquireTime = $acquireTime;
 
@@ -119,14 +93,14 @@ class LeaseSpec implements JsonSerializable
         return $this;
     }
 
-    public function setRenewTime(MicroTime $renewTime): self
+    public function setRenewTime(DateTimeInterface $renewTime): self
     {
         $this->renewTime = $renewTime;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'acquireTime' => $this->acquireTime,

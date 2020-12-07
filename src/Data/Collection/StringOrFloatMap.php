@@ -2,13 +2,12 @@
 
 namespace Dealroadshow\K8S\Data\Collection;
 
-use Dealroadshow\K8S\ValueObject\Quantity;
 use JsonSerializable;
 
-class QuantityMap implements JsonSerializable
+class StringOrFloatMap implements JsonSerializable
 {
     /**
-     * @var array<string, Quantity>|Quantity[]
+     * @var string[]|float[]
      */
     private array $items = [];
 
@@ -17,7 +16,7 @@ class QuantityMap implements JsonSerializable
         $this->clear();
     }
 
-    public function add(string $name, Quantity $value): self
+    public function add(string $name, string|float $value): self
     {
         $this->items[$name] = $value;
 
@@ -25,7 +24,7 @@ class QuantityMap implements JsonSerializable
     }
 
     /**
-     * @var array<string, Quantity>|Quantity[] $items
+     * @var string[]|float[] $items
      *
      * @return self
      */
@@ -37,7 +36,7 @@ class QuantityMap implements JsonSerializable
     }
 
     /**
-     * @return array<string, Quantity>|Quantity[]
+     * @return string[]|float[]
      */
     public function all(): array
     {
@@ -51,14 +50,14 @@ class QuantityMap implements JsonSerializable
         return $this;
     }
 
-    public function get(string $name): Quantity
+    public function get(string $name): string|float
     {
         return $this->items[$name];
     }
 
     public function has(string $name): bool
     {
-        return \array_key_exists($name, $this->items);
+        return array_key_exists($name, $this->items);
     }
 
     public function remove(string $name): self
@@ -68,7 +67,7 @@ class QuantityMap implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

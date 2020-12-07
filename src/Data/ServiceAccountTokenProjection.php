@@ -17,10 +17,8 @@ class ServiceAccountTokenProjection implements JsonSerializable
      * identify itself with an identifier specified in the audience of the token, and
      * otherwise should reject the token. The audience defaults to the identifier of
      * the apiserver.
-     *
-     * @var string|null
      */
-    private ?string $audience = null;
+    private string|null $audience = null;
 
     /**
      * ExpirationSeconds is the requested duration of validity of the service account
@@ -29,10 +27,8 @@ class ServiceAccountTokenProjection implements JsonSerializable
      * rotate the token if the token is older than 80 percent of its time to live or if
      * the token is older than 24 hours.Defaults to 1 hour and must be at least 10
      * minutes.
-     *
-     * @var int|null
      */
-    private ?int $expirationSeconds = null;
+    private int|null $expirationSeconds = null;
 
     /**
      * Path is the path relative to the mount point of the file to project the token
@@ -45,18 +41,12 @@ class ServiceAccountTokenProjection implements JsonSerializable
         $this->path = $path;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getAudience(): ?string
+    public function getAudience(): string|null
     {
         return $this->audience;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getExpirationSeconds(): ?int
+    public function getExpirationSeconds(): int|null
     {
         return $this->expirationSeconds;
     }
@@ -87,7 +77,7 @@ class ServiceAccountTokenProjection implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'audience' => $this->audience,

@@ -11,64 +11,44 @@ class BoundObjectReference implements JsonSerializable
 {
     /**
      * API version of the referent.
-     *
-     * @var string|null
      */
-    private ?string $apiVersion = null;
+    private string|null $apiVersion = null;
 
     /**
      * Kind of the referent. Valid kinds are 'Pod' and 'Secret'.
-     *
-     * @var string|null
      */
-    private ?string $kind = null;
+    private string|null $kind = null;
 
     /**
      * Name of the referent.
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * UID of the referent.
-     *
-     * @var string|null
      */
-    private ?string $uid = null;
+    private string|null $uid = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getApiVersion(): ?string
+    public function getApiVersion(): string|null
     {
         return $this->apiVersion;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getKind(): ?string
+    public function getKind(): string|null
     {
         return $this->kind;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUid(): ?string
+    public function getUid(): string|null
     {
         return $this->uid;
     }
@@ -101,7 +81,7 @@ class BoundObjectReference implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => $this->apiVersion,

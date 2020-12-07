@@ -12,34 +12,24 @@ class SecretReference implements JsonSerializable
 {
     /**
      * Name is unique within a namespace to reference a secret resource.
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * Namespace defines the space within which the secret name must be unique.
-     *
-     * @var string|null
      */
-    private ?string $namespace = null;
+    private string|null $namespace = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNamespace(): ?string
+    public function getNamespace(): string|null
     {
         return $this->namespace;
     }
@@ -58,7 +48,7 @@ class SecretReference implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => $this->name,

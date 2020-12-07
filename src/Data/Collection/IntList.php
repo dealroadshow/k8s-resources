@@ -7,7 +7,7 @@ use JsonSerializable;
 class IntList implements JsonSerializable
 {
     /**
-     * @var int[]|array
+     * @var int[]
      */
     private array $items = [];
 
@@ -24,7 +24,7 @@ class IntList implements JsonSerializable
     }
 
     /**
-     * @var int[]|array $items
+     * @var int[] $items
      *
      * @return self
      */
@@ -36,7 +36,7 @@ class IntList implements JsonSerializable
     }
 
     /**
-     * @return int[]|array
+     * @return int[]
      */
     public function all(): array
     {
@@ -50,7 +50,7 @@ class IntList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

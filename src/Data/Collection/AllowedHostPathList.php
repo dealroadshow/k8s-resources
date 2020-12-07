@@ -8,7 +8,7 @@ use JsonSerializable;
 class AllowedHostPathList implements JsonSerializable
 {
     /**
-     * @var AllowedHostPath[]|array
+     * @var AllowedHostPath[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class AllowedHostPathList implements JsonSerializable
     }
 
     /**
-     * @var AllowedHostPath[]|array $items
+     * @var AllowedHostPath[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class AllowedHostPathList implements JsonSerializable
     }
 
     /**
-     * @return AllowedHostPath[]|array
+     * @return AllowedHostPath[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class AllowedHostPathList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

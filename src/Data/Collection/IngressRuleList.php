@@ -8,7 +8,7 @@ use JsonSerializable;
 class IngressRuleList implements JsonSerializable
 {
     /**
-     * @var IngressRule[]|array
+     * @var IngressRule[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class IngressRuleList implements JsonSerializable
     }
 
     /**
-     * @var IngressRule[]|array $items
+     * @var IngressRule[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class IngressRuleList implements JsonSerializable
     }
 
     /**
-     * @return IngressRule[]|array
+     * @return IngressRule[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class IngressRuleList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

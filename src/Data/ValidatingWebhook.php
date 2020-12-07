@@ -31,10 +31,8 @@ class ValidatingWebhook implements JsonSerializable
     /**
      * FailurePolicy defines how unrecognized errors from the admission endpoint are
      * handled - allowed values are Ignore or Fail. Defaults to Fail.
-     *
-     * @var string|null
      */
-    private ?string $failurePolicy = null;
+    private string|null $failurePolicy = null;
 
     /**
      * matchPolicy defines how the "rules" list is used to match incoming requests.
@@ -54,10 +52,8 @@ class ValidatingWebhook implements JsonSerializable
      * the webhook.
      *
      * Defaults to "Equivalent"
-     *
-     * @var string|null
      */
-    private ?string $matchPolicy = null;
+    private string|null $matchPolicy = null;
 
     /**
      * The name of the admission webhook. Name should be fully qualified, e.g.,
@@ -149,10 +145,8 @@ class ValidatingWebhook implements JsonSerializable
      * the webhook call will be ignored or the API call will fail based on the failure
      * policy. The timeout value must be between 1 and 30 seconds. Default to 10
      * seconds.
-     *
-     * @var int|null
      */
-    private ?int $timeoutSeconds = null;
+    private int|null $timeoutSeconds = null;
 
     public function __construct(string $name, string $sideEffects)
     {
@@ -175,18 +169,12 @@ class ValidatingWebhook implements JsonSerializable
         return $this->clientConfig;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFailurePolicy(): ?string
+    public function getFailurePolicy(): string|null
     {
         return $this->failurePolicy;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMatchPolicy(): ?string
+    public function getMatchPolicy(): string|null
     {
         return $this->matchPolicy;
     }
@@ -201,10 +189,7 @@ class ValidatingWebhook implements JsonSerializable
         return $this->sideEffects;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTimeoutSeconds(): ?int
+    public function getTimeoutSeconds(): int|null
     {
         return $this->timeoutSeconds;
     }
@@ -259,7 +244,7 @@ class ValidatingWebhook implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'admissionReviewVersions' => $this->admissionReviewVersions,

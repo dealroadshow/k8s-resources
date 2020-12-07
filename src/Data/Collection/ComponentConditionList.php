@@ -8,7 +8,7 @@ use JsonSerializable;
 class ComponentConditionList implements JsonSerializable
 {
     /**
-     * @var ComponentCondition[]|array
+     * @var ComponentCondition[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class ComponentConditionList implements JsonSerializable
     }
 
     /**
-     * @var ComponentCondition[]|array $items
+     * @var ComponentCondition[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class ComponentConditionList implements JsonSerializable
     }
 
     /**
-     * @return ComponentCondition[]|array
+     * @return ComponentCondition[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class ComponentConditionList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

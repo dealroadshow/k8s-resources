@@ -15,17 +15,13 @@ class APIServiceSpec implements JsonSerializable
      * CABundle is a PEM encoded CA bundle which will be used to validate an API
      * server's serving certificate. If unspecified, system trust roots on the
      * apiserver are used.
-     *
-     * @var string|null
      */
-    private ?string $caBundle = null;
+    private string|null $caBundle = null;
 
     /**
      * Group is the API group name this server hosts
-     *
-     * @var string|null
      */
-    private ?string $group = null;
+    private string|null $group = null;
 
     /**
      * GroupPriorityMininum is the priority this group should have at least. Higher
@@ -44,10 +40,8 @@ class APIServiceSpec implements JsonSerializable
      * InsecureSkipTLSVerify disables TLS certificate verification when communicating
      * with this server. This is strongly discouraged.  You should use the CABundle
      * instead.
-     *
-     * @var bool|null
      */
-    private ?bool $insecureSkipTLSVerify = null;
+    private bool|null $insecureSkipTLSVerify = null;
 
     /**
      * Service is a reference to the service for this API server.  It must communicate
@@ -59,10 +53,8 @@ class APIServiceSpec implements JsonSerializable
 
     /**
      * Version is the API version this server hosts.  For example, "v1"
-     *
-     * @var string|null
      */
-    private ?string $version = null;
+    private string|null $version = null;
 
     /**
      * VersionPriority controls the ordering of this API version inside of its group.
@@ -88,18 +80,12 @@ class APIServiceSpec implements JsonSerializable
         $this->versionPriority = $versionPriority;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCaBundle(): ?string
+    public function getCaBundle(): string|null
     {
         return $this->caBundle;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getGroup(): ?string
+    public function getGroup(): string|null
     {
         return $this->group;
     }
@@ -109,10 +95,7 @@ class APIServiceSpec implements JsonSerializable
         return $this->groupPriorityMinimum;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getInsecureSkipTLSVerify(): ?bool
+    public function getInsecureSkipTLSVerify(): bool|null
     {
         return $this->insecureSkipTLSVerify;
     }
@@ -122,10 +105,7 @@ class APIServiceSpec implements JsonSerializable
         return $this->service;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVersion(): ?string
+    public function getVersion(): string|null
     {
         return $this->version;
     }
@@ -184,7 +164,7 @@ class APIServiceSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'caBundle' => $this->caBundle,

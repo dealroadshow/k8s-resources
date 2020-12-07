@@ -8,7 +8,7 @@ use JsonSerializable;
 class LocalObjectReferenceList implements JsonSerializable
 {
     /**
-     * @var LocalObjectReference[]|array
+     * @var LocalObjectReference[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class LocalObjectReferenceList implements JsonSerializable
     }
 
     /**
-     * @var LocalObjectReference[]|array $items
+     * @var LocalObjectReference[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class LocalObjectReferenceList implements JsonSerializable
     }
 
     /**
-     * @return LocalObjectReference[]|array
+     * @return LocalObjectReference[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class LocalObjectReferenceList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

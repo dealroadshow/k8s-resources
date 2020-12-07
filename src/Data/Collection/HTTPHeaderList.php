@@ -8,7 +8,7 @@ use JsonSerializable;
 class HTTPHeaderList implements JsonSerializable
 {
     /**
-     * @var HTTPHeader[]|array
+     * @var HTTPHeader[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class HTTPHeaderList implements JsonSerializable
     }
 
     /**
-     * @var HTTPHeader[]|array $items
+     * @var HTTPHeader[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class HTTPHeaderList implements JsonSerializable
     }
 
     /**
-     * @return HTTPHeader[]|array
+     * @return HTTPHeader[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class HTTPHeaderList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

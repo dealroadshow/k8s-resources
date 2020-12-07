@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\IntOrString;
 use JsonSerializable;
 
 /**
@@ -15,20 +14,16 @@ class PodDisruptionBudgetSpec implements JsonSerializable
      * are unavailable after the eviction, i.e. even in absence of the evicted pod. For
      * example, one can prevent all voluntary evictions by specifying 0. This is a
      * mutually exclusive setting with "minAvailable".
-     *
-     * @var IntOrString|null
      */
-    private ?IntOrString $maxUnavailable = null;
+    private string|int|null $maxUnavailable = null;
 
     /**
      * An eviction is allowed if at least "minAvailable" pods selected by "selector"
      * will still be available after the eviction, i.e. even in the absence of the
      * evicted pod.  So for example you can prevent all voluntary evictions by
      * specifying "100%".
-     *
-     * @var IntOrString|null
      */
-    private ?IntOrString $minAvailable = null;
+    private string|int|null $minAvailable = null;
 
     /**
      * Label query over pods whose evictions are managed by the disruption budget.
@@ -40,18 +35,12 @@ class PodDisruptionBudgetSpec implements JsonSerializable
         $this->selector = new LabelSelector();
     }
 
-    /**
-     * @return IntOrString|null
-     */
-    public function getMaxUnavailable(): ?IntOrString
+    public function getMaxUnavailable(): string|int|null
     {
         return $this->maxUnavailable;
     }
 
-    /**
-     * @return IntOrString|null
-     */
-    public function getMinAvailable(): ?IntOrString
+    public function getMinAvailable(): string|int|null
     {
         return $this->minAvailable;
     }
@@ -61,21 +50,21 @@ class PodDisruptionBudgetSpec implements JsonSerializable
         return $this->selector;
     }
 
-    public function setMaxUnavailable(IntOrString $maxUnavailable): self
+    public function setMaxUnavailable(string|int $maxUnavailable): self
     {
         $this->maxUnavailable = $maxUnavailable;
 
         return $this;
     }
 
-    public function setMinAvailable(IntOrString $minAvailable): self
+    public function setMinAvailable(string|int $minAvailable): self
     {
         $this->minAvailable = $minAvailable;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'maxUnavailable' => $this->maxUnavailable,

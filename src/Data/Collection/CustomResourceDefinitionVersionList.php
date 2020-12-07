@@ -8,7 +8,7 @@ use JsonSerializable;
 class CustomResourceDefinitionVersionList implements JsonSerializable
 {
     /**
-     * @var CustomResourceDefinitionVersion[]|array
+     * @var CustomResourceDefinitionVersion[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class CustomResourceDefinitionVersionList implements JsonSerializable
     }
 
     /**
-     * @var CustomResourceDefinitionVersion[]|array $items
+     * @var CustomResourceDefinitionVersion[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class CustomResourceDefinitionVersionList implements JsonSerializable
     }
 
     /**
-     * @return CustomResourceDefinitionVersion[]|array
+     * @return CustomResourceDefinitionVersion[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class CustomResourceDefinitionVersionList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

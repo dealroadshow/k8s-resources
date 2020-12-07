@@ -60,7 +60,7 @@ class EndpointSubset implements JsonSerializable
         return $this->ports;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'addresses' => $this->addresses,

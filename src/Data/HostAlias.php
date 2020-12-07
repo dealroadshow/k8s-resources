@@ -18,20 +18,15 @@ class HostAlias implements JsonSerializable
 
     /**
      * IP address of the host file entry.
-     *
-     * @var string|null
      */
-    private ?string $ip = null;
+    private string|null $ip = null;
 
     public function __construct()
     {
         $this->hostnames = new StringList();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getIp(): ?string
+    public function getIp(): string|null
     {
         return $this->ip;
     }
@@ -48,7 +43,7 @@ class HostAlias implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'hostnames' => $this->hostnames,

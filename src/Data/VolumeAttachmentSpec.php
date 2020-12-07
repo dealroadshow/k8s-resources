@@ -61,7 +61,7 @@ class VolumeAttachmentSpec implements JsonSerializable
         return $this->source;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'attacher' => $this->attacher,

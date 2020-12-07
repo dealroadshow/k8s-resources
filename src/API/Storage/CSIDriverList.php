@@ -14,7 +14,7 @@ class CSIDriverList implements APIResourceListInterface
     const KIND = 'CSIDriverList';
 
     /**
-     * @var CSIDriver[]|array
+     * @var CSIDriver[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class CSIDriverList implements APIResourceListInterface
     }
 
     /**
-     * @var CSIDriver[]|array $items
+     * @var CSIDriver[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class CSIDriverList implements APIResourceListInterface
     }
 
     /**
-     * @return CSIDriver[]|array
+     * @return CSIDriver[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class CSIDriverList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

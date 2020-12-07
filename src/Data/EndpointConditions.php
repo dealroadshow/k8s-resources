@@ -13,19 +13,14 @@ class EndpointConditions implements JsonSerializable
      * ready indicates that this endpoint is prepared to receive traffic, according to
      * whatever system is managing the endpoint. A nil value indicates an unknown
      * state. In most cases consumers should interpret this unknown state as ready.
-     *
-     * @var bool|null
      */
-    private ?bool $ready = null;
+    private bool|null $ready = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReady(): ?bool
+    public function getReady(): bool|null
     {
         return $this->ready;
     }
@@ -37,7 +32,7 @@ class EndpointConditions implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'ready' => $this->ready,

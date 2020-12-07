@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\Quantity;
 use JsonSerializable;
 
 /**
@@ -13,17 +12,13 @@ class ResourceFieldSelector implements JsonSerializable
 {
     /**
      * Container name: required for volumes, optional for env vars
-     *
-     * @var string|null
      */
-    private ?string $containerName = null;
+    private string|null $containerName = null;
 
     /**
      * Specifies the output format of the exposed resources, defaults to "1"
-     *
-     * @var Quantity|null
      */
-    private ?Quantity $divisor = null;
+    private string|float|null $divisor = null;
 
     /**
      * Required: resource to select
@@ -35,18 +30,12 @@ class ResourceFieldSelector implements JsonSerializable
         $this->resource = $resource;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getContainerName(): ?string
+    public function getContainerName(): string|null
     {
         return $this->containerName;
     }
 
-    /**
-     * @return Quantity|null
-     */
-    public function getDivisor(): ?Quantity
+    public function getDivisor(): string|float|null
     {
         return $this->divisor;
     }
@@ -63,7 +52,7 @@ class ResourceFieldSelector implements JsonSerializable
         return $this;
     }
 
-    public function setDivisor(Quantity $divisor): self
+    public function setDivisor(string|float $divisor): self
     {
         $this->divisor = $divisor;
 
@@ -77,7 +66,7 @@ class ResourceFieldSelector implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'containerName' => $this->containerName,

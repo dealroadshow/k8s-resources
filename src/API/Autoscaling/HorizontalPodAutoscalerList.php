@@ -14,7 +14,7 @@ class HorizontalPodAutoscalerList implements APIResourceListInterface
     const KIND = 'HorizontalPodAutoscalerList';
 
     /**
-     * @var HorizontalPodAutoscaler[]|array
+     * @var HorizontalPodAutoscaler[]
      */
     private array $items = [];
 
@@ -37,7 +37,7 @@ class HorizontalPodAutoscalerList implements APIResourceListInterface
     }
 
     /**
-     * @var HorizontalPodAutoscaler[]|array $items
+     * @var HorizontalPodAutoscaler[] $items
      *
      * @return self
      */
@@ -49,7 +49,7 @@ class HorizontalPodAutoscalerList implements APIResourceListInterface
     }
 
     /**
-     * @return HorizontalPodAutoscaler[]|array
+     * @return HorizontalPodAutoscaler[]
      */
     public function all(): array
     {
@@ -68,7 +68,7 @@ class HorizontalPodAutoscalerList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

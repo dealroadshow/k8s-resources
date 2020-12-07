@@ -19,10 +19,8 @@ class GitRepoVolumeSource implements JsonSerializable
      * Target directory name. Must not contain or start with '..'.  If '.' is supplied,
      * the volume directory will be the git repository.  Otherwise, if specified, the
      * volume will contain the git repository in the subdirectory with the given name.
-     *
-     * @var string|null
      */
-    private ?string $directory = null;
+    private string|null $directory = null;
 
     /**
      * Repository URL
@@ -31,20 +29,15 @@ class GitRepoVolumeSource implements JsonSerializable
 
     /**
      * Commit hash for the specified revision.
-     *
-     * @var string|null
      */
-    private ?string $revision = null;
+    private string|null $revision = null;
 
     public function __construct(string $repository)
     {
         $this->repository = $repository;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDirectory(): ?string
+    public function getDirectory(): string|null
     {
         return $this->directory;
     }
@@ -54,10 +47,7 @@ class GitRepoVolumeSource implements JsonSerializable
         return $this->repository;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRevision(): ?string
+    public function getRevision(): string|null
     {
         return $this->revision;
     }
@@ -83,7 +73,7 @@ class GitRepoVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'directory' => $this->directory,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class WeightedPodAffinityTermList implements JsonSerializable
 {
     /**
-     * @var WeightedPodAffinityTerm[]|array
+     * @var WeightedPodAffinityTerm[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class WeightedPodAffinityTermList implements JsonSerializable
     }
 
     /**
-     * @var WeightedPodAffinityTerm[]|array $items
+     * @var WeightedPodAffinityTerm[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class WeightedPodAffinityTermList implements JsonSerializable
     }
 
     /**
-     * @return WeightedPodAffinityTerm[]|array
+     * @return WeightedPodAffinityTerm[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class WeightedPodAffinityTermList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

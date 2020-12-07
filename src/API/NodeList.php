@@ -14,7 +14,7 @@ class NodeList implements APIResourceListInterface
     const KIND = 'NodeList';
 
     /**
-     * @var Node[]|array
+     * @var Node[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class NodeList implements APIResourceListInterface
     }
 
     /**
-     * @var Node[]|array $items
+     * @var Node[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class NodeList implements APIResourceListInterface
     }
 
     /**
-     * @return Node[]|array
+     * @return Node[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class NodeList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

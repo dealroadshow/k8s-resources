@@ -14,7 +14,7 @@ class StorageClassList implements APIResourceListInterface
     const KIND = 'StorageClassList';
 
     /**
-     * @var StorageClass[]|array
+     * @var StorageClass[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class StorageClassList implements APIResourceListInterface
     }
 
     /**
-     * @var StorageClass[]|array $items
+     * @var StorageClass[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class StorageClassList implements APIResourceListInterface
     }
 
     /**
-     * @return StorageClass[]|array
+     * @return StorageClass[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class StorageClassList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

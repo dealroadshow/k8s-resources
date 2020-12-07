@@ -39,10 +39,8 @@ class Secret implements APIResourceInterface
 
     /**
      * Used to facilitate programmatic handling of secret data.
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     public function __construct()
     {
@@ -56,10 +54,7 @@ class Secret implements APIResourceInterface
         return $this->data;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
@@ -81,7 +76,7 @@ class Secret implements APIResourceInterface
         return $this->stringData;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

@@ -8,19 +8,14 @@ class SelfSubjectRulesReviewSpec implements JsonSerializable
 {
     /**
      * Namespace to evaluate rules for. Required.
-     *
-     * @var string|null
      */
-    private ?string $namespace = null;
+    private string|null $namespace = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNamespace(): ?string
+    public function getNamespace(): string|null
     {
         return $this->namespace;
     }
@@ -32,7 +27,7 @@ class SelfSubjectRulesReviewSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'namespace' => $this->namespace,

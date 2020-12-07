@@ -48,7 +48,7 @@ class Affinity implements JsonSerializable
         return $this->podAntiAffinity;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'nodeAffinity' => $this->nodeAffinity,

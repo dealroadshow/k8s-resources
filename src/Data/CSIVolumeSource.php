@@ -21,10 +21,8 @@ class CSIVolumeSource implements JsonSerializable
      * Filesystem type to mount. Ex. "ext4", "xfs", "ntfs". If not provided, the empty
      * value is passed to the associated CSI driver which will determine the default
      * filesystem to apply.
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * NodePublishSecretRef is a reference to the secret object containing sensitive
@@ -38,10 +36,8 @@ class CSIVolumeSource implements JsonSerializable
     /**
      * Specifies a read-only configuration for the volume. Defaults to false
      * (read/write).
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * VolumeAttributes stores driver-specific properties that are passed to the CSI
@@ -61,18 +57,12 @@ class CSIVolumeSource implements JsonSerializable
         return $this->driver;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -108,7 +98,7 @@ class CSIVolumeSource implements JsonSerializable
         return $this->volumeAttributes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'driver' => $this->driver,

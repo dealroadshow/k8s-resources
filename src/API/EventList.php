@@ -14,7 +14,7 @@ class EventList implements APIResourceListInterface
     const KIND = 'EventList';
 
     /**
-     * @var Event[]|array
+     * @var Event[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class EventList implements APIResourceListInterface
     }
 
     /**
-     * @var Event[]|array $items
+     * @var Event[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class EventList implements APIResourceListInterface
     }
 
     /**
-     * @return Event[]|array
+     * @return Event[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class EventList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

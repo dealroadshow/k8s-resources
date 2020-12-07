@@ -20,10 +20,8 @@ class NFSVolumeSource implements JsonSerializable
      * ReadOnly here will force the NFS export to be mounted with read-only
      * permissions. Defaults to false. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#nfs
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * Server is the hostname or IP address of the NFS server. More info:
@@ -42,10 +40,7 @@ class NFSVolumeSource implements JsonSerializable
         return $this->path;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -76,7 +71,7 @@ class NFSVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'path' => $this->path,

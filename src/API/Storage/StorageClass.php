@@ -22,10 +22,8 @@ class StorageClass implements APIResourceInterface
 
     /**
      * AllowVolumeExpansion shows whether the storage class allow volume expand
-     *
-     * @var bool|null
      */
-    private ?bool $allowVolumeExpansion = null;
+    private bool|null $allowVolumeExpansion = null;
 
     /**
      * Restrict the node topologies where volumes can be dynamically provisioned. Each
@@ -62,19 +60,15 @@ class StorageClass implements APIResourceInterface
     /**
      * Dynamically provisioned PersistentVolumes of this storage class are created with
      * this reclaimPolicy. Defaults to Delete.
-     *
-     * @var string|null
      */
-    private ?string $reclaimPolicy = null;
+    private string|null $reclaimPolicy = null;
 
     /**
      * VolumeBindingMode indicates how PersistentVolumeClaims should be provisioned and
      * bound.  When unset, VolumeBindingImmediate is used. This field is only honored
      * by servers that enable the VolumeScheduling feature.
-     *
-     * @var string|null
      */
-    private ?string $volumeBindingMode = null;
+    private string|null $volumeBindingMode = null;
 
     public function __construct(string $provisioner)
     {
@@ -90,10 +84,7 @@ class StorageClass implements APIResourceInterface
         return $this->allowedTopologies;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getAllowVolumeExpansion(): ?bool
+    public function getAllowVolumeExpansion(): bool|null
     {
         return $this->allowVolumeExpansion;
     }
@@ -103,18 +94,12 @@ class StorageClass implements APIResourceInterface
         return $this->provisioner;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getReclaimPolicy(): ?string
+    public function getReclaimPolicy(): string|null
     {
         return $this->reclaimPolicy;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVolumeBindingMode(): ?string
+    public function getVolumeBindingMode(): string|null
     {
         return $this->volumeBindingMode;
     }
@@ -162,7 +147,7 @@ class StorageClass implements APIResourceInterface
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

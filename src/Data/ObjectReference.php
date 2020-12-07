@@ -12,10 +12,8 @@ class ObjectReference implements JsonSerializable
 {
     /**
      * API version of the referent.
-     *
-     * @var string|null
      */
-    private ?string $apiVersion = null;
+    private string|null $apiVersion = null;
 
     /**
      * If referring to a piece of an object instead of an entire object, this string
@@ -26,107 +24,74 @@ class ObjectReference implements JsonSerializable
      * triggered the event) or if no container name is specified "spec.containers[2]"
      * (container with index 2 in this pod). This syntax is chosen only to have some
      * well-defined way of referencing a part of an object.
-     *
-     * @var string|null
      */
-    private ?string $fieldPath = null;
+    private string|null $fieldPath = null;
 
     /**
      * Kind of the referent. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
-     *
-     * @var string|null
      */
-    private ?string $kind = null;
+    private string|null $kind = null;
 
     /**
      * Name of the referent. More info:
      * https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * Namespace of the referent. More info:
      * https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
-     *
-     * @var string|null
      */
-    private ?string $namespace = null;
+    private string|null $namespace = null;
 
     /**
      * Specific resourceVersion to which this reference is made, if any. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
-     *
-     * @var string|null
      */
-    private ?string $resourceVersion = null;
+    private string|null $resourceVersion = null;
 
     /**
      * UID of the referent. More info:
      * https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
-     *
-     * @var string|null
      */
-    private ?string $uid = null;
+    private string|null $uid = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getApiVersion(): ?string
+    public function getApiVersion(): string|null
     {
         return $this->apiVersion;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFieldPath(): ?string
+    public function getFieldPath(): string|null
     {
         return $this->fieldPath;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getKind(): ?string
+    public function getKind(): string|null
     {
         return $this->kind;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNamespace(): ?string
+    public function getNamespace(): string|null
     {
         return $this->namespace;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getResourceVersion(): ?string
+    public function getResourceVersion(): string|null
     {
         return $this->resourceVersion;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUid(): ?string
+    public function getUid(): string|null
     {
         return $this->uid;
     }
@@ -180,7 +145,7 @@ class ObjectReference implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => $this->apiVersion,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class PolicyRuleList implements JsonSerializable
 {
     /**
-     * @var PolicyRule[]|array
+     * @var PolicyRule[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class PolicyRuleList implements JsonSerializable
     }
 
     /**
-     * @var PolicyRule[]|array $items
+     * @var PolicyRule[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class PolicyRuleList implements JsonSerializable
     }
 
     /**
-     * @return PolicyRule[]|array
+     * @return PolicyRule[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class PolicyRuleList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

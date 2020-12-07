@@ -13,18 +13,14 @@ class StorageOSPersistentVolumeSource implements JsonSerializable
      * Filesystem type to mount. Must be a filesystem type supported by the host
      * operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if
      * unspecified.
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in
      * VolumeMounts.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * SecretRef specifies the secret to use for obtaining the StorageOS API
@@ -35,10 +31,8 @@ class StorageOSPersistentVolumeSource implements JsonSerializable
     /**
      * VolumeName is the human-readable name of the StorageOS volume.  Volume names are
      * only unique within a namespace.
-     *
-     * @var string|null
      */
-    private ?string $volumeName = null;
+    private string|null $volumeName = null;
 
     /**
      * VolumeNamespace specifies the scope of the volume within StorageOS.  If no
@@ -47,44 +41,30 @@ class StorageOSPersistentVolumeSource implements JsonSerializable
      * Set VolumeName to any name to override the default behaviour. Set to "default"
      * if you are not using namespaces within StorageOS. Namespaces that do not
      * pre-exist within StorageOS will be created.
-     *
-     * @var string|null
      */
-    private ?string $volumeNamespace = null;
+    private string|null $volumeNamespace = null;
 
     public function __construct()
     {
         $this->secretRef = new ObjectReference();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVolumeName(): ?string
+    public function getVolumeName(): string|null
     {
         return $this->volumeName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVolumeNamespace(): ?string
+    public function getVolumeNamespace(): string|null
     {
         return $this->volumeNamespace;
     }
@@ -122,7 +102,7 @@ class StorageOSPersistentVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'fsType' => $this->fsType,

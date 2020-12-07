@@ -14,7 +14,7 @@ class PodDisruptionBudgetList implements APIResourceListInterface
     const KIND = 'PodDisruptionBudgetList';
 
     /**
-     * @var PodDisruptionBudget[]|array
+     * @var PodDisruptionBudget[]
      */
     private array $items = [];
     private ListMeta $metadata;
@@ -33,7 +33,7 @@ class PodDisruptionBudgetList implements APIResourceListInterface
     }
 
     /**
-     * @var PodDisruptionBudget[]|array $items
+     * @var PodDisruptionBudget[] $items
      *
      * @return self
      */
@@ -45,7 +45,7 @@ class PodDisruptionBudgetList implements APIResourceListInterface
     }
 
     /**
-     * @return PodDisruptionBudget[]|array
+     * @return PodDisruptionBudget[]
      */
     public function all(): array
     {
@@ -64,7 +64,7 @@ class PodDisruptionBudgetList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

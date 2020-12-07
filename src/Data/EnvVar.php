@@ -21,10 +21,8 @@ class EnvVar implements JsonSerializable
      * unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie:
      * $$(VAR_NAME). Escaped references will never be expanded, regardless of whether
      * the variable exists or not. Defaults to "".
-     *
-     * @var string|null
      */
-    private ?string $value = null;
+    private string|null $value = null;
 
     /**
      * Source for the environment variable's value. Cannot be used if value is not
@@ -43,10 +41,7 @@ class EnvVar implements JsonSerializable
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getValue(): ?string
+    public function getValue(): string|null
     {
         return $this->value;
     }
@@ -70,7 +65,7 @@ class EnvVar implements JsonSerializable
         return $this->valueFrom;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => $this->name,

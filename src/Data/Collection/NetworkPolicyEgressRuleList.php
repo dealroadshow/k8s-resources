@@ -8,7 +8,7 @@ use JsonSerializable;
 class NetworkPolicyEgressRuleList implements JsonSerializable
 {
     /**
-     * @var NetworkPolicyEgressRule[]|array
+     * @var NetworkPolicyEgressRule[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class NetworkPolicyEgressRuleList implements JsonSerializable
     }
 
     /**
-     * @var NetworkPolicyEgressRule[]|array $items
+     * @var NetworkPolicyEgressRule[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class NetworkPolicyEgressRuleList implements JsonSerializable
     }
 
     /**
-     * @return NetworkPolicyEgressRule[]|array
+     * @return NetworkPolicyEgressRule[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class NetworkPolicyEgressRuleList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

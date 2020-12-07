@@ -18,35 +18,25 @@ class AllowedHostPath implements JsonSerializable
      *
      * Examples: `/foo` would allow `/foo`, `/foo/` and `/foo/bar` `/foo` would not
      * allow `/food` or `/etc/foo`
-     *
-     * @var string|null
      */
-    private ?string $pathPrefix = null;
+    private string|null $pathPrefix = null;
 
     /**
      * when set to true, will allow host volumes matching the pathPrefix only if all
      * volume mounts are readOnly.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPathPrefix(): ?string
+    public function getPathPrefix(): string|null
     {
         return $this->pathPrefix;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -65,7 +55,7 @@ class AllowedHostPath implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'pathPrefix' => $this->pathPrefix,

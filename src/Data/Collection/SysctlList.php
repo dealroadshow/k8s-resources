@@ -8,7 +8,7 @@ use JsonSerializable;
 class SysctlList implements JsonSerializable
 {
     /**
-     * @var Sysctl[]|array
+     * @var Sysctl[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class SysctlList implements JsonSerializable
     }
 
     /**
-     * @var Sysctl[]|array $items
+     * @var Sysctl[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class SysctlList implements JsonSerializable
     }
 
     /**
-     * @return Sysctl[]|array
+     * @return Sysctl[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class SysctlList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

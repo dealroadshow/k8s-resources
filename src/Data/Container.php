@@ -57,19 +57,15 @@ class Container implements JsonSerializable
      * https://kubernetes.io/docs/concepts/containers/images This field is optional to
      * allow higher level config management to default or override container images in
      * workload controllers like Deployments and StatefulSets.
-     *
-     * @var string|null
      */
-    private ?string $image = null;
+    private string|null $image = null;
 
     /**
      * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if
      * :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More
      * info: https://kubernetes.io/docs/concepts/containers/images#updating-images
-     *
-     * @var string|null
      */
-    private ?string $imagePullPolicy = null;
+    private string|null $imagePullPolicy = null;
 
     /**
      * Actions that the management system should take in response to container
@@ -136,10 +132,8 @@ class Container implements JsonSerializable
      * Whether this container should allocate a buffer for stdin in the container
      * runtime. If this is not set, reads from stdin in the container will always
      * result in EOF. Default is false.
-     *
-     * @var bool|null
      */
-    private ?bool $stdin = null;
+    private bool|null $stdin = null;
 
     /**
      * Whether the container runtime should close the stdin channel after it has been
@@ -150,10 +144,8 @@ class Container implements JsonSerializable
      * is closed and remains closed until the container is restarted. If this flag is
      * false, a container processes that reads from stdin will never receive an EOF.
      * Default is false
-     *
-     * @var bool|null
      */
-    private ?bool $stdinOnce = null;
+    private bool|null $stdinOnce = null;
 
     /**
      * Optional: Path at which the file to which the container's termination message
@@ -162,10 +154,8 @@ class Container implements JsonSerializable
      * truncated by the node if greater than 4096 bytes. The total message length
      * across all containers will be limited to 12kb. Defaults to /dev/termination-log.
      * Cannot be updated.
-     *
-     * @var string|null
      */
-    private ?string $terminationMessagePath = null;
+    private string|null $terminationMessagePath = null;
 
     /**
      * Indicate how the termination message should be populated. File will use the
@@ -174,18 +164,14 @@ class Container implements JsonSerializable
      * container log output if the termination message file is empty and the container
      * exited with an error. The log output is limited to 2048 bytes or 80 lines,
      * whichever is smaller. Defaults to File. Cannot be updated.
-     *
-     * @var string|null
      */
-    private ?string $terminationMessagePolicy = null;
+    private string|null $terminationMessagePolicy = null;
 
     /**
      * Whether this container should allocate a TTY for itself, also requires 'stdin'
      * to be true. Default is false.
-     *
-     * @var bool|null
      */
-    private ?bool $tty = null;
+    private bool|null $tty = null;
 
     /**
      * volumeDevices is the list of block devices to be used by the container. This is
@@ -202,10 +188,8 @@ class Container implements JsonSerializable
      * Container's working directory. If not specified, the container runtime's default
      * will be used, which might be configured in the container image. Cannot be
      * updated.
-     *
-     * @var string|null
      */
-    private ?string $workingDir = null;
+    private string|null $workingDir = null;
 
     public function __construct(string $name)
     {
@@ -245,18 +229,12 @@ class Container implements JsonSerializable
         return $this->envFrom;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getImage(): ?string
+    public function getImage(): string|null
     {
         return $this->image;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getImagePullPolicy(): ?string
+    public function getImagePullPolicy(): string|null
     {
         return $this->imagePullPolicy;
     }
@@ -266,50 +244,32 @@ class Container implements JsonSerializable
         return $this->name;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getStdin(): ?bool
+    public function getStdin(): bool|null
     {
         return $this->stdin;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getStdinOnce(): ?bool
+    public function getStdinOnce(): bool|null
     {
         return $this->stdinOnce;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getTerminationMessagePath(): ?string
+    public function getTerminationMessagePath(): string|null
     {
         return $this->terminationMessagePath;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getTerminationMessagePolicy(): ?string
+    public function getTerminationMessagePolicy(): string|null
     {
         return $this->terminationMessagePolicy;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getTty(): ?bool
+    public function getTty(): bool|null
     {
         return $this->tty;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getWorkingDir(): ?string
+    public function getWorkingDir(): string|null
     {
         return $this->workingDir;
     }
@@ -422,7 +382,7 @@ class Container implements JsonSerializable
         return $this->volumeMounts;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'args' => $this->args,

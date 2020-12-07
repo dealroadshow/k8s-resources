@@ -13,10 +13,8 @@ class PhotonPersistentDiskVolumeSource implements JsonSerializable
      * Filesystem type to mount. Must be a filesystem type supported by the host
      * operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if
      * unspecified.
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * ID that identifies Photon Controller persistent disk
@@ -28,10 +26,7 @@ class PhotonPersistentDiskVolumeSource implements JsonSerializable
         $this->pdID = $pdID;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
@@ -55,7 +50,7 @@ class PhotonPersistentDiskVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'fsType' => $this->fsType,

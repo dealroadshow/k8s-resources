@@ -18,10 +18,8 @@ class PodSecurityPolicySpec implements JsonSerializable
     /**
      * allowPrivilegeEscalation determines if a pod can request to allow privilege
      * escalation. If unspecified, defaults to true.
-     *
-     * @var bool|null
      */
-    private ?bool $allowPrivilegeEscalation = null;
+    private bool|null $allowPrivilegeEscalation = null;
 
     /**
      * AllowedCSIDrivers is a whitelist of inline CSI drivers that must be explicitly
@@ -82,10 +80,8 @@ class PodSecurityPolicySpec implements JsonSerializable
     /**
      * defaultAllowPrivilegeEscalation controls the default setting for whether a
      * process can gain more privileges than its parent process.
-     *
-     * @var bool|null
      */
-    private ?bool $defaultAllowPrivilegeEscalation = null;
+    private bool|null $defaultAllowPrivilegeEscalation = null;
 
     /**
      * forbiddenSysctls is a list of explicitly forbidden sysctls, defaults to none.
@@ -106,25 +102,19 @@ class PodSecurityPolicySpec implements JsonSerializable
 
     /**
      * hostIPC determines if the policy allows the use of HostIPC in the pod spec.
-     *
-     * @var bool|null
      */
-    private ?bool $hostIPC = null;
+    private bool|null $hostIPC = null;
 
     /**
      * hostNetwork determines if the policy allows the use of HostNetwork in the pod
      * spec.
-     *
-     * @var bool|null
      */
-    private ?bool $hostNetwork = null;
+    private bool|null $hostNetwork = null;
 
     /**
      * hostPID determines if the policy allows the use of HostPID in the pod spec.
-     *
-     * @var bool|null
      */
-    private ?bool $hostPID = null;
+    private bool|null $hostPID = null;
 
     /**
      * hostPorts determines which host port ranges are allowed to be exposed.
@@ -133,10 +123,8 @@ class PodSecurityPolicySpec implements JsonSerializable
 
     /**
      * privileged determines if a pod can request to be run as privileged.
-     *
-     * @var bool|null
      */
-    private ?bool $privileged = null;
+    private bool|null $privileged = null;
 
     /**
      * readOnlyRootFilesystem when set to true will force containers to run with a read
@@ -144,10 +132,8 @@ class PodSecurityPolicySpec implements JsonSerializable
      * non-read only root file system the PSP should deny the pod. If set to false the
      * container may run with a read only root file system if it wishes but it will not
      * be forced to.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnlyRootFilesystem = null;
+    private bool|null $readOnlyRootFilesystem = null;
 
     /**
      * requiredDropCapabilities are the capabilities that will be dropped from the
@@ -159,10 +145,8 @@ class PodSecurityPolicySpec implements JsonSerializable
      * RunAsGroup is the strategy that will dictate the allowable RunAsGroup values
      * that may be set. If this field is omitted, the pod's RunAsGroup can take any
      * value. This field requires the RunAsGroup feature gate to be enabled.
-     *
-     * @var RunAsGroupStrategyOptions|null
      */
-    private ?RunAsGroupStrategyOptions $runAsGroup = null;
+    private RunAsGroupStrategyOptions|null $runAsGroup = null;
 
     /**
      * runAsUser is the strategy that will dictate the allowable RunAsUser values that
@@ -260,66 +244,42 @@ class PodSecurityPolicySpec implements JsonSerializable
         return $this->fsGroup;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getAllowPrivilegeEscalation(): ?bool
+    public function getAllowPrivilegeEscalation(): bool|null
     {
         return $this->allowPrivilegeEscalation;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getDefaultAllowPrivilegeEscalation(): ?bool
+    public function getDefaultAllowPrivilegeEscalation(): bool|null
     {
         return $this->defaultAllowPrivilegeEscalation;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getHostIPC(): ?bool
+    public function getHostIPC(): bool|null
     {
         return $this->hostIPC;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getHostNetwork(): ?bool
+    public function getHostNetwork(): bool|null
     {
         return $this->hostNetwork;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getHostPID(): ?bool
+    public function getHostPID(): bool|null
     {
         return $this->hostPID;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getPrivileged(): ?bool
+    public function getPrivileged(): bool|null
     {
         return $this->privileged;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnlyRootFilesystem(): ?bool
+    public function getReadOnlyRootFilesystem(): bool|null
     {
         return $this->readOnlyRootFilesystem;
     }
 
-    /**
-     * @return RunAsGroupStrategyOptions|null
-     */
-    public function getRunAsGroup(): ?RunAsGroupStrategyOptions
+    public function getRunAsGroup(): RunAsGroupStrategyOptions|null
     {
         return $this->runAsGroup;
     }
@@ -429,7 +389,7 @@ class PodSecurityPolicySpec implements JsonSerializable
         return $this->volumes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'allowPrivilegeEscalation' => $this->allowPrivilegeEscalation,

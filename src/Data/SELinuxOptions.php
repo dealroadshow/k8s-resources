@@ -11,64 +11,44 @@ class SELinuxOptions implements JsonSerializable
 {
     /**
      * Level is SELinux level label that applies to the container.
-     *
-     * @var string|null
      */
-    private ?string $level = null;
+    private string|null $level = null;
 
     /**
      * Role is a SELinux role label that applies to the container.
-     *
-     * @var string|null
      */
-    private ?string $role = null;
+    private string|null $role = null;
 
     /**
      * Type is a SELinux type label that applies to the container.
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     /**
      * User is a SELinux user label that applies to the container.
-     *
-     * @var string|null
      */
-    private ?string $user = null;
+    private string|null $user = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLevel(): ?string
+    public function getLevel(): string|null
     {
         return $this->level;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRole(): ?string
+    public function getRole(): string|null
     {
         return $this->role;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUser(): ?string
+    public function getUser(): string|null
     {
         return $this->user;
     }
@@ -101,7 +81,7 @@ class SELinuxOptions implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'level' => $this->level,

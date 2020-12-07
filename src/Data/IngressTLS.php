@@ -24,20 +24,15 @@ class IngressTLS implements JsonSerializable
      * host in a listener conflicts with the "Host" header field used by an
      * IngressRule, the SNI host is used for termination and value of the Host header
      * is used for routing.
-     *
-     * @var string|null
      */
-    private ?string $secretName = null;
+    private string|null $secretName = null;
 
     public function __construct()
     {
         $this->hosts = new StringList();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSecretName(): ?string
+    public function getSecretName(): string|null
     {
         return $this->secretName;
     }
@@ -54,7 +49,7 @@ class IngressTLS implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'hosts' => $this->hosts,

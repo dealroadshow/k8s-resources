@@ -12,10 +12,8 @@ class EndpointPort implements JsonSerializable
     /**
      * The name of this port.  This must match the 'name' field in the corresponding
      * ServicePort. Must be a DNS_LABEL. Optional only if one port is defined.
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * The port number of the endpoint.
@@ -24,20 +22,15 @@ class EndpointPort implements JsonSerializable
 
     /**
      * The IP protocol for this port. Must be UDP, TCP, or SCTP. Default is TCP.
-     *
-     * @var string|null
      */
-    private ?string $protocol = null;
+    private string|null $protocol = null;
 
     public function __construct(int $port)
     {
         $this->port = $port;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
@@ -47,10 +40,7 @@ class EndpointPort implements JsonSerializable
         return $this->port;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getProtocol(): ?string
+    public function getProtocol(): string|null
     {
         return $this->protocol;
     }
@@ -76,7 +66,7 @@ class EndpointPort implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => $this->name,

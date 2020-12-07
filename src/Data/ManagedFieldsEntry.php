@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\Time;
 use JsonSerializable;
 
 /**
@@ -16,18 +15,14 @@ class ManagedFieldsEntry implements JsonSerializable
      * The format is "group/version" just like the top-level APIVersion field. It is
      * necessary to track the version of a field set because it cannot be automatically
      * converted.
-     *
-     * @var string|null
      */
-    private ?string $apiVersion = null;
+    private string|null $apiVersion = null;
 
     /**
      * FieldsType is the discriminator for the different fields format and version.
      * There is currently only one possible value: "FieldsV1"
-     *
-     * @var string|null
      */
-    private ?string $fieldsType = null;
+    private string|null $fieldsType = null;
 
     /**
      * FieldsV1 holds the first JSON version format as described in the "FieldsV1"
@@ -37,26 +32,20 @@ class ManagedFieldsEntry implements JsonSerializable
 
     /**
      * Manager is an identifier of the workflow managing these fields.
-     *
-     * @var string|null
      */
-    private ?string $manager = null;
+    private string|null $manager = null;
 
     /**
      * Operation is the type of operation which lead to this ManagedFieldsEntry being
      * created. The only valid values for this field are 'Apply' and 'Update'.
-     *
-     * @var string|null
      */
-    private ?string $operation = null;
+    private string|null $operation = null;
 
     /**
      * Time is timestamp of when these fields were set. It should always be empty if
      * Operation is 'Apply'
-     *
-     * @var Time|null
      */
-    private ?Time $time = null;
+    private DateTimeInterface|null $time = null;
 
     public function __construct()
     {
@@ -68,42 +57,27 @@ class ManagedFieldsEntry implements JsonSerializable
         return $this->fieldsV1;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getApiVersion(): ?string
+    public function getApiVersion(): string|null
     {
         return $this->apiVersion;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFieldsType(): ?string
+    public function getFieldsType(): string|null
     {
         return $this->fieldsType;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getManager(): ?string
+    public function getManager(): string|null
     {
         return $this->manager;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getOperation(): ?string
+    public function getOperation(): string|null
     {
         return $this->operation;
     }
 
-    /**
-     * @return Time|null
-     */
-    public function getTime(): ?Time
+    public function getTime(): DateTimeInterface|null
     {
         return $this->time;
     }
@@ -136,14 +110,14 @@ class ManagedFieldsEntry implements JsonSerializable
         return $this;
     }
 
-    public function setTime(Time $time): self
+    public function setTime(DateTimeInterface $time): self
     {
         $this->time = $time;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => $this->apiVersion,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class EnvFromSourceList implements JsonSerializable
 {
     /**
-     * @var EnvFromSource[]|array
+     * @var EnvFromSource[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class EnvFromSourceList implements JsonSerializable
     }
 
     /**
-     * @var EnvFromSource[]|array $items
+     * @var EnvFromSource[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class EnvFromSourceList implements JsonSerializable
     }
 
     /**
-     * @return EnvFromSource[]|array
+     * @return EnvFromSource[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class EnvFromSourceList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

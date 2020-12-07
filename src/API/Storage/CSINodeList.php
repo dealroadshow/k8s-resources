@@ -14,7 +14,7 @@ class CSINodeList implements APIResourceListInterface
     const KIND = 'CSINodeList';
 
     /**
-     * @var CSINode[]|array
+     * @var CSINode[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class CSINodeList implements APIResourceListInterface
     }
 
     /**
-     * @var CSINode[]|array $items
+     * @var CSINode[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class CSINodeList implements APIResourceListInterface
     }
 
     /**
-     * @return CSINode[]|array
+     * @return CSINode[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class CSINodeList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

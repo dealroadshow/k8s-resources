@@ -14,7 +14,7 @@ class CustomResourceDefinitionList implements APIResourceListInterface
     const KIND = 'CustomResourceDefinitionList';
 
     /**
-     * @var CustomResourceDefinition[]|array
+     * @var CustomResourceDefinition[]
      */
     private array $items = [];
     private ListMeta $metadata;
@@ -33,7 +33,7 @@ class CustomResourceDefinitionList implements APIResourceListInterface
     }
 
     /**
-     * @var CustomResourceDefinition[]|array $items
+     * @var CustomResourceDefinition[] $items
      *
      * @return self
      */
@@ -45,7 +45,7 @@ class CustomResourceDefinitionList implements APIResourceListInterface
     }
 
     /**
-     * @return CustomResourceDefinition[]|array
+     * @return CustomResourceDefinition[]
      */
     public function all(): array
     {
@@ -64,7 +64,7 @@ class CustomResourceDefinitionList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

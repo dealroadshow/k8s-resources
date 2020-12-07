@@ -8,7 +8,7 @@ use JsonSerializable;
 class TolerationList implements JsonSerializable
 {
     /**
-     * @var Toleration[]|array
+     * @var Toleration[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class TolerationList implements JsonSerializable
     }
 
     /**
-     * @var Toleration[]|array $items
+     * @var Toleration[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class TolerationList implements JsonSerializable
     }
 
     /**
-     * @return Toleration[]|array
+     * @return Toleration[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class TolerationList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

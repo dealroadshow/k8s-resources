@@ -14,19 +14,14 @@ class ClientIPConfig implements JsonSerializable
      * timeoutSeconds specifies the seconds of ClientIP type session sticky time. The
      * value must be >0 && <=86400(for 1 day) if ServiceAffinity == "ClientIP". Default
      * value is 10800(for 3 hours).
-     *
-     * @var int|null
      */
-    private ?int $timeoutSeconds = null;
+    private int|null $timeoutSeconds = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTimeoutSeconds(): ?int
+    public function getTimeoutSeconds(): int|null
     {
         return $this->timeoutSeconds;
     }
@@ -38,7 +33,7 @@ class ClientIPConfig implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'timeoutSeconds' => $this->timeoutSeconds,

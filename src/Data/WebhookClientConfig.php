@@ -14,20 +14,16 @@ class WebhookClientConfig implements JsonSerializable
      * `caBundle` is a PEM encoded CA bundle which will be used to validate the
      * webhook's server certificate. If unspecified, system trust roots on the
      * apiserver are used.
-     *
-     * @var string|null
      */
-    private ?string $caBundle = null;
+    private string|null $caBundle = null;
 
     /**
      * `service` is a reference to the service for this webhook. Either `service` or
      * `url` must be specified.
      *
      * If the webhook is running within the cluster, then you should use `service`.
-     *
-     * @var ServiceReference|null
      */
-    private ?ServiceReference $service = null;
+    private ServiceReference|null $service = null;
 
     /**
      * `url` gives the location of the webhook, in standard URL form
@@ -52,35 +48,24 @@ class WebhookClientConfig implements JsonSerializable
      *
      * Attempting to use a user or basic auth e.g. "user:password@" is not allowed.
      * Fragments ("#...") and query parameters ("?...") are not allowed, either.
-     *
-     * @var string|null
      */
-    private ?string $url = null;
+    private string|null $url = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCaBundle(): ?string
+    public function getCaBundle(): string|null
     {
         return $this->caBundle;
     }
 
-    /**
-     * @return ServiceReference|null
-     */
-    public function getService(): ?ServiceReference
+    public function getService(): ServiceReference|null
     {
         return $this->service;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUrl(): ?string
+    public function getUrl(): string|null
     {
         return $this->url;
     }
@@ -106,7 +91,7 @@ class WebhookClientConfig implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'caBundle' => $this->caBundle,

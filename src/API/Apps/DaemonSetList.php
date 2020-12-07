@@ -14,7 +14,7 @@ class DaemonSetList implements APIResourceListInterface
     const KIND = 'DaemonSetList';
 
     /**
-     * @var DaemonSet[]|array
+     * @var DaemonSet[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class DaemonSetList implements APIResourceListInterface
     }
 
     /**
-     * @var DaemonSet[]|array $items
+     * @var DaemonSet[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class DaemonSetList implements APIResourceListInterface
     }
 
     /**
-     * @return DaemonSet[]|array
+     * @return DaemonSet[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class DaemonSetList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

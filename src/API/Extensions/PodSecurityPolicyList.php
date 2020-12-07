@@ -15,7 +15,7 @@ class PodSecurityPolicyList implements APIResourceListInterface
     const KIND = 'PodSecurityPolicyList';
 
     /**
-     * @var PodSecurityPolicy[]|array
+     * @var PodSecurityPolicy[]
      */
     private array $items = [];
 
@@ -39,7 +39,7 @@ class PodSecurityPolicyList implements APIResourceListInterface
     }
 
     /**
-     * @var PodSecurityPolicy[]|array $items
+     * @var PodSecurityPolicy[] $items
      *
      * @return self
      */
@@ -51,7 +51,7 @@ class PodSecurityPolicyList implements APIResourceListInterface
     }
 
     /**
-     * @return PodSecurityPolicy[]|array
+     * @return PodSecurityPolicy[]
      */
     public function all(): array
     {
@@ -70,7 +70,7 @@ class PodSecurityPolicyList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

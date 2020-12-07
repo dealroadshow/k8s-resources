@@ -2,8 +2,8 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\Data\Collection\QuantityMap;
 use Dealroadshow\K8S\Data\Collection\StringList;
+use Dealroadshow\K8S\Data\Collection\StringOrFloatMap;
 use JsonSerializable;
 
 /**
@@ -15,7 +15,7 @@ class ResourceQuotaSpec implements JsonSerializable
      * hard is the set of desired hard limits for each named resource. More info:
      * https://kubernetes.io/docs/concepts/policy/resource-quotas/
      */
-    private QuantityMap $hard;
+    private StringOrFloatMap $hard;
 
     /**
      * scopeSelector is also a collection of filters like scopes that must match each
@@ -33,12 +33,12 @@ class ResourceQuotaSpec implements JsonSerializable
 
     public function __construct()
     {
-        $this->hard = new QuantityMap();
+        $this->hard = new StringOrFloatMap();
         $this->scopeSelector = new ScopeSelector();
         $this->scopes = new StringList();
     }
 
-    public function hard(): QuantityMap
+    public function hard(): StringOrFloatMap
     {
         return $this->hard;
     }
@@ -53,7 +53,7 @@ class ResourceQuotaSpec implements JsonSerializable
         return $this->scopes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'hard' => $this->hard,

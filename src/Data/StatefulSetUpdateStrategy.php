@@ -20,20 +20,15 @@ class StatefulSetUpdateStrategy implements JsonSerializable
     /**
      * Type indicates the type of the StatefulSetUpdateStrategy. Default is
      * RollingUpdate.
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     public function __construct()
     {
         $this->rollingUpdate = new RollingUpdateStatefulSetStrategy();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
@@ -50,7 +45,7 @@ class StatefulSetUpdateStrategy implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'rollingUpdate' => $this->rollingUpdate,

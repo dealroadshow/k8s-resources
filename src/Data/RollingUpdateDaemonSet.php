@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\IntOrString;
 use JsonSerializable;
 
 /**
@@ -22,31 +21,26 @@ class RollingUpdateDaemonSet implements JsonSerializable
      * pods in their place. Once the new pods are available, it then proceeds onto
      * other DaemonSet pods, thus ensuring that at least 70% of original number of
      * DaemonSet pods are available at all times during the update.
-     *
-     * @var IntOrString|null
      */
-    private ?IntOrString $maxUnavailable = null;
+    private string|int|null $maxUnavailable = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return IntOrString|null
-     */
-    public function getMaxUnavailable(): ?IntOrString
+    public function getMaxUnavailable(): string|int|null
     {
         return $this->maxUnavailable;
     }
 
-    public function setMaxUnavailable(IntOrString $maxUnavailable): self
+    public function setMaxUnavailable(string|int $maxUnavailable): self
     {
         $this->maxUnavailable = $maxUnavailable;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'maxUnavailable' => $this->maxUnavailable,

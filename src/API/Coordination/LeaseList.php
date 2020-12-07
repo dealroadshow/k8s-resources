@@ -14,7 +14,7 @@ class LeaseList implements APIResourceListInterface
     const KIND = 'LeaseList';
 
     /**
-     * @var Lease[]|array
+     * @var Lease[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class LeaseList implements APIResourceListInterface
     }
 
     /**
-     * @var Lease[]|array $items
+     * @var Lease[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class LeaseList implements APIResourceListInterface
     }
 
     /**
-     * @return Lease[]|array
+     * @return Lease[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class LeaseList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

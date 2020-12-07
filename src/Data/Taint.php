@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\Time;
 use JsonSerializable;
 
 /**
@@ -25,17 +24,13 @@ class Taint implements JsonSerializable
     /**
      * TimeAdded represents the time at which the taint was added. It is only written
      * for NoExecute taints.
-     *
-     * @var Time|null
      */
-    private ?Time $timeAdded = null;
+    private DateTimeInterface|null $timeAdded = null;
 
     /**
      * Required. The taint value corresponding to the taint key.
-     *
-     * @var string|null
      */
-    private ?string $value = null;
+    private string|null $value = null;
 
     public function __construct(string $effect, string $key)
     {
@@ -53,18 +48,12 @@ class Taint implements JsonSerializable
         return $this->key;
     }
 
-    /**
-     * @return Time|null
-     */
-    public function getTimeAdded(): ?Time
+    public function getTimeAdded(): DateTimeInterface|null
     {
         return $this->timeAdded;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getValue(): ?string
+    public function getValue(): string|null
     {
         return $this->value;
     }
@@ -83,7 +72,7 @@ class Taint implements JsonSerializable
         return $this;
     }
 
-    public function setTimeAdded(Time $timeAdded): self
+    public function setTimeAdded(DateTimeInterface $timeAdded): self
     {
         $this->timeAdded = $timeAdded;
 
@@ -97,7 +86,7 @@ class Taint implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'effect' => $this->effect,

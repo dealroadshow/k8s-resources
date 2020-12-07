@@ -90,7 +90,7 @@ class RuntimeClass implements APIResourceInterface
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

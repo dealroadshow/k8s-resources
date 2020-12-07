@@ -11,10 +11,8 @@ class EndpointAddress implements JsonSerializable
 {
     /**
      * The Hostname of this endpoint
-     *
-     * @var string|null
      */
-    private ?string $hostname = null;
+    private string|null $hostname = null;
 
     /**
      * The IP of this endpoint. May not be loopback (127.0.0.0/8), link-local
@@ -27,10 +25,8 @@ class EndpointAddress implements JsonSerializable
     /**
      * Optional: Node hosting this endpoint. This can be used to determine endpoints
      * local to a node.
-     *
-     * @var string|null
      */
-    private ?string $nodeName = null;
+    private string|null $nodeName = null;
 
     /**
      * Reference to object providing the endpoint.
@@ -43,10 +39,7 @@ class EndpointAddress implements JsonSerializable
         $this->targetRef = new ObjectReference();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHostname(): ?string
+    public function getHostname(): string|null
     {
         return $this->hostname;
     }
@@ -56,10 +49,7 @@ class EndpointAddress implements JsonSerializable
         return $this->ip;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNodeName(): ?string
+    public function getNodeName(): string|null
     {
         return $this->nodeName;
     }
@@ -90,7 +80,7 @@ class EndpointAddress implements JsonSerializable
         return $this->targetRef;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'hostname' => $this->hostname,

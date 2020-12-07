@@ -17,17 +17,13 @@ class Handler implements JsonSerializable
 
     /**
      * HTTPGet specifies the http request to perform.
-     *
-     * @var HTTPGetAction|null
      */
-    private ?HTTPGetAction $httpGet = null;
+    private HTTPGetAction|null $httpGet = null;
 
     /**
      * TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported
-     *
-     * @var TCPSocketAction|null
      */
-    private ?TCPSocketAction $tcpSocket = null;
+    private TCPSocketAction|null $tcpSocket = null;
 
     public function __construct()
     {
@@ -39,18 +35,12 @@ class Handler implements JsonSerializable
         return $this->exec;
     }
 
-    /**
-     * @return HTTPGetAction|null
-     */
-    public function getHttpGet(): ?HTTPGetAction
+    public function getHttpGet(): HTTPGetAction|null
     {
         return $this->httpGet;
     }
 
-    /**
-     * @return TCPSocketAction|null
-     */
-    public function getTcpSocket(): ?TCPSocketAction
+    public function getTcpSocket(): TCPSocketAction|null
     {
         return $this->tcpSocket;
     }
@@ -69,7 +59,7 @@ class Handler implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'exec' => $this->exec,

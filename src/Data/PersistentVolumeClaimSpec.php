@@ -25,10 +25,8 @@ class PersistentVolumeClaimSpec implements JsonSerializable
      * does not support VolumeSnapshot data source, volume will not be created and the
      * failure will be reported as an event. In the future, we plan to support more
      * data source types and the behavior of the provisioner may change.
-     *
-     * @var TypedLocalObjectReference|null
      */
-    private ?TypedLocalObjectReference $dataSource = null;
+    private TypedLocalObjectReference|null $dataSource = null;
 
     /**
      * Resources represents the minimum resources the volume should have. More info:
@@ -44,25 +42,19 @@ class PersistentVolumeClaimSpec implements JsonSerializable
     /**
      * Name of the StorageClass required by the claim. More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes#class-1
-     *
-     * @var string|null
      */
-    private ?string $storageClassName = null;
+    private string|null $storageClassName = null;
 
     /**
      * volumeMode defines what type of volume is required by the claim. Value of
      * Filesystem is implied when not included in claim spec. This is a beta feature.
-     *
-     * @var string|null
      */
-    private ?string $volumeMode = null;
+    private string|null $volumeMode = null;
 
     /**
      * VolumeName is the binding reference to the PersistentVolume backing this claim.
-     *
-     * @var string|null
      */
-    private ?string $volumeName = null;
+    private string|null $volumeName = null;
 
     public function __construct()
     {
@@ -76,34 +68,22 @@ class PersistentVolumeClaimSpec implements JsonSerializable
         return $this->accessModes;
     }
 
-    /**
-     * @return TypedLocalObjectReference|null
-     */
-    public function getDataSource(): ?TypedLocalObjectReference
+    public function getDataSource(): TypedLocalObjectReference|null
     {
         return $this->dataSource;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getStorageClassName(): ?string
+    public function getStorageClassName(): string|null
     {
         return $this->storageClassName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVolumeMode(): ?string
+    public function getVolumeMode(): string|null
     {
         return $this->volumeMode;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVolumeName(): ?string
+    public function getVolumeName(): string|null
     {
         return $this->volumeName;
     }
@@ -146,7 +126,7 @@ class PersistentVolumeClaimSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'accessModes' => $this->accessModes,

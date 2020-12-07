@@ -38,7 +38,7 @@ class NodeSelectorTerm implements JsonSerializable
         return $this->matchFields;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'matchExpressions' => $this->matchExpressions,

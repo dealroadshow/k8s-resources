@@ -14,10 +14,8 @@ class TypedLocalObjectReference implements JsonSerializable
      * APIGroup is the group for the resource being referenced. If APIGroup is not
      * specified, the specified Kind must be in the core API group. For any other
      * third-party types, APIGroup is required.
-     *
-     * @var string|null
      */
-    private ?string $apiGroup = null;
+    private string|null $apiGroup = null;
 
     /**
      * Kind is the type of resource being referenced
@@ -35,10 +33,7 @@ class TypedLocalObjectReference implements JsonSerializable
         $this->name = $name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getApiGroup(): ?string
+    public function getApiGroup(): string|null
     {
         return $this->apiGroup;
     }
@@ -74,7 +69,7 @@ class TypedLocalObjectReference implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiGroup' => $this->apiGroup,

@@ -14,7 +14,7 @@ class RoleList implements APIResourceListInterface
     const KIND = 'RoleList';
 
     /**
-     * @var Role[]|array
+     * @var Role[]
      */
     private array $items = [];
 
@@ -37,7 +37,7 @@ class RoleList implements APIResourceListInterface
     }
 
     /**
-     * @var Role[]|array $items
+     * @var Role[] $items
      *
      * @return self
      */
@@ -49,7 +49,7 @@ class RoleList implements APIResourceListInterface
     }
 
     /**
-     * @return Role[]|array
+     * @return Role[]
      */
     public function all(): array
     {
@@ -68,7 +68,7 @@ class RoleList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

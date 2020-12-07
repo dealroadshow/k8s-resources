@@ -16,25 +16,19 @@ class FCVolumeSource implements JsonSerializable
      * Filesystem type to mount. Must be a filesystem type supported by the host
      * operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if
      * unspecified.
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * Optional: FC target lun number
-     *
-     * @var int|null
      */
-    private ?int $lun = null;
+    private int|null $lun = null;
 
     /**
      * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly
      * setting in VolumeMounts.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * Optional: FC target worldwide names (WWNs)
@@ -53,26 +47,17 @@ class FCVolumeSource implements JsonSerializable
         $this->wwids = new StringList();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getLun(): ?int
+    public function getLun(): int|null
     {
         return $this->lun;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -108,7 +93,7 @@ class FCVolumeSource implements JsonSerializable
         return $this->wwids;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'fsType' => $this->fsType,

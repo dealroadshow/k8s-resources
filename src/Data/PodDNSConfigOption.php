@@ -11,32 +11,20 @@ class PodDNSConfigOption implements JsonSerializable
 {
     /**
      * Required.
-     *
-     * @var string|null
      */
-    private ?string $name = null;
-
-    /**
-     * @var string|null
-     */
-    private ?string $value = null;
+    private string|null $name = null;
+    private string|null $value = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getValue(): ?string
+    public function getValue(): string|null
     {
         return $this->value;
     }
@@ -55,7 +43,7 @@ class PodDNSConfigOption implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => $this->name,

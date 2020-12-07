@@ -8,7 +8,7 @@ use JsonSerializable;
 class LabelSelectorRequirementList implements JsonSerializable
 {
     /**
-     * @var LabelSelectorRequirement[]|array
+     * @var LabelSelectorRequirement[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class LabelSelectorRequirementList implements JsonSerializable
     }
 
     /**
-     * @var LabelSelectorRequirement[]|array $items
+     * @var LabelSelectorRequirement[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class LabelSelectorRequirementList implements JsonSerializable
     }
 
     /**
-     * @return LabelSelectorRequirement[]|array
+     * @return LabelSelectorRequirement[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class LabelSelectorRequirementList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

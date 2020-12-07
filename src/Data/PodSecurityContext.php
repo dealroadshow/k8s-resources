@@ -25,20 +25,16 @@ class PodSecurityContext implements JsonSerializable
      *
      * If unset, the Kubelet will not modify the ownership and permissions of any
      * volume.
-     *
-     * @var int|null
      */
-    private ?int $fsGroup = null;
+    private int|null $fsGroup = null;
 
     /**
      * The GID to run the entrypoint of the container process. Uses runtime default if
      * unset. May also be set in SecurityContext.  If set in both SecurityContext and
      * PodSecurityContext, the value specified in SecurityContext takes precedence for
      * that container.
-     *
-     * @var int|null
      */
-    private ?int $runAsGroup = null;
+    private int|null $runAsGroup = null;
 
     /**
      * Indicates that the container must run as a non-root user. If true, the Kubelet
@@ -47,20 +43,16 @@ class PodSecurityContext implements JsonSerializable
      * validation will be performed. May also be set in SecurityContext.  If set in
      * both SecurityContext and PodSecurityContext, the value specified in
      * SecurityContext takes precedence.
-     *
-     * @var bool|null
      */
-    private ?bool $runAsNonRoot = null;
+    private bool|null $runAsNonRoot = null;
 
     /**
      * The UID to run the entrypoint of the container process. Defaults to user
      * specified in image metadata if unspecified. May also be set in SecurityContext.
      * If set in both SecurityContext and PodSecurityContext, the value specified in
      * SecurityContext takes precedence for that container.
-     *
-     * @var int|null
      */
-    private ?int $runAsUser = null;
+    private int|null $runAsUser = null;
 
     /**
      * The SELinux context to be applied to all containers. If unspecified, the
@@ -100,34 +92,22 @@ class PodSecurityContext implements JsonSerializable
         $this->windowsOptions = new WindowsSecurityContextOptions();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getFsGroup(): ?int
+    public function getFsGroup(): int|null
     {
         return $this->fsGroup;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getRunAsGroup(): ?int
+    public function getRunAsGroup(): int|null
     {
         return $this->runAsGroup;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getRunAsNonRoot(): ?bool
+    public function getRunAsNonRoot(): bool|null
     {
         return $this->runAsNonRoot;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getRunAsUser(): ?int
+    public function getRunAsUser(): int|null
     {
         return $this->runAsUser;
     }
@@ -180,7 +160,7 @@ class PodSecurityContext implements JsonSerializable
         return $this->windowsOptions;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'fsGroup' => $this->fsGroup,

@@ -45,7 +45,7 @@ class PreferredSchedulingTerm implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'preference' => $this->preference,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class AllowedFlexVolumeList implements JsonSerializable
 {
     /**
-     * @var AllowedFlexVolume[]|array
+     * @var AllowedFlexVolume[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class AllowedFlexVolumeList implements JsonSerializable
     }
 
     /**
-     * @var AllowedFlexVolume[]|array $items
+     * @var AllowedFlexVolume[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class AllowedFlexVolumeList implements JsonSerializable
     }
 
     /**
-     * @return AllowedFlexVolume[]|array
+     * @return AllowedFlexVolume[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class AllowedFlexVolumeList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

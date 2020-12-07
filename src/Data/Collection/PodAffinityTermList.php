@@ -8,7 +8,7 @@ use JsonSerializable;
 class PodAffinityTermList implements JsonSerializable
 {
     /**
-     * @var PodAffinityTerm[]|array
+     * @var PodAffinityTerm[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class PodAffinityTermList implements JsonSerializable
     }
 
     /**
-     * @var PodAffinityTerm[]|array $items
+     * @var PodAffinityTerm[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class PodAffinityTermList implements JsonSerializable
     }
 
     /**
-     * @return PodAffinityTerm[]|array
+     * @return PodAffinityTerm[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class PodAffinityTermList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }
