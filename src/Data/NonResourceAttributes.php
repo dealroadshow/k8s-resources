@@ -12,34 +12,24 @@ class NonResourceAttributes implements JsonSerializable
 {
     /**
      * Path is the URL path of the request
-     *
-     * @var string|null
      */
-    private ?string $path = null;
+    private string|null $path = null;
 
     /**
      * Verb is the standard HTTP verb
-     *
-     * @var string|null
      */
-    private ?string $verb = null;
+    private string|null $verb = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPath(): ?string
+    public function getPath(): string|null
     {
         return $this->path;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVerb(): ?string
+    public function getVerb(): string|null
     {
         return $this->verb;
     }
@@ -58,7 +48,7 @@ class NonResourceAttributes implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'path' => $this->path,

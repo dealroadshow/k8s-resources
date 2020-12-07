@@ -11,19 +11,14 @@ class ScaleSpec implements JsonSerializable
 {
     /**
      * desired number of instances for the scaled object.
-     *
-     * @var int|null
      */
-    private ?int $replicas = null;
+    private int|null $replicas = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return int|null
-     */
-    public function getReplicas(): ?int
+    public function getReplicas(): int|null
     {
         return $this->replicas;
     }
@@ -35,7 +30,7 @@ class ScaleSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'replicas' => $this->replicas,

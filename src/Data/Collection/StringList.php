@@ -7,7 +7,7 @@ use JsonSerializable;
 class StringList implements JsonSerializable
 {
     /**
-     * @var string[]|array
+     * @var string[]
      */
     private array $items = [];
 
@@ -24,7 +24,7 @@ class StringList implements JsonSerializable
     }
 
     /**
-     * @var string[]|array $items
+     * @var string[] $items
      *
      * @return self
      */
@@ -36,7 +36,7 @@ class StringList implements JsonSerializable
     }
 
     /**
-     * @return string[]|array
+     * @return string[]
      */
     public function all(): array
     {
@@ -50,7 +50,7 @@ class StringList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

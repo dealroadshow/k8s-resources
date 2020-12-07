@@ -47,7 +47,7 @@ class NodeAffinity implements JsonSerializable
         return $this->requiredDuringSchedulingIgnoredDuringExecution;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'preferredDuringSchedulingIgnoredDuringExecution' => $this->preferredDuringSchedulingIgnoredDuringExecution,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class SubjectList implements JsonSerializable
 {
     /**
-     * @var Subject[]|array
+     * @var Subject[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class SubjectList implements JsonSerializable
     }
 
     /**
-     * @var Subject[]|array $items
+     * @var Subject[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class SubjectList implements JsonSerializable
     }
 
     /**
-     * @return Subject[]|array
+     * @return Subject[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class SubjectList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

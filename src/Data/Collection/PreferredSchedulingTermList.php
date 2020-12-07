@@ -8,7 +8,7 @@ use JsonSerializable;
 class PreferredSchedulingTermList implements JsonSerializable
 {
     /**
-     * @var PreferredSchedulingTerm[]|array
+     * @var PreferredSchedulingTerm[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class PreferredSchedulingTermList implements JsonSerializable
     }
 
     /**
-     * @var PreferredSchedulingTerm[]|array $items
+     * @var PreferredSchedulingTerm[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class PreferredSchedulingTermList implements JsonSerializable
     }
 
     /**
-     * @return PreferredSchedulingTerm[]|array
+     * @return PreferredSchedulingTerm[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class PreferredSchedulingTermList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

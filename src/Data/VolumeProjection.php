@@ -26,10 +26,8 @@ class VolumeProjection implements JsonSerializable
 
     /**
      * information about the serviceAccountToken data to project
-     *
-     * @var ServiceAccountTokenProjection|null
      */
-    private ?ServiceAccountTokenProjection $serviceAccountToken = null;
+    private ServiceAccountTokenProjection|null $serviceAccountToken = null;
 
     public function __construct()
     {
@@ -48,10 +46,7 @@ class VolumeProjection implements JsonSerializable
         return $this->downwardAPI;
     }
 
-    /**
-     * @return ServiceAccountTokenProjection|null
-     */
-    public function getServiceAccountToken(): ?ServiceAccountTokenProjection
+    public function getServiceAccountToken(): ServiceAccountTokenProjection|null
     {
         return $this->serviceAccountToken;
     }
@@ -68,7 +63,7 @@ class VolumeProjection implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'configMap' => $this->configMap,

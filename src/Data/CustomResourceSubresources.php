@@ -13,19 +13,14 @@ class CustomResourceSubresources implements JsonSerializable
     /**
      * scale indicates the custom resource should serve a `/scale` subresource that
      * returns an `autoscaling/v1` Scale object.
-     *
-     * @var CustomResourceSubresourceScale|null
      */
-    private ?CustomResourceSubresourceScale $scale = null;
+    private CustomResourceSubresourceScale|null $scale = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return CustomResourceSubresourceScale|null
-     */
-    public function getScale(): ?CustomResourceSubresourceScale
+    public function getScale(): CustomResourceSubresourceScale|null
     {
         return $this->scale;
     }
@@ -37,7 +32,7 @@ class CustomResourceSubresources implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'scale' => $this->scale,

@@ -44,7 +44,7 @@ class Scheduling implements JsonSerializable
         return $this->tolerations;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'nodeSelector' => $this->nodeSelector,

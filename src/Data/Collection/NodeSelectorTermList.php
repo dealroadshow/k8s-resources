@@ -8,7 +8,7 @@ use JsonSerializable;
 class NodeSelectorTermList implements JsonSerializable
 {
     /**
-     * @var NodeSelectorTerm[]|array
+     * @var NodeSelectorTerm[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class NodeSelectorTermList implements JsonSerializable
     }
 
     /**
-     * @var NodeSelectorTerm[]|array $items
+     * @var NodeSelectorTerm[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class NodeSelectorTermList implements JsonSerializable
     }
 
     /**
-     * @return NodeSelectorTerm[]|array
+     * @return NodeSelectorTerm[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class NodeSelectorTermList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

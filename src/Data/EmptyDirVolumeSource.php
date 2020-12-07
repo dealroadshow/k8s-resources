@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\Quantity;
 use JsonSerializable;
 
 /**
@@ -15,10 +14,8 @@ class EmptyDirVolumeSource implements JsonSerializable
      * What type of storage medium should back this directory. The default is "" which
      * means to use the node's default medium. Must be an empty string (default) or
      * Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
-     *
-     * @var string|null
      */
-    private ?string $medium = null;
+    private string|null $medium = null;
 
     /**
      * Total amount of local storage required for this EmptyDir volume. The size limit
@@ -27,27 +24,19 @@ class EmptyDirVolumeSource implements JsonSerializable
      * sum of memory limits of all containers in a pod. The default is nil which means
      * that the limit is undefined. More info:
      * http://kubernetes.io/docs/user-guide/volumes#emptydir
-     *
-     * @var Quantity|null
      */
-    private ?Quantity $sizeLimit = null;
+    private string|float|null $sizeLimit = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMedium(): ?string
+    public function getMedium(): string|null
     {
         return $this->medium;
     }
 
-    /**
-     * @return Quantity|null
-     */
-    public function getSizeLimit(): ?Quantity
+    public function getSizeLimit(): string|float|null
     {
         return $this->sizeLimit;
     }
@@ -59,14 +48,14 @@ class EmptyDirVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function setSizeLimit(Quantity $sizeLimit): self
+    public function setSizeLimit(string|float $sizeLimit): self
     {
         $this->sizeLimit = $sizeLimit;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'medium' => $this->medium,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class EphemeralContainerList implements JsonSerializable
 {
     /**
-     * @var EphemeralContainer[]|array
+     * @var EphemeralContainer[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class EphemeralContainerList implements JsonSerializable
     }
 
     /**
-     * @var EphemeralContainer[]|array $items
+     * @var EphemeralContainer[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class EphemeralContainerList implements JsonSerializable
     }
 
     /**
-     * @return EphemeralContainer[]|array
+     * @return EphemeralContainer[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class EphemeralContainerList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

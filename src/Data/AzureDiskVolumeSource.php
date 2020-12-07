@@ -12,10 +12,8 @@ class AzureDiskVolumeSource implements JsonSerializable
 {
     /**
      * Host Caching mode: None, Read Only, Read Write.
-     *
-     * @var string|null
      */
-    private ?string $cachingMode = null;
+    private string|null $cachingMode = null;
 
     /**
      * The Name of the data disk in the blob storage
@@ -31,27 +29,21 @@ class AzureDiskVolumeSource implements JsonSerializable
      * Filesystem type to mount. Must be a filesystem type supported by the host
      * operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if
      * unspecified.
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * Expected values Shared: multiple blob disks per storage account  Dedicated:
      * single blob disk per storage account  Managed: azure managed data disk (only in
      * managed availability set). defaults to shared
-     *
-     * @var string|null
      */
-    private ?string $kind = null;
+    private string|null $kind = null;
 
     /**
      * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in
      * VolumeMounts.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     public function __construct(string $diskName, string $diskURI)
     {
@@ -59,10 +51,7 @@ class AzureDiskVolumeSource implements JsonSerializable
         $this->diskURI = $diskURI;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getCachingMode(): ?string
+    public function getCachingMode(): string|null
     {
         return $this->cachingMode;
     }
@@ -77,26 +66,17 @@ class AzureDiskVolumeSource implements JsonSerializable
         return $this->diskURI;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getKind(): ?string
+    public function getKind(): string|null
     {
         return $this->kind;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -143,7 +123,7 @@ class AzureDiskVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'cachingMode' => $this->cachingMode,

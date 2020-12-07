@@ -14,7 +14,7 @@ class MutatingWebhookConfigurationList implements APIResourceListInterface
     const KIND = 'MutatingWebhookConfigurationList';
 
     /**
-     * @var MutatingWebhookConfiguration[]|array
+     * @var MutatingWebhookConfiguration[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class MutatingWebhookConfigurationList implements APIResourceListInterface
     }
 
     /**
-     * @var MutatingWebhookConfiguration[]|array $items
+     * @var MutatingWebhookConfiguration[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class MutatingWebhookConfigurationList implements APIResourceListInterface
     }
 
     /**
-     * @return MutatingWebhookConfiguration[]|array
+     * @return MutatingWebhookConfiguration[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class MutatingWebhookConfigurationList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

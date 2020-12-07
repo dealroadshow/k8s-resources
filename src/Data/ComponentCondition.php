@@ -11,18 +11,14 @@ class ComponentCondition implements JsonSerializable
 {
     /**
      * Condition error code for a component. For example, a health check error code.
-     *
-     * @var string|null
      */
-    private ?string $error = null;
+    private string|null $error = null;
 
     /**
      * Message about the condition for a component. For example, information about a
      * health check.
-     *
-     * @var string|null
      */
-    private ?string $message = null;
+    private string|null $message = null;
 
     /**
      * Type of condition for a component. Valid value: "Healthy"
@@ -34,18 +30,12 @@ class ComponentCondition implements JsonSerializable
         $this->type = $type;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getError(): ?string
+    public function getError(): string|null
     {
         return $this->error;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMessage(): ?string
+    public function getMessage(): string|null
     {
         return $this->message;
     }
@@ -76,7 +66,7 @@ class ComponentCondition implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'error' => $this->error,

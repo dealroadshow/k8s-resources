@@ -14,7 +14,7 @@ class ConfigMapList implements APIResourceListInterface
     const KIND = 'ConfigMapList';
 
     /**
-     * @var ConfigMap[]|array
+     * @var ConfigMap[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class ConfigMapList implements APIResourceListInterface
     }
 
     /**
-     * @var ConfigMap[]|array $items
+     * @var ConfigMap[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class ConfigMapList implements APIResourceListInterface
     }
 
     /**
-     * @return ConfigMap[]|array
+     * @return ConfigMap[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class ConfigMapList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

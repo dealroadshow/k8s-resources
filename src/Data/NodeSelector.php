@@ -27,7 +27,7 @@ class NodeSelector implements JsonSerializable
         return $this->nodeSelectorTerms;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'nodeSelectorTerms' => $this->nodeSelectorTerms,

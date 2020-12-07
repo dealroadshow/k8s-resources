@@ -17,10 +17,8 @@ class SecurityContext implements JsonSerializable
      * than its parent process. This bool directly controls if the no_new_privs flag
      * will be set on the container process. AllowPrivilegeEscalation is true always
      * when the container is: 1) run as Privileged 2) has CAP_SYS_ADMIN
-     *
-     * @var bool|null
      */
-    private ?bool $allowPrivilegeEscalation = null;
+    private bool|null $allowPrivilegeEscalation = null;
 
     /**
      * The capabilities to add/drop when running containers. Defaults to the default
@@ -31,35 +29,27 @@ class SecurityContext implements JsonSerializable
     /**
      * Run container in privileged mode. Processes in privileged containers are
      * essentially equivalent to root on the host. Defaults to false.
-     *
-     * @var bool|null
      */
-    private ?bool $privileged = null;
+    private bool|null $privileged = null;
 
     /**
      * procMount denotes the type of proc mount to use for the containers. The default
      * is DefaultProcMount which uses the container runtime defaults for readonly paths
      * and masked paths. This requires the ProcMountType feature flag to be enabled.
-     *
-     * @var string|null
      */
-    private ?string $procMount = null;
+    private string|null $procMount = null;
 
     /**
      * Whether this container has a read-only root filesystem. Default is false.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnlyRootFilesystem = null;
+    private bool|null $readOnlyRootFilesystem = null;
 
     /**
      * The GID to run the entrypoint of the container process. Uses runtime default if
      * unset. May also be set in PodSecurityContext.  If set in both SecurityContext
      * and PodSecurityContext, the value specified in SecurityContext takes precedence.
-     *
-     * @var int|null
      */
-    private ?int $runAsGroup = null;
+    private int|null $runAsGroup = null;
 
     /**
      * Indicates that the container must run as a non-root user. If true, the Kubelet
@@ -68,20 +58,16 @@ class SecurityContext implements JsonSerializable
      * validation will be performed. May also be set in PodSecurityContext.  If set in
      * both SecurityContext and PodSecurityContext, the value specified in
      * SecurityContext takes precedence.
-     *
-     * @var bool|null
      */
-    private ?bool $runAsNonRoot = null;
+    private bool|null $runAsNonRoot = null;
 
     /**
      * The UID to run the entrypoint of the container process. Defaults to user
      * specified in image metadata if unspecified. May also be set in
      * PodSecurityContext.  If set in both SecurityContext and PodSecurityContext, the
      * value specified in SecurityContext takes precedence.
-     *
-     * @var int|null
      */
-    private ?int $runAsUser = null;
+    private int|null $runAsUser = null;
 
     /**
      * The SELinux context to be applied to the container. If unspecified, the
@@ -110,58 +96,37 @@ class SecurityContext implements JsonSerializable
         return $this->capabilities;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getAllowPrivilegeEscalation(): ?bool
+    public function getAllowPrivilegeEscalation(): bool|null
     {
         return $this->allowPrivilegeEscalation;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getPrivileged(): ?bool
+    public function getPrivileged(): bool|null
     {
         return $this->privileged;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getProcMount(): ?string
+    public function getProcMount(): string|null
     {
         return $this->procMount;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnlyRootFilesystem(): ?bool
+    public function getReadOnlyRootFilesystem(): bool|null
     {
         return $this->readOnlyRootFilesystem;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getRunAsGroup(): ?int
+    public function getRunAsGroup(): int|null
     {
         return $this->runAsGroup;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getRunAsNonRoot(): ?bool
+    public function getRunAsNonRoot(): bool|null
     {
         return $this->runAsNonRoot;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getRunAsUser(): ?int
+    public function getRunAsUser(): int|null
     {
         return $this->runAsUser;
     }
@@ -225,7 +190,7 @@ class SecurityContext implements JsonSerializable
         return $this->windowsOptions;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'allowPrivilegeEscalation' => $this->allowPrivilegeEscalation,

@@ -43,7 +43,7 @@ class LabelSelector implements JsonSerializable
         return $this->matchLabels;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'matchExpressions' => $this->matchExpressions,

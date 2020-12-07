@@ -8,7 +8,7 @@ use JsonSerializable;
 class RuleWithOperationsList implements JsonSerializable
 {
     /**
-     * @var RuleWithOperations[]|array
+     * @var RuleWithOperations[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class RuleWithOperationsList implements JsonSerializable
     }
 
     /**
-     * @var RuleWithOperations[]|array $items
+     * @var RuleWithOperations[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class RuleWithOperationsList implements JsonSerializable
     }
 
     /**
-     * @return RuleWithOperations[]|array
+     * @return RuleWithOperations[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class RuleWithOperationsList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

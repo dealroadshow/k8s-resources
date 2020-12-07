@@ -20,10 +20,8 @@ class EndpointSlice implements APIResourceInterface
     /**
      * addressType specifies the type of address carried by this EndpointSlice. All
      * addresses in this slice must be the same type. Default is IP
-     *
-     * @var string|null
      */
-    private ?string $addressType = null;
+    private string|null $addressType = null;
 
     /**
      * endpoints is a list of unique endpoints in this slice. Each slice may include a
@@ -56,10 +54,7 @@ class EndpointSlice implements APIResourceInterface
         return $this->endpoints;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getAddressType(): ?string
+    public function getAddressType(): string|null
     {
         return $this->addressType;
     }
@@ -81,7 +76,7 @@ class EndpointSlice implements APIResourceInterface
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

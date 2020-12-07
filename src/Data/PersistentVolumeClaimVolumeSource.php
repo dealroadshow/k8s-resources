@@ -21,10 +21,8 @@ class PersistentVolumeClaimVolumeSource implements JsonSerializable
 
     /**
      * Will force the ReadOnly setting in VolumeMounts. Default false.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     public function __construct(string $claimName)
     {
@@ -36,10 +34,7 @@ class PersistentVolumeClaimVolumeSource implements JsonSerializable
         return $this->claimName;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -58,7 +53,7 @@ class PersistentVolumeClaimVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'claimName' => $this->claimName,

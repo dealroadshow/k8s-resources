@@ -12,34 +12,24 @@ class WebhookThrottleConfig implements JsonSerializable
     /**
      * ThrottleBurst is the maximum number of events sent at the same moment default 15
      * QPS
-     *
-     * @var int|null
      */
-    private ?int $burst = null;
+    private int|null $burst = null;
 
     /**
      * ThrottleQPS maximum number of batches per second default 10 QPS
-     *
-     * @var int|null
      */
-    private ?int $qps = null;
+    private int|null $qps = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return int|null
-     */
-    public function getBurst(): ?int
+    public function getBurst(): int|null
     {
         return $this->burst;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getQps(): ?int
+    public function getQps(): int|null
     {
         return $this->qps;
     }
@@ -58,7 +48,7 @@ class WebhookThrottleConfig implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'burst' => $this->burst,

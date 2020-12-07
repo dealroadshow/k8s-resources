@@ -11,19 +11,14 @@ class CustomResourceValidation implements JsonSerializable
 {
     /**
      * openAPIV3Schema is the OpenAPI v3 schema to use for validation and pruning.
-     *
-     * @var JSONSchemaProps|null
      */
-    private ?JSONSchemaProps $openAPIV3Schema = null;
+    private JSONSchemaProps|null $openAPIV3Schema = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return JSONSchemaProps|null
-     */
-    public function getOpenAPIV3Schema(): ?JSONSchemaProps
+    public function getOpenAPIV3Schema(): JSONSchemaProps|null
     {
         return $this->openAPIV3Schema;
     }
@@ -35,7 +30,7 @@ class CustomResourceValidation implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'openAPIV3Schema' => $this->openAPIV3Schema,

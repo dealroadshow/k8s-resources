@@ -14,7 +14,7 @@ class IngressList implements APIResourceListInterface
     const KIND = 'IngressList';
 
     /**
-     * @var Ingress[]|array
+     * @var Ingress[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class IngressList implements APIResourceListInterface
     }
 
     /**
-     * @var Ingress[]|array $items
+     * @var Ingress[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class IngressList implements APIResourceListInterface
     }
 
     /**
-     * @return Ingress[]|array
+     * @return Ingress[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class IngressList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

@@ -18,20 +18,15 @@ class DaemonSetUpdateStrategy implements JsonSerializable
     /**
      * Type of daemon set update. Can be "RollingUpdate" or "OnDelete". Default is
      * RollingUpdate.
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     public function __construct()
     {
         $this->rollingUpdate = new RollingUpdateDaemonSet();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
@@ -48,7 +43,7 @@ class DaemonSetUpdateStrategy implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'rollingUpdate' => $this->rollingUpdate,

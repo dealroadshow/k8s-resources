@@ -25,7 +25,7 @@ class VolumeNodeAffinity implements JsonSerializable
         return $this->required;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'required' => $this->required,

@@ -42,7 +42,7 @@ class PodTemplate implements APIResourceInterface
         return $this->template;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

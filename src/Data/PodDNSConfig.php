@@ -54,7 +54,7 @@ class PodDNSConfig implements JsonSerializable
         return $this->searches;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'nameservers' => $this->nameservers,

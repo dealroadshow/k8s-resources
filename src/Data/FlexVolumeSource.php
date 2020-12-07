@@ -20,10 +20,8 @@ class FlexVolumeSource implements JsonSerializable
      * Filesystem type to mount. Must be a filesystem type supported by the host
      * operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on
      * FlexVolume script.
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * Optional: Extra command options if any.
@@ -33,10 +31,8 @@ class FlexVolumeSource implements JsonSerializable
     /**
      * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly
      * setting in VolumeMounts.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * Optional: SecretRef is reference to the secret object containing sensitive
@@ -58,18 +54,12 @@ class FlexVolumeSource implements JsonSerializable
         return $this->driver;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -105,7 +95,7 @@ class FlexVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'driver' => $this->driver,

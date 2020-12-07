@@ -28,10 +28,8 @@ class CustomResourceDefinitionNames implements JsonSerializable
     /**
      * listKind is the serialized kind of the list for this resource. Defaults to
      * "`kind`List".
-     *
-     * @var string|null
      */
-    private ?string $listKind = null;
+    private string|null $listKind = null;
 
     /**
      * plural is the plural name of the resource to serve. The custom resources are
@@ -51,10 +49,8 @@ class CustomResourceDefinitionNames implements JsonSerializable
     /**
      * singular is the singular name of the resource. It must be all lowercase.
      * Defaults to lowercased `kind`.
-     *
-     * @var string|null
      */
-    private ?string $singular = null;
+    private string|null $singular = null;
 
     public function __construct(string $kind, string $plural)
     {
@@ -74,10 +70,7 @@ class CustomResourceDefinitionNames implements JsonSerializable
         return $this->kind;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getListKind(): ?string
+    public function getListKind(): string|null
     {
         return $this->listKind;
     }
@@ -87,10 +80,7 @@ class CustomResourceDefinitionNames implements JsonSerializable
         return $this->plural;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSingular(): ?string
+    public function getSingular(): string|null
     {
         return $this->singular;
     }
@@ -128,7 +118,7 @@ class CustomResourceDefinitionNames implements JsonSerializable
         return $this->shortNames;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'categories' => $this->categories,

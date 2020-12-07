@@ -28,7 +28,7 @@ class TopologySelectorTerm implements JsonSerializable
         return $this->matchLabelExpressions;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'matchLabelExpressions' => $this->matchLabelExpressions,

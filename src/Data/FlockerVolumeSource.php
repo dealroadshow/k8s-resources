@@ -14,34 +14,24 @@ class FlockerVolumeSource implements JsonSerializable
     /**
      * Name of the dataset stored as metadata -> name on the dataset for Flocker should
      * be considered as deprecated
-     *
-     * @var string|null
      */
-    private ?string $datasetName = null;
+    private string|null $datasetName = null;
 
     /**
      * UUID of the dataset. This is unique identifier of a Flocker dataset
-     *
-     * @var string|null
      */
-    private ?string $datasetUUID = null;
+    private string|null $datasetUUID = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDatasetName(): ?string
+    public function getDatasetName(): string|null
     {
         return $this->datasetName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDatasetUUID(): ?string
+    public function getDatasetUUID(): string|null
     {
         return $this->datasetUUID;
     }
@@ -60,7 +50,7 @@ class FlockerVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'datasetName' => $this->datasetName,

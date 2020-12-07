@@ -8,7 +8,7 @@ use JsonSerializable;
 class ServicePortList implements JsonSerializable
 {
     /**
-     * @var ServicePort[]|array
+     * @var ServicePort[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class ServicePortList implements JsonSerializable
     }
 
     /**
-     * @var ServicePort[]|array $items
+     * @var ServicePort[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class ServicePortList implements JsonSerializable
     }
 
     /**
-     * @return ServicePort[]|array
+     * @return ServicePort[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class ServicePortList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

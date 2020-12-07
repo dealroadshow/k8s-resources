@@ -35,7 +35,7 @@ class Webhook implements JsonSerializable
         return $this->throttle;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'clientConfig' => $this->clientConfig,

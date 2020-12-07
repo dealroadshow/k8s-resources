@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\MicroTime;
 use JsonSerializable;
 
 /**
@@ -13,49 +12,34 @@ class EventSeries implements JsonSerializable
 {
     /**
      * Number of occurrences in this series up to the last heartbeat time
-     *
-     * @var int|null
      */
-    private ?int $count = null;
+    private int|null $count = null;
 
     /**
      * Time of the last occurrence observed
-     *
-     * @var MicroTime|null
      */
-    private ?MicroTime $lastObservedTime = null;
+    private DateTimeInterface|null $lastObservedTime = null;
 
     /**
      * State of this Series: Ongoing or Finished Deprecated. Planned removal for 1.18
-     *
-     * @var string|null
      */
-    private ?string $state = null;
+    private string|null $state = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return int|null
-     */
-    public function getCount(): ?int
+    public function getCount(): int|null
     {
         return $this->count;
     }
 
-    /**
-     * @return MicroTime|null
-     */
-    public function getLastObservedTime(): ?MicroTime
+    public function getLastObservedTime(): DateTimeInterface|null
     {
         return $this->lastObservedTime;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getState(): ?string
+    public function getState(): string|null
     {
         return $this->state;
     }
@@ -67,7 +51,7 @@ class EventSeries implements JsonSerializable
         return $this;
     }
 
-    public function setLastObservedTime(MicroTime $lastObservedTime): self
+    public function setLastObservedTime(DateTimeInterface $lastObservedTime): self
     {
         $this->lastObservedTime = $lastObservedTime;
 
@@ -81,7 +65,7 @@ class EventSeries implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'count' => $this->count,

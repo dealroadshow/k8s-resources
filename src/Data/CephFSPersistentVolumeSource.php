@@ -19,28 +19,22 @@ class CephFSPersistentVolumeSource implements JsonSerializable
 
     /**
      * Optional: Used as the mounted root, rather than the full Ceph tree, default is /
-     *
-     * @var string|null
      */
-    private ?string $path = null;
+    private string|null $path = null;
 
     /**
      * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly
      * setting in VolumeMounts. More info:
      * https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * Optional: SecretFile is the path to key ring for User, default is
      * /etc/ceph/user.secret More info:
      * https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
-     *
-     * @var string|null
      */
-    private ?string $secretFile = null;
+    private string|null $secretFile = null;
 
     /**
      * Optional: SecretRef is reference to the authentication secret for User, default
@@ -52,10 +46,8 @@ class CephFSPersistentVolumeSource implements JsonSerializable
     /**
      * Optional: User is the rados user name, default is admin More info:
      * https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
-     *
-     * @var string|null
      */
-    private ?string $user = null;
+    private string|null $user = null;
 
     public function __construct()
     {
@@ -63,34 +55,22 @@ class CephFSPersistentVolumeSource implements JsonSerializable
         $this->secretRef = new SecretReference();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPath(): ?string
+    public function getPath(): string|null
     {
         return $this->path;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSecretFile(): ?string
+    public function getSecretFile(): string|null
     {
         return $this->secretFile;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUser(): ?string
+    public function getUser(): string|null
     {
         return $this->user;
     }
@@ -133,7 +113,7 @@ class CephFSPersistentVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'monitors' => $this->monitors,

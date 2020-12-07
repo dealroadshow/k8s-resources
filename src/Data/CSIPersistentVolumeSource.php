@@ -38,10 +38,8 @@ class CSIPersistentVolumeSource implements JsonSerializable
     /**
      * Filesystem type to mount. Must be a filesystem type supported by the host
      * operating system. Ex. "ext4", "xfs", "ntfs".
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * NodePublishSecretRef is a reference to the secret object containing sensitive
@@ -64,10 +62,8 @@ class CSIPersistentVolumeSource implements JsonSerializable
     /**
      * Optional: The value to pass to ControllerPublishVolumeRequest. Defaults to false
      * (read/write).
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * Attributes of the volume to publish.
@@ -106,18 +102,12 @@ class CSIPersistentVolumeSource implements JsonSerializable
         return $this->driver;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -170,7 +160,7 @@ class CSIPersistentVolumeSource implements JsonSerializable
         return $this->volumeAttributes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'controllerExpandSecretRef' => $this->controllerExpandSecretRef,

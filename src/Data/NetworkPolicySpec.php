@@ -86,7 +86,7 @@ class NetworkPolicySpec implements JsonSerializable
         return $this->policyTypes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'egress' => $this->egress,

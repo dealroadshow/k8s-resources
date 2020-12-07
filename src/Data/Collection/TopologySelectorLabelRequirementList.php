@@ -8,7 +8,7 @@ use JsonSerializable;
 class TopologySelectorLabelRequirementList implements JsonSerializable
 {
     /**
-     * @var TopologySelectorLabelRequirement[]|array
+     * @var TopologySelectorLabelRequirement[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class TopologySelectorLabelRequirementList implements JsonSerializable
     }
 
     /**
-     * @var TopologySelectorLabelRequirement[]|array $items
+     * @var TopologySelectorLabelRequirement[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class TopologySelectorLabelRequirementList implements JsonSerializable
     }
 
     /**
-     * @return TopologySelectorLabelRequirement[]|array
+     * @return TopologySelectorLabelRequirement[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class TopologySelectorLabelRequirementList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

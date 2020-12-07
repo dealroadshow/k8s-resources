@@ -8,7 +8,7 @@ use JsonSerializable;
 class PersistentVolumeClaimList implements JsonSerializable
 {
     /**
-     * @var PersistentVolumeClaim[]|array
+     * @var PersistentVolumeClaim[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class PersistentVolumeClaimList implements JsonSerializable
     }
 
     /**
-     * @var PersistentVolumeClaim[]|array $items
+     * @var PersistentVolumeClaim[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class PersistentVolumeClaimList implements JsonSerializable
     }
 
     /**
-     * @return PersistentVolumeClaim[]|array
+     * @return PersistentVolumeClaim[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class PersistentVolumeClaimList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -8,7 +8,7 @@ use JsonSerializable;
 class DownwardAPIVolumeFileList implements JsonSerializable
 {
     /**
-     * @var DownwardAPIVolumeFile[]|array
+     * @var DownwardAPIVolumeFile[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class DownwardAPIVolumeFileList implements JsonSerializable
     }
 
     /**
-     * @var DownwardAPIVolumeFile[]|array $items
+     * @var DownwardAPIVolumeFile[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class DownwardAPIVolumeFileList implements JsonSerializable
     }
 
     /**
-     * @return DownwardAPIVolumeFile[]|array
+     * @return DownwardAPIVolumeFile[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class DownwardAPIVolumeFileList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -2,7 +2,7 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\Data\Collection\QuantityMap;
+use Dealroadshow\K8S\Data\Collection\StringOrFloatMap;
 use JsonSerializable;
 
 /**
@@ -14,7 +14,7 @@ class ResourceRequirements implements JsonSerializable
      * Limits describes the maximum amount of compute resources allowed. More info:
      * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
      */
-    private QuantityMap $limits;
+    private StringOrFloatMap $limits;
 
     /**
      * Requests describes the minimum amount of compute resources required. If Requests
@@ -22,25 +22,25 @@ class ResourceRequirements implements JsonSerializable
      * specified, otherwise to an implementation-defined value. More info:
      * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
      */
-    private QuantityMap $requests;
+    private StringOrFloatMap $requests;
 
     public function __construct()
     {
-        $this->limits = new QuantityMap();
-        $this->requests = new QuantityMap();
+        $this->limits = new StringOrFloatMap();
+        $this->requests = new StringOrFloatMap();
     }
 
-    public function limits(): QuantityMap
+    public function limits(): StringOrFloatMap
     {
         return $this->limits;
     }
 
-    public function requests(): QuantityMap
+    public function requests(): StringOrFloatMap
     {
         return $this->requests;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'limits' => $this->limits,

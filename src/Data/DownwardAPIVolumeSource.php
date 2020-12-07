@@ -16,10 +16,8 @@ class DownwardAPIVolumeSource implements JsonSerializable
      * 0 and 0777. Defaults to 0644. Directories within the path are not affected by
      * this setting. This might be in conflict with other options that affect the file
      * mode, like fsGroup, and the result can be other mode bits set.
-     *
-     * @var int|null
      */
-    private ?int $defaultMode = null;
+    private int|null $defaultMode = null;
 
     /**
      * Items is a list of downward API volume file
@@ -31,10 +29,7 @@ class DownwardAPIVolumeSource implements JsonSerializable
         $this->items = new DownwardAPIVolumeFileList();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getDefaultMode(): ?int
+    public function getDefaultMode(): int|null
     {
         return $this->defaultMode;
     }
@@ -51,7 +46,7 @@ class DownwardAPIVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'defaultMode' => $this->defaultMode,

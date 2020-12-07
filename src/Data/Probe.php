@@ -19,59 +19,45 @@ class Probe implements JsonSerializable
     /**
      * Minimum consecutive failures for the probe to be considered failed after having
      * succeeded. Defaults to 3. Minimum value is 1.
-     *
-     * @var int|null
      */
-    private ?int $failureThreshold = null;
+    private int|null $failureThreshold = null;
 
     /**
      * HTTPGet specifies the http request to perform.
-     *
-     * @var HTTPGetAction|null
      */
-    private ?HTTPGetAction $httpGet = null;
+    private HTTPGetAction|null $httpGet = null;
 
     /**
      * Number of seconds after the container has started before liveness probes are
      * initiated. More info:
      * https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
-     *
-     * @var int|null
      */
-    private ?int $initialDelaySeconds = null;
+    private int|null $initialDelaySeconds = null;
 
     /**
      * How often (in seconds) to perform the probe. Default to 10 seconds. Minimum
      * value is 1.
-     *
-     * @var int|null
      */
-    private ?int $periodSeconds = null;
+    private int|null $periodSeconds = null;
 
     /**
      * Minimum consecutive successes for the probe to be considered successful after
      * having failed. Defaults to 1. Must be 1 for liveness and startup. Minimum value
      * is 1.
-     *
-     * @var int|null
      */
-    private ?int $successThreshold = null;
+    private int|null $successThreshold = null;
 
     /**
      * TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported
-     *
-     * @var TCPSocketAction|null
      */
-    private ?TCPSocketAction $tcpSocket = null;
+    private TCPSocketAction|null $tcpSocket = null;
 
     /**
      * Number of seconds after which the probe times out. Defaults to 1 second. Minimum
      * value is 1. More info:
      * https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
-     *
-     * @var int|null
      */
-    private ?int $timeoutSeconds = null;
+    private int|null $timeoutSeconds = null;
 
     public function __construct()
     {
@@ -83,58 +69,37 @@ class Probe implements JsonSerializable
         return $this->exec;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getFailureThreshold(): ?int
+    public function getFailureThreshold(): int|null
     {
         return $this->failureThreshold;
     }
 
-    /**
-     * @return HTTPGetAction|null
-     */
-    public function getHttpGet(): ?HTTPGetAction
+    public function getHttpGet(): HTTPGetAction|null
     {
         return $this->httpGet;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getInitialDelaySeconds(): ?int
+    public function getInitialDelaySeconds(): int|null
     {
         return $this->initialDelaySeconds;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getPeriodSeconds(): ?int
+    public function getPeriodSeconds(): int|null
     {
         return $this->periodSeconds;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getSuccessThreshold(): ?int
+    public function getSuccessThreshold(): int|null
     {
         return $this->successThreshold;
     }
 
-    /**
-     * @return TCPSocketAction|null
-     */
-    public function getTcpSocket(): ?TCPSocketAction
+    public function getTcpSocket(): TCPSocketAction|null
     {
         return $this->tcpSocket;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTimeoutSeconds(): ?int
+    public function getTimeoutSeconds(): int|null
     {
         return $this->timeoutSeconds;
     }
@@ -188,7 +153,7 @@ class Probe implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'exec' => $this->exec,

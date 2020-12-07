@@ -21,10 +21,8 @@ class ServiceSpec implements JsonSerializable
      * services when proxying is not required. Only applies to types ClusterIP,
      * NodePort, and LoadBalancer. Ignored if type is ExternalName. More info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-     *
-     * @var string|null
      */
-    private ?string $clusterIP = null;
+    private string|null $clusterIP = null;
 
     /**
      * externalIPs is a list of IP addresses for which nodes in the cluster will also
@@ -40,10 +38,8 @@ class ServiceSpec implements JsonSerializable
      * a CNAME record for this service. No proxying will be involved. Must be a valid
      * RFC-1123 hostname (https://tools.ietf.org/html/rfc1123) and requires Type to be
      * ExternalName.
-     *
-     * @var string|null
      */
-    private ?string $externalName = null;
+    private string|null $externalName = null;
 
     /**
      * externalTrafficPolicy denotes if this Service desires to route external traffic
@@ -52,10 +48,8 @@ class ServiceSpec implements JsonSerializable
      * potentially imbalanced traffic spreading. "Cluster" obscures the client source
      * IP and may cause a second hop to another node, but should have good overall
      * load-spreading.
-     *
-     * @var string|null
      */
-    private ?string $externalTrafficPolicy = null;
+    private string|null $externalTrafficPolicy = null;
 
     /**
      * healthCheckNodePort specifies the healthcheck nodePort for the service. If not
@@ -63,10 +57,8 @@ class ServiceSpec implements JsonSerializable
      * allocated nodePort. Will use user-specified nodePort value if specified by the
      * client. Only effects when Type is set to LoadBalancer and ExternalTrafficPolicy
      * is set to Local.
-     *
-     * @var int|null
      */
-    private ?int $healthCheckNodePort = null;
+    private int|null $healthCheckNodePort = null;
 
     /**
      * ipFamily specifies whether this Service has a preference for a particular IP
@@ -79,10 +71,8 @@ class ServiceSpec implements JsonSerializable
      * immutable after creation. Assigning a ServiceIPFamily not available in the
      * cluster (e.g. IPv6 in IPv4 only cluster) is an error condition and will fail
      * during clusterIP assignment.
-     *
-     * @var string|null
      */
-    private ?string $ipFamily = null;
+    private string|null $ipFamily = null;
 
     /**
      * Only applies to Service Type: LoadBalancer LoadBalancer will get created with
@@ -90,10 +80,8 @@ class ServiceSpec implements JsonSerializable
      * cloud-provider supports specifying the loadBalancerIP when a load balancer is
      * created. This field will be ignored if the cloud-provider does not support the
      * feature.
-     *
-     * @var string|null
      */
-    private ?string $loadBalancerIP = null;
+    private string|null $loadBalancerIP = null;
 
     /**
      * If specified and supported by the platform, this will restrict traffic through
@@ -116,10 +104,8 @@ class ServiceSpec implements JsonSerializable
      * the Service. The default value is false. The primary use case for setting this
      * field is to use a StatefulSet's Headless Service to propagate SRV records for
      * its Pods without respect to their readiness for purpose of peer discovery.
-     *
-     * @var bool|null
      */
-    private ?bool $publishNotReadyAddresses = null;
+    private bool|null $publishNotReadyAddresses = null;
 
     /**
      * Route service traffic to pods with label keys and values matching this selector.
@@ -135,10 +121,8 @@ class ServiceSpec implements JsonSerializable
      * IP based session affinity. Must be ClientIP or None. Defaults to None. More
      * info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-     *
-     * @var string|null
      */
-    private ?string $sessionAffinity = null;
+    private string|null $sessionAffinity = null;
 
     /**
      * sessionAffinityConfig contains the configurations of session affinity.
@@ -157,10 +141,8 @@ class ServiceSpec implements JsonSerializable
      * builds on NodePort and creates an external load-balancer (if supported in the
      * current cloud) which routes to the clusterIP. More info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     public function __construct()
     {
@@ -176,74 +158,47 @@ class ServiceSpec implements JsonSerializable
         return $this->externalIPs;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getClusterIP(): ?string
+    public function getClusterIP(): string|null
     {
         return $this->clusterIP;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getExternalName(): ?string
+    public function getExternalName(): string|null
     {
         return $this->externalName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getExternalTrafficPolicy(): ?string
+    public function getExternalTrafficPolicy(): string|null
     {
         return $this->externalTrafficPolicy;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getHealthCheckNodePort(): ?int
+    public function getHealthCheckNodePort(): int|null
     {
         return $this->healthCheckNodePort;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getIpFamily(): ?string
+    public function getIpFamily(): string|null
     {
         return $this->ipFamily;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getLoadBalancerIP(): ?string
+    public function getLoadBalancerIP(): string|null
     {
         return $this->loadBalancerIP;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getPublishNotReadyAddresses(): ?bool
+    public function getPublishNotReadyAddresses(): bool|null
     {
         return $this->publishNotReadyAddresses;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSessionAffinity(): ?string
+    public function getSessionAffinity(): string|null
     {
         return $this->sessionAffinity;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
@@ -331,7 +286,7 @@ class ServiceSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'clusterIP' => $this->clusterIP,

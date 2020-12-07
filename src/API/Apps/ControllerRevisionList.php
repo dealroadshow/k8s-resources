@@ -15,7 +15,7 @@ class ControllerRevisionList implements APIResourceListInterface
     const KIND = 'ControllerRevisionList';
 
     /**
-     * @var ControllerRevision[]|array
+     * @var ControllerRevision[]
      */
     private array $items = [];
 
@@ -39,7 +39,7 @@ class ControllerRevisionList implements APIResourceListInterface
     }
 
     /**
-     * @var ControllerRevision[]|array $items
+     * @var ControllerRevision[] $items
      *
      * @return self
      */
@@ -51,7 +51,7 @@ class ControllerRevisionList implements APIResourceListInterface
     }
 
     /**
-     * @return ControllerRevision[]|array
+     * @return ControllerRevision[]
      */
     public function all(): array
     {
@@ -70,7 +70,7 @@ class ControllerRevisionList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

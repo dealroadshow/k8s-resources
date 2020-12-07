@@ -8,7 +8,7 @@ use JsonSerializable;
 class TopologySelectorTermList implements JsonSerializable
 {
     /**
-     * @var TopologySelectorTerm[]|array
+     * @var TopologySelectorTerm[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class TopologySelectorTermList implements JsonSerializable
     }
 
     /**
-     * @var TopologySelectorTerm[]|array $items
+     * @var TopologySelectorTerm[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class TopologySelectorTermList implements JsonSerializable
     }
 
     /**
-     * @return TopologySelectorTerm[]|array
+     * @return TopologySelectorTerm[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class TopologySelectorTermList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

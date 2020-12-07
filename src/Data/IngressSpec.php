@@ -16,10 +16,8 @@ class IngressSpec implements JsonSerializable
      * least one of 'backend' or 'rules' must be specified. This field is optional to
      * allow the loadbalancer controller or defaulting logic to specify a global
      * default.
-     *
-     * @var IngressBackend|null
      */
-    private ?IngressBackend $backend = null;
+    private IngressBackend|null $backend = null;
 
     /**
      * A list of host rules used to configure the Ingress. If unspecified, or no rule
@@ -41,10 +39,7 @@ class IngressSpec implements JsonSerializable
         $this->tls = new IngressTLSList();
     }
 
-    /**
-     * @return IngressBackend|null
-     */
-    public function getBackend(): ?IngressBackend
+    public function getBackend(): IngressBackend|null
     {
         return $this->backend;
     }
@@ -66,7 +61,7 @@ class IngressSpec implements JsonSerializable
         return $this->tls;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'backend' => $this->backend,

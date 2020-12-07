@@ -20,17 +20,13 @@ class NodeSpec implements JsonSerializable
     /**
      * Deprecated. Not all kubelets will set this field. Remove field after 1.13. see:
      * https://issues.k8s.io/61966
-     *
-     * @var string|null
      */
-    private ?string $externalID = null;
+    private string|null $externalID = null;
 
     /**
      * PodCIDR represents the pod IP range assigned to the node.
-     *
-     * @var string|null
      */
-    private ?string $podCIDR = null;
+    private string|null $podCIDR = null;
 
     /**
      * podCIDRs represents the IP ranges assigned to the node for usage by Pods on that
@@ -42,10 +38,8 @@ class NodeSpec implements JsonSerializable
     /**
      * ID of the node assigned by the cloud provider in the format:
      * <ProviderName>://<ProviderSpecificNodeID>
-     *
-     * @var string|null
      */
-    private ?string $providerID = null;
+    private string|null $providerID = null;
 
     /**
      * If specified, the node's taints.
@@ -56,10 +50,8 @@ class NodeSpec implements JsonSerializable
      * Unschedulable controls node schedulability of new pods. By default, node is
      * schedulable. More info:
      * https://kubernetes.io/docs/concepts/nodes/node/#manual-node-administration
-     *
-     * @var bool|null
      */
-    private ?bool $unschedulable = null;
+    private bool|null $unschedulable = null;
 
     public function __construct()
     {
@@ -73,34 +65,22 @@ class NodeSpec implements JsonSerializable
         return $this->configSource;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getExternalID(): ?string
+    public function getExternalID(): string|null
     {
         return $this->externalID;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPodCIDR(): ?string
+    public function getPodCIDR(): string|null
     {
         return $this->podCIDR;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getProviderID(): ?string
+    public function getProviderID(): string|null
     {
         return $this->providerID;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getUnschedulable(): ?bool
+    public function getUnschedulable(): bool|null
     {
         return $this->unschedulable;
     }
@@ -143,7 +123,7 @@ class NodeSpec implements JsonSerializable
         return $this->taints;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'configSource' => $this->configSource,

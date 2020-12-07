@@ -16,10 +16,8 @@ class RBDPersistentVolumeSource implements JsonSerializable
      * filesystem type is supported by the host operating system. Examples: "ext4",
      * "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#rbd
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * The rados image name. More info:
@@ -30,10 +28,8 @@ class RBDPersistentVolumeSource implements JsonSerializable
     /**
      * Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More
      * info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-     *
-     * @var string|null
      */
-    private ?string $keyring = null;
+    private string|null $keyring = null;
 
     /**
      * A collection of Ceph monitors. More info:
@@ -44,18 +40,14 @@ class RBDPersistentVolumeSource implements JsonSerializable
     /**
      * The rados pool name. Default is rbd. More info:
      * https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-     *
-     * @var string|null
      */
-    private ?string $pool = null;
+    private string|null $pool = null;
 
     /**
      * ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
      * false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * SecretRef is name of the authentication secret for RBDUser. If provided
@@ -67,10 +59,8 @@ class RBDPersistentVolumeSource implements JsonSerializable
     /**
      * The rados user name. Default is admin. More info:
      * https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
-     *
-     * @var string|null
      */
-    private ?string $user = null;
+    private string|null $user = null;
 
     public function __construct(string $image)
     {
@@ -79,10 +69,7 @@ class RBDPersistentVolumeSource implements JsonSerializable
         $this->secretRef = new SecretReference();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
@@ -92,34 +79,22 @@ class RBDPersistentVolumeSource implements JsonSerializable
         return $this->image;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getKeyring(): ?string
+    public function getKeyring(): string|null
     {
         return $this->keyring;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPool(): ?string
+    public function getPool(): string|null
     {
         return $this->pool;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUser(): ?string
+    public function getUser(): string|null
     {
         return $this->user;
     }
@@ -176,7 +151,7 @@ class RBDPersistentVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'fsType' => $this->fsType,

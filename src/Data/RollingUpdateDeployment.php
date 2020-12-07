@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\IntOrString;
 use JsonSerializable;
 
 /**
@@ -20,10 +19,8 @@ class RollingUpdateDeployment implements JsonSerializable
      * of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up
      * further, ensuring that total number of pods running at any time during the
      * update is at most 130% of desired pods.
-     *
-     * @var IntOrString|null
      */
-    private ?IntOrString $maxSurge = null;
+    private string|int|null $maxSurge = null;
 
     /**
      * The maximum number of pods that can be unavailable during the update. Value can
@@ -35,46 +32,38 @@ class RollingUpdateDeployment implements JsonSerializable
      * down further, followed by scaling up the new ReplicaSet, ensuring that the total
      * number of pods available at all times during the update is at least 70% of
      * desired pods.
-     *
-     * @var IntOrString|null
      */
-    private ?IntOrString $maxUnavailable = null;
+    private string|int|null $maxUnavailable = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return IntOrString|null
-     */
-    public function getMaxSurge(): ?IntOrString
+    public function getMaxSurge(): string|int|null
     {
         return $this->maxSurge;
     }
 
-    /**
-     * @return IntOrString|null
-     */
-    public function getMaxUnavailable(): ?IntOrString
+    public function getMaxUnavailable(): string|int|null
     {
         return $this->maxUnavailable;
     }
 
-    public function setMaxSurge(IntOrString $maxSurge): self
+    public function setMaxSurge(string|int $maxSurge): self
     {
         $this->maxSurge = $maxSurge;
 
         return $this;
     }
 
-    public function setMaxUnavailable(IntOrString $maxUnavailable): self
+    public function setMaxUnavailable(string|int $maxUnavailable): self
     {
         $this->maxUnavailable = $maxUnavailable;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'maxSurge' => $this->maxSurge,

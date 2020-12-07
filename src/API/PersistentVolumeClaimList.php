@@ -14,7 +14,7 @@ class PersistentVolumeClaimList implements APIResourceListInterface
     const KIND = 'PersistentVolumeClaimList';
 
     /**
-     * @var PersistentVolumeClaim[]|array
+     * @var PersistentVolumeClaim[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class PersistentVolumeClaimList implements APIResourceListInterface
     }
 
     /**
-     * @var PersistentVolumeClaim[]|array $items
+     * @var PersistentVolumeClaim[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class PersistentVolumeClaimList implements APIResourceListInterface
     }
 
     /**
-     * @return PersistentVolumeClaim[]|array
+     * @return PersistentVolumeClaim[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class PersistentVolumeClaimList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

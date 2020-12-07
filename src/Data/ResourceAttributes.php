@@ -12,18 +12,14 @@ class ResourceAttributes implements JsonSerializable
 {
     /**
      * Group is the API Group of the Resource.  "*" means all.
-     *
-     * @var string|null
      */
-    private ?string $group = null;
+    private string|null $group = null;
 
     /**
      * Name is the name of the resource being requested for a "get" or deleted for a
      * "delete". "" (empty) means all.
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * Namespace is the namespace of the action being requested.  Currently, there is
@@ -31,96 +27,65 @@ class ResourceAttributes implements JsonSerializable
      * for LocalSubjectAccessReviews "" (empty) is empty for cluster-scoped resources
      * "" (empty) means "all" for namespace scoped resources from a SubjectAccessReview
      * or SelfSubjectAccessReview
-     *
-     * @var string|null
      */
-    private ?string $namespace = null;
+    private string|null $namespace = null;
 
     /**
      * Resource is one of the existing resource types.  "*" means all.
-     *
-     * @var string|null
      */
-    private ?string $resource = null;
+    private string|null $resource = null;
 
     /**
      * Subresource is one of the existing resource types.  "" means none.
-     *
-     * @var string|null
      */
-    private ?string $subresource = null;
+    private string|null $subresource = null;
 
     /**
      * Verb is a kubernetes resource API verb, like: get, list, watch, create, update,
      * delete, proxy.  "*" means all.
-     *
-     * @var string|null
      */
-    private ?string $verb = null;
+    private string|null $verb = null;
 
     /**
      * Version is the API Version of the Resource.  "*" means all.
-     *
-     * @var string|null
      */
-    private ?string $version = null;
+    private string|null $version = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getGroup(): ?string
+    public function getGroup(): string|null
     {
         return $this->group;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNamespace(): ?string
+    public function getNamespace(): string|null
     {
         return $this->namespace;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getResource(): ?string
+    public function getResource(): string|null
     {
         return $this->resource;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSubresource(): ?string
+    public function getSubresource(): string|null
     {
         return $this->subresource;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVerb(): ?string
+    public function getVerb(): string|null
     {
         return $this->verb;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVersion(): ?string
+    public function getVersion(): string|null
     {
         return $this->version;
     }
@@ -174,7 +139,7 @@ class ResourceAttributes implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'group' => $this->group,

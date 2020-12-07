@@ -34,7 +34,7 @@ class PodPreset implements APIResourceInterface
         return $this->spec;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

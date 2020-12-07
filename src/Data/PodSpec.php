@@ -7,8 +7,8 @@ use Dealroadshow\K8S\Data\Collection\EphemeralContainerList;
 use Dealroadshow\K8S\Data\Collection\HostAliasList;
 use Dealroadshow\K8S\Data\Collection\LocalObjectReferenceList;
 use Dealroadshow\K8S\Data\Collection\PodReadinessGateList;
-use Dealroadshow\K8S\Data\Collection\QuantityMap;
 use Dealroadshow\K8S\Data\Collection\StringMap;
+use Dealroadshow\K8S\Data\Collection\StringOrFloatMap;
 use Dealroadshow\K8S\Data\Collection\TolerationList;
 use Dealroadshow\K8S\Data\Collection\TopologySpreadConstraintList;
 use Dealroadshow\K8S\Data\Collection\VolumeList;
@@ -23,10 +23,8 @@ class PodSpec implements JsonSerializable
      * Optional duration in seconds the pod may be active on the node relative to
      * StartTime before the system will actively try to mark it failed and kill
      * associated containers. Value must be a positive integer.
-     *
-     * @var int|null
      */
-    private ?int $activeDeadlineSeconds = null;
+    private int|null $activeDeadlineSeconds = null;
 
     /**
      * If specified, the pod's scheduling constraints
@@ -36,10 +34,8 @@ class PodSpec implements JsonSerializable
     /**
      * AutomountServiceAccountToken indicates whether a service account token should be
      * automatically mounted.
-     *
-     * @var bool|null
      */
-    private ?bool $automountServiceAccountToken = null;
+    private bool|null $automountServiceAccountToken = null;
 
     /**
      * List of containers belonging to the pod. Containers cannot currently be added or
@@ -59,19 +55,15 @@ class PodSpec implements JsonSerializable
      * given in DNSConfig will be merged with the policy selected with DNSPolicy. To
      * have DNS options set along with hostNetwork, you have to specify DNS policy
      * explicitly to 'ClusterFirstWithHostNet'.
-     *
-     * @var string|null
      */
-    private ?string $dnsPolicy = null;
+    private string|null $dnsPolicy = null;
 
     /**
      * EnableServiceLinks indicates whether information about services should be
      * injected into pod's environment variables, matching the syntax of Docker links.
      * Optional: Defaults to true.
-     *
-     * @var bool|null
      */
-    private ?bool $enableServiceLinks = null;
+    private bool|null $enableServiceLinks = null;
 
     /**
      * List of ephemeral containers run in this pod. Ephemeral containers may be run in
@@ -91,34 +83,26 @@ class PodSpec implements JsonSerializable
 
     /**
      * Use the host's ipc namespace. Optional: Default to false.
-     *
-     * @var bool|null
      */
-    private ?bool $hostIPC = null;
+    private bool|null $hostIPC = null;
 
     /**
      * Host networking requested for this pod. Use the host's network namespace. If
      * this option is set, the ports that will be used must be specified. Default to
      * false.
-     *
-     * @var bool|null
      */
-    private ?bool $hostNetwork = null;
+    private bool|null $hostNetwork = null;
 
     /**
      * Use the host's pid namespace. Optional: Default to false.
-     *
-     * @var bool|null
      */
-    private ?bool $hostPID = null;
+    private bool|null $hostPID = null;
 
     /**
      * Specifies the hostname of the Pod If not specified, the pod's hostname will be
      * set to a system-defined value.
-     *
-     * @var string|null
      */
-    private ?string $hostname = null;
+    private string|null $hostname = null;
 
     /**
      * ImagePullSecrets is an optional list of references to secrets in the same
@@ -150,10 +134,8 @@ class PodSpec implements JsonSerializable
      * NodeName is a request to schedule this pod onto a specific node. If it is
      * non-empty, the scheduler simply schedules this pod onto that node, assuming that
      * it fits resource requirements.
-     *
-     * @var string|null
      */
-    private ?string $nodeName = null;
+    private string|null $nodeName = null;
 
     /**
      * NodeSelector is a selector which must be true for the pod to fit on a node.
@@ -176,27 +158,23 @@ class PodSpec implements JsonSerializable
      * field is alpha-level as of Kubernetes v1.16, and is only honored by servers that
      * enable the PodOverhead feature.
      */
-    private QuantityMap $overhead;
+    private StringOrFloatMap $overhead;
 
     /**
      * PreemptionPolicy is the Policy for preempting pods with lower priority. One of
      * Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. This
      * field is alpha-level and is only honored by servers that enable the
      * NonPreemptingPriority feature.
-     *
-     * @var string|null
      */
-    private ?string $preemptionPolicy = null;
+    private string|null $preemptionPolicy = null;
 
     /**
      * The priority value. Various system components use this field to find the
      * priority of the pod. When Priority Admission Controller is enabled, it prevents
      * users from setting this field. The admission controller populates this field
      * from PriorityClassName. The higher the value, the higher the priority.
-     *
-     * @var int|null
      */
-    private ?int $priority = null;
+    private int|null $priority = null;
 
     /**
      * If specified, indicates the pod's priority. "system-node-critical" and
@@ -204,10 +182,8 @@ class PodSpec implements JsonSerializable
      * priorities with the former being the highest priority. Any other name must be
      * defined by creating a PriorityClass object with that name. If not specified, the
      * pod priority will be default or zero if there is no default.
-     *
-     * @var string|null
      */
-    private ?string $priorityClassName = null;
+    private string|null $priorityClassName = null;
 
     /**
      * If specified, all readiness gates will be evaluated for pod readiness. A pod is
@@ -221,10 +197,8 @@ class PodSpec implements JsonSerializable
      * Restart policy for all containers within the pod. One of Always, OnFailure,
      * Never. Default to Always. More info:
      * https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
-     *
-     * @var string|null
      */
-    private ?string $restartPolicy = null;
+    private string|null $restartPolicy = null;
 
     /**
      * RuntimeClassName refers to a RuntimeClass object in the node.k8s.io group, which
@@ -234,18 +208,14 @@ class PodSpec implements JsonSerializable
      * default runtime handler. More info:
      * https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md This is a beta
      * feature as of Kubernetes v1.14.
-     *
-     * @var string|null
      */
-    private ?string $runtimeClassName = null;
+    private string|null $runtimeClassName = null;
 
     /**
      * If specified, the pod will be dispatched by specified scheduler. If not
      * specified, the pod will be dispatched by default scheduler.
-     *
-     * @var string|null
      */
-    private ?string $schedulerName = null;
+    private string|null $schedulerName = null;
 
     /**
      * SecurityContext holds pod-level security attributes and common container
@@ -257,19 +227,15 @@ class PodSpec implements JsonSerializable
     /**
      * DeprecatedServiceAccount is a depreciated alias for ServiceAccountName.
      * Deprecated: Use serviceAccountName instead.
-     *
-     * @var string|null
      */
-    private ?string $serviceAccount = null;
+    private string|null $serviceAccount = null;
 
     /**
      * ServiceAccountName is the name of the ServiceAccount to use to run this pod.
      * More info:
      * https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
-     *
-     * @var string|null
      */
-    private ?string $serviceAccountName = null;
+    private string|null $serviceAccountName = null;
 
     /**
      * Share a single process namespace between all of the containers in a pod. When
@@ -278,19 +244,15 @@ class PodSpec implements JsonSerializable
      * assigned PID 1. HostPID and ShareProcessNamespace cannot both be set. Optional:
      * Default to false. This field is beta-level and may be disabled with the
      * PodShareProcessNamespace feature.
-     *
-     * @var bool|null
      */
-    private ?bool $shareProcessNamespace = null;
+    private bool|null $shareProcessNamespace = null;
 
     /**
      * If specified, the fully qualified Pod hostname will be
      * "<hostname>.<subdomain>.<pod namespace>.svc.<cluster domain>". If not specified,
      * the pod will not have a domainname at all.
-     *
-     * @var string|null
      */
-    private ?string $subdomain = null;
+    private string|null $subdomain = null;
 
     /**
      * Optional duration in seconds the pod needs to terminate gracefully. May be
@@ -300,10 +262,8 @@ class PodSpec implements JsonSerializable
      * processes running in the pod are sent a termination signal and the time when the
      * processes are forcibly halted with a kill signal. Set this value longer than the
      * expected cleanup time for your process. Defaults to 30 seconds.
-     *
-     * @var int|null
      */
-    private ?int $terminationGracePeriodSeconds = null;
+    private int|null $terminationGracePeriodSeconds = null;
 
     /**
      * If specified, the pod's tolerations.
@@ -334,7 +294,7 @@ class PodSpec implements JsonSerializable
         $this->imagePullSecrets = new LocalObjectReferenceList();
         $this->initContainers = new ContainerList();
         $this->nodeSelector = new StringMap();
-        $this->overhead = new QuantityMap();
+        $this->overhead = new StringOrFloatMap();
         $this->readinessGates = new PodReadinessGateList();
         $this->securityContext = new PodSecurityContext();
         $this->tolerations = new TolerationList();
@@ -362,162 +322,102 @@ class PodSpec implements JsonSerializable
         return $this->ephemeralContainers;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getActiveDeadlineSeconds(): ?int
+    public function getActiveDeadlineSeconds(): int|null
     {
         return $this->activeDeadlineSeconds;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getAutomountServiceAccountToken(): ?bool
+    public function getAutomountServiceAccountToken(): bool|null
     {
         return $this->automountServiceAccountToken;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDnsPolicy(): ?string
+    public function getDnsPolicy(): string|null
     {
         return $this->dnsPolicy;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getEnableServiceLinks(): ?bool
+    public function getEnableServiceLinks(): bool|null
     {
         return $this->enableServiceLinks;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getHostIPC(): ?bool
+    public function getHostIPC(): bool|null
     {
         return $this->hostIPC;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getHostNetwork(): ?bool
+    public function getHostNetwork(): bool|null
     {
         return $this->hostNetwork;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getHostPID(): ?bool
+    public function getHostPID(): bool|null
     {
         return $this->hostPID;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHostname(): ?string
+    public function getHostname(): string|null
     {
         return $this->hostname;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNodeName(): ?string
+    public function getNodeName(): string|null
     {
         return $this->nodeName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPreemptionPolicy(): ?string
+    public function getPreemptionPolicy(): string|null
     {
         return $this->preemptionPolicy;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getPriority(): ?int
+    public function getPriority(): int|null
     {
         return $this->priority;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPriorityClassName(): ?string
+    public function getPriorityClassName(): string|null
     {
         return $this->priorityClassName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRestartPolicy(): ?string
+    public function getRestartPolicy(): string|null
     {
         return $this->restartPolicy;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRuntimeClassName(): ?string
+    public function getRuntimeClassName(): string|null
     {
         return $this->runtimeClassName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSchedulerName(): ?string
+    public function getSchedulerName(): string|null
     {
         return $this->schedulerName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getServiceAccount(): ?string
+    public function getServiceAccount(): string|null
     {
         return $this->serviceAccount;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getServiceAccountName(): ?string
+    public function getServiceAccountName(): string|null
     {
         return $this->serviceAccountName;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getShareProcessNamespace(): ?bool
+    public function getShareProcessNamespace(): bool|null
     {
         return $this->shareProcessNamespace;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSubdomain(): ?string
+    public function getSubdomain(): string|null
     {
         return $this->subdomain;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTerminationGracePeriodSeconds(): ?int
+    public function getTerminationGracePeriodSeconds(): int|null
     {
         return $this->terminationGracePeriodSeconds;
     }
@@ -542,7 +442,7 @@ class PodSpec implements JsonSerializable
         return $this->nodeSelector;
     }
 
-    public function overhead(): QuantityMap
+    public function overhead(): StringOrFloatMap
     {
         return $this->overhead;
     }
@@ -712,7 +612,7 @@ class PodSpec implements JsonSerializable
         return $this->volumes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'activeDeadlineSeconds' => $this->activeDeadlineSeconds,

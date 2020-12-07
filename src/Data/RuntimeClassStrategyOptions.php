@@ -23,10 +23,8 @@ class RuntimeClassStrategyOptions implements JsonSerializable
      * defaultRuntimeClassName is the default RuntimeClassName to set on the pod. The
      * default MUST be allowed by the allowedRuntimeClassNames list. A value of nil
      * does not mutate the Pod.
-     *
-     * @var string|null
      */
-    private ?string $defaultRuntimeClassName = null;
+    private string|null $defaultRuntimeClassName = null;
 
     public function __construct()
     {
@@ -38,10 +36,7 @@ class RuntimeClassStrategyOptions implements JsonSerializable
         return $this->allowedRuntimeClassNames;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDefaultRuntimeClassName(): ?string
+    public function getDefaultRuntimeClassName(): string|null
     {
         return $this->defaultRuntimeClassName;
     }
@@ -53,7 +48,7 @@ class RuntimeClassStrategyOptions implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'allowedRuntimeClassNames' => $this->allowedRuntimeClassNames,

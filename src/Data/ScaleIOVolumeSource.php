@@ -12,10 +12,8 @@ class ScaleIOVolumeSource implements JsonSerializable
     /**
      * Filesystem type to mount. Must be a filesystem type supported by the host
      * operating system. Ex. "ext4", "xfs", "ntfs". Default is "xfs".
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * The host address of the ScaleIO API Gateway.
@@ -24,18 +22,14 @@ class ScaleIOVolumeSource implements JsonSerializable
 
     /**
      * The name of the ScaleIO Protection Domain for the configured storage.
-     *
-     * @var string|null
      */
-    private ?string $protectionDomain = null;
+    private string|null $protectionDomain = null;
 
     /**
      * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in
      * VolumeMounts.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * SecretRef references to the secret for ScaleIO user and other sensitive
@@ -45,25 +39,19 @@ class ScaleIOVolumeSource implements JsonSerializable
 
     /**
      * Flag to enable/disable SSL communication with Gateway, default false
-     *
-     * @var bool|null
      */
-    private ?bool $sslEnabled = null;
+    private bool|null $sslEnabled = null;
 
     /**
      * Indicates whether the storage for a volume should be ThickProvisioned or
      * ThinProvisioned. Default is ThinProvisioned.
-     *
-     * @var string|null
      */
-    private ?string $storageMode = null;
+    private string|null $storageMode = null;
 
     /**
      * The ScaleIO Storage Pool associated with the protection domain.
-     *
-     * @var string|null
      */
-    private ?string $storagePool = null;
+    private string|null $storagePool = null;
 
     /**
      * The name of the storage system as configured in ScaleIO.
@@ -73,10 +61,8 @@ class ScaleIOVolumeSource implements JsonSerializable
     /**
      * The name of a volume already created in the ScaleIO system that is associated
      * with this volume source.
-     *
-     * @var string|null
      */
-    private ?string $volumeName = null;
+    private string|null $volumeName = null;
 
     public function __construct(string $gateway, string $system)
     {
@@ -85,10 +71,7 @@ class ScaleIOVolumeSource implements JsonSerializable
         $this->system = $system;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
@@ -98,42 +81,27 @@ class ScaleIOVolumeSource implements JsonSerializable
         return $this->gateway;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getProtectionDomain(): ?string
+    public function getProtectionDomain(): string|null
     {
         return $this->protectionDomain;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getSslEnabled(): ?bool
+    public function getSslEnabled(): bool|null
     {
         return $this->sslEnabled;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getStorageMode(): ?string
+    public function getStorageMode(): string|null
     {
         return $this->storageMode;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getStoragePool(): ?string
+    public function getStoragePool(): string|null
     {
         return $this->storagePool;
     }
@@ -143,10 +111,7 @@ class ScaleIOVolumeSource implements JsonSerializable
         return $this->system;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVolumeName(): ?string
+    public function getVolumeName(): string|null
     {
         return $this->volumeName;
     }
@@ -219,7 +184,7 @@ class ScaleIOVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'fsType' => $this->fsType,

@@ -59,7 +59,7 @@ class Endpoints implements APIResourceInterface
         return $this->subsets;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

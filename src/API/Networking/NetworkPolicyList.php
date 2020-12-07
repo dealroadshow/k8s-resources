@@ -14,7 +14,7 @@ class NetworkPolicyList implements APIResourceListInterface
     const KIND = 'NetworkPolicyList';
 
     /**
-     * @var NetworkPolicy[]|array
+     * @var NetworkPolicy[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class NetworkPolicyList implements APIResourceListInterface
     }
 
     /**
-     * @var NetworkPolicy[]|array $items
+     * @var NetworkPolicy[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class NetworkPolicyList implements APIResourceListInterface
     }
 
     /**
-     * @return NetworkPolicy[]|array
+     * @return NetworkPolicy[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class NetworkPolicyList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

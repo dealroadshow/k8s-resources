@@ -110,7 +110,7 @@ class CustomResourceDefinitionVersion implements JsonSerializable
         return $this->subresources;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'additionalPrinterColumns' => $this->additionalPrinterColumns,

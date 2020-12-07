@@ -21,10 +21,8 @@ class TokenReviewSpec implements JsonSerializable
 
     /**
      * Token is the opaque bearer token.
-     *
-     * @var string|null
      */
-    private ?string $token = null;
+    private string|null $token = null;
 
     public function __construct()
     {
@@ -36,10 +34,7 @@ class TokenReviewSpec implements JsonSerializable
         return $this->audiences;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getToken(): ?string
+    public function getToken(): string|null
     {
         return $this->token;
     }
@@ -51,7 +46,7 @@ class TokenReviewSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'audiences' => $this->audiences,

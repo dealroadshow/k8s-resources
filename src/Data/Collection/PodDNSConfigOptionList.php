@@ -8,7 +8,7 @@ use JsonSerializable;
 class PodDNSConfigOptionList implements JsonSerializable
 {
     /**
-     * @var PodDNSConfigOption[]|array
+     * @var PodDNSConfigOption[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class PodDNSConfigOptionList implements JsonSerializable
     }
 
     /**
-     * @var PodDNSConfigOption[]|array $items
+     * @var PodDNSConfigOption[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class PodDNSConfigOptionList implements JsonSerializable
     }
 
     /**
-     * @return PodDNSConfigOption[]|array
+     * @return PodDNSConfigOption[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class PodDNSConfigOptionList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

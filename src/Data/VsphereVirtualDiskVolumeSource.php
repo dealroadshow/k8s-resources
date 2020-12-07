@@ -13,25 +13,19 @@ class VsphereVirtualDiskVolumeSource implements JsonSerializable
      * Filesystem type to mount. Must be a filesystem type supported by the host
      * operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if
      * unspecified.
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * Storage Policy Based Management (SPBM) profile ID associated with the
      * StoragePolicyName.
-     *
-     * @var string|null
      */
-    private ?string $storagePolicyID = null;
+    private string|null $storagePolicyID = null;
 
     /**
      * Storage Policy Based Management (SPBM) profile name.
-     *
-     * @var string|null
      */
-    private ?string $storagePolicyName = null;
+    private string|null $storagePolicyName = null;
 
     /**
      * Path that identifies vSphere volume vmdk
@@ -43,26 +37,17 @@ class VsphereVirtualDiskVolumeSource implements JsonSerializable
         $this->volumePath = $volumePath;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getStoragePolicyID(): ?string
+    public function getStoragePolicyID(): string|null
     {
         return $this->storagePolicyID;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getStoragePolicyName(): ?string
+    public function getStoragePolicyName(): string|null
     {
         return $this->storagePolicyName;
     }
@@ -100,7 +85,7 @@ class VsphereVirtualDiskVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'fsType' => $this->fsType,

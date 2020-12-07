@@ -2,8 +2,8 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\Data\Collection\QuantityMap;
 use Dealroadshow\K8S\Data\Collection\StringList;
+use Dealroadshow\K8S\Data\Collection\StringOrFloatMap;
 use JsonSerializable;
 
 /**
@@ -21,32 +21,26 @@ class PersistentVolumeSpec implements JsonSerializable
      * AWSElasticBlockStore represents an AWS Disk resource that is attached to a
      * kubelet's host machine and then exposed to the pod. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
-     *
-     * @var AWSElasticBlockStoreVolumeSource|null
      */
-    private ?AWSElasticBlockStoreVolumeSource $awsElasticBlockStore = null;
+    private AWSElasticBlockStoreVolumeSource|null $awsElasticBlockStore = null;
 
     /**
      * AzureDisk represents an Azure Data Disk mount on the host and bind mount to the
      * pod.
-     *
-     * @var AzureDiskVolumeSource|null
      */
-    private ?AzureDiskVolumeSource $azureDisk = null;
+    private AzureDiskVolumeSource|null $azureDisk = null;
 
     /**
      * AzureFile represents an Azure File Service mount on the host and bind mount to
      * the pod.
-     *
-     * @var AzureFilePersistentVolumeSource|null
      */
-    private ?AzureFilePersistentVolumeSource $azureFile = null;
+    private AzureFilePersistentVolumeSource|null $azureFile = null;
 
     /**
      * A description of the persistent volume's resources and capacity. More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
      */
-    private QuantityMap $capacity;
+    private StringOrFloatMap $capacity;
 
     /**
      * CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
@@ -56,10 +50,8 @@ class PersistentVolumeSpec implements JsonSerializable
     /**
      * Cinder represents a cinder volume attached and mounted on kubelets host machine.
      * More info: https://examples.k8s.io/mysql-cinder-pd/README.md
-     *
-     * @var CinderPersistentVolumeSource|null
      */
-    private ?CinderPersistentVolumeSource $cinder = null;
+    private CinderPersistentVolumeSource|null $cinder = null;
 
     /**
      * ClaimRef is part of a bi-directional binding between PersistentVolume and
@@ -71,10 +63,8 @@ class PersistentVolumeSpec implements JsonSerializable
 
     /**
      * CSI represents storage that is handled by an external CSI driver (Beta feature).
-     *
-     * @var CSIPersistentVolumeSource|null
      */
-    private ?CSIPersistentVolumeSource $csi = null;
+    private CSIPersistentVolumeSource|null $csi = null;
 
     /**
      * FC represents a Fibre Channel resource that is attached to a kubelet's host
@@ -85,10 +75,8 @@ class PersistentVolumeSpec implements JsonSerializable
     /**
      * FlexVolume represents a generic volume resource that is provisioned/attached
      * using an exec based plugin.
-     *
-     * @var FlexPersistentVolumeSource|null
      */
-    private ?FlexPersistentVolumeSource $flexVolume = null;
+    private FlexPersistentVolumeSource|null $flexVolume = null;
 
     /**
      * Flocker represents a Flocker volume attached to a kubelet's host machine and
@@ -101,44 +89,34 @@ class PersistentVolumeSpec implements JsonSerializable
      * GCEPersistentDisk represents a GCE Disk resource that is attached to a kubelet's
      * host machine and then exposed to the pod. Provisioned by an admin. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
-     *
-     * @var GCEPersistentDiskVolumeSource|null
      */
-    private ?GCEPersistentDiskVolumeSource $gcePersistentDisk = null;
+    private GCEPersistentDiskVolumeSource|null $gcePersistentDisk = null;
 
     /**
      * Glusterfs represents a Glusterfs volume that is attached to a host and exposed
      * to the pod. Provisioned by an admin. More info:
      * https://examples.k8s.io/volumes/glusterfs/README.md
-     *
-     * @var GlusterfsPersistentVolumeSource|null
      */
-    private ?GlusterfsPersistentVolumeSource $glusterfs = null;
+    private GlusterfsPersistentVolumeSource|null $glusterfs = null;
 
     /**
      * HostPath represents a directory on the host. Provisioned by a developer or
      * tester. This is useful for single-node development and testing only! On-host
      * storage is not supported in any way and WILL NOT WORK in a multi-node cluster.
      * More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
-     *
-     * @var HostPathVolumeSource|null
      */
-    private ?HostPathVolumeSource $hostPath = null;
+    private HostPathVolumeSource|null $hostPath = null;
 
     /**
      * ISCSI represents an ISCSI Disk resource that is attached to a kubelet's host
      * machine and then exposed to the pod. Provisioned by an admin.
-     *
-     * @var ISCSIPersistentVolumeSource|null
      */
-    private ?ISCSIPersistentVolumeSource $iscsi = null;
+    private ISCSIPersistentVolumeSource|null $iscsi = null;
 
     /**
      * Local represents directly-attached storage with node affinity
-     *
-     * @var LocalVolumeSource|null
      */
-    private ?LocalVolumeSource $local = null;
+    private LocalVolumeSource|null $local = null;
 
     /**
      * A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply
@@ -150,10 +128,8 @@ class PersistentVolumeSpec implements JsonSerializable
     /**
      * NFS represents an NFS mount on the host. Provisioned by an admin. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#nfs
-     *
-     * @var NFSVolumeSource|null
      */
-    private ?NFSVolumeSource $nfs = null;
+    private NFSVolumeSource|null $nfs = null;
 
     /**
      * NodeAffinity defines constraints that limit what nodes this volume can be
@@ -168,57 +144,43 @@ class PersistentVolumeSpec implements JsonSerializable
      * dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle
      * must be supported by the volume plugin underlying this PersistentVolume. More
      * info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming
-     *
-     * @var string|null
      */
-    private ?string $persistentVolumeReclaimPolicy = null;
+    private string|null $persistentVolumeReclaimPolicy = null;
 
     /**
      * PhotonPersistentDisk represents a PhotonController persistent disk attached and
      * mounted on kubelets host machine
-     *
-     * @var PhotonPersistentDiskVolumeSource|null
      */
-    private ?PhotonPersistentDiskVolumeSource $photonPersistentDisk = null;
+    private PhotonPersistentDiskVolumeSource|null $photonPersistentDisk = null;
 
     /**
      * PortworxVolume represents a portworx volume attached and mounted on kubelets
      * host machine
-     *
-     * @var PortworxVolumeSource|null
      */
-    private ?PortworxVolumeSource $portworxVolume = null;
+    private PortworxVolumeSource|null $portworxVolume = null;
 
     /**
      * Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
-     *
-     * @var QuobyteVolumeSource|null
      */
-    private ?QuobyteVolumeSource $quobyte = null;
+    private QuobyteVolumeSource|null $quobyte = null;
 
     /**
      * RBD represents a Rados Block Device mount on the host that shares a pod's
      * lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md
-     *
-     * @var RBDPersistentVolumeSource|null
      */
-    private ?RBDPersistentVolumeSource $rbd = null;
+    private RBDPersistentVolumeSource|null $rbd = null;
 
     /**
      * ScaleIO represents a ScaleIO persistent volume attached and mounted on
      * Kubernetes nodes.
-     *
-     * @var ScaleIOPersistentVolumeSource|null
      */
-    private ?ScaleIOPersistentVolumeSource $scaleIO = null;
+    private ScaleIOPersistentVolumeSource|null $scaleIO = null;
 
     /**
      * Name of StorageClass to which this persistent volume belongs. Empty value means
      * that this volume does not belong to any StorageClass.
-     *
-     * @var string|null
      */
-    private ?string $storageClassName = null;
+    private string|null $storageClassName = null;
 
     /**
      * StorageOS represents a StorageOS volume that is attached to the kubelet's host
@@ -231,23 +193,19 @@ class PersistentVolumeSpec implements JsonSerializable
      * volumeMode defines if a volume is intended to be used with a formatted
      * filesystem or to remain in raw block state. Value of Filesystem is implied when
      * not included in spec. This is a beta feature.
-     *
-     * @var string|null
      */
-    private ?string $volumeMode = null;
+    private string|null $volumeMode = null;
 
     /**
      * VsphereVolume represents a vSphere volume attached and mounted on kubelets host
      * machine
-     *
-     * @var VsphereVirtualDiskVolumeSource|null
      */
-    private ?VsphereVirtualDiskVolumeSource $vsphereVolume = null;
+    private VsphereVirtualDiskVolumeSource|null $vsphereVolume = null;
 
     public function __construct()
     {
         $this->accessModes = new StringList();
-        $this->capacity = new QuantityMap();
+        $this->capacity = new StringOrFloatMap();
         $this->cephfs = new CephFSPersistentVolumeSource();
         $this->claimRef = new ObjectReference();
         $this->fc = new FCVolumeSource();
@@ -262,7 +220,7 @@ class PersistentVolumeSpec implements JsonSerializable
         return $this->accessModes;
     }
 
-    public function capacity(): QuantityMap
+    public function capacity(): StringOrFloatMap
     {
         return $this->capacity;
     }
@@ -287,170 +245,107 @@ class PersistentVolumeSpec implements JsonSerializable
         return $this->flocker;
     }
 
-    /**
-     * @return AWSElasticBlockStoreVolumeSource|null
-     */
-    public function getAwsElasticBlockStore(): ?AWSElasticBlockStoreVolumeSource
+    public function getAwsElasticBlockStore(): AWSElasticBlockStoreVolumeSource|null
     {
         return $this->awsElasticBlockStore;
     }
 
-    /**
-     * @return AzureDiskVolumeSource|null
-     */
-    public function getAzureDisk(): ?AzureDiskVolumeSource
+    public function getAzureDisk(): AzureDiskVolumeSource|null
     {
         return $this->azureDisk;
     }
 
-    /**
-     * @return AzureFilePersistentVolumeSource|null
-     */
-    public function getAzureFile(): ?AzureFilePersistentVolumeSource
+    public function getAzureFile(): AzureFilePersistentVolumeSource|null
     {
         return $this->azureFile;
     }
 
-    /**
-     * @return CinderPersistentVolumeSource|null
-     */
-    public function getCinder(): ?CinderPersistentVolumeSource
+    public function getCinder(): CinderPersistentVolumeSource|null
     {
         return $this->cinder;
     }
 
-    /**
-     * @return CSIPersistentVolumeSource|null
-     */
-    public function getCsi(): ?CSIPersistentVolumeSource
+    public function getCsi(): CSIPersistentVolumeSource|null
     {
         return $this->csi;
     }
 
-    /**
-     * @return FlexPersistentVolumeSource|null
-     */
-    public function getFlexVolume(): ?FlexPersistentVolumeSource
+    public function getFlexVolume(): FlexPersistentVolumeSource|null
     {
         return $this->flexVolume;
     }
 
-    /**
-     * @return GCEPersistentDiskVolumeSource|null
-     */
-    public function getGcePersistentDisk(): ?GCEPersistentDiskVolumeSource
+    public function getGcePersistentDisk(): GCEPersistentDiskVolumeSource|null
     {
         return $this->gcePersistentDisk;
     }
 
-    /**
-     * @return GlusterfsPersistentVolumeSource|null
-     */
-    public function getGlusterfs(): ?GlusterfsPersistentVolumeSource
+    public function getGlusterfs(): GlusterfsPersistentVolumeSource|null
     {
         return $this->glusterfs;
     }
 
-    /**
-     * @return HostPathVolumeSource|null
-     */
-    public function getHostPath(): ?HostPathVolumeSource
+    public function getHostPath(): HostPathVolumeSource|null
     {
         return $this->hostPath;
     }
 
-    /**
-     * @return ISCSIPersistentVolumeSource|null
-     */
-    public function getIscsi(): ?ISCSIPersistentVolumeSource
+    public function getIscsi(): ISCSIPersistentVolumeSource|null
     {
         return $this->iscsi;
     }
 
-    /**
-     * @return LocalVolumeSource|null
-     */
-    public function getLocal(): ?LocalVolumeSource
+    public function getLocal(): LocalVolumeSource|null
     {
         return $this->local;
     }
 
-    /**
-     * @return NFSVolumeSource|null
-     */
-    public function getNfs(): ?NFSVolumeSource
+    public function getNfs(): NFSVolumeSource|null
     {
         return $this->nfs;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPersistentVolumeReclaimPolicy(): ?string
+    public function getPersistentVolumeReclaimPolicy(): string|null
     {
         return $this->persistentVolumeReclaimPolicy;
     }
 
-    /**
-     * @return PhotonPersistentDiskVolumeSource|null
-     */
-    public function getPhotonPersistentDisk(): ?PhotonPersistentDiskVolumeSource
+    public function getPhotonPersistentDisk(): PhotonPersistentDiskVolumeSource|null
     {
         return $this->photonPersistentDisk;
     }
 
-    /**
-     * @return PortworxVolumeSource|null
-     */
-    public function getPortworxVolume(): ?PortworxVolumeSource
+    public function getPortworxVolume(): PortworxVolumeSource|null
     {
         return $this->portworxVolume;
     }
 
-    /**
-     * @return QuobyteVolumeSource|null
-     */
-    public function getQuobyte(): ?QuobyteVolumeSource
+    public function getQuobyte(): QuobyteVolumeSource|null
     {
         return $this->quobyte;
     }
 
-    /**
-     * @return RBDPersistentVolumeSource|null
-     */
-    public function getRbd(): ?RBDPersistentVolumeSource
+    public function getRbd(): RBDPersistentVolumeSource|null
     {
         return $this->rbd;
     }
 
-    /**
-     * @return ScaleIOPersistentVolumeSource|null
-     */
-    public function getScaleIO(): ?ScaleIOPersistentVolumeSource
+    public function getScaleIO(): ScaleIOPersistentVolumeSource|null
     {
         return $this->scaleIO;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getStorageClassName(): ?string
+    public function getStorageClassName(): string|null
     {
         return $this->storageClassName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getVolumeMode(): ?string
+    public function getVolumeMode(): string|null
     {
         return $this->volumeMode;
     }
 
-    /**
-     * @return VsphereVirtualDiskVolumeSource|null
-     */
-    public function getVsphereVolume(): ?VsphereVirtualDiskVolumeSource
+    public function getVsphereVolume(): VsphereVirtualDiskVolumeSource|null
     {
         return $this->vsphereVolume;
     }
@@ -617,7 +512,7 @@ class PersistentVolumeSpec implements JsonSerializable
         return $this->storageos;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'accessModes' => $this->accessModes,

@@ -42,7 +42,7 @@ class WebhookConversion implements JsonSerializable
         return $this->conversionReviewVersions;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'clientConfig' => $this->clientConfig,

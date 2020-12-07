@@ -15,19 +15,14 @@ class VolumeNodeResources implements JsonSerializable
      * used once, not twice. The same rule applies for a unique volume that is shared
      * among multiple pods on the same node. If this field is nil, then the supported
      * number of volumes on this node is unbounded.
-     *
-     * @var int|null
      */
-    private ?int $count = null;
+    private int|null $count = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return int|null
-     */
-    public function getCount(): ?int
+    public function getCount(): int|null
     {
         return $this->count;
     }
@@ -39,7 +34,7 @@ class VolumeNodeResources implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'count' => $this->count,

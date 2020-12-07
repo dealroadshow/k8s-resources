@@ -20,10 +20,8 @@ class HostPathVolumeSource implements JsonSerializable
     /**
      * Type for HostPath Volume Defaults to "" More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#hostpath
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     public function __construct(string $path)
     {
@@ -35,10 +33,7 @@ class HostPathVolumeSource implements JsonSerializable
         return $this->path;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
@@ -57,7 +52,7 @@ class HostPathVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'path' => $this->path,

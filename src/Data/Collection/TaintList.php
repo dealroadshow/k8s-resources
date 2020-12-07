@@ -8,7 +8,7 @@ use JsonSerializable;
 class TaintList implements JsonSerializable
 {
     /**
-     * @var Taint[]|array
+     * @var Taint[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class TaintList implements JsonSerializable
     }
 
     /**
-     * @var Taint[]|array $items
+     * @var Taint[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class TaintList implements JsonSerializable
     }
 
     /**
-     * @return Taint[]|array
+     * @return Taint[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class TaintList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -12,10 +12,8 @@ class CrossVersionObjectReference implements JsonSerializable
 {
     /**
      * API version of the referent
-     *
-     * @var string|null
      */
-    private ?string $apiVersion = null;
+    private string|null $apiVersion = null;
 
     /**
      * Kind of the referent; More info:
@@ -35,10 +33,7 @@ class CrossVersionObjectReference implements JsonSerializable
         $this->name = $name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getApiVersion(): ?string
+    public function getApiVersion(): string|null
     {
         return $this->apiVersion;
     }
@@ -74,7 +69,7 @@ class CrossVersionObjectReference implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => $this->apiVersion,

@@ -25,7 +25,7 @@ class LimitRangeSpec implements JsonSerializable
         return $this->limits;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'limits' => $this->limits,

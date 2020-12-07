@@ -15,19 +15,15 @@ class WindowsSecurityContextOptions implements JsonSerializable
      * GMSA credential spec named by the GMSACredentialSpecName field. This field is
      * alpha-level and is only honored by servers that enable the WindowsGMSA feature
      * flag.
-     *
-     * @var string|null
      */
-    private ?string $gmsaCredentialSpec = null;
+    private string|null $gmsaCredentialSpec = null;
 
     /**
      * GMSACredentialSpecName is the name of the GMSA credential spec to use. This
      * field is alpha-level and is only honored by servers that enable the WindowsGMSA
      * feature flag.
-     *
-     * @var string|null
      */
-    private ?string $gmsaCredentialSpecName = null;
+    private string|null $gmsaCredentialSpecName = null;
 
     /**
      * The UserName in Windows to run the entrypoint of the container process. Defaults
@@ -36,35 +32,24 @@ class WindowsSecurityContextOptions implements JsonSerializable
      * value specified in SecurityContext takes precedence. This field is alpha-level
      * and it is only honored by servers that enable the WindowsRunAsUserName feature
      * flag.
-     *
-     * @var string|null
      */
-    private ?string $runAsUserName = null;
+    private string|null $runAsUserName = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getGmsaCredentialSpec(): ?string
+    public function getGmsaCredentialSpec(): string|null
     {
         return $this->gmsaCredentialSpec;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getGmsaCredentialSpecName(): ?string
+    public function getGmsaCredentialSpecName(): string|null
     {
         return $this->gmsaCredentialSpecName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getRunAsUserName(): ?string
+    public function getRunAsUserName(): string|null
     {
         return $this->runAsUserName;
     }
@@ -90,7 +75,7 @@ class WindowsSecurityContextOptions implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'gmsaCredentialSpec' => $this->gmsaCredentialSpec,

@@ -14,7 +14,7 @@ class AuditSinkList implements APIResourceListInterface
     const KIND = 'AuditSinkList';
 
     /**
-     * @var AuditSink[]|array
+     * @var AuditSink[]
      */
     private array $items = [];
     private ListMeta $metadata;
@@ -33,7 +33,7 @@ class AuditSinkList implements APIResourceListInterface
     }
 
     /**
-     * @var AuditSink[]|array $items
+     * @var AuditSink[] $items
      *
      * @return self
      */
@@ -45,7 +45,7 @@ class AuditSinkList implements APIResourceListInterface
     }
 
     /**
-     * @return AuditSink[]|array
+     * @return AuditSink[]
      */
     public function all(): array
     {
@@ -64,7 +64,7 @@ class AuditSinkList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

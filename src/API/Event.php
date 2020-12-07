@@ -3,12 +3,11 @@
 namespace Dealroadshow\K8S\API;
 
 use Dealroadshow\K8S\APIResourceInterface;
+use Dealroadshow\K8S\Data\DateTimeInterface;
 use Dealroadshow\K8S\Data\EventSeries;
 use Dealroadshow\K8S\Data\EventSource;
 use Dealroadshow\K8S\Data\ObjectMeta;
 use Dealroadshow\K8S\Data\ObjectReference;
-use Dealroadshow\K8S\ValueObject\MicroTime;
-use Dealroadshow\K8S\ValueObject\Time;
 
 /**
  * Event is a report of an event somewhere in the cluster.
@@ -20,32 +19,24 @@ class Event implements APIResourceInterface
 
     /**
      * What action was taken/failed regarding to the Regarding object.
-     *
-     * @var string|null
      */
-    private ?string $action = null;
+    private string|null $action = null;
 
     /**
      * The number of times this event has occurred.
-     *
-     * @var int|null
      */
-    private ?int $count = null;
+    private int|null $count = null;
 
     /**
      * Time when this Event was first observed.
-     *
-     * @var MicroTime|null
      */
-    private ?MicroTime $eventTime = null;
+    private DateTimeInterface|null $eventTime = null;
 
     /**
      * The time at which the event was first recorded. (Time of server receipt is in
      * TypeMeta.)
-     *
-     * @var Time|null
      */
-    private ?Time $firstTimestamp = null;
+    private DateTimeInterface|null $firstTimestamp = null;
 
     /**
      * The object that this event is about.
@@ -54,17 +45,13 @@ class Event implements APIResourceInterface
 
     /**
      * The time at which the most recent occurrence of this event was recorded.
-     *
-     * @var Time|null
      */
-    private ?Time $lastTimestamp = null;
+    private DateTimeInterface|null $lastTimestamp = null;
 
     /**
      * A human-readable description of the status of this operation.
-     *
-     * @var string|null
      */
-    private ?string $message = null;
+    private string|null $message = null;
 
     /**
      * Standard object's metadata. More info:
@@ -75,10 +62,8 @@ class Event implements APIResourceInterface
     /**
      * This should be a short, machine understandable string that gives the reason for
      * the transition into the object's current status.
-     *
-     * @var string|null
      */
-    private ?string $reason = null;
+    private string|null $reason = null;
 
     /**
      * Optional secondary object for more complex actions.
@@ -87,17 +72,13 @@ class Event implements APIResourceInterface
 
     /**
      * Name of the controller that emitted this Event, e.g. `kubernetes.io/kubelet`.
-     *
-     * @var string|null
      */
-    private ?string $reportingComponent = null;
+    private string|null $reportingComponent = null;
 
     /**
      * ID of the controller instance, e.g. `kubelet-xyzf`.
-     *
-     * @var string|null
      */
-    private ?string $reportingInstance = null;
+    private string|null $reportingInstance = null;
 
     /**
      * Data about the Event series this event represents or nil if it's a singleton
@@ -113,10 +94,8 @@ class Event implements APIResourceInterface
 
     /**
      * Type of this event (Normal, Warning), new types could be added in the future
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     public function __construct()
     {
@@ -127,82 +106,52 @@ class Event implements APIResourceInterface
         $this->source = new EventSource();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getAction(): ?string
+    public function getAction(): string|null
     {
         return $this->action;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getCount(): ?int
+    public function getCount(): int|null
     {
         return $this->count;
     }
 
-    /**
-     * @return MicroTime|null
-     */
-    public function getEventTime(): ?MicroTime
+    public function getEventTime(): DateTimeInterface|null
     {
         return $this->eventTime;
     }
 
-    /**
-     * @return Time|null
-     */
-    public function getFirstTimestamp(): ?Time
+    public function getFirstTimestamp(): DateTimeInterface|null
     {
         return $this->firstTimestamp;
     }
 
-    /**
-     * @return Time|null
-     */
-    public function getLastTimestamp(): ?Time
+    public function getLastTimestamp(): DateTimeInterface|null
     {
         return $this->lastTimestamp;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getMessage(): ?string
+    public function getMessage(): string|null
     {
         return $this->message;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getReason(): ?string
+    public function getReason(): string|null
     {
         return $this->reason;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getReportingComponent(): ?string
+    public function getReportingComponent(): string|null
     {
         return $this->reportingComponent;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getReportingInstance(): ?string
+    public function getReportingInstance(): string|null
     {
         return $this->reportingInstance;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
@@ -241,21 +190,21 @@ class Event implements APIResourceInterface
         return $this;
     }
 
-    public function setEventTime(MicroTime $eventTime): self
+    public function setEventTime(DateTimeInterface $eventTime): self
     {
         $this->eventTime = $eventTime;
 
         return $this;
     }
 
-    public function setFirstTimestamp(Time $firstTimestamp): self
+    public function setFirstTimestamp(DateTimeInterface $firstTimestamp): self
     {
         $this->firstTimestamp = $firstTimestamp;
 
         return $this;
     }
 
-    public function setLastTimestamp(Time $lastTimestamp): self
+    public function setLastTimestamp(DateTimeInterface $lastTimestamp): self
     {
         $this->lastTimestamp = $lastTimestamp;
 
@@ -302,7 +251,7 @@ class Event implements APIResourceInterface
         return $this->source;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

@@ -81,7 +81,7 @@ class PolicyRule implements JsonSerializable
         return $this->verbs;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiGroups' => $this->apiGroups,

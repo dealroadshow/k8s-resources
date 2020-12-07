@@ -30,7 +30,7 @@ class ExecAction implements JsonSerializable
         return $this->command;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'command' => $this->command,

@@ -18,30 +18,24 @@ class StatefulSetSpec implements JsonSerializable
      * When scaling down, the pods are removed in the opposite order. The alternative
      * policy is `Parallel` which will create pods in parallel to match the desired
      * scale without waiting, and on scale down will delete all pods at once.
-     *
-     * @var string|null
      */
-    private ?string $podManagementPolicy = null;
+    private string|null $podManagementPolicy = null;
 
     /**
      * replicas is the desired number of replicas of the given Template. These are
      * replicas in the sense that they are instantiations of the same Template, but
      * individual replicas also have a consistent identity. If unspecified, defaults to
      * 1.
-     *
-     * @var int|null
      */
-    private ?int $replicas = null;
+    private int|null $replicas = null;
 
     /**
      * revisionHistoryLimit is the maximum number of revisions that will be maintained
      * in the StatefulSet's revision history. The revision history consists of all
      * revisions not represented by a currently applied StatefulSetSpec version. The
      * default value is 10.
-     *
-     * @var int|null
      */
-    private ?int $revisionHistoryLimit = null;
+    private int|null $revisionHistoryLimit = null;
 
     /**
      * selector is a label query over pods that should match the replica count. It must
@@ -92,26 +86,17 @@ class StatefulSetSpec implements JsonSerializable
         $this->volumeClaimTemplates = new PersistentVolumeClaimList();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPodManagementPolicy(): ?string
+    public function getPodManagementPolicy(): string|null
     {
         return $this->podManagementPolicy;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getReplicas(): ?int
+    public function getReplicas(): int|null
     {
         return $this->replicas;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getRevisionHistoryLimit(): ?int
+    public function getRevisionHistoryLimit(): int|null
     {
         return $this->revisionHistoryLimit;
     }
@@ -169,7 +154,7 @@ class StatefulSetSpec implements JsonSerializable
         return $this->volumeClaimTemplates;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'podManagementPolicy' => $this->podManagementPolicy,

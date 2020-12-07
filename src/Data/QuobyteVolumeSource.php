@@ -12,18 +12,14 @@ class QuobyteVolumeSource implements JsonSerializable
 {
     /**
      * Group to map volume access to Default is no group
-     *
-     * @var string|null
      */
-    private ?string $group = null;
+    private string|null $group = null;
 
     /**
      * ReadOnly here will force the Quobyte volume to be mounted with read-only
      * permissions. Defaults to false.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * Registry represents a single or multiple Quobyte Registry services specified as
@@ -35,17 +31,13 @@ class QuobyteVolumeSource implements JsonSerializable
     /**
      * Tenant owning the given Quobyte volume in the Backend Used with dynamically
      * provisioned Quobyte volumes, value is set by the plugin
-     *
-     * @var string|null
      */
-    private ?string $tenant = null;
+    private string|null $tenant = null;
 
     /**
      * User to map volume access to Defaults to serivceaccount user
-     *
-     * @var string|null
      */
-    private ?string $user = null;
+    private string|null $user = null;
 
     /**
      * Volume is a string that references an already created Quobyte volume by name.
@@ -58,18 +50,12 @@ class QuobyteVolumeSource implements JsonSerializable
         $this->volume = $volume;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getGroup(): ?string
+    public function getGroup(): string|null
     {
         return $this->group;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -79,18 +65,12 @@ class QuobyteVolumeSource implements JsonSerializable
         return $this->registry;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getTenant(): ?string
+    public function getTenant(): string|null
     {
         return $this->tenant;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUser(): ?string
+    public function getUser(): string|null
     {
         return $this->user;
     }
@@ -142,7 +122,7 @@ class QuobyteVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'group' => $this->group,

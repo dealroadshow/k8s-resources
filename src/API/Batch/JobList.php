@@ -14,7 +14,7 @@ class JobList implements APIResourceListInterface
     const KIND = 'JobList';
 
     /**
-     * @var Job[]|array
+     * @var Job[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class JobList implements APIResourceListInterface
     }
 
     /**
-     * @var Job[]|array $items
+     * @var Job[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class JobList implements APIResourceListInterface
     }
 
     /**
-     * @return Job[]|array
+     * @return Job[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class JobList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

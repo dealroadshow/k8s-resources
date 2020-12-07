@@ -8,7 +8,7 @@ use JsonSerializable;
 class EndpointAddressList implements JsonSerializable
 {
     /**
-     * @var EndpointAddress[]|array
+     * @var EndpointAddress[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class EndpointAddressList implements JsonSerializable
     }
 
     /**
-     * @var EndpointAddress[]|array $items
+     * @var EndpointAddress[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class EndpointAddressList implements JsonSerializable
     }
 
     /**
-     * @return EndpointAddress[]|array
+     * @return EndpointAddress[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class EndpointAddressList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

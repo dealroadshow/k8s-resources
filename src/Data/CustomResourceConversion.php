@@ -48,7 +48,7 @@ class CustomResourceConversion implements JsonSerializable
         return $this->webhook;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'strategy' => $this->strategy,

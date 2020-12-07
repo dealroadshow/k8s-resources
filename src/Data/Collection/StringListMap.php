@@ -7,7 +7,7 @@ use JsonSerializable;
 class StringListMap implements JsonSerializable
 {
     /**
-     * @var array<string, StringList>|StringList[]
+     * @var StringList[]
      */
     private array $items = [];
 
@@ -24,7 +24,7 @@ class StringListMap implements JsonSerializable
     }
 
     /**
-     * @var array<string, StringList>|StringList[] $items
+     * @var StringList[] $items
      *
      * @return self
      */
@@ -36,7 +36,7 @@ class StringListMap implements JsonSerializable
     }
 
     /**
-     * @return array<string, StringList>|StringList[]
+     * @return StringList[]
      */
     public function all(): array
     {
@@ -57,7 +57,7 @@ class StringListMap implements JsonSerializable
 
     public function has(string $name): bool
     {
-        return \array_key_exists($name, $this->items);
+        return array_key_exists($name, $this->items);
     }
 
     public function remove(string $name): self
@@ -67,7 +67,7 @@ class StringListMap implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

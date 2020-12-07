@@ -51,7 +51,7 @@ class Lifecycle implements JsonSerializable
         return $this->preStop;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'postStart' => $this->postStart,

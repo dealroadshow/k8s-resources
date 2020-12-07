@@ -8,7 +8,7 @@ use JsonSerializable;
 class HostAliasList implements JsonSerializable
 {
     /**
-     * @var HostAlias[]|array
+     * @var HostAlias[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class HostAliasList implements JsonSerializable
     }
 
     /**
-     * @var HostAlias[]|array $items
+     * @var HostAlias[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class HostAliasList implements JsonSerializable
     }
 
     /**
-     * @return HostAlias[]|array
+     * @return HostAlias[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class HostAliasList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

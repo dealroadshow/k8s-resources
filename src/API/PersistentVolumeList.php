@@ -14,7 +14,7 @@ class PersistentVolumeList implements APIResourceListInterface
     const KIND = 'PersistentVolumeList';
 
     /**
-     * @var PersistentVolume[]|array
+     * @var PersistentVolume[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class PersistentVolumeList implements APIResourceListInterface
     }
 
     /**
-     * @var PersistentVolume[]|array $items
+     * @var PersistentVolume[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class PersistentVolumeList implements APIResourceListInterface
     }
 
     /**
-     * @return PersistentVolume[]|array
+     * @return PersistentVolume[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class PersistentVolumeList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

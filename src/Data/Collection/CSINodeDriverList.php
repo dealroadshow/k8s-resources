@@ -8,7 +8,7 @@ use JsonSerializable;
 class CSINodeDriverList implements JsonSerializable
 {
     /**
-     * @var CSINodeDriver[]|array
+     * @var CSINodeDriver[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class CSINodeDriverList implements JsonSerializable
     }
 
     /**
-     * @var CSINodeDriver[]|array $items
+     * @var CSINodeDriver[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class CSINodeDriverList implements JsonSerializable
     }
 
     /**
-     * @return CSINodeDriver[]|array
+     * @return CSINodeDriver[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class CSINodeDriverList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

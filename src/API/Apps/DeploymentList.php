@@ -14,7 +14,7 @@ class DeploymentList implements APIResourceListInterface
     const KIND = 'DeploymentList';
 
     /**
-     * @var Deployment[]|array
+     * @var Deployment[]
      */
     private array $items = [];
 
@@ -37,7 +37,7 @@ class DeploymentList implements APIResourceListInterface
     }
 
     /**
-     * @var Deployment[]|array $items
+     * @var Deployment[] $items
      *
      * @return self
      */
@@ -49,7 +49,7 @@ class DeploymentList implements APIResourceListInterface
     }
 
     /**
-     * @return Deployment[]|array
+     * @return Deployment[]
      */
     public function all(): array
     {
@@ -68,7 +68,7 @@ class DeploymentList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

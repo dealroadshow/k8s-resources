@@ -8,7 +8,7 @@ use JsonSerializable;
 class PodReadinessGateList implements JsonSerializable
 {
     /**
-     * @var PodReadinessGate[]|array
+     * @var PodReadinessGate[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class PodReadinessGateList implements JsonSerializable
     }
 
     /**
-     * @var PodReadinessGate[]|array $items
+     * @var PodReadinessGate[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class PodReadinessGateList implements JsonSerializable
     }
 
     /**
-     * @return PodReadinessGate[]|array
+     * @return PodReadinessGate[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class PodReadinessGateList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\IntOrString;
 use JsonSerializable;
 
 /**
@@ -15,10 +14,8 @@ class ServicePort implements JsonSerializable
      * within a ServiceSpec must have unique names. When considering the endpoints for
      * a Service, this must match the 'name' field in the EndpointPort. Optional if
      * only one ServicePort is defined on this service.
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * The port on each node on which this service is exposed when type=NodePort or
@@ -27,10 +24,8 @@ class ServicePort implements JsonSerializable
      * to auto-allocate a port if the ServiceType of this Service requires one. More
      * info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
-     *
-     * @var int|null
      */
-    private ?int $nodePort = null;
+    private int|null $nodePort = null;
 
     /**
      * The port that will be exposed by this service.
@@ -40,10 +35,8 @@ class ServicePort implements JsonSerializable
     /**
      * The IP protocol for this port. Supports "TCP", "UDP", and "SCTP". Default is
      * TCP.
-     *
-     * @var string|null
      */
-    private ?string $protocol = null;
+    private string|null $protocol = null;
 
     /**
      * Number or name of the port to access on the pods targeted by the service. Number
@@ -53,28 +46,20 @@ class ServicePort implements JsonSerializable
      * identity map). This field is ignored for services with clusterIP=None, and
      * should be omitted or set equal to the 'port' field. More info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
-     *
-     * @var IntOrString|null
      */
-    private ?IntOrString $targetPort = null;
+    private string|int|null $targetPort = null;
 
     public function __construct(int $port)
     {
         $this->port = $port;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getNodePort(): ?int
+    public function getNodePort(): int|null
     {
         return $this->nodePort;
     }
@@ -84,18 +69,12 @@ class ServicePort implements JsonSerializable
         return $this->port;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getProtocol(): ?string
+    public function getProtocol(): string|null
     {
         return $this->protocol;
     }
 
-    /**
-     * @return IntOrString|null
-     */
-    public function getTargetPort(): ?IntOrString
+    public function getTargetPort(): string|int|null
     {
         return $this->targetPort;
     }
@@ -128,14 +107,14 @@ class ServicePort implements JsonSerializable
         return $this;
     }
 
-    public function setTargetPort(IntOrString $targetPort): self
+    public function setTargetPort(string|int $targetPort): self
     {
         $this->targetPort = $targetPort;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'name' => $this->name,

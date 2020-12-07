@@ -8,7 +8,7 @@ use JsonSerializable;
 class IDRangeList implements JsonSerializable
 {
     /**
-     * @var IDRange[]|array
+     * @var IDRange[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class IDRangeList implements JsonSerializable
     }
 
     /**
-     * @var IDRange[]|array $items
+     * @var IDRange[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class IDRangeList implements JsonSerializable
     }
 
     /**
-     * @return IDRange[]|array
+     * @return IDRange[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class IDRangeList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -13,19 +13,14 @@ class RollingUpdateStatefulSetStrategy implements JsonSerializable
     /**
      * Partition indicates the ordinal at which the StatefulSet should be partitioned.
      * Default value is 0.
-     *
-     * @var int|null
      */
-    private ?int $partition = null;
+    private int|null $partition = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return int|null
-     */
-    public function getPartition(): ?int
+    public function getPartition(): int|null
     {
         return $this->partition;
     }
@@ -37,7 +32,7 @@ class RollingUpdateStatefulSetStrategy implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'partition' => $this->partition,

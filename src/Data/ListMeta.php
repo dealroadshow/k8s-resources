@@ -20,10 +20,8 @@ class ListMeta implements JsonSerializable
      * have passed. The resourceVersion field returned when using this continue value
      * will be identical to the value in the first response, unless you have received
      * this token from an error message.
-     *
-     * @var string|null
      */
-    private ?string $continue = null;
+    private string|null $continue = null;
 
     /**
      * remainingItemCount is the number of subsequent items in the list which are not
@@ -35,10 +33,8 @@ class ListMeta implements JsonSerializable
      * serialization. Servers older than v1.15 do not set this field. The intended use
      * of the remainingItemCount is *estimating* the size of a collection. Clients
      * should not rely on the remainingItemCount to be set or to be exact.
-     *
-     * @var int|null
      */
-    private ?int $remainingItemCount = null;
+    private int|null $remainingItemCount = null;
 
     /**
      * String that identifies the server's internal version of this object that can be
@@ -46,53 +42,37 @@ class ListMeta implements JsonSerializable
      * opaque by clients and passed unmodified back to the server. Populated by the
      * system. Read-only. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#concurrency-control-and-consistency
-     *
-     * @var string|null
      */
-    private ?string $resourceVersion = null;
+    private string|null $resourceVersion = null;
 
     /**
      * selfLink is a URL representing this object. Populated by the system. Read-only.
      *
      * DEPRECATED Kubernetes will stop propagating this field in 1.20 release and the
      * field is planned to be removed in 1.21 release.
-     *
-     * @var string|null
      */
-    private ?string $selfLink = null;
+    private string|null $selfLink = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getContinue(): ?string
+    public function getContinue(): string|null
     {
         return $this->continue;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getRemainingItemCount(): ?int
+    public function getRemainingItemCount(): int|null
     {
         return $this->remainingItemCount;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getResourceVersion(): ?string
+    public function getResourceVersion(): string|null
     {
         return $this->resourceVersion;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSelfLink(): ?string
+    public function getSelfLink(): string|null
     {
         return $this->selfLink;
     }
@@ -125,7 +105,7 @@ class ListMeta implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'continue' => $this->continue,

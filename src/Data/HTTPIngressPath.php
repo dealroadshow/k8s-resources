@@ -23,10 +23,8 @@ class HTTPIngressPath implements JsonSerializable
      * conventional "path" part of a URL as defined by RFC 3986. Paths must begin with
      * a '/'. If unspecified, the path defaults to a catch all sending traffic to the
      * backend.
-     *
-     * @var string|null
      */
-    private ?string $path = null;
+    private string|null $path = null;
 
     public function __construct(IngressBackend $backend)
     {
@@ -38,10 +36,7 @@ class HTTPIngressPath implements JsonSerializable
         return $this->backend;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPath(): ?string
+    public function getPath(): string|null
     {
         return $this->path;
     }
@@ -60,7 +55,7 @@ class HTTPIngressPath implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'backend' => $this->backend,

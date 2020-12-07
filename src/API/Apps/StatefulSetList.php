@@ -14,7 +14,7 @@ class StatefulSetList implements APIResourceListInterface
     const KIND = 'StatefulSetList';
 
     /**
-     * @var StatefulSet[]|array
+     * @var StatefulSet[]
      */
     private array $items = [];
     private ListMeta $metadata;
@@ -33,7 +33,7 @@ class StatefulSetList implements APIResourceListInterface
     }
 
     /**
-     * @var StatefulSet[]|array $items
+     * @var StatefulSet[] $items
      *
      * @return self
      */
@@ -45,7 +45,7 @@ class StatefulSetList implements APIResourceListInterface
     }
 
     /**
-     * @return StatefulSet[]|array
+     * @return StatefulSet[]
      */
     public function all(): array
     {
@@ -64,7 +64,7 @@ class StatefulSetList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

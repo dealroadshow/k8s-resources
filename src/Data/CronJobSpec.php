@@ -15,18 +15,14 @@ class CronJobSpec implements JsonSerializable
      * "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids
      * concurrent runs, skipping next run if previous run hasn't finished yet; -
      * "Replace": cancels currently running job and replaces it with a new one
-     *
-     * @var string|null
      */
-    private ?string $concurrencyPolicy = null;
+    private string|null $concurrencyPolicy = null;
 
     /**
      * The number of failed finished jobs to retain. This is a pointer to distinguish
      * between explicit zero and not specified. Defaults to 1.
-     *
-     * @var int|null
      */
-    private ?int $failedJobsHistoryLimit = null;
+    private int|null $failedJobsHistoryLimit = null;
 
     /**
      * Specifies the job that will be created when executing a CronJob.
@@ -41,26 +37,20 @@ class CronJobSpec implements JsonSerializable
     /**
      * Optional deadline in seconds for starting the job if it misses scheduled time
      * for any reason.  Missed jobs executions will be counted as failed ones.
-     *
-     * @var int|null
      */
-    private ?int $startingDeadlineSeconds = null;
+    private int|null $startingDeadlineSeconds = null;
 
     /**
      * The number of successful finished jobs to retain. This is a pointer to
      * distinguish between explicit zero and not specified. Defaults to 3.
-     *
-     * @var int|null
      */
-    private ?int $successfulJobsHistoryLimit = null;
+    private int|null $successfulJobsHistoryLimit = null;
 
     /**
      * This flag tells the controller to suspend subsequent executions, it does not
      * apply to already started executions.  Defaults to false.
-     *
-     * @var bool|null
      */
-    private ?bool $suspend = null;
+    private bool|null $suspend = null;
 
     public function __construct(string $schedule)
     {
@@ -68,18 +58,12 @@ class CronJobSpec implements JsonSerializable
         $this->schedule = $schedule;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getConcurrencyPolicy(): ?string
+    public function getConcurrencyPolicy(): string|null
     {
         return $this->concurrencyPolicy;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getFailedJobsHistoryLimit(): ?int
+    public function getFailedJobsHistoryLimit(): int|null
     {
         return $this->failedJobsHistoryLimit;
     }
@@ -89,26 +73,17 @@ class CronJobSpec implements JsonSerializable
         return $this->schedule;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getStartingDeadlineSeconds(): ?int
+    public function getStartingDeadlineSeconds(): int|null
     {
         return $this->startingDeadlineSeconds;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getSuccessfulJobsHistoryLimit(): ?int
+    public function getSuccessfulJobsHistoryLimit(): int|null
     {
         return $this->successfulJobsHistoryLimit;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getSuspend(): ?bool
+    public function getSuspend(): bool|null
     {
         return $this->suspend;
     }
@@ -160,7 +135,7 @@ class CronJobSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'concurrencyPolicy' => $this->concurrencyPolicy,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class MutatingWebhookList implements JsonSerializable
 {
     /**
-     * @var MutatingWebhook[]|array
+     * @var MutatingWebhook[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class MutatingWebhookList implements JsonSerializable
     }
 
     /**
-     * @var MutatingWebhook[]|array $items
+     * @var MutatingWebhook[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class MutatingWebhookList implements JsonSerializable
     }
 
     /**
-     * @return MutatingWebhook[]|array
+     * @return MutatingWebhook[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class MutatingWebhookList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -15,10 +15,8 @@ class ProjectedVolumeSource implements JsonSerializable
      * 0777. Directories within the path are not affected by this setting. This might
      * be in conflict with other options that affect the file mode, like fsGroup, and
      * the result can be other mode bits set.
-     *
-     * @var int|null
      */
-    private ?int $defaultMode = null;
+    private int|null $defaultMode = null;
 
     /**
      * list of volume projections
@@ -30,10 +28,7 @@ class ProjectedVolumeSource implements JsonSerializable
         $this->sources = new VolumeProjectionList();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getDefaultMode(): ?int
+    public function getDefaultMode(): int|null
     {
         return $this->defaultMode;
     }
@@ -50,7 +45,7 @@ class ProjectedVolumeSource implements JsonSerializable
         return $this->sources;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'defaultMode' => $this->defaultMode,

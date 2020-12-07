@@ -14,7 +14,7 @@ class ClusterRoleBindingList implements APIResourceListInterface
     const KIND = 'ClusterRoleBindingList';
 
     /**
-     * @var ClusterRoleBinding[]|array
+     * @var ClusterRoleBinding[]
      */
     private array $items = [];
 
@@ -37,7 +37,7 @@ class ClusterRoleBindingList implements APIResourceListInterface
     }
 
     /**
-     * @var ClusterRoleBinding[]|array $items
+     * @var ClusterRoleBinding[] $items
      *
      * @return self
      */
@@ -49,7 +49,7 @@ class ClusterRoleBindingList implements APIResourceListInterface
     }
 
     /**
-     * @return ClusterRoleBinding[]|array
+     * @return ClusterRoleBinding[]
      */
     public function all(): array
     {
@@ -68,7 +68,7 @@ class ClusterRoleBindingList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

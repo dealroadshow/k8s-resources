@@ -19,10 +19,8 @@ class SecretVolumeSource implements JsonSerializable
      * 0 and 0777. Defaults to 0644. Directories within the path are not affected by
      * this setting. This might be in conflict with other options that affect the file
      * mode, like fsGroup, and the result can be other mode bits set.
-     *
-     * @var int|null
      */
-    private ?int $defaultMode = null;
+    private int|null $defaultMode = null;
 
     /**
      * If unspecified, each key-value pair in the Data field of the referenced Secret
@@ -36,44 +34,31 @@ class SecretVolumeSource implements JsonSerializable
 
     /**
      * Specify whether the Secret or its keys must be defined
-     *
-     * @var bool|null
      */
-    private ?bool $optional = null;
+    private bool|null $optional = null;
 
     /**
      * Name of the secret in the pod's namespace to use. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#secret
-     *
-     * @var string|null
      */
-    private ?string $secretName = null;
+    private string|null $secretName = null;
 
     public function __construct()
     {
         $this->items = new KeyToPathList();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getDefaultMode(): ?int
+    public function getDefaultMode(): int|null
     {
         return $this->defaultMode;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getOptional(): ?bool
+    public function getOptional(): bool|null
     {
         return $this->optional;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSecretName(): ?string
+    public function getSecretName(): string|null
     {
         return $this->secretName;
     }
@@ -104,7 +89,7 @@ class SecretVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'defaultMode' => $this->defaultMode,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class AllowedCSIDriverList implements JsonSerializable
 {
     /**
-     * @var AllowedCSIDriver[]|array
+     * @var AllowedCSIDriver[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class AllowedCSIDriverList implements JsonSerializable
     }
 
     /**
-     * @var AllowedCSIDriver[]|array $items
+     * @var AllowedCSIDriver[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class AllowedCSIDriverList implements JsonSerializable
     }
 
     /**
-     * @return AllowedCSIDriver[]|array
+     * @return AllowedCSIDriver[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class AllowedCSIDriverList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

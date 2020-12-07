@@ -44,7 +44,7 @@ class Policy implements JsonSerializable
         return $this->stages;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'level' => $this->level,

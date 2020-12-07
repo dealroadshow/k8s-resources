@@ -3,7 +3,6 @@
 namespace Dealroadshow\K8S\Data;
 
 use Dealroadshow\K8S\Data\Collection\HTTPHeaderList;
-use Dealroadshow\K8S\ValueObject\IntOrString;
 use JsonSerializable;
 
 /**
@@ -14,10 +13,8 @@ class HTTPGetAction implements JsonSerializable
     /**
      * Host name to connect to, defaults to the pod IP. You probably want to set "Host"
      * in httpHeaders instead.
-     *
-     * @var string|null
      */
-    private ?string $host = null;
+    private string|null $host = null;
 
     /**
      * Custom headers to set in the request. HTTP allows repeated headers.
@@ -26,55 +23,42 @@ class HTTPGetAction implements JsonSerializable
 
     /**
      * Path to access on the HTTP server.
-     *
-     * @var string|null
      */
-    private ?string $path = null;
+    private string|null $path = null;
 
     /**
      * Name or number of the port to access on the container. Number must be in the
      * range 1 to 65535. Name must be an IANA_SVC_NAME.
      */
-    private IntOrString $port;
+    private string|int $port;
 
     /**
      * Scheme to use for connecting to the host. Defaults to HTTP.
-     *
-     * @var string|null
      */
-    private ?string $scheme = null;
+    private string|null $scheme = null;
 
-    public function __construct(IntOrString $port)
+    public function __construct(string|int $port)
     {
         $this->httpHeaders = new HTTPHeaderList();
         $this->port = $port;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHost(): ?string
+    public function getHost(): string|null
     {
         return $this->host;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPath(): ?string
+    public function getPath(): string|null
     {
         return $this->path;
     }
 
-    public function getPort(): IntOrString
+    public function getPort(): string|int
     {
         return $this->port;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getScheme(): ?string
+    public function getScheme(): string|null
     {
         return $this->scheme;
     }
@@ -98,7 +82,7 @@ class HTTPGetAction implements JsonSerializable
         return $this;
     }
 
-    public function setPort(IntOrString $port): self
+    public function setPort(string|int $port): self
     {
         $this->port = $port;
 
@@ -112,7 +96,7 @@ class HTTPGetAction implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'host' => $this->host,

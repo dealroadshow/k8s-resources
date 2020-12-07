@@ -43,7 +43,7 @@ class Binding implements APIResourceInterface
         return $this->target;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

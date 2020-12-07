@@ -14,7 +14,7 @@ class LimitRangeList implements APIResourceListInterface
     const KIND = 'LimitRangeList';
 
     /**
-     * @var LimitRange[]|array
+     * @var LimitRange[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class LimitRangeList implements APIResourceListInterface
     }
 
     /**
-     * @var LimitRange[]|array $items
+     * @var LimitRange[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class LimitRangeList implements APIResourceListInterface
     }
 
     /**
-     * @return LimitRange[]|array
+     * @return LimitRange[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class LimitRangeList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

@@ -42,7 +42,7 @@ class ValidatingWebhookConfiguration implements APIResourceInterface
         return $this->webhooks;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

@@ -11,10 +11,8 @@ class CustomResourceColumnDefinition implements JsonSerializable
 {
     /**
      * description is a human readable description of this column.
-     *
-     * @var string|null
      */
-    private ?string $description = null;
+    private string|null $description = null;
 
     /**
      * format is an optional OpenAPI type definition for this column. The 'name' format
@@ -22,10 +20,8 @@ class CustomResourceColumnDefinition implements JsonSerializable
      * column is the resource name. See
      * https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md#data-types
      * for details.
-     *
-     * @var string|null
      */
-    private ?string $format = null;
+    private string|null $format = null;
 
     /**
      * jsonPath is a simple JSON path (i.e. with array notation) which is evaluated
@@ -42,10 +38,8 @@ class CustomResourceColumnDefinition implements JsonSerializable
      * priority is an integer defining the relative importance of this column compared
      * to others. Lower numbers are considered higher priority. Columns that may be
      * omitted in limited space scenarios should be given a priority greater than 0.
-     *
-     * @var int|null
      */
-    private ?int $priority = null;
+    private int|null $priority = null;
 
     /**
      * type is an OpenAPI type definition for this column. See
@@ -61,18 +55,12 @@ class CustomResourceColumnDefinition implements JsonSerializable
         $this->type = $type;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDescription(): ?string
+    public function getDescription(): string|null
     {
         return $this->description;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFormat(): ?string
+    public function getFormat(): string|null
     {
         return $this->format;
     }
@@ -87,10 +75,7 @@ class CustomResourceColumnDefinition implements JsonSerializable
         return $this->name;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getPriority(): ?int
+    public function getPriority(): int|null
     {
         return $this->priority;
     }
@@ -142,7 +127,7 @@ class CustomResourceColumnDefinition implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'description' => $this->description,

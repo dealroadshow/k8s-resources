@@ -17,10 +17,8 @@ class PriorityClass implements APIResourceInterface
     /**
      * description is an arbitrary string that usually provides guidelines on when this
      * priority class should be used.
-     *
-     * @var string|null
      */
-    private ?string $description = null;
+    private string|null $description = null;
 
     /**
      * globalDefault specifies whether this PriorityClass should be considered as the
@@ -29,10 +27,8 @@ class PriorityClass implements APIResourceInterface
      * PriorityClasses exists with their `globalDefault` field set to true, the
      * smallest value of such global default PriorityClasses will be used as the
      * default priority.
-     *
-     * @var bool|null
      */
-    private ?bool $globalDefault = null;
+    private bool|null $globalDefault = null;
 
     /**
      * Standard object's metadata. More info:
@@ -45,10 +41,8 @@ class PriorityClass implements APIResourceInterface
      * Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. This
      * field is alpha-level and is only honored by servers that enable the
      * NonPreemptingPriority feature.
-     *
-     * @var string|null
      */
-    private ?string $preemptionPolicy = null;
+    private string|null $preemptionPolicy = null;
 
     /**
      * The value of this priority class. This is the actual priority that pods receive
@@ -62,26 +56,17 @@ class PriorityClass implements APIResourceInterface
         $this->value = $value;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getDescription(): ?string
+    public function getDescription(): string|null
     {
         return $this->description;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getGlobalDefault(): ?bool
+    public function getGlobalDefault(): bool|null
     {
         return $this->globalDefault;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPreemptionPolicy(): ?string
+    public function getPreemptionPolicy(): string|null
     {
         return $this->preemptionPolicy;
     }
@@ -124,7 +109,7 @@ class PriorityClass implements APIResourceInterface
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

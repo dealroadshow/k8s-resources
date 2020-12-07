@@ -45,7 +45,7 @@ class TopologySelectorLabelRequirement implements JsonSerializable
         return $this->values;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'key' => $this->key,

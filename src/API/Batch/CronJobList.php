@@ -14,7 +14,7 @@ class CronJobList implements APIResourceListInterface
     const KIND = 'CronJobList';
 
     /**
-     * @var CronJob[]|array
+     * @var CronJob[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class CronJobList implements APIResourceListInterface
     }
 
     /**
-     * @var CronJob[]|array $items
+     * @var CronJob[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class CronJobList implements APIResourceListInterface
     }
 
     /**
-     * @return CronJob[]|array
+     * @return CronJob[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class CronJobList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

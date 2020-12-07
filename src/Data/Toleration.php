@@ -13,87 +13,62 @@ class Toleration implements JsonSerializable
     /**
      * Effect indicates the taint effect to match. Empty means match all taint effects.
      * When specified, allowed values are NoSchedule, PreferNoSchedule and NoExecute.
-     *
-     * @var string|null
      */
-    private ?string $effect = null;
+    private string|null $effect = null;
 
     /**
      * Key is the taint key that the toleration applies to. Empty means match all taint
      * keys. If the key is empty, operator must be Exists; this combination means to
      * match all values and all keys.
-     *
-     * @var string|null
      */
-    private ?string $key = null;
+    private string|null $key = null;
 
     /**
      * Operator represents a key's relationship to the value. Valid operators are
      * Exists and Equal. Defaults to Equal. Exists is equivalent to wildcard for value,
      * so that a pod can tolerate all taints of a particular category.
-     *
-     * @var string|null
      */
-    private ?string $operator = null;
+    private string|null $operator = null;
 
     /**
      * TolerationSeconds represents the period of time the toleration (which must be of
      * effect NoExecute, otherwise this field is ignored) tolerates the taint. By
      * default, it is not set, which means tolerate the taint forever (do not evict).
      * Zero and negative values will be treated as 0 (evict immediately) by the system.
-     *
-     * @var int|null
      */
-    private ?int $tolerationSeconds = null;
+    private int|null $tolerationSeconds = null;
 
     /**
      * Value is the taint value the toleration matches to. If the operator is Exists,
      * the value should be empty, otherwise just a regular string.
-     *
-     * @var string|null
      */
-    private ?string $value = null;
+    private string|null $value = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getEffect(): ?string
+    public function getEffect(): string|null
     {
         return $this->effect;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getKey(): ?string
+    public function getKey(): string|null
     {
         return $this->key;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getOperator(): ?string
+    public function getOperator(): string|null
     {
         return $this->operator;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTolerationSeconds(): ?int
+    public function getTolerationSeconds(): int|null
     {
         return $this->tolerationSeconds;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getValue(): ?string
+    public function getValue(): string|null
     {
         return $this->value;
     }
@@ -133,7 +108,7 @@ class Toleration implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'effect' => $this->effect,

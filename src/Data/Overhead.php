@@ -2,7 +2,7 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\Data\Collection\QuantityMap;
+use Dealroadshow\K8S\Data\Collection\StringOrFloatMap;
 use JsonSerializable;
 
 /**
@@ -14,19 +14,19 @@ class Overhead implements JsonSerializable
     /**
      * PodFixed represents the fixed resource overhead associated with running a pod.
      */
-    private QuantityMap $podFixed;
+    private StringOrFloatMap $podFixed;
 
     public function __construct()
     {
-        $this->podFixed = new QuantityMap();
+        $this->podFixed = new StringOrFloatMap();
     }
 
-    public function podFixed(): QuantityMap
+    public function podFixed(): StringOrFloatMap
     {
         return $this->podFixed;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'podFixed' => $this->podFixed,

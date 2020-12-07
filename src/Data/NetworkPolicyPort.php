@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\IntOrString;
 use JsonSerializable;
 
 /**
@@ -13,40 +12,30 @@ class NetworkPolicyPort implements JsonSerializable
     /**
      * The port on the given protocol. This can either be a numerical or named port on
      * a pod. If this field is not provided, this matches all port names and numbers.
-     *
-     * @var IntOrString|null
      */
-    private ?IntOrString $port = null;
+    private string|int|null $port = null;
 
     /**
      * The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified,
      * this field defaults to TCP.
-     *
-     * @var string|null
      */
-    private ?string $protocol = null;
+    private string|null $protocol = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return IntOrString|null
-     */
-    public function getPort(): ?IntOrString
+    public function getPort(): string|int|null
     {
         return $this->port;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getProtocol(): ?string
+    public function getProtocol(): string|null
     {
         return $this->protocol;
     }
 
-    public function setPort(IntOrString $port): self
+    public function setPort(string|int $port): self
     {
         $this->port = $port;
 
@@ -60,7 +49,7 @@ class NetworkPolicyPort implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'port' => $this->port,

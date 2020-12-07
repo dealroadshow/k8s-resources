@@ -11,10 +11,8 @@ class ObjectFieldSelector implements JsonSerializable
 {
     /**
      * Version of the schema the FieldPath is written in terms of, defaults to "v1".
-     *
-     * @var string|null
      */
-    private ?string $apiVersion = null;
+    private string|null $apiVersion = null;
 
     /**
      * Path of the field to select in the specified API version.
@@ -26,10 +24,7 @@ class ObjectFieldSelector implements JsonSerializable
         $this->fieldPath = $fieldPath;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getApiVersion(): ?string
+    public function getApiVersion(): string|null
     {
         return $this->apiVersion;
     }
@@ -53,7 +48,7 @@ class ObjectFieldSelector implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => $this->apiVersion,

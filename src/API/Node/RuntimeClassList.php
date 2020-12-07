@@ -14,7 +14,7 @@ class RuntimeClassList implements APIResourceListInterface
     const KIND = 'RuntimeClassList';
 
     /**
-     * @var RuntimeClass[]|array
+     * @var RuntimeClass[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class RuntimeClassList implements APIResourceListInterface
     }
 
     /**
-     * @var RuntimeClass[]|array $items
+     * @var RuntimeClass[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class RuntimeClassList implements APIResourceListInterface
     }
 
     /**
-     * @return RuntimeClass[]|array
+     * @return RuntimeClass[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class RuntimeClassList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

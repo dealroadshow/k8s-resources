@@ -8,7 +8,7 @@ use JsonSerializable;
 class HostPortRangeList implements JsonSerializable
 {
     /**
-     * @var HostPortRange[]|array
+     * @var HostPortRange[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class HostPortRangeList implements JsonSerializable
     }
 
     /**
-     * @var HostPortRange[]|array $items
+     * @var HostPortRange[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class HostPortRangeList implements JsonSerializable
     }
 
     /**
-     * @return HostPortRange[]|array
+     * @return HostPortRange[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class HostPortRangeList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

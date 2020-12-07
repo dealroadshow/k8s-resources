@@ -17,17 +17,13 @@ class SecretKeySelector implements JsonSerializable
     /**
      * Name of the referent. More info:
      * https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * Specify whether the Secret or its key must be defined
-     *
-     * @var bool|null
      */
-    private ?bool $optional = null;
+    private bool|null $optional = null;
 
     public function __construct(string $key)
     {
@@ -39,18 +35,12 @@ class SecretKeySelector implements JsonSerializable
         return $this->key;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getOptional(): ?bool
+    public function getOptional(): bool|null
     {
         return $this->optional;
     }
@@ -76,7 +66,7 @@ class SecretKeySelector implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'key' => $this->key,

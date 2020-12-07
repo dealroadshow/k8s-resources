@@ -38,7 +38,7 @@ class SelfSubjectAccessReviewSpec implements JsonSerializable
         return $this->resourceAttributes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'nonResourceAttributes' => $this->nonResourceAttributes,

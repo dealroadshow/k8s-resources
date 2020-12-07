@@ -14,7 +14,7 @@ class ResourceQuotaList implements APIResourceListInterface
     const KIND = 'ResourceQuotaList';
 
     /**
-     * @var ResourceQuota[]|array
+     * @var ResourceQuota[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class ResourceQuotaList implements APIResourceListInterface
     }
 
     /**
-     * @var ResourceQuota[]|array $items
+     * @var ResourceQuota[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class ResourceQuotaList implements APIResourceListInterface
     }
 
     /**
-     * @return ResourceQuota[]|array
+     * @return ResourceQuota[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class ResourceQuotaList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

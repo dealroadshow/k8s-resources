@@ -11,34 +11,24 @@ class EventSource implements JsonSerializable
 {
     /**
      * Component from which the event is generated.
-     *
-     * @var string|null
      */
-    private ?string $component = null;
+    private string|null $component = null;
 
     /**
      * Node name on which the event is generated.
-     *
-     * @var string|null
      */
-    private ?string $host = null;
+    private string|null $host = null;
 
     public function __construct()
     {
     }
 
-    /**
-     * @return string|null
-     */
-    public function getComponent(): ?string
+    public function getComponent(): string|null
     {
         return $this->component;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHost(): ?string
+    public function getHost(): string|null
     {
         return $this->host;
     }
@@ -57,7 +47,7 @@ class EventSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'component' => $this->component,

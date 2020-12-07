@@ -13,19 +13,15 @@ class ReplicaSetSpec implements JsonSerializable
      * Minimum number of seconds for which a newly created pod should be ready without
      * any of its container crashing, for it to be considered available. Defaults to 0
      * (pod will be considered available as soon as it is ready)
-     *
-     * @var int|null
      */
-    private ?int $minReadySeconds = null;
+    private int|null $minReadySeconds = null;
 
     /**
      * Replicas is the number of desired replicas. This is a pointer to distinguish
      * between explicit zero and unspecified. Defaults to 1. More info:
      * https://kubernetes.io/docs/concepts/workloads/controllers/replicationcontroller/#what-is-a-replicationcontroller
-     *
-     * @var int|null
      */
-    private ?int $replicas = null;
+    private int|null $replicas = null;
 
     /**
      * Selector is a label query over pods that should match the replica count. Label
@@ -48,18 +44,12 @@ class ReplicaSetSpec implements JsonSerializable
         $this->template = new PodTemplateSpec();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getMinReadySeconds(): ?int
+    public function getMinReadySeconds(): int|null
     {
         return $this->minReadySeconds;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getReplicas(): ?int
+    public function getReplicas(): int|null
     {
         return $this->replicas;
     }
@@ -88,7 +78,7 @@ class ReplicaSetSpec implements JsonSerializable
         return $this->template;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'minReadySeconds' => $this->minReadySeconds,

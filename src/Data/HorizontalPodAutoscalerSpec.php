@@ -21,10 +21,8 @@ class HorizontalPodAutoscalerSpec implements JsonSerializable
      * 0 if the alpha feature gate HPAScaleToZero is enabled and at least one Object or
      * External metric is configured.  Scaling is active as long as at least one metric
      * value is available.
-     *
-     * @var int|null
      */
-    private ?int $minReplicas = null;
+    private int|null $minReplicas = null;
 
     /**
      * reference to scaled resource; horizontal pod autoscaler will learn the current
@@ -36,10 +34,8 @@ class HorizontalPodAutoscalerSpec implements JsonSerializable
     /**
      * target average CPU utilization (represented as a percentage of requested CPU)
      * over all the pods; if not specified the default autoscaling policy will be used.
-     *
-     * @var int|null
      */
-    private ?int $targetCPUUtilizationPercentage = null;
+    private int|null $targetCPUUtilizationPercentage = null;
 
     public function __construct(int $maxReplicas, CrossVersionObjectReference $scaleTargetRef)
     {
@@ -52,10 +48,7 @@ class HorizontalPodAutoscalerSpec implements JsonSerializable
         return $this->maxReplicas;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getMinReplicas(): ?int
+    public function getMinReplicas(): int|null
     {
         return $this->minReplicas;
     }
@@ -65,10 +58,7 @@ class HorizontalPodAutoscalerSpec implements JsonSerializable
         return $this->scaleTargetRef;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getTargetCPUUtilizationPercentage(): ?int
+    public function getTargetCPUUtilizationPercentage(): int|null
     {
         return $this->targetCPUUtilizationPercentage;
     }
@@ -101,7 +91,7 @@ class HorizontalPodAutoscalerSpec implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'maxReplicas' => $this->maxReplicas,

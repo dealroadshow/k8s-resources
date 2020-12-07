@@ -41,7 +41,7 @@ class ComponentStatus implements APIResourceInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

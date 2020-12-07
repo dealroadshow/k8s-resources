@@ -13,10 +13,8 @@ class AzureFilePersistentVolumeSource implements JsonSerializable
     /**
      * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in
      * VolumeMounts.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * the name of secret that contains Azure Storage Account Name and Key
@@ -26,10 +24,8 @@ class AzureFilePersistentVolumeSource implements JsonSerializable
     /**
      * the namespace of the secret that contains Azure Storage Account Name and Key
      * default is the same as the Pod
-     *
-     * @var string|null
      */
-    private ?string $secretNamespace = null;
+    private string|null $secretNamespace = null;
 
     /**
      * Share Name
@@ -42,10 +38,7 @@ class AzureFilePersistentVolumeSource implements JsonSerializable
         $this->shareName = $shareName;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -55,10 +48,7 @@ class AzureFilePersistentVolumeSource implements JsonSerializable
         return $this->secretName;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getSecretNamespace(): ?string
+    public function getSecretNamespace(): string|null
     {
         return $this->secretNamespace;
     }
@@ -96,7 +86,7 @@ class AzureFilePersistentVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'readOnly' => $this->readOnly,

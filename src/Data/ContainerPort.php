@@ -17,35 +17,27 @@ class ContainerPort implements JsonSerializable
 
     /**
      * What host IP to bind the external port to.
-     *
-     * @var string|null
      */
-    private ?string $hostIP = null;
+    private string|null $hostIP = null;
 
     /**
      * Number of port to expose on the host. If specified, this must be a valid port
      * number, 0 < x < 65536. If HostNetwork is specified, this must match
      * ContainerPort. Most containers do not need this.
-     *
-     * @var int|null
      */
-    private ?int $hostPort = null;
+    private int|null $hostPort = null;
 
     /**
      * If specified, this must be an IANA_SVC_NAME and unique within the pod. Each
      * named port in a pod must have a unique name. Name for the port that can be
      * referred to by services.
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * Protocol for port. Must be UDP, TCP, or SCTP. Defaults to "TCP".
-     *
-     * @var string|null
      */
-    private ?string $protocol = null;
+    private string|null $protocol = null;
 
     public function __construct(int $containerPort)
     {
@@ -57,34 +49,22 @@ class ContainerPort implements JsonSerializable
         return $this->containerPort;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHostIP(): ?string
+    public function getHostIP(): string|null
     {
         return $this->hostIP;
     }
 
-    /**
-     * @return int|null
-     */
-    public function getHostPort(): ?int
+    public function getHostPort(): int|null
     {
         return $this->hostPort;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getProtocol(): ?string
+    public function getProtocol(): string|null
     {
         return $this->protocol;
     }
@@ -124,7 +104,7 @@ class ContainerPort implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'containerPort' => $this->containerPort,

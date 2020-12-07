@@ -18,20 +18,15 @@ class DeploymentStrategy implements JsonSerializable
     /**
      * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is
      * RollingUpdate.
-     *
-     * @var string|null
      */
-    private ?string $type = null;
+    private string|null $type = null;
 
     public function __construct()
     {
         $this->rollingUpdate = new RollingUpdateDeployment();
     }
 
-    /**
-     * @return string|null
-     */
-    public function getType(): ?string
+    public function getType(): string|null
     {
         return $this->type;
     }
@@ -48,7 +43,7 @@ class DeploymentStrategy implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'rollingUpdate' => $this->rollingUpdate,

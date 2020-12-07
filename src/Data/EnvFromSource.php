@@ -17,10 +17,8 @@ class EnvFromSource implements JsonSerializable
     /**
      * An optional identifier to prepend to each key in the ConfigMap. Must be a
      * C_IDENTIFIER.
-     *
-     * @var string|null
      */
-    private ?string $prefix = null;
+    private string|null $prefix = null;
 
     /**
      * The Secret to select from
@@ -38,10 +36,7 @@ class EnvFromSource implements JsonSerializable
         return $this->configMapRef;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getPrefix(): ?string
+    public function getPrefix(): string|null
     {
         return $this->prefix;
     }
@@ -58,7 +53,7 @@ class EnvFromSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'configMapRef' => $this->configMapRef,

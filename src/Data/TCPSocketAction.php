@@ -2,7 +2,6 @@
 
 namespace Dealroadshow\K8S\Data;
 
-use Dealroadshow\K8S\ValueObject\IntOrString;
 use JsonSerializable;
 
 /**
@@ -12,31 +11,26 @@ class TCPSocketAction implements JsonSerializable
 {
     /**
      * Optional: Host name to connect to, defaults to the pod IP.
-     *
-     * @var string|null
      */
-    private ?string $host = null;
+    private string|null $host = null;
 
     /**
      * Number or name of the port to access on the container. Number must be in the
      * range 1 to 65535. Name must be an IANA_SVC_NAME.
      */
-    private IntOrString $port;
+    private string|int $port;
 
-    public function __construct(IntOrString $port)
+    public function __construct(string|int $port)
     {
         $this->port = $port;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getHost(): ?string
+    public function getHost(): string|null
     {
         return $this->host;
     }
 
-    public function getPort(): IntOrString
+    public function getPort(): string|int
     {
         return $this->port;
     }
@@ -48,14 +42,14 @@ class TCPSocketAction implements JsonSerializable
         return $this;
     }
 
-    public function setPort(IntOrString $port): self
+    public function setPort(string|int $port): self
     {
         $this->port = $port;
 
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'host' => $this->host,

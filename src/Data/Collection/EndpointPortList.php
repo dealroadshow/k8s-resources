@@ -8,7 +8,7 @@ use JsonSerializable;
 class EndpointPortList implements JsonSerializable
 {
     /**
-     * @var EndpointPort[]|array
+     * @var EndpointPort[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class EndpointPortList implements JsonSerializable
     }
 
     /**
-     * @var EndpointPort[]|array $items
+     * @var EndpointPort[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class EndpointPortList implements JsonSerializable
     }
 
     /**
-     * @return EndpointPort[]|array
+     * @return EndpointPort[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class EndpointPortList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -20,10 +20,8 @@ class ConfigMapVolumeSource implements JsonSerializable
      * 0 and 0777. Defaults to 0644. Directories within the path are not affected by
      * this setting. This might be in conflict with other options that affect the file
      * mode, like fsGroup, and the result can be other mode bits set.
-     *
-     * @var int|null
      */
-    private ?int $defaultMode = null;
+    private int|null $defaultMode = null;
 
     /**
      * If unspecified, each key-value pair in the Data field of the referenced
@@ -39,43 +37,30 @@ class ConfigMapVolumeSource implements JsonSerializable
     /**
      * Name of the referent. More info:
      * https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
-     *
-     * @var string|null
      */
-    private ?string $name = null;
+    private string|null $name = null;
 
     /**
      * Specify whether the ConfigMap or its keys must be defined
-     *
-     * @var bool|null
      */
-    private ?bool $optional = null;
+    private bool|null $optional = null;
 
     public function __construct()
     {
         $this->items = new KeyToPathList();
     }
 
-    /**
-     * @return int|null
-     */
-    public function getDefaultMode(): ?int
+    public function getDefaultMode(): int|null
     {
         return $this->defaultMode;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getName(): ?string
+    public function getName(): string|null
     {
         return $this->name;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getOptional(): ?bool
+    public function getOptional(): bool|null
     {
         return $this->optional;
     }
@@ -106,7 +91,7 @@ class ConfigMapVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'defaultMode' => $this->defaultMode,

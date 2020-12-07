@@ -15,10 +15,8 @@ class Subject implements JsonSerializable
      * APIGroup holds the API group of the referenced subject. Defaults to "" for
      * ServiceAccount subjects. Defaults to "rbac.authorization.k8s.io" for User and
      * Group subjects.
-     *
-     * @var string|null
      */
-    private ?string $apiGroup = null;
+    private string|null $apiGroup = null;
 
     /**
      * Kind of object being referenced. Values defined by this API group are "User",
@@ -36,10 +34,8 @@ class Subject implements JsonSerializable
      * Namespace of the referenced object.  If the object kind is non-namespace, such
      * as "User" or "Group", and this value is not empty the Authorizer should report
      * an error.
-     *
-     * @var string|null
      */
-    private ?string $namespace = null;
+    private string|null $namespace = null;
 
     public function __construct(string $kind, string $name)
     {
@@ -47,10 +43,7 @@ class Subject implements JsonSerializable
         $this->name = $name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getApiGroup(): ?string
+    public function getApiGroup(): string|null
     {
         return $this->apiGroup;
     }
@@ -65,10 +58,7 @@ class Subject implements JsonSerializable
         return $this->name;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getNamespace(): ?string
+    public function getNamespace(): string|null
     {
         return $this->namespace;
     }
@@ -101,7 +91,7 @@ class Subject implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiGroup' => $this->apiGroup,

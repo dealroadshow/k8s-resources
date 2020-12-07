@@ -32,10 +32,8 @@ class CertificateSigningRequestSpec implements JsonSerializable
 
     /**
      * UID information about the requesting user. See user.Info interface for details.
-     *
-     * @var string|null
      */
-    private ?string $uid = null;
+    private string|null $uid = null;
 
     /**
      * allowedUsages specifies a set of usage contexts the key will be valid for. See:
@@ -46,10 +44,8 @@ class CertificateSigningRequestSpec implements JsonSerializable
 
     /**
      * Information about the requesting user. See user.Info interface for details.
-     *
-     * @var string|null
      */
-    private ?string $username = null;
+    private string|null $username = null;
 
     public function __construct(string $request)
     {
@@ -69,18 +65,12 @@ class CertificateSigningRequestSpec implements JsonSerializable
         return $this->request;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUid(): ?string
+    public function getUid(): string|null
     {
         return $this->uid;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getUsername(): ?string
+    public function getUsername(): string|null
     {
         return $this->username;
     }
@@ -116,7 +106,7 @@ class CertificateSigningRequestSpec implements JsonSerializable
         return $this->usages;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'extra' => $this->extra,

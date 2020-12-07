@@ -8,7 +8,7 @@ use JsonSerializable;
 class KeyToPathList implements JsonSerializable
 {
     /**
-     * @var KeyToPath[]|array
+     * @var KeyToPath[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class KeyToPathList implements JsonSerializable
     }
 
     /**
-     * @var KeyToPath[]|array $items
+     * @var KeyToPath[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class KeyToPathList implements JsonSerializable
     }
 
     /**
-     * @return KeyToPath[]|array
+     * @return KeyToPath[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class KeyToPathList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

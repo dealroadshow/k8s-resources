@@ -26,7 +26,7 @@ class ScopeSelector implements JsonSerializable
         return $this->matchExpressions;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'matchExpressions' => $this->matchExpressions,

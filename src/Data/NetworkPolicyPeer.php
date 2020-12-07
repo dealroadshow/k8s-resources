@@ -13,10 +13,8 @@ class NetworkPolicyPeer implements JsonSerializable
     /**
      * IPBlock defines policy on a particular IPBlock. If this field is set then
      * neither of the other fields can be.
-     *
-     * @var IPBlock|null
      */
-    private ?IPBlock $ipBlock = null;
+    private IPBlock|null $ipBlock = null;
 
     /**
      * Selects Namespaces using cluster-scoped labels. This field follows standard
@@ -45,10 +43,7 @@ class NetworkPolicyPeer implements JsonSerializable
         $this->podSelector = new LabelSelector();
     }
 
-    /**
-     * @return IPBlock|null
-     */
-    public function getIpBlock(): ?IPBlock
+    public function getIpBlock(): IPBlock|null
     {
         return $this->ipBlock;
     }
@@ -70,7 +65,7 @@ class NetworkPolicyPeer implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'ipBlock' => $this->ipBlock,

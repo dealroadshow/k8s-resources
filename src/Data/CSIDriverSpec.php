@@ -20,10 +20,8 @@ class CSIDriverSpec implements JsonSerializable
      * is complete. If the CSIDriverRegistry feature gate is enabled and the value is
      * specified to false, the attach operation will be skipped. Otherwise the attach
      * operation will be called.
-     *
-     * @var bool|null
      */
-    private ?bool $attachRequired = null;
+    private bool|null $attachRequired = null;
 
     /**
      * If set to true, podInfoOnMount indicates this CSI volume driver requires
@@ -46,10 +44,8 @@ class CSIDriverSpec implements JsonSerializable
      * this field. As Kubernetes 1.15 doesn't support this field, drivers can only
      * support one mode when deployed on such a cluster and the deployment determines
      * which mode that is, for example via a command line parameter of the driver.
-     *
-     * @var bool|null
      */
-    private ?bool $podInfoOnMount = null;
+    private bool|null $podInfoOnMount = null;
 
     /**
      * VolumeLifecycleModes defines what kind of volumes this CSI volume driver
@@ -70,18 +66,12 @@ class CSIDriverSpec implements JsonSerializable
         $this->volumeLifecycleModes = new StringList();
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getAttachRequired(): ?bool
+    public function getAttachRequired(): bool|null
     {
         return $this->attachRequired;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getPodInfoOnMount(): ?bool
+    public function getPodInfoOnMount(): bool|null
     {
         return $this->podInfoOnMount;
     }
@@ -105,7 +95,7 @@ class CSIDriverSpec implements JsonSerializable
         return $this->volumeLifecycleModes;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'attachRequired' => $this->attachRequired,

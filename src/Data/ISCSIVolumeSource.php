@@ -13,36 +13,28 @@ class ISCSIVolumeSource implements JsonSerializable
 {
     /**
      * whether support iSCSI Discovery CHAP authentication
-     *
-     * @var bool|null
      */
-    private ?bool $chapAuthDiscovery = null;
+    private bool|null $chapAuthDiscovery = null;
 
     /**
      * whether support iSCSI Session CHAP authentication
-     *
-     * @var bool|null
      */
-    private ?bool $chapAuthSession = null;
+    private bool|null $chapAuthSession = null;
 
     /**
      * Filesystem type of the volume that you want to mount. Tip: Ensure that the
      * filesystem type is supported by the host operating system. Examples: "ext4",
      * "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#iscsi
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * Custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface
      * simultaneously, new iSCSI interface <target portal>:<volume name> will be
      * created for the connection.
-     *
-     * @var string|null
      */
-    private ?string $initiatorName = null;
+    private string|null $initiatorName = null;
 
     /**
      * Target iSCSI Qualified Name.
@@ -51,10 +43,8 @@ class ISCSIVolumeSource implements JsonSerializable
 
     /**
      * iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default' (tcp).
-     *
-     * @var string|null
      */
-    private ?string $iscsiInterface = null;
+    private string|null $iscsiInterface = null;
 
     /**
      * iSCSI Target Lun number.
@@ -70,10 +60,8 @@ class ISCSIVolumeSource implements JsonSerializable
     /**
      * ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
      * false.
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * CHAP Secret for iSCSI target and initiator authentication
@@ -95,34 +83,22 @@ class ISCSIVolumeSource implements JsonSerializable
         $this->targetPortal = $targetPortal;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getChapAuthDiscovery(): ?bool
+    public function getChapAuthDiscovery(): bool|null
     {
         return $this->chapAuthDiscovery;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getChapAuthSession(): ?bool
+    public function getChapAuthSession(): bool|null
     {
         return $this->chapAuthSession;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getInitiatorName(): ?string
+    public function getInitiatorName(): string|null
     {
         return $this->initiatorName;
     }
@@ -132,10 +108,7 @@ class ISCSIVolumeSource implements JsonSerializable
         return $this->iqn;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getIscsiInterface(): ?string
+    public function getIscsiInterface(): string|null
     {
         return $this->iscsiInterface;
     }
@@ -145,10 +118,7 @@ class ISCSIVolumeSource implements JsonSerializable
         return $this->lun;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -231,7 +201,7 @@ class ISCSIVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'chapAuthDiscovery' => $this->chapAuthDiscovery,

@@ -14,7 +14,7 @@ class APIServiceList implements APIResourceListInterface
     const KIND = 'APIServiceList';
 
     /**
-     * @var APIService[]|array
+     * @var APIService[]
      */
     private array $items = [];
     private ListMeta $metadata;
@@ -33,7 +33,7 @@ class APIServiceList implements APIResourceListInterface
     }
 
     /**
-     * @var APIService[]|array $items
+     * @var APIService[] $items
      *
      * @return self
      */
@@ -45,7 +45,7 @@ class APIServiceList implements APIResourceListInterface
     }
 
     /**
-     * @return APIService[]|array
+     * @return APIService[]
      */
     public function all(): array
     {
@@ -64,7 +64,7 @@ class APIServiceList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

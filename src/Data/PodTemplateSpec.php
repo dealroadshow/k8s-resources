@@ -38,7 +38,7 @@ class PodTemplateSpec implements JsonSerializable
         return $this->spec;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'metadata' => $this->metadata,

@@ -26,7 +26,7 @@ class DownwardAPIProjection implements JsonSerializable
         return $this->items;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'items' => $this->items,

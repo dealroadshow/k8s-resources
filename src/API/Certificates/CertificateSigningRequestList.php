@@ -11,7 +11,7 @@ class CertificateSigningRequestList implements APIResourceListInterface
     const KIND = 'CertificateSigningRequestList';
 
     /**
-     * @var CertificateSigningRequest[]|array
+     * @var CertificateSigningRequest[]
      */
     private array $items = [];
     private ListMeta $metadata;
@@ -30,7 +30,7 @@ class CertificateSigningRequestList implements APIResourceListInterface
     }
 
     /**
-     * @var CertificateSigningRequest[]|array $items
+     * @var CertificateSigningRequest[] $items
      *
      * @return self
      */
@@ -42,7 +42,7 @@ class CertificateSigningRequestList implements APIResourceListInterface
     }
 
     /**
-     * @return CertificateSigningRequest[]|array
+     * @return CertificateSigningRequest[]
      */
     public function all(): array
     {
@@ -61,7 +61,7 @@ class CertificateSigningRequestList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,

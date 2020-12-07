@@ -47,7 +47,7 @@ class NetworkPolicyEgressRule implements JsonSerializable
         return $this->to;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'ports' => $this->ports,

@@ -8,7 +8,7 @@ use JsonSerializable;
 class ContainerList implements JsonSerializable
 {
     /**
-     * @var Container[]|array
+     * @var Container[]
      */
     private array $items = [];
 
@@ -25,7 +25,7 @@ class ContainerList implements JsonSerializable
     }
 
     /**
-     * @var Container[]|array $items
+     * @var Container[] $items
      *
      * @return self
      */
@@ -37,7 +37,7 @@ class ContainerList implements JsonSerializable
     }
 
     /**
-     * @return Container[]|array
+     * @return Container[]
      */
     public function all(): array
     {
@@ -51,7 +51,7 @@ class ContainerList implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->items;
     }

@@ -16,19 +16,15 @@ class CinderVolumeSource implements JsonSerializable
      * operating system. Examples: "ext4", "xfs", "ntfs". Implicitly inferred to be
      * "ext4" if unspecified. More info:
      * https://examples.k8s.io/mysql-cinder-pd/README.md
-     *
-     * @var string|null
      */
-    private ?string $fsType = null;
+    private string|null $fsType = null;
 
     /**
      * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly
      * setting in VolumeMounts. More info:
      * https://examples.k8s.io/mysql-cinder-pd/README.md
-     *
-     * @var bool|null
      */
-    private ?bool $readOnly = null;
+    private bool|null $readOnly = null;
 
     /**
      * Optional: points to a secret object containing parameters used to connect to
@@ -48,18 +44,12 @@ class CinderVolumeSource implements JsonSerializable
         $this->volumeID = $volumeID;
     }
 
-    /**
-     * @return string|null
-     */
-    public function getFsType(): ?string
+    public function getFsType(): string|null
     {
         return $this->fsType;
     }
 
-    /**
-     * @return bool|null
-     */
-    public function getReadOnly(): ?bool
+    public function getReadOnly(): bool|null
     {
         return $this->readOnly;
     }
@@ -95,7 +85,7 @@ class CinderVolumeSource implements JsonSerializable
         return $this;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'fsType' => $this->fsType,

@@ -14,7 +14,7 @@ class PriorityClassList implements APIResourceListInterface
     const KIND = 'PriorityClassList';
 
     /**
-     * @var PriorityClass[]|array
+     * @var PriorityClass[]
      */
     private array $items = [];
 
@@ -38,7 +38,7 @@ class PriorityClassList implements APIResourceListInterface
     }
 
     /**
-     * @var PriorityClass[]|array $items
+     * @var PriorityClass[] $items
      *
      * @return self
      */
@@ -50,7 +50,7 @@ class PriorityClassList implements APIResourceListInterface
     }
 
     /**
-     * @return PriorityClass[]|array
+     * @return PriorityClass[]
      */
     public function all(): array
     {
@@ -69,7 +69,7 @@ class PriorityClassList implements APIResourceListInterface
         return $this->metadata;
     }
 
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return [
             'apiVersion' => self::API_VERSION,
