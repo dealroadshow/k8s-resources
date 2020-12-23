@@ -50,6 +50,11 @@ class StringMap implements JsonSerializable
         return $this;
     }
 
+    public function count(): int
+    {
+        return count($this->items);
+    }
+
     public function get(string $name): string
     {
         return $this->items[$name];

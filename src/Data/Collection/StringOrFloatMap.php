@@ -50,6 +50,11 @@ class StringOrFloatMap implements JsonSerializable
         return $this;
     }
 
+    public function count(): int
+    {
+        return count($this->items);
+    }
+
     public function get(string $name): string|float
     {
         return $this->items[$name];

@@ -51,6 +51,11 @@ class AllowedFlexVolumeList implements JsonSerializable
         return $this;
     }
 
+    public function count(): int
+    {
+        return count($this->items);
+    }
+
     public function jsonSerialize(): array
     {
         return $this->items;

@@ -56,6 +56,11 @@ class CertificateSigningRequestList implements APIResourceListInterface
         return $this;
     }
 
+    public function count(): int
+    {
+        return count($this->items);
+    }
+
     public function metadata(): ListMeta
     {
         return $this->metadata;
