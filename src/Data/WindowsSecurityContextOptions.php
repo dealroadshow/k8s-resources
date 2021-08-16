@@ -22,17 +22,6 @@ class WindowsSecurityContextOptions implements JsonSerializable
     private string|null $gmsaCredentialSpecName = null;
 
     /**
-     * HostProcess determines if a container should be run as a 'Host Process'
-     * container. This field is alpha-level and will only be honored by components that
-     * enable the WindowsHostProcessContainers feature flag. Setting this field without
-     * the feature flag will result in errors when validating the Pod. All of a Pod's
-     * containers must have the same effective HostProcess value (it is not allowed to
-     * have a mix of HostProcess containers and non-HostProcess containers).  In
-     * addition, if HostProcess is true then HostNetwork must also be set to true.
-     */
-    private bool|null $hostProcess = null;
-
-    /**
      * The UserName in Windows to run the entrypoint of the container process. Defaults
      * to the user specified in image metadata if unspecified. May also be set in
      * PodSecurityContext. If set in both SecurityContext and PodSecurityContext, the
@@ -54,11 +43,6 @@ class WindowsSecurityContextOptions implements JsonSerializable
         return $this->gmsaCredentialSpecName;
     }
 
-    public function getHostProcess(): bool|null
-    {
-        return $this->hostProcess;
-    }
-
     public function getRunAsUserName(): string|null
     {
         return $this->runAsUserName;
@@ -78,13 +62,6 @@ class WindowsSecurityContextOptions implements JsonSerializable
         return $this;
     }
 
-    public function setHostProcess(bool $hostProcess): self
-    {
-        $this->hostProcess = $hostProcess;
-
-        return $this;
-    }
-
     public function setRunAsUserName(string $runAsUserName): self
     {
         $this->runAsUserName = $runAsUserName;
@@ -97,7 +74,6 @@ class WindowsSecurityContextOptions implements JsonSerializable
         return [
             'gmsaCredentialSpec' => $this->gmsaCredentialSpec,
             'gmsaCredentialSpecName' => $this->gmsaCredentialSpecName,
-            'hostProcess' => $this->hostProcess,
             'runAsUserName' => $this->runAsUserName,
         ];
     }

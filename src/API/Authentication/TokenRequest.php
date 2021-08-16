@@ -14,15 +14,7 @@ class TokenRequest implements APIResourceInterface
     const API_VERSION = 'authentication.k8s.io/v1';
     const KIND = 'TokenRequest';
 
-    /**
-     * Standard object's metadata. More info:
-     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
-     */
     private ObjectMeta $metadata;
-
-    /**
-     * Spec holds information about the request being evaluated
-     */
     private TokenRequestSpec $spec;
 
     public function __construct()

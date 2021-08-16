@@ -15,11 +15,10 @@ class ServiceSpec implements JsonSerializable
     /**
      * allocateLoadBalancerNodePorts defines if NodePorts will be automatically
      * allocated for services with type LoadBalancer.  Default is "true". It may be set
-     * to "false" if the cluster load-balancer does not rely on NodePorts.  If the
-     * caller requests specific NodePorts (by specifying a value), those requests will
-     * be respected, regardless of this field. This field may only be set for services
-     * with type LoadBalancer and will be cleared if the type is changed to any other
-     * type. This field is beta-level and is only honored by servers that enable the
+     * to "false" if the cluster load-balancer does not rely on NodePorts.
+     * allocateLoadBalancerNodePorts may only be set for services with type
+     * LoadBalancer and will be cleared if the type is changed to any other type. This
+     * field is alpha-level and is only honored by servers that enable the
      * ServiceLBNodePortControl feature.
      */
     private bool|null $allocateLoadBalancerNodePorts = null;
@@ -82,7 +81,7 @@ class ServiceSpec implements JsonSerializable
      * externalName is the external reference that discovery mechanisms will return as
      * an alias for this service (e.g. a DNS CNAME record). No proxying will be
      * involved.  Must be a lowercase RFC-1123 hostname
-     * (https://tools.ietf.org/html/rfc1123) and requires `type` to be "ExternalName".
+     * (https://tools.ietf.org/html/rfc1123) and requires Type to be
      */
     private string|null $externalName = null;
 
@@ -107,15 +106,6 @@ class ServiceSpec implements JsonSerializable
      * be wiped when updating a Service to no longer need it (e.g. changing type).
      */
     private int|null $healthCheckNodePort = null;
-
-    /**
-     * InternalTrafficPolicy specifies if the cluster internal traffic should be routed
-     * to all endpoints or node-local endpoints only. "Cluster" routes internal traffic
-     * to a Service to all endpoints. "Local" routes traffic to node-local endpoints
-     * only, traffic is dropped if no node-local endpoints are ready. The default value
-     * is "Cluster".
-     */
-    private string|null $internalTrafficPolicy = null;
 
     /**
      * IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this service,
@@ -151,23 +141,6 @@ class ServiceSpec implements JsonSerializable
     private string|null $ipFamilyPolicy = null;
 
     /**
-     * loadBalancerClass is the class of the load balancer implementation this Service
-     * belongs to. If specified, the value of this field must be a label-style
-     * identifier, with an optional prefix, e.g. "internal-vip" or
-     * "example.com/internal-vip". Unprefixed names are reserved for end-users. This
-     * field can only be set when the Service type is 'LoadBalancer'. If not set, the
-     * default load balancer implementation is used, today this is typically done
-     * through the cloud provider integration, but should apply for any default
-     * implementation. If set, it is assumed that a load balancer implementation is
-     * watching for Services with a matching class. Any default load balancer
-     * implementation (e.g. cloud providers) should ignore Services that set this
-     * field. This field can only be set when creating or updating a Service to type
-     * 'LoadBalancer'. Once set, it can not be changed. This field will be wiped when a
-     * service is updated to a non 'LoadBalancer' type.
-     */
-    private string|null $loadBalancerClass = null;
-
-    /**
      * Only applies to Service Type: LoadBalancer LoadBalancer will get created with
      * the IP specified in this field. This feature depends on whether the underlying
      * cloud-provider supports specifying the loadBalancerIP when a load balancer is
@@ -181,7 +154,7 @@ class ServiceSpec implements JsonSerializable
      * the cloud-provider load-balancer will be restricted to the specified client IPs.
      * This field will be ignored if the cloud-provider does not support the feature."
      * More info:
-     * https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
+     * https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
      */
     private StringList $loadBalancerSourceRanges;
 
@@ -227,6 +200,22 @@ class ServiceSpec implements JsonSerializable
     private SessionAffinityConfig $sessionAffinityConfig;
 
     /**
+     * topologyKeys is a preference-order list of topology keys which implementations
+     * of services should use to preferentially sort endpoints when accessing this
+     * Service, it can not be used at the same time as externalTrafficPolicy=Local.
+     * Topology keys must be valid label keys and at most 16 keys may be specified.
+     * Endpoints are chosen based on the first topology key with available backends. If
+     * this field is specified and all entries have no backends that match the topology
+     * of the client, the service has no backends for that client and connections
+     * should fail. The special value "*" may be used to mean "any topology". This
+     * catch-all value, if used, only makes sense as the last value in the list. If
+     * this is not specified or empty, no topology constraints will be applied. This
+     * field is alpha-level and is only honored by servers that enable the
+     * ServiceTopology feature.
+     */
+    private StringList $topologyKeys;
+
+    /**
      * type determines how the Service is exposed. Defaults to ClusterIP. Valid options
      * are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ClusterIP" allocates a
      * cluster-internal IP address for load-balancing to endpoints. Endpoints are
@@ -252,6 +241,7 @@ class ServiceSpec implements JsonSerializable
         $this->ports = new ServicePortList();
         $this->selector = new StringMap();
         $this->sessionAffinityConfig = new SessionAffinityConfig();
+        $this->topologyKeys = new StringList();
     }
 
     public function clusterIPs(): StringList
@@ -289,19 +279,9 @@ class ServiceSpec implements JsonSerializable
         return $this->healthCheckNodePort;
     }
 
-    public function getInternalTrafficPolicy(): string|null
-    {
-        return $this->internalTrafficPolicy;
-    }
-
     public function getIpFamilyPolicy(): string|null
     {
         return $this->ipFamilyPolicy;
-    }
-
-    public function getLoadBalancerClass(): string|null
-    {
-        return $this->loadBalancerClass;
     }
 
     public function getLoadBalancerIP(): string|null
@@ -384,23 +364,9 @@ class ServiceSpec implements JsonSerializable
         return $this;
     }
 
-    public function setInternalTrafficPolicy(string $internalTrafficPolicy): self
-    {
-        $this->internalTrafficPolicy = $internalTrafficPolicy;
-
-        return $this;
-    }
-
     public function setIpFamilyPolicy(string $ipFamilyPolicy): self
     {
         $this->ipFamilyPolicy = $ipFamilyPolicy;
-
-        return $this;
-    }
-
-    public function setLoadBalancerClass(string $loadBalancerClass): self
-    {
-        $this->loadBalancerClass = $loadBalancerClass;
 
         return $this;
     }
@@ -433,6 +399,11 @@ class ServiceSpec implements JsonSerializable
         return $this;
     }
 
+    public function topologyKeys(): StringList
+    {
+        return $this->topologyKeys;
+    }
+
     public function jsonSerialize(): array
     {
         return [
@@ -443,10 +414,8 @@ class ServiceSpec implements JsonSerializable
             'externalName' => $this->externalName,
             'externalTrafficPolicy' => $this->externalTrafficPolicy,
             'healthCheckNodePort' => $this->healthCheckNodePort,
-            'internalTrafficPolicy' => $this->internalTrafficPolicy,
             'ipFamilies' => $this->ipFamilies,
             'ipFamilyPolicy' => $this->ipFamilyPolicy,
-            'loadBalancerClass' => $this->loadBalancerClass,
             'loadBalancerIP' => $this->loadBalancerIP,
             'loadBalancerSourceRanges' => $this->loadBalancerSourceRanges,
             'ports' => $this->ports,
@@ -454,6 +423,7 @@ class ServiceSpec implements JsonSerializable
             'selector' => $this->selector,
             'sessionAffinity' => $this->sessionAffinity,
             'sessionAffinityConfig' => $this->sessionAffinityConfig,
+            'topologyKeys' => $this->topologyKeys,
             'type' => $this->type,
         ];
     }

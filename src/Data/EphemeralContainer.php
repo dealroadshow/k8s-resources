@@ -27,10 +27,9 @@ class EphemeralContainer implements JsonSerializable
      * Arguments to the entrypoint. The docker image's CMD is used if this is not
      * provided. Variable references $(VAR_NAME) are expanded using the container's
      * environment. If a variable cannot be resolved, the reference in the input string
-     * will be unchanged. Double $$ are reduced to a single $, which allows for
-     * escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will produce the string
-     * literal "$(VAR_NAME)". Escaped references will never be expanded, regardless of
-     * whether the variable exists or not. Cannot be updated. More info:
+     * will be unchanged. The $(VAR_NAME) syntax can be escaped with a double $$, ie:
+     * $$(VAR_NAME). Escaped references will never be expanded, regardless of whether
+     * the variable exists or not. Cannot be updated. More info:
      * https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
      */
     private StringList $args;
@@ -39,9 +38,8 @@ class EphemeralContainer implements JsonSerializable
      * Entrypoint array. Not executed within a shell. The docker image's ENTRYPOINT is
      * used if this is not provided. Variable references $(VAR_NAME) are expanded using
      * the container's environment. If a variable cannot be resolved, the reference in
-     * the input string will be unchanged. Double $$ are reduced to a single $, which
-     * allows for escaping the $(VAR_NAME) syntax: i.e. "$$(VAR_NAME)" will produce the
-     * string literal "$(VAR_NAME)". Escaped references will never be expanded,
+     * the input string will be unchanged. The $(VAR_NAME) syntax can be escaped with a
+     * double $$, ie: $$(VAR_NAME). Escaped references will never be expanded,
      * regardless of whether the variable exists or not. Cannot be updated. More info:
      * https://kubernetes.io/docs/tasks/inject-data-application/define-command-argument-container/#running-a-command-in-a-shell
      */
@@ -108,9 +106,7 @@ class EphemeralContainer implements JsonSerializable
     private ResourceRequirements $resources;
 
     /**
-     * Optional: SecurityContext defines the security options the ephemeral container
-     * should be run with. If set, the fields of SecurityContext override the
-     * equivalent fields of PodSecurityContext.
+     * SecurityContext is not allowed for ephemeral containers.
      */
     private SecurityContext $securityContext;
 

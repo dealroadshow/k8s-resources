@@ -6,8 +6,7 @@ use JsonSerializable;
 
 /**
  * ConfigMapNodeConfigSource contains the information to reference a ConfigMap as a
- * config source for the Node. This API is deprecated since 1.22:
- * https://git.k8s.io/enhancements/keps/sig-node/281-dynamic-kubelet-configuration
+ * config source for the Node.
  */
 class ConfigMapNodeConfigSource implements JsonSerializable
 {

@@ -19,8 +19,8 @@ class CronJobSpec implements JsonSerializable
     private string|null $concurrencyPolicy = null;
 
     /**
-     * The number of failed finished jobs to retain. Value must be non-negative
-     * integer. Defaults to 1.
+     * The number of failed finished jobs to retain. This is a pointer to distinguish
+     * between explicit zero and not specified. Defaults to 1.
      */
     private int|null $failedJobsHistoryLimit = null;
 
@@ -41,8 +41,8 @@ class CronJobSpec implements JsonSerializable
     private int|null $startingDeadlineSeconds = null;
 
     /**
-     * The number of successful finished jobs to retain. Value must be non-negative
-     * integer. Defaults to 3.
+     * The number of successful finished jobs to retain. This is a pointer to
+     * distinguish between explicit zero and not specified. Defaults to 3.
      */
     private int|null $successfulJobsHistoryLimit = null;
 

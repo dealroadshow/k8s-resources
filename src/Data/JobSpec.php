@@ -11,9 +11,7 @@ class JobSpec implements JsonSerializable
 {
     /**
      * Specifies the duration in seconds relative to the startTime that the job may be
-     * continuously active before the system tries to terminate it; value must be
-     * positive integer. If a Job is suspended (at creation or through an update), this
-     * timer will effectively be stopped and reset when the Job is resumed again.
+     * active before the system tries to terminate it; value must be positive integer
      */
     private int|null $activeDeadlineSeconds = null;
 
@@ -21,29 +19,6 @@ class JobSpec implements JsonSerializable
      * Specifies the number of retries before marking this job failed. Defaults to 6
      */
     private int|null $backoffLimit = null;
-
-    /**
-     * CompletionMode specifies how Pod completions are tracked. It can be `NonIndexed`
-     * (default) or `Indexed`.
-     *
-     * `NonIndexed` means that the Job is considered complete when there have been
-     * .spec.completions successfully completed Pods. Each Pod completion is homologous
-     * to each other.
-     *
-     * `Indexed` means that the Pods of a Job get an associated completion index from 0
-     * to (.spec.completions - 1), available in the annotation
-     * batch.kubernetes.io/job-completion-index. The Job is considered complete when
-     * there is one successfully completed Pod for each index. When value is `Indexed`,
-     * .spec.completions must be specified and `.spec.parallelism` must be less than or
-     * equal to 10^5. In addition, The Pod name takes the form
-     * `$(job-name)-$(index)-$(random-string)`, the Pod hostname takes the form
-     * `$(job-name)-$(index)`.
-     *
-     * This field is beta-level. More completion modes can be added in the future. If
-     * the Job controller observes a mode that it doesn't recognize, the controller
-     * skips updates for the Job.
-     */
-    private string|null $completionMode = null;
 
     /**
      * Specifies the desired number of successfully finished pods the job should be run
@@ -85,19 +60,6 @@ class JobSpec implements JsonSerializable
     private LabelSelector $selector;
 
     /**
-     * Suspend specifies whether the Job controller should create Pods or not. If a Job
-     * is created with suspend set to true, no Pods are created by the Job controller.
-     * If a Job is suspended after creation (i.e. the flag goes from false to true),
-     * the Job controller will delete all active Pods associated with this Job. Users
-     * must design their workload to gracefully handle this. Suspending a Job will
-     * reset the StartTime field of the Job, effectively resetting the
-     * ActiveDeadlineSeconds timer too. Defaults to false.
-     *
-     * This field is beta-level, gated by SuspendJob feature flag (enabled by default).
-     */
-    private bool|null $suspend = null;
-
-    /**
      * Describes the pod that will be created when executing a job. More info:
      * https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
      */
@@ -131,11 +93,6 @@ class JobSpec implements JsonSerializable
         return $this->backoffLimit;
     }
 
-    public function getCompletionMode(): string|null
-    {
-        return $this->completionMode;
-    }
-
     public function getCompletions(): int|null
     {
         return $this->completions;
@@ -149,11 +106,6 @@ class JobSpec implements JsonSerializable
     public function getParallelism(): int|null
     {
         return $this->parallelism;
-    }
-
-    public function getSuspend(): bool|null
-    {
-        return $this->suspend;
     }
 
     public function getTtlSecondsAfterFinished(): int|null
@@ -180,13 +132,6 @@ class JobSpec implements JsonSerializable
         return $this;
     }
 
-    public function setCompletionMode(string $completionMode): self
-    {
-        $this->completionMode = $completionMode;
-
-        return $this;
-    }
-
     public function setCompletions(int $completions): self
     {
         $this->completions = $completions;
@@ -208,13 +153,6 @@ class JobSpec implements JsonSerializable
         return $this;
     }
 
-    public function setSuspend(bool $suspend): self
-    {
-        $this->suspend = $suspend;
-
-        return $this;
-    }
-
     public function setTtlSecondsAfterFinished(int $ttlSecondsAfterFinished): self
     {
         $this->ttlSecondsAfterFinished = $ttlSecondsAfterFinished;
@@ -232,12 +170,10 @@ class JobSpec implements JsonSerializable
         return [
             'activeDeadlineSeconds' => $this->activeDeadlineSeconds,
             'backoffLimit' => $this->backoffLimit,
-            'completionMode' => $this->completionMode,
             'completions' => $this->completions,
             'manualSelector' => $this->manualSelector,
             'parallelism' => $this->parallelism,
             'selector' => $this->selector,
-            'suspend' => $this->suspend,
             'template' => $this->template,
             'ttlSecondsAfterFinished' => $this->ttlSecondsAfterFinished,
         ];

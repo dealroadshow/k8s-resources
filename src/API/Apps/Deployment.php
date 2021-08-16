@@ -15,8 +15,7 @@ class Deployment implements APIResourceInterface
     const KIND = 'Deployment';
 
     /**
-     * Standard object's metadata. More info:
-     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     * Standard object metadata.
      */
     private ObjectMeta $metadata;
 

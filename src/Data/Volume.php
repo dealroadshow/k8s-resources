@@ -64,9 +64,9 @@ class Volume implements JsonSerializable
     private EmptyDirVolumeSource $emptyDir;
 
     /**
-     * Ephemeral represents a volume that is handled by a cluster storage driver. The
-     * volume's lifecycle is tied to the pod that defines it - it will be created
-     * before the pod starts, and deleted when the pod is removed.
+     * Ephemeral represents a volume that is handled by a cluster storage driver (Alpha
+     * feature). The volume's lifecycle is tied to the pod that defines it - it will be
+     * created before the pod starts, and deleted when the pod is removed.
      *
      * Use this if: a) the volume is only needed while the pod runs, b) features of
      * normal volumes like restoring from snapshot or capacity
@@ -85,9 +85,6 @@ class Volume implements JsonSerializable
      *
      * A pod can use both types of ephemeral volumes and persistent volumes at the same
      * time.
-     *
-     * This is a beta feature and only available when the GenericEphemeralVolume
-     * feature gate is enabled.
      */
     private EphemeralVolumeSource $ephemeral;
 

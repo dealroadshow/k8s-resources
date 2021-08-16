@@ -42,16 +42,6 @@ class ManagedFieldsEntry implements JsonSerializable
     private string|null $operation = null;
 
     /**
-     * Subresource is the name of the subresource used to update that object, or empty
-     * string if the object was updated through the main resource. The value of this
-     * field is used to distinguish between managers, even if they share the same name.
-     * For example, a status update will be distinct from a regular update using the
-     * same manager name. Note that the APIVersion field is not related to the
-     * Subresource field and it always corresponds to the version of the main resource.
-     */
-    private string|null $subresource = null;
-
-    /**
      * Time is timestamp of when these fields were set. It should always be empty if
      * Operation is 'Apply'
      */
@@ -87,11 +77,6 @@ class ManagedFieldsEntry implements JsonSerializable
         return $this->operation;
     }
 
-    public function getSubresource(): string|null
-    {
-        return $this->subresource;
-    }
-
     public function getTime(): DateTimeInterface|null
     {
         return $this->time;
@@ -125,13 +110,6 @@ class ManagedFieldsEntry implements JsonSerializable
         return $this;
     }
 
-    public function setSubresource(string $subresource): self
-    {
-        $this->subresource = $subresource;
-
-        return $this;
-    }
-
     public function setTime(DateTimeInterface $time): self
     {
         $this->time = $time;
@@ -147,7 +125,6 @@ class ManagedFieldsEntry implements JsonSerializable
             'fieldsV1' => $this->fieldsV1,
             'manager' => $this->manager,
             'operation' => $this->operation,
-            'subresource' => $this->subresource,
             'time' => $this->time,
         ];
     }

@@ -24,7 +24,7 @@ class IngressClassSpec implements JsonSerializable
      * for the controller. This is optional if the controller does not require extra
      * parameters.
      */
-    private IngressClassParametersReference|null $parameters = null;
+    private TypedLocalObjectReference|null $parameters = null;
 
     public function __construct()
     {
@@ -35,7 +35,7 @@ class IngressClassSpec implements JsonSerializable
         return $this->controller;
     }
 
-    public function getParameters(): IngressClassParametersReference|null
+    public function getParameters(): TypedLocalObjectReference|null
     {
         return $this->parameters;
     }
@@ -47,7 +47,7 @@ class IngressClassSpec implements JsonSerializable
         return $this;
     }
 
-    public function setParameters(IngressClassParametersReference $parameters): self
+    public function setParameters(TypedLocalObjectReference $parameters): self
     {
         $this->parameters = $parameters;
 

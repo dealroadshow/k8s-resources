@@ -26,9 +26,7 @@ class PodDisruptionBudgetSpec implements JsonSerializable
     private string|int|null $minAvailable = null;
 
     /**
-     * Label query over pods whose evictions are managed by the disruption budget. A
-     * null selector will match no pods, while an empty ({}) selector will select all
-     * pods within the namespace.
+     * Label query over pods whose evictions are managed by the disruption budget.
      */
     private LabelSelector $selector;
 

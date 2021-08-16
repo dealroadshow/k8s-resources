@@ -25,21 +25,6 @@ class Endpoint implements JsonSerializable
     private EndpointConditions $conditions;
 
     /**
-     * deprecatedTopology contains topology information part of the v1beta1 API. This
-     * field is deprecated, and will be removed when the v1beta1 API is removed (no
-     * sooner than kubernetes v1.24).  While this field can hold values, it is not
-     * writable through the v1 API, and any attempts to write to it will be silently
-     * ignored. Topology information can be found in the zone and nodeName fields
-     * instead.
-     */
-    private StringMap $deprecatedTopology;
-
-    /**
-     * hints contains information associated with how an endpoint should be consumed.
-     */
-    private EndpointHints $hints;
-
-    /**
      * hostname of this endpoint. This field may be used by consumers of endpoints to
      * distinguish endpoints from each other (e.g. in DNS names). Multiple endpoints
      * which use the same hostname should be considered fungible (e.g. multiple A
@@ -60,17 +45,28 @@ class Endpoint implements JsonSerializable
     private ObjectReference $targetRef;
 
     /**
-     * zone is the name of the Zone this endpoint exists in.
+     * topology contains arbitrary topology information associated with the endpoint.
+     * These key/value pairs must conform with the label format.
+     * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels
+     * Topology may include a maximum of 16 key/value pairs. This includes, but is not
+     * limited to the following well known keys: * kubernetes.io/hostname: the value
+     * indicates the hostname of the node
+     *   where the endpoint is located. This should match the corresponding
+     *   node label.
+     * * topology.kubernetes.io/zone: the value indicates the zone where the
+     *   endpoint is located. This should match the corresponding node label.
+     * * topology.kubernetes.io/region: the value indicates the region where the
+     *   endpoint is located. This should match the corresponding node label.
+     * This field is deprecated and will be removed in future api versions.
      */
-    private string|null $zone = null;
+    private StringMap $topology;
 
     public function __construct()
     {
         $this->addresses = new StringList();
         $this->conditions = new EndpointConditions();
-        $this->deprecatedTopology = new StringMap();
-        $this->hints = new EndpointHints();
         $this->targetRef = new ObjectReference();
+        $this->topology = new StringMap();
     }
 
     public function addresses(): StringList
@@ -83,11 +79,6 @@ class Endpoint implements JsonSerializable
         return $this->conditions;
     }
 
-    public function deprecatedTopology(): StringMap
-    {
-        return $this->deprecatedTopology;
-    }
-
     public function getHostname(): string|null
     {
         return $this->hostname;
@@ -96,16 +87,6 @@ class Endpoint implements JsonSerializable
     public function getNodeName(): string|null
     {
         return $this->nodeName;
-    }
-
-    public function getZone(): string|null
-    {
-        return $this->zone;
-    }
-
-    public function hints(): EndpointHints
-    {
-        return $this->hints;
     }
 
     public function setHostname(string $hostname): self
@@ -122,16 +103,14 @@ class Endpoint implements JsonSerializable
         return $this;
     }
 
-    public function setZone(string $zone): self
-    {
-        $this->zone = $zone;
-
-        return $this;
-    }
-
     public function targetRef(): ObjectReference
     {
         return $this->targetRef;
+    }
+
+    public function topology(): StringMap
+    {
+        return $this->topology;
     }
 
     public function jsonSerialize(): array
@@ -139,12 +118,10 @@ class Endpoint implements JsonSerializable
         return [
             'addresses' => $this->addresses,
             'conditions' => $this->conditions,
-            'deprecatedTopology' => $this->deprecatedTopology,
-            'hints' => $this->hints,
             'hostname' => $this->hostname,
             'nodeName' => $this->nodeName,
             'targetRef' => $this->targetRef,
-            'zone' => $this->zone,
+            'topology' => $this->topology,
         ];
     }
 }

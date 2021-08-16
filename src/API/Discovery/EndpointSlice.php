@@ -14,7 +14,7 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class EndpointSlice implements APIResourceInterface
 {
-    const API_VERSION = 'discovery.k8s.io/v1';
+    const API_VERSION = 'discovery.k8s.io/v1beta1';
     const KIND = 'EndpointSlice';
 
     /**

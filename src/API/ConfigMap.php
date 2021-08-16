@@ -34,7 +34,8 @@ class ConfigMap implements APIResourceInterface
     /**
      * Immutable, if set to true, ensures that data stored in the ConfigMap cannot be
      * updated (only object metadata can be modified). If not set to true, the field
-     * can be modified at any time. Defaulted to nil.
+     * can be modified at any time. Defaulted to nil. This is a beta field enabled by
+     * ImmutableEphemeralVolumes feature gate.
      */
     private bool|null $immutable = null;
 

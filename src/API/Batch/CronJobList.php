@@ -10,7 +10,7 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class CronJobList implements APIResourceListInterface
 {
-    const API_VERSION = 'batch/v1';
+    const API_VERSION = 'batch/v1beta1';
     const KIND = 'CronJobList';
 
     /**

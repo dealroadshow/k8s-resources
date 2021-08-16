@@ -11,14 +11,6 @@ use JsonSerializable;
 class StatefulSetSpec implements JsonSerializable
 {
     /**
-     * Minimum number of seconds for which a newly created pod should be ready without
-     * any of its container crashing for it to be considered available. Defaults to 0
-     * (pod will be considered available as soon as it is ready) This is an alpha field
-     * and requires enabling StatefulSetMinReadySeconds feature gate.
-     */
-    private int|null $minReadySeconds = null;
-
-    /**
      * podManagementPolicy controls how pods are created during initial scale up, when
      * replacing pods on nodes, or when scaling down. The default policy is
      * `OrderedReady`, where pods are created in increasing order (pod-0, then pod-1,
@@ -94,11 +86,6 @@ class StatefulSetSpec implements JsonSerializable
         $this->volumeClaimTemplates = new PersistentVolumeClaimList();
     }
 
-    public function getMinReadySeconds(): int|null
-    {
-        return $this->minReadySeconds;
-    }
-
     public function getPodManagementPolicy(): string|null
     {
         return $this->podManagementPolicy;
@@ -122,13 +109,6 @@ class StatefulSetSpec implements JsonSerializable
     public function selector(): LabelSelector
     {
         return $this->selector;
-    }
-
-    public function setMinReadySeconds(int $minReadySeconds): self
-    {
-        $this->minReadySeconds = $minReadySeconds;
-
-        return $this;
     }
 
     public function setPodManagementPolicy(string $podManagementPolicy): self
@@ -177,7 +157,6 @@ class StatefulSetSpec implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'minReadySeconds' => $this->minReadySeconds,
             'podManagementPolicy' => $this->podManagementPolicy,
             'replicas' => $this->replicas,
             'revisionHistoryLimit' => $this->revisionHistoryLimit,

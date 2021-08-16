@@ -10,6 +10,12 @@ use JsonSerializable;
 class EphemeralVolumeSource implements JsonSerializable
 {
     /**
+     * Specifies a read-only configuration for the volume. Defaults to false
+     * (read/write).
+     */
+    private bool|null $readOnly = null;
+
+    /**
      * Will be used to create a stand-alone PVC to provision the volume. The pod in
      * which this EphemeralVolumeSource is embedded will be the owner of the PVC, i.e.
      * the PVC will be deleted together with the pod.  The name of the PVC will be
@@ -36,6 +42,18 @@ class EphemeralVolumeSource implements JsonSerializable
         $this->volumeClaimTemplate = new PersistentVolumeClaimTemplate();
     }
 
+    public function getReadOnly(): bool|null
+    {
+        return $this->readOnly;
+    }
+
+    public function setReadOnly(bool $readOnly): self
+    {
+        $this->readOnly = $readOnly;
+
+        return $this;
+    }
+
     public function volumeClaimTemplate(): PersistentVolumeClaimTemplate
     {
         return $this->volumeClaimTemplate;
@@ -44,6 +62,7 @@ class EphemeralVolumeSource implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'readOnly' => $this->readOnly,
             'volumeClaimTemplate' => $this->volumeClaimTemplate,
         ];
     }

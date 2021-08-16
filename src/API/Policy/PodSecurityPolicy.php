@@ -8,7 +8,7 @@ use Dealroadshow\K8S\Data\PodSecurityPolicySpec;
 
 /**
  * PodSecurityPolicy governs the ability to make requests that affect the Security
- * Context that will be applied to a pod and container. Deprecated in 1.21.
+ * Context that will be applied to a pod and container.
  */
 class PodSecurityPolicy implements APIResourceInterface
 {

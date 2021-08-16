@@ -11,24 +11,13 @@ use JsonSerializable;
  */
 class Subject implements JsonSerializable
 {
-    /**
-     * `group` matches based on user group name.
-     */
     private GroupSubject|null $group = null;
 
     /**
-     * `kind` indicates which one of the other fields is non-empty. Required
+     * Required
      */
     private string $kind;
-
-    /**
-     * `serviceAccount` matches ServiceAccounts.
-     */
     private ServiceAccountSubject|null $serviceAccount = null;
-
-    /**
-     * `user` matches based on username.
-     */
     private UserSubject|null $user = null;
 
     public function __construct(string $kind)
