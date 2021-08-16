@@ -12,7 +12,7 @@ class ResourceRequirements implements JsonSerializable
 {
     /**
      * Limits describes the maximum amount of compute resources allowed. More info:
-     * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+     * https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
      */
     private StringOrFloatMap $limits;
 
@@ -20,7 +20,7 @@ class ResourceRequirements implements JsonSerializable
      * Requests describes the minimum amount of compute resources required. If Requests
      * is omitted for a container, it defaults to Limits if that is explicitly
      * specified, otherwise to an implementation-defined value. More info:
-     * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+     * https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
      */
     private StringOrFloatMap $requests;
 

@@ -7,7 +7,7 @@ use Dealroadshow\K8S\Data\ListMeta;
 
 /**
  * Status of all the conditions for the component as a list of ComponentStatus
- * objects.
+ * objects. Deprecated: This API is deprecated in v1.19+
  */
 class ComponentStatusList implements APIResourceListInterface
 {

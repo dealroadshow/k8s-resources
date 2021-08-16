@@ -40,8 +40,7 @@ class CustomResourceDefinitionSpec implements JsonSerializable
 
     /**
      * scope indicates whether the defined custom resource is cluster- or
-     * namespace-scoped. Allowed values are `Cluster` and `Namespaced`. Default is
-     * `Namespaced`.
+     * namespace-scoped. Allowed values are `Cluster` and `Namespaced`.
      */
     private string $scope;
 

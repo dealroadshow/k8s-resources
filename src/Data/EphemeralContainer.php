@@ -170,8 +170,7 @@ class EphemeralContainer implements JsonSerializable
     private bool|null $tty = null;
 
     /**
-     * volumeDevices is the list of block devices to be used by the container. This is
-     * a beta feature.
+     * volumeDevices is the list of block devices to be used by the container.
      */
     private VolumeDeviceList $volumeDevices;
 

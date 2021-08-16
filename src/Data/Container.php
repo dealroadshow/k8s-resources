@@ -105,7 +105,7 @@ class Container implements JsonSerializable
 
     /**
      * Compute Resources required by this container. Cannot be updated. More info:
-     * https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+     * https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
      */
     private ResourceRequirements $resources;
 
@@ -122,8 +122,7 @@ class Container implements JsonSerializable
      * fails, the Pod will be restarted, just as if the livenessProbe failed. This can
      * be used to provide different probe parameters at the beginning of a Pod's
      * lifecycle, when it might take a long time to load data or warm a cache, than
-     * during steady-state operation. This cannot be updated. This is an alpha feature
-     * enabled by the StartupProbe feature flag. More info:
+     * during steady-state operation. This cannot be updated. More info:
      * https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
      */
     private Probe $startupProbe;
@@ -174,8 +173,7 @@ class Container implements JsonSerializable
     private bool|null $tty = null;
 
     /**
-     * volumeDevices is the list of block devices to be used by the container. This is
-     * a beta feature.
+     * volumeDevices is the list of block devices to be used by the container.
      */
     private VolumeDeviceList $volumeDevices;
 

@@ -10,41 +10,42 @@ use JsonSerializable;
 class IngressBackend implements JsonSerializable
 {
     /**
-     * Specifies the name of the referenced service.
+     * Resource is an ObjectRef to another Kubernetes resource in the namespace of the
+     * Ingress object. If resource is specified, a service.Name and service.Port must
+     * not be specified. This is a mutually exclusive setting with "Service".
      */
-    private string $serviceName;
+    private TypedLocalObjectReference|null $resource = null;
 
     /**
-     * Specifies the port of the referenced service.
+     * Service references a Service as a Backend. This is a mutually exclusive setting
+     * with "Resource".
      */
-    private string|int $servicePort;
+    private IngressServiceBackend|null $service = null;
 
-    public function __construct(string $serviceName, string|int $servicePort)
+    public function __construct()
     {
-        $this->serviceName = $serviceName;
-        $this->servicePort = $servicePort;
     }
 
-    public function getServiceName(): string
+    public function getResource(): TypedLocalObjectReference|null
     {
-        return $this->serviceName;
+        return $this->resource;
     }
 
-    public function getServicePort(): string|int
+    public function getService(): IngressServiceBackend|null
     {
-        return $this->servicePort;
+        return $this->service;
     }
 
-    public function setServiceName(string $serviceName): self
+    public function setResource(TypedLocalObjectReference $resource): self
     {
-        $this->serviceName = $serviceName;
+        $this->resource = $resource;
 
         return $this;
     }
 
-    public function setServicePort(string|int $servicePort): self
+    public function setService(IngressServiceBackend $service): self
     {
-        $this->servicePort = $servicePort;
+        $this->service = $service;
 
         return $this;
     }
@@ -52,8 +53,8 @@ class IngressBackend implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'serviceName' => $this->serviceName,
-            'servicePort' => $this->servicePort,
+            'resource' => $this->resource,
+            'service' => $this->service,
         ];
     }
 }

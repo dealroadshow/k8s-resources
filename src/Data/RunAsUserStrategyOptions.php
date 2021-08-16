@@ -7,8 +7,7 @@ use JsonSerializable;
 
 /**
  * RunAsUserStrategyOptions defines the strategy type and any options used to
- * create the strategy. Deprecated: use RunAsUserStrategyOptions from policy API
- * Group instead.
+ * create the strategy.
  */
 class RunAsUserStrategyOptions implements JsonSerializable
 {

@@ -18,7 +18,7 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class CSINode implements APIResourceInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1beta1';
+    const API_VERSION = 'storage.k8s.io/v1';
     const KIND = 'CSINode';
 
     /**

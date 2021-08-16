@@ -29,6 +29,15 @@ class PodSecurityContext implements JsonSerializable
     private int|null $fsGroup = null;
 
     /**
+     * fsGroupChangePolicy defines behavior of changing ownership and permission of the
+     * volume before being exposed inside Pod. This field will only apply to volume
+     * types which support fsGroup based ownership(and permissions). It will have no
+     * effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid
+     * values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+     */
+    private string|null $fsGroupChangePolicy = null;
+
+    /**
      * The GID to run the entrypoint of the container process. Uses runtime default if
      * unset. May also be set in SecurityContext.  If set in both SecurityContext and
      * PodSecurityContext, the value specified in SecurityContext takes precedence for
@@ -64,6 +73,11 @@ class PodSecurityContext implements JsonSerializable
     private SELinuxOptions $seLinuxOptions;
 
     /**
+     * The seccomp options to use by the containers in this pod.
+     */
+    private SeccompProfile|null $seccompProfile = null;
+
+    /**
      * A list of groups applied to the first process run in each container, in addition
      * to the container's primary GID.  If unspecified, no groups will be added to any
      * container.
@@ -97,6 +111,11 @@ class PodSecurityContext implements JsonSerializable
         return $this->fsGroup;
     }
 
+    public function getFsGroupChangePolicy(): string|null
+    {
+        return $this->fsGroupChangePolicy;
+    }
+
     public function getRunAsGroup(): int|null
     {
         return $this->runAsGroup;
@@ -112,6 +131,11 @@ class PodSecurityContext implements JsonSerializable
         return $this->runAsUser;
     }
 
+    public function getSeccompProfile(): SeccompProfile|null
+    {
+        return $this->seccompProfile;
+    }
+
     public function seLinuxOptions(): SELinuxOptions
     {
         return $this->seLinuxOptions;
@@ -120,6 +144,13 @@ class PodSecurityContext implements JsonSerializable
     public function setFsGroup(int $fsGroup): self
     {
         $this->fsGroup = $fsGroup;
+
+        return $this;
+    }
+
+    public function setFsGroupChangePolicy(string $fsGroupChangePolicy): self
+    {
+        $this->fsGroupChangePolicy = $fsGroupChangePolicy;
 
         return $this;
     }
@@ -145,6 +176,13 @@ class PodSecurityContext implements JsonSerializable
         return $this;
     }
 
+    public function setSeccompProfile(SeccompProfile $seccompProfile): self
+    {
+        $this->seccompProfile = $seccompProfile;
+
+        return $this;
+    }
+
     public function supplementalGroups(): IntList
     {
         return $this->supplementalGroups;
@@ -164,10 +202,12 @@ class PodSecurityContext implements JsonSerializable
     {
         return [
             'fsGroup' => $this->fsGroup,
+            'fsGroupChangePolicy' => $this->fsGroupChangePolicy,
             'runAsGroup' => $this->runAsGroup,
             'runAsNonRoot' => $this->runAsNonRoot,
             'runAsUser' => $this->runAsUser,
             'seLinuxOptions' => $this->seLinuxOptions,
+            'seccompProfile' => $this->seccompProfile,
             'supplementalGroups' => $this->supplementalGroups,
             'sysctls' => $this->sysctls,
             'windowsOptions' => $this->windowsOptions,

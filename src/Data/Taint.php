@@ -28,7 +28,7 @@ class Taint implements JsonSerializable
     private DateTimeInterface|null $timeAdded = null;
 
     /**
-     * Required. The taint value corresponding to the taint key.
+     * The taint value corresponding to the taint key.
      */
     private string|null $value = null;
 

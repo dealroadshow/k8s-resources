@@ -24,6 +24,13 @@ class Secret implements APIResourceInterface
     private StringMap $data;
 
     /**
+     * Immutable, if set to true, ensures that data stored in the Secret cannot be
+     * updated (only object metadata can be modified). If not set to true, the field
+     * can be modified at any time. Defaulted to nil.
+     */
+    private bool|null $immutable = null;
+
+    /**
      * Standard object's metadata. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
      */
@@ -31,9 +38,9 @@ class Secret implements APIResourceInterface
 
     /**
      * stringData allows specifying non-binary secret data in string form. It is
-     * provided as a write-only convenience method. All keys and values are merged into
-     * the data field on write, overwriting any existing values. It is never output
-     * when reading from the API.
+     * provided as a write-only input field for convenience. All keys and values are
+     * merged into the data field on write, overwriting any existing values. The
+     * stringData field is never output when reading from the API.
      */
     private StringMap $stringData;
 
@@ -54,6 +61,11 @@ class Secret implements APIResourceInterface
         return $this->data;
     }
 
+    public function getImmutable(): bool|null
+    {
+        return $this->immutable;
+    }
+
     public function getType(): string|null
     {
         return $this->type;
@@ -62,6 +74,13 @@ class Secret implements APIResourceInterface
     public function metadata(): ObjectMeta
     {
         return $this->metadata;
+    }
+
+    public function setImmutable(bool $immutable): self
+    {
+        $this->immutable = $immutable;
+
+        return $this;
     }
 
     public function setType(string $type): self
@@ -82,6 +101,7 @@ class Secret implements APIResourceInterface
             'apiVersion' => self::API_VERSION,
             'kind' => self::KIND,
             'data' => $this->data,
+            'immutable' => $this->immutable,
             'metadata' => $this->metadata,
             'stringData' => $this->stringData,
             'type' => $this->type,

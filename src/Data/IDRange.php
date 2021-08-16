@@ -5,8 +5,7 @@ namespace Dealroadshow\K8S\Data;
 use JsonSerializable;
 
 /**
- * IDRange provides a min/max of an allowed range of IDs. Deprecated: use IDRange
- * from policy API Group instead.
+ * IDRange provides a min/max of an allowed range of IDs.
  */
 class IDRange implements JsonSerializable
 {

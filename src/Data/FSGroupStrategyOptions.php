@@ -7,7 +7,7 @@ use JsonSerializable;
 
 /**
  * FSGroupStrategyOptions defines the strategy type and options used to create the
- * strategy. Deprecated: use FSGroupStrategyOptions from policy API Group instead.
+ * strategy.
  */
 class FSGroupStrategyOptions implements JsonSerializable
 {

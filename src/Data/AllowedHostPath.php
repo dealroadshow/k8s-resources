@@ -6,8 +6,7 @@ use JsonSerializable;
 
 /**
  * AllowedHostPath defines the host volume conditions that will be enabled by a
- * policy for pods to use. It requires the path prefix to be defined. Deprecated:
- * use AllowedHostPath from policy API Group instead.
+ * policy for pods to use. It requires the path prefix to be defined.
  */
 class AllowedHostPath implements JsonSerializable
 {

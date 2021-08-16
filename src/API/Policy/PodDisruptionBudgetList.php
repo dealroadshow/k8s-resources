@@ -10,13 +10,18 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class PodDisruptionBudgetList implements APIResourceListInterface
 {
-    const API_VERSION = 'policy/v1beta1';
+    const API_VERSION = 'policy/v1';
     const KIND = 'PodDisruptionBudgetList';
 
     /**
      * @var PodDisruptionBudget[]
      */
     private array $items = [];
+
+    /**
+     * Standard object's metadata. More info:
+     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
     private ListMeta $metadata;
 
     public function __construct()

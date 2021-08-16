@@ -7,8 +7,7 @@ use JsonSerializable;
 
 /**
  * SupplementalGroupsStrategyOptions defines the strategy type and options used to
- * create the strategy. Deprecated: use SupplementalGroupsStrategyOptions from
- * policy API Group instead.
+ * create the strategy.
  */
 class SupplementalGroupsStrategyOptions implements JsonSerializable
 {

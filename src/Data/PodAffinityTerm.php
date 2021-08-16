@@ -20,8 +20,20 @@ class PodAffinityTerm implements JsonSerializable
     private LabelSelector $labelSelector;
 
     /**
-     * namespaces specifies which namespaces the labelSelector applies to (matches
-     * against); null or empty list means "this pod's namespace"
+     * A label query over the set of namespaces that the term applies to. The term is
+     * applied to the union of the namespaces selected by this field and the ones
+     * listed in the namespaces field. null selector and null or empty namespaces list
+     * means "this pod's namespace". An empty selector ({}) matches all namespaces.
+     * This field is alpha-level and is only honored when PodAffinityNamespaceSelector
+     * feature is enabled.
+     */
+    private LabelSelector $namespaceSelector;
+
+    /**
+     * namespaces specifies a static list of namespace names that the term applies to.
+     * The term is applied to the union of the namespaces listed in this field and the
+     * ones selected by namespaceSelector. null or empty namespaces list and null
+     * namespaceSelector means "this pod's namespace"
      */
     private StringList $namespaces;
 
@@ -37,6 +49,7 @@ class PodAffinityTerm implements JsonSerializable
     public function __construct(string $topologyKey)
     {
         $this->labelSelector = new LabelSelector();
+        $this->namespaceSelector = new LabelSelector();
         $this->namespaces = new StringList();
         $this->topologyKey = $topologyKey;
     }
@@ -49,6 +62,11 @@ class PodAffinityTerm implements JsonSerializable
     public function labelSelector(): LabelSelector
     {
         return $this->labelSelector;
+    }
+
+    public function namespaceSelector(): LabelSelector
+    {
+        return $this->namespaceSelector;
     }
 
     public function namespaces(): StringList
@@ -67,6 +85,7 @@ class PodAffinityTerm implements JsonSerializable
     {
         return [
             'labelSelector' => $this->labelSelector,
+            'namespaceSelector' => $this->namespaceSelector,
             'namespaces' => $this->namespaces,
             'topologyKey' => $this->topologyKey,
         ];

@@ -32,6 +32,13 @@ class ConfigMap implements APIResourceInterface
     private StringMap $data;
 
     /**
+     * Immutable, if set to true, ensures that data stored in the ConfigMap cannot be
+     * updated (only object metadata can be modified). If not set to true, the field
+     * can be modified at any time. Defaulted to nil.
+     */
+    private bool|null $immutable = null;
+
+    /**
      * Standard object's metadata. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
      */
@@ -54,9 +61,21 @@ class ConfigMap implements APIResourceInterface
         return $this->data;
     }
 
+    public function getImmutable(): bool|null
+    {
+        return $this->immutable;
+    }
+
     public function metadata(): ObjectMeta
     {
         return $this->metadata;
+    }
+
+    public function setImmutable(bool $immutable): self
+    {
+        $this->immutable = $immutable;
+
+        return $this;
     }
 
     public function jsonSerialize(): array
@@ -66,6 +85,7 @@ class ConfigMap implements APIResourceInterface
             'kind' => self::KIND,
             'binaryData' => $this->binaryData,
             'data' => $this->data,
+            'immutable' => $this->immutable,
             'metadata' => $this->metadata,
         ];
     }

@@ -5,7 +5,7 @@ namespace Dealroadshow\K8S\Data;
 use JsonSerializable;
 
 /**
- * NetworkPolicyPeer describes a peer to allow traffic from. Only certain
+ * NetworkPolicyPeer describes a peer to allow traffic to/from. Only certain
  * combinations of fields are allowed
  */
 class NetworkPolicyPeer implements JsonSerializable

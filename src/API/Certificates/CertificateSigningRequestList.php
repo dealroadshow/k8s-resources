@@ -5,9 +5,13 @@ namespace Dealroadshow\K8S\API\Certificates;
 use Dealroadshow\K8S\APIResourceListInterface;
 use Dealroadshow\K8S\Data\ListMeta;
 
+/**
+ * CertificateSigningRequestList is a collection of CertificateSigningRequest
+ * objects
+ */
 class CertificateSigningRequestList implements APIResourceListInterface
 {
-    const API_VERSION = 'certificates.k8s.io/v1beta1';
+    const API_VERSION = 'certificates.k8s.io/v1';
     const KIND = 'CertificateSigningRequestList';
 
     /**
