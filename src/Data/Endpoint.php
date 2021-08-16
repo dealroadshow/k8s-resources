@@ -28,16 +28,9 @@ class Endpoint implements JsonSerializable
      * hostname of this endpoint. This field may be used by consumers of endpoints to
      * distinguish endpoints from each other (e.g. in DNS names). Multiple endpoints
      * which use the same hostname should be considered fungible (e.g. multiple A
-     * values in DNS). Must be lowercase and pass DNS Label (RFC 1123) validation.
+     * values in DNS). Must pass DNS Label (RFC 1123) validation.
      */
     private string|null $hostname = null;
-
-    /**
-     * nodeName represents the name of the Node hosting this endpoint. This can be used
-     * to determine endpoints local to a Node. This field can be enabled with the
-     * EndpointSliceNodeName feature gate.
-     */
-    private string|null $nodeName = null;
 
     /**
      * targetRef is a reference to a Kubernetes object that represents this endpoint.
@@ -57,7 +50,6 @@ class Endpoint implements JsonSerializable
      *   endpoint is located. This should match the corresponding node label.
      * * topology.kubernetes.io/region: the value indicates the region where the
      *   endpoint is located. This should match the corresponding node label.
-     * This field is deprecated and will be removed in future api versions.
      */
     private StringMap $topology;
 
@@ -84,21 +76,9 @@ class Endpoint implements JsonSerializable
         return $this->hostname;
     }
 
-    public function getNodeName(): string|null
-    {
-        return $this->nodeName;
-    }
-
     public function setHostname(string $hostname): self
     {
         $this->hostname = $hostname;
-
-        return $this;
-    }
-
-    public function setNodeName(string $nodeName): self
-    {
-        $this->nodeName = $nodeName;
 
         return $this;
     }
@@ -119,7 +99,6 @@ class Endpoint implements JsonSerializable
             'addresses' => $this->addresses,
             'conditions' => $this->conditions,
             'hostname' => $this->hostname,
-            'nodeName' => $this->nodeName,
             'targetRef' => $this->targetRef,
             'topology' => $this->topology,
         ];

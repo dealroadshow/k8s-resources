@@ -33,7 +33,7 @@ class PodSecurityContext implements JsonSerializable
      * volume before being exposed inside Pod. This field will only apply to volume
      * types which support fsGroup based ownership(and permissions). It will have no
      * effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid
-     * values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+     * values are "OnRootMismatch" and "Always". If not specified defaults to "Always".
      */
     private string|null $fsGroupChangePolicy = null;
 

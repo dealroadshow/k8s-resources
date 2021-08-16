@@ -13,60 +13,16 @@ use JsonSerializable;
 class ServiceSpec implements JsonSerializable
 {
     /**
-     * allocateLoadBalancerNodePorts defines if NodePorts will be automatically
-     * allocated for services with type LoadBalancer.  Default is "true". It may be set
-     * to "false" if the cluster load-balancer does not rely on NodePorts.
-     * allocateLoadBalancerNodePorts may only be set for services with type
-     * LoadBalancer and will be cleared if the type is changed to any other type. This
-     * field is alpha-level and is only honored by servers that enable the
-     * ServiceLBNodePortControl feature.
-     */
-    private bool|null $allocateLoadBalancerNodePorts = null;
-
-    /**
-     * clusterIP is the IP address of the service and is usually assigned randomly. If
-     * an address is specified manually, is in-range (as per system configuration), and
-     * is not in use, it will be allocated to the service; otherwise creation of the
-     * service will fail. This field may not be changed through updates unless the type
-     * field is also being changed to ExternalName (which requires this field to be
-     * blank) or the type field is being changed from ExternalName (in which case this
-     * field may optionally be specified, as describe above).  Valid values are "None",
-     * empty string (""), or a valid IP address. Setting this to "None" makes a
-     * "headless service" (no virtual IP), which is useful when direct endpoint
-     * connections are preferred and proxying is not required.  Only applies to types
-     * ClusterIP, NodePort, and LoadBalancer. If this field is specified when creating
-     * a Service of type ExternalName, creation will fail. This field will be wiped
-     * when updating a Service to type ExternalName. More info:
+     * clusterIP is the IP address of the service and is usually assigned randomly by
+     * the master. If an address is specified manually and is not in use by others, it
+     * will be allocated to the service; otherwise, creation of the service will fail.
+     * This field can not be changed through updates. Valid values are "None", empty
+     * string (""), or a valid IP address. "None" can be specified for headless
+     * services when proxying is not required. Only applies to types ClusterIP,
+     * NodePort, and LoadBalancer. Ignored if type is ExternalName. More info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
      */
     private string|null $clusterIP = null;
-
-    /**
-     * ClusterIPs is a list of IP addresses assigned to this service, and are usually
-     * assigned randomly.  If an address is specified manually, is in-range (as per
-     * system configuration), and is not in use, it will be allocated to the service;
-     * otherwise creation of the service will fail. This field may not be changed
-     * through updates unless the type field is also being changed to ExternalName
-     * (which requires this field to be empty) or the type field is being changed from
-     * ExternalName (in which case this field may optionally be specified, as describe
-     * above).  Valid values are "None", empty string (""), or a valid IP address.
-     * Setting this to "None" makes a "headless service" (no virtual IP), which is
-     * useful when direct endpoint connections are preferred and proxying is not
-     * required.  Only applies to types ClusterIP, NodePort, and LoadBalancer. If this
-     * field is specified when creating a Service of type ExternalName, creation will
-     * fail. This field will be wiped when updating a Service to type ExternalName.  If
-     * this field is not specified, it will be initialized from the clusterIP field.
-     * If this field is specified, clients must ensure that clusterIPs[0] and clusterIP
-     * have the same value.
-     *
-     * Unless the "IPv6DualStack" feature gate is enabled, this field is limited to one
-     * value, which must be the same as the clusterIP field.  If the feature gate is
-     * enabled, this field may hold a maximum of two entries (dual-stack IPs, in either
-     * order).  These IPs must correspond to the values of the ipFamilies field. Both
-     * clusterIPs and ipFamilies are governed by the ipFamilyPolicy field. More info:
-     * https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
-     */
-    private StringList $clusterIPs;
 
     /**
      * externalIPs is a list of IP addresses for which nodes in the cluster will also
@@ -78,10 +34,10 @@ class ServiceSpec implements JsonSerializable
     private StringList $externalIPs;
 
     /**
-     * externalName is the external reference that discovery mechanisms will return as
-     * an alias for this service (e.g. a DNS CNAME record). No proxying will be
-     * involved.  Must be a lowercase RFC-1123 hostname
-     * (https://tools.ietf.org/html/rfc1123) and requires Type to be
+     * externalName is the external reference that kubedns or equivalent will return as
+     * a CNAME record for this service. No proxying will be involved. Must be a valid
+     * RFC-1123 hostname (https://tools.ietf.org/html/rfc1123) and requires Type to be
+     * ExternalName.
      */
     private string|null $externalName = null;
 
@@ -96,49 +52,33 @@ class ServiceSpec implements JsonSerializable
     private string|null $externalTrafficPolicy = null;
 
     /**
-     * healthCheckNodePort specifies the healthcheck nodePort for the service. This
-     * only applies when type is set to LoadBalancer and externalTrafficPolicy is set
-     * to Local. If a value is specified, is in-range, and is not in use, it will be
-     * used.  If not specified, a value will be automatically allocated.  External
-     * systems (e.g. load-balancers) can use this port to determine if a given node
-     * holds endpoints for this service or not.  If this field is specified when
-     * creating a Service which does not need it, creation will fail. This field will
-     * be wiped when updating a Service to no longer need it (e.g. changing type).
+     * healthCheckNodePort specifies the healthcheck nodePort for the service. If not
+     * specified, HealthCheckNodePort is created by the service api backend with the
+     * allocated nodePort. Will use user-specified nodePort value if specified by the
+     * client. Only effects when Type is set to LoadBalancer and ExternalTrafficPolicy
+     * is set to Local.
      */
     private int|null $healthCheckNodePort = null;
 
     /**
-     * IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this service,
-     * and is gated by the "IPv6DualStack" feature gate.  This field is usually
-     * assigned automatically based on cluster configuration and the ipFamilyPolicy
-     * field. If this field is specified manually, the requested family is available in
-     * the cluster, and ipFamilyPolicy allows it, it will be used; otherwise creation
-     * of the service will fail.  This field is conditionally mutable: it allows for
-     * adding or removing a secondary IP family, but it does not allow changing the
-     * primary IP family of the Service.  Valid values are "IPv4" and "IPv6".  This
-     * field only applies to Services of types ClusterIP, NodePort, and LoadBalancer,
-     * and does apply to "headless" services.  This field will be wiped when updating a
-     * Service to type ExternalName.
-     *
-     * This field may hold a maximum of two entries (dual-stack families, in either
-     * order).  These families must correspond to the values of the clusterIPs field,
-     * if specified. Both clusterIPs and ipFamilies are governed by the ipFamilyPolicy
-     * field.
+     * ipFamily specifies whether this Service has a preference for a particular IP
+     * family (e.g. IPv4 vs. IPv6) when the IPv6DualStack feature gate is enabled. In a
+     * dual-stack cluster, you can specify ipFamily when creating a ClusterIP Service
+     * to determine whether the controller will allocate an IPv4 or IPv6 IP for it, and
+     * you can specify ipFamily when creating a headless Service to determine whether
+     * it will have IPv4 or IPv6 Endpoints. In either case, if you do not specify an
+     * ipFamily explicitly, it will default to the cluster's primary IP family. This
+     * field is part of an alpha feature, and you should not make any assumptions about
+     * its semantics other than those described above. In particular, you should not
+     * assume that it can (or cannot) be changed after creation time; that it can only
+     * have the values "IPv4" and "IPv6"; or that its current value on a given Service
+     * correctly reflects the current state of that Service. (For ClusterIP Services,
+     * look at clusterIP to see if the Service is IPv4 or IPv6. For headless Services,
+     * look at the endpoints, which may be dual-stack in the future. For ExternalName
+     * Services, ipFamily has no meaning, but it may be set to an irrelevant value
+     * anyway.)
      */
-    private StringList $ipFamilies;
-
-    /**
-     * IPFamilyPolicy represents the dual-stack-ness requested or required by this
-     * Service, and is gated by the "IPv6DualStack" feature gate.  If there is no value
-     * provided, then this field will be set to SingleStack. Services can be
-     * "SingleStack" (a single IP family), "PreferDualStack" (two IP families on
-     * dual-stack configured clusters or a single IP family on single-stack clusters),
-     * or "RequireDualStack" (two IP families on dual-stack configured clusters,
-     * otherwise fail). The ipFamilies and clusterIPs fields depend on the value of
-     * this field.  This field will be wiped when updating a service to type
-     * ExternalName.
-     */
-    private string|null $ipFamilyPolicy = null;
+    private string|null $ipFamily = null;
 
     /**
      * Only applies to Service Type: LoadBalancer LoadBalancer will get created with
@@ -209,34 +149,28 @@ class ServiceSpec implements JsonSerializable
      * of the client, the service has no backends for that client and connections
      * should fail. The special value "*" may be used to mean "any topology". This
      * catch-all value, if used, only makes sense as the last value in the list. If
-     * this is not specified or empty, no topology constraints will be applied. This
-     * field is alpha-level and is only honored by servers that enable the
-     * ServiceTopology feature.
+     * this is not specified or empty, no topology constraints will be applied.
      */
     private StringList $topologyKeys;
 
     /**
      * type determines how the Service is exposed. Defaults to ClusterIP. Valid options
-     * are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ClusterIP" allocates a
-     * cluster-internal IP address for load-balancing to endpoints. Endpoints are
-     * determined by the selector or if that is not specified, by manual construction
-     * of an Endpoints object or EndpointSlice objects. If clusterIP is "None", no
-     * virtual IP is allocated and the endpoints are published as a set of endpoints
-     * rather than a virtual IP. "NodePort" builds on ClusterIP and allocates a port on
-     * every node which routes to the same endpoints as the clusterIP. "LoadBalancer"
+     * are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ExternalName" maps to
+     * the specified externalName. "ClusterIP" allocates a cluster-internal IP address
+     * for load-balancing to endpoints. Endpoints are determined by the selector or if
+     * that is not specified, by manual construction of an Endpoints object. If
+     * clusterIP is "None", no virtual IP is allocated and the endpoints are published
+     * as a set of endpoints rather than a stable IP. "NodePort" builds on ClusterIP
+     * and allocates a port on every node which routes to the clusterIP. "LoadBalancer"
      * builds on NodePort and creates an external load-balancer (if supported in the
-     * current cloud) which routes to the same endpoints as the clusterIP.
-     * "ExternalName" aliases this service to the specified externalName. Several other
-     * fields do not apply to ExternalName services. More info:
+     * current cloud) which routes to the clusterIP. More info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
      */
     private string|null $type = null;
 
     public function __construct()
     {
-        $this->clusterIPs = new StringList();
         $this->externalIPs = new StringList();
-        $this->ipFamilies = new StringList();
         $this->loadBalancerSourceRanges = new StringList();
         $this->ports = new ServicePortList();
         $this->selector = new StringMap();
@@ -244,19 +178,9 @@ class ServiceSpec implements JsonSerializable
         $this->topologyKeys = new StringList();
     }
 
-    public function clusterIPs(): StringList
-    {
-        return $this->clusterIPs;
-    }
-
     public function externalIPs(): StringList
     {
         return $this->externalIPs;
-    }
-
-    public function getAllocateLoadBalancerNodePorts(): bool|null
-    {
-        return $this->allocateLoadBalancerNodePorts;
     }
 
     public function getClusterIP(): string|null
@@ -279,9 +203,9 @@ class ServiceSpec implements JsonSerializable
         return $this->healthCheckNodePort;
     }
 
-    public function getIpFamilyPolicy(): string|null
+    public function getIpFamily(): string|null
     {
-        return $this->ipFamilyPolicy;
+        return $this->ipFamily;
     }
 
     public function getLoadBalancerIP(): string|null
@@ -304,11 +228,6 @@ class ServiceSpec implements JsonSerializable
         return $this->type;
     }
 
-    public function ipFamilies(): StringList
-    {
-        return $this->ipFamilies;
-    }
-
     public function loadBalancerSourceRanges(): StringList
     {
         return $this->loadBalancerSourceRanges;
@@ -327,13 +246,6 @@ class ServiceSpec implements JsonSerializable
     public function sessionAffinityConfig(): SessionAffinityConfig
     {
         return $this->sessionAffinityConfig;
-    }
-
-    public function setAllocateLoadBalancerNodePorts(bool $allocateLoadBalancerNodePorts): self
-    {
-        $this->allocateLoadBalancerNodePorts = $allocateLoadBalancerNodePorts;
-
-        return $this;
     }
 
     public function setClusterIP(string $clusterIP): self
@@ -364,9 +276,9 @@ class ServiceSpec implements JsonSerializable
         return $this;
     }
 
-    public function setIpFamilyPolicy(string $ipFamilyPolicy): self
+    public function setIpFamily(string $ipFamily): self
     {
-        $this->ipFamilyPolicy = $ipFamilyPolicy;
+        $this->ipFamily = $ipFamily;
 
         return $this;
     }
@@ -407,15 +319,12 @@ class ServiceSpec implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'allocateLoadBalancerNodePorts' => $this->allocateLoadBalancerNodePorts,
             'clusterIP' => $this->clusterIP,
-            'clusterIPs' => $this->clusterIPs,
             'externalIPs' => $this->externalIPs,
             'externalName' => $this->externalName,
             'externalTrafficPolicy' => $this->externalTrafficPolicy,
             'healthCheckNodePort' => $this->healthCheckNodePort,
-            'ipFamilies' => $this->ipFamilies,
-            'ipFamilyPolicy' => $this->ipFamilyPolicy,
+            'ipFamily' => $this->ipFamily,
             'loadBalancerIP' => $this->loadBalancerIP,
             'loadBalancerSourceRanges' => $this->loadBalancerSourceRanges,
             'ports' => $this->ports,

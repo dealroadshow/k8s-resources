@@ -3,7 +3,6 @@
 namespace Dealroadshow\K8S\Data;
 
 use Dealroadshow\K8S\Data\Collection\StringList;
-use Dealroadshow\K8S\Data\Collection\TokenRequestList;
 use JsonSerializable;
 
 /**
@@ -57,20 +56,6 @@ class CSIDriverSpec implements JsonSerializable
     private bool|null $podInfoOnMount = null;
 
     /**
-     * RequiresRepublish indicates the CSI driver wants `NodePublishVolume` being
-     * periodically called to reflect any possible change in the mounted volume. This
-     * field defaults to false.
-     *
-     * Note: After a successful initial NodePublishVolume call, subsequent calls to
-     * NodePublishVolume should only update the contents of the volume. New mount
-     * points will not be seen by a running container.
-     *
-     * This is an alpha feature and only available when the CSIServiceAccountToken
-     * feature is enabled.
-     */
-    private bool|null $requiresRepublish = null;
-
-    /**
      * If set to true, storageCapacity indicates that the CSI volume driver wants pod
      * scheduling to consider the storage capacity that the driver deployment will
      * report by creating CSIStorageCapacity objects with capacity information.
@@ -86,28 +71,6 @@ class CSIDriverSpec implements JsonSerializable
      * enabled. The default is false.
      */
     private bool|null $storageCapacity = null;
-
-    /**
-     * TokenRequests indicates the CSI driver needs pods' service account tokens it is
-     * mounting volume for to do necessary authentication. Kubelet will pass the tokens
-     * in VolumeContext in the CSI NodePublishVolume calls. The CSI driver should parse
-     * and validate the following VolumeContext:
-     * "csi.storage.k8s.io/serviceAccount.tokens": {
-     *   "<audience>": {
-     *     "token": <token>,
-     *     "expirationTimestamp": <expiration timestamp in RFC3339>,
-     *   },
-     *   ...
-     * }
-     *
-     * Note: Audience in each TokenRequest should be different and at most one token is
-     * empty string. To receive a new token after expiry, RequiresRepublish can be used
-     * to trigger NodePublishVolume periodically.
-     *
-     * This is an alpha feature and only available when the CSIServiceAccountToken
-     * feature is enabled.
-     */
-    private TokenRequestList $tokenRequests;
 
     /**
      * volumeLifecycleModes defines what kind of volumes this CSI volume driver
@@ -126,7 +89,6 @@ class CSIDriverSpec implements JsonSerializable
 
     public function __construct()
     {
-        $this->tokenRequests = new TokenRequestList();
         $this->volumeLifecycleModes = new StringList();
     }
 
@@ -143,11 +105,6 @@ class CSIDriverSpec implements JsonSerializable
     public function getPodInfoOnMount(): bool|null
     {
         return $this->podInfoOnMount;
-    }
-
-    public function getRequiresRepublish(): bool|null
-    {
-        return $this->requiresRepublish;
     }
 
     public function getStorageCapacity(): bool|null
@@ -176,23 +133,11 @@ class CSIDriverSpec implements JsonSerializable
         return $this;
     }
 
-    public function setRequiresRepublish(bool $requiresRepublish): self
-    {
-        $this->requiresRepublish = $requiresRepublish;
-
-        return $this;
-    }
-
     public function setStorageCapacity(bool $storageCapacity): self
     {
         $this->storageCapacity = $storageCapacity;
 
         return $this;
-    }
-
-    public function tokenRequests(): TokenRequestList
-    {
-        return $this->tokenRequests;
     }
 
     public function volumeLifecycleModes(): StringList
@@ -206,9 +151,7 @@ class CSIDriverSpec implements JsonSerializable
             'attachRequired' => $this->attachRequired,
             'fsGroupPolicy' => $this->fsGroupPolicy,
             'podInfoOnMount' => $this->podInfoOnMount,
-            'requiresRepublish' => $this->requiresRepublish,
             'storageCapacity' => $this->storageCapacity,
-            'tokenRequests' => $this->tokenRequests,
             'volumeLifecycleModes' => $this->volumeLifecycleModes,
         ];
     }

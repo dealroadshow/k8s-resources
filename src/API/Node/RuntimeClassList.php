@@ -10,7 +10,7 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class RuntimeClassList implements APIResourceListInterface
 {
-    const API_VERSION = 'node.k8s.io/v1';
+    const API_VERSION = 'node.k8s.io/v1beta1';
     const KIND = 'RuntimeClassList';
 
     /**
