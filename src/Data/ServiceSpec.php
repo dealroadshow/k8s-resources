@@ -15,10 +15,11 @@ class ServiceSpec implements JsonSerializable
     /**
      * allocateLoadBalancerNodePorts defines if NodePorts will be automatically
      * allocated for services with type LoadBalancer.  Default is "true". It may be set
-     * to "false" if the cluster load-balancer does not rely on NodePorts.
-     * allocateLoadBalancerNodePorts may only be set for services with type
-     * LoadBalancer and will be cleared if the type is changed to any other type. This
-     * field is alpha-level and is only honored by servers that enable the
+     * to "false" if the cluster load-balancer does not rely on NodePorts.  If the
+     * caller requests specific NodePorts (by specifying a value), those requests will
+     * be respected, regardless of this field. This field may only be set for services
+     * with type LoadBalancer and will be cleared if the type is changed to any other
+     * type. This field is beta-level and is only honored by servers that enable the
      * ServiceLBNodePortControl feature.
      */
     private bool|null $allocateLoadBalancerNodePorts = null;
@@ -180,7 +181,7 @@ class ServiceSpec implements JsonSerializable
      * the cloud-provider load-balancer will be restricted to the specified client IPs.
      * This field will be ignored if the cloud-provider does not support the feature."
      * More info:
-     * https://kubernetes.io/docs/tasks/access-application-cluster/configure-cloud-provider-firewall/
+     * https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/
      */
     private StringList $loadBalancerSourceRanges;
 
@@ -226,23 +227,6 @@ class ServiceSpec implements JsonSerializable
     private SessionAffinityConfig $sessionAffinityConfig;
 
     /**
-     * topologyKeys is a preference-order list of topology keys which implementations
-     * of services should use to preferentially sort endpoints when accessing this
-     * Service, it can not be used at the same time as externalTrafficPolicy=Local.
-     * Topology keys must be valid label keys and at most 16 keys may be specified.
-     * Endpoints are chosen based on the first topology key with available backends. If
-     * this field is specified and all entries have no backends that match the topology
-     * of the client, the service has no backends for that client and connections
-     * should fail. The special value "*" may be used to mean "any topology". This
-     * catch-all value, if used, only makes sense as the last value in the list. If
-     * this is not specified or empty, no topology constraints will be applied. This
-     * field is alpha-level and is only honored by servers that enable the
-     * ServiceTopology feature. This field is deprecated and will be removed in a
-     * future version.
-     */
-    private StringList $topologyKeys;
-
-    /**
      * type determines how the Service is exposed. Defaults to ClusterIP. Valid options
      * are ExternalName, ClusterIP, NodePort, and LoadBalancer. "ClusterIP" allocates a
      * cluster-internal IP address for load-balancing to endpoints. Endpoints are
@@ -268,7 +252,6 @@ class ServiceSpec implements JsonSerializable
         $this->ports = new ServicePortList();
         $this->selector = new StringMap();
         $this->sessionAffinityConfig = new SessionAffinityConfig();
-        $this->topologyKeys = new StringList();
     }
 
     public function clusterIPs(): StringList
@@ -450,11 +433,6 @@ class ServiceSpec implements JsonSerializable
         return $this;
     }
 
-    public function topologyKeys(): StringList
-    {
-        return $this->topologyKeys;
-    }
-
     public function jsonSerialize(): array
     {
         return [
@@ -476,7 +454,6 @@ class ServiceSpec implements JsonSerializable
             'selector' => $this->selector,
             'sessionAffinity' => $this->sessionAffinity,
             'sessionAffinityConfig' => $this->sessionAffinityConfig,
-            'topologyKeys' => $this->topologyKeys,
             'type' => $this->type,
         ];
     }

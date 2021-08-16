@@ -19,8 +19,8 @@ class HTTPIngressPath implements JsonSerializable
     /**
      * Path is matched against the path of an incoming request. Currently it can
      * contain characters disallowed from the conventional "path" part of a URL as
-     * defined by RFC 3986. Paths must begin with a '/'. When unspecified, all paths
-     * from incoming requests are matched.
+     * defined by RFC 3986. Paths must begin with a '/' and must be present when using
+     * PathType with value "Exact" or "Prefix".
      */
     private string|null $path = null;
 
@@ -39,11 +39,12 @@ class HTTPIngressPath implements JsonSerializable
      *   or treat it identically to Prefix or Exact path types.
      * Implementations are required to support all path types.
      */
-    private string|null $pathType = null;
+    private string $pathType;
 
-    public function __construct()
+    public function __construct(string $pathType)
     {
         $this->backend = new IngressBackend();
+        $this->pathType = $pathType;
     }
 
     public function backend(): IngressBackend
@@ -56,7 +57,7 @@ class HTTPIngressPath implements JsonSerializable
         return $this->path;
     }
 
-    public function getPathType(): string|null
+    public function getPathType(): string
     {
         return $this->pathType;
     }

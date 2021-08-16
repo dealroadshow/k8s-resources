@@ -24,7 +24,7 @@ class PodAffinityTerm implements JsonSerializable
      * applied to the union of the namespaces selected by this field and the ones
      * listed in the namespaces field. null selector and null or empty namespaces list
      * means "this pod's namespace". An empty selector ({}) matches all namespaces.
-     * This field is alpha-level and is only honored when PodAffinityNamespaceSelector
+     * This field is beta-level and is only honored when PodAffinityNamespaceSelector
      * feature is enabled.
      */
     private LabelSelector $namespaceSelector;

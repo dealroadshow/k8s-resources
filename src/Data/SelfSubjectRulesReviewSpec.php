@@ -4,6 +4,9 @@ namespace Dealroadshow\K8S\Data;
 
 use JsonSerializable;
 
+/**
+ * SelfSubjectRulesReviewSpec defines the specification for SelfSubjectRulesReview.
+ */
 class SelfSubjectRulesReviewSpec implements JsonSerializable
 {
     /**

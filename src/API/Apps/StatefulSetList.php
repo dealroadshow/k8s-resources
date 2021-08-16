@@ -17,6 +17,11 @@ class StatefulSetList implements APIResourceListInterface
      * @var StatefulSet[]
      */
     private array $items = [];
+
+    /**
+     * Standard list's metadata. More info:
+     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
     private ListMeta $metadata;
 
     public function __construct()

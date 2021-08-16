@@ -36,14 +36,14 @@ class PolicyRule implements JsonSerializable
     private StringList $resourceNames;
 
     /**
-     * Resources is a list of resources this rule applies to.  ResourceAll represents
-     * all resources.
+     * Resources is a list of resources this rule applies to. '*' represents all
+     * resources.
      */
     private StringList $resources;
 
     /**
      * Verbs is a list of Verbs that apply to ALL the ResourceKinds and
-     * AttributeRestrictions contained in this rule.  VerbAll represents all kinds.
+     * AttributeRestrictions contained in this rule. '*' represents all verbs.
      */
     private StringList $verbs;
 

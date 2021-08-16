@@ -154,8 +154,8 @@ class PodSpec implements JsonSerializable
      * already set. If RuntimeClass is configured and selected in the PodSpec, Overhead
      * will be set to the value defined in the corresponding RuntimeClass, otherwise it
      * will remain unset and treated as zero. More info:
-     * https://git.k8s.io/enhancements/keps/sig-node/20190226-pod-overhead.md This
-     * field is alpha-level as of Kubernetes v1.16, and is only honored by servers that
+     * https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md This
+     * field is beta-level as of Kubernetes v1.18, and is only honored by servers that
      * enable the PodOverhead feature.
      */
     private StringOrFloatMap $overhead;
@@ -188,7 +188,7 @@ class PodSpec implements JsonSerializable
      * If specified, all readiness gates will be evaluated for pod readiness. A pod is
      * ready when all its containers are ready AND all conditions specified in the
      * readiness gates have status equal to "True" More info:
-     * https://git.k8s.io/enhancements/keps/sig-network/0007-pod-ready%2B%2B.md
+     * https://git.k8s.io/enhancements/keps/sig-network/580-pod-readiness-gates
      */
     private PodReadinessGateList $readinessGates;
 
@@ -205,7 +205,7 @@ class PodSpec implements JsonSerializable
      * class, the pod will not be run. If unset or empty, the "legacy" RuntimeClass
      * will be used, which is an implicit class with an empty definition that uses the
      * default runtime handler. More info:
-     * https://git.k8s.io/enhancements/keps/sig-node/runtime-class.md This is a beta
+     * https://git.k8s.io/enhancements/keps/sig-node/585-runtime-class This is a beta
      * feature as of Kubernetes v1.14.
      */
     private string|null $runtimeClassName = null;

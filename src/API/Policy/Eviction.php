@@ -13,7 +13,7 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Eviction implements APIResourceInterface
 {
-    const API_VERSION = 'policy/v1beta1';
+    const API_VERSION = 'policy/v1';
     const KIND = 'Eviction';
 
     /**

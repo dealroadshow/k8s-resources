@@ -14,6 +14,10 @@ class SubjectAccessReview implements APIResourceInterface
     const API_VERSION = 'authorization.k8s.io/v1';
     const KIND = 'SubjectAccessReview';
 
+    /**
+     * Standard list metadata. More info:
+     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
     private ObjectMeta $metadata;
 
     /**

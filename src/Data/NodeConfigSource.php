@@ -6,7 +6,7 @@ use JsonSerializable;
 
 /**
  * NodeConfigSource specifies a source of node configuration. Exactly one subfield
- * (excluding metadata) must be non-nil.
+ * (excluding metadata) must be non-nil. This API is deprecated since 1.22
  */
 class NodeConfigSource implements JsonSerializable
 {

@@ -15,6 +15,10 @@ class CustomResourceDefinition implements APIResourceInterface
     const API_VERSION = 'apiextensions.k8s.io/v1';
     const KIND = 'CustomResourceDefinition';
 
+    /**
+     * Standard object's metadata More info:
+     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     */
     private ObjectMeta $metadata;
 
     /**

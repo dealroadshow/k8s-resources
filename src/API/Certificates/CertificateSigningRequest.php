@@ -30,8 +30,9 @@ class CertificateSigningRequest implements APIResourceInterface
 
     /**
      * spec contains the certificate request, and is immutable after creation. Only the
-     * request, signerName, and usages fields can be set on creation. Other fields are
-     * derived by Kubernetes and cannot be modified by users.
+     * request, signerName, expirationSeconds, and usages fields can be set on
+     * creation. Other fields are derived by Kubernetes and cannot be modified by
+     * users.
      */
     private CertificateSigningRequestSpec $spec;
 
