@@ -8,11 +8,11 @@ use Dealroadshow\K8S\APIResourceListInterface;
 use Dealroadshow\K8S\Data\ListMeta;
 
 /**
- * list of horizontal pod autoscaler objects.
+ * HorizontalPodAutoscalerList is a list of horizontal pod autoscaler objects.
  */
 class HorizontalPodAutoscalerList implements APIResourceListInterface
 {
-    public const API_VERSION = 'autoscaling/v1';
+    public const API_VERSION = 'autoscaling/v2';
     public const KIND = 'HorizontalPodAutoscalerList';
 
     /**
@@ -21,7 +21,7 @@ class HorizontalPodAutoscalerList implements APIResourceListInterface
     private array $items = [];
 
     /**
-     * Standard list metadata.
+     * metadata is the standard list metadata.
      */
     private ListMeta $metadata;
 

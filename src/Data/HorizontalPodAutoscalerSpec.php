@@ -4,18 +4,39 @@ declare(strict_types=1);
 
 namespace Dealroadshow\K8S\Data;
 
+use Dealroadshow\K8S\Data\Collection\MetricSpecList;
 use JsonSerializable;
 
 /**
- * specification of a horizontal pod autoscaler.
+ * HorizontalPodAutoscalerSpec describes the desired functionality of the
+ * HorizontalPodAutoscaler.
  */
 class HorizontalPodAutoscalerSpec implements JsonSerializable
 {
     /**
-     * upper limit for the number of pods that can be set by the autoscaler; cannot be
-     * smaller than MinReplicas.
+     * behavior configures the scaling behavior of the target in both Up and Down
+     * directions (scaleUp and scaleDown fields respectively). If not set, the default
+     * HPAScalingRules for scale up and scale down are used.
+     */
+    private HorizontalPodAutoscalerBehavior $behavior;
+
+    /**
+     * maxReplicas is the upper limit for the number of replicas to which the
+     * autoscaler can scale up. It cannot be less that minReplicas.
      */
     private int $maxReplicas;
+
+    /**
+     * metrics contains the specifications for which to use to calculate the desired
+     * replica count (the maximum replica count across all metrics will be used).  The
+     * desired replica count is calculated multiplying the ratio between the target
+     * value and the current value by the current number of pods.  Ergo, metrics used
+     * must decrease as the pod count is increased, and vice-versa.  See the individual
+     * metric source types for more information about how each type of metric must
+     * respond. If not set, the default metric will be set to 80% average CPU
+     * utilization.
+     */
+    private MetricSpecList $metrics;
 
     /**
      * minReplicas is the lower limit for the number of replicas to which the
@@ -27,22 +48,23 @@ class HorizontalPodAutoscalerSpec implements JsonSerializable
     private int|null $minReplicas = null;
 
     /**
-     * reference to scaled resource; horizontal pod autoscaler will learn the current
-     * resource consumption and will set the desired number of pods by using its Scale
-     * subresource.
+     * scaleTargetRef points to the target resource to scale, and is used to the pods
+     * for which metrics should be collected, as well as to actually change the replica
+     * count.
      */
     private CrossVersionObjectReference $scaleTargetRef;
 
-    /**
-     * target average CPU utilization (represented as a percentage of requested CPU)
-     * over all the pods; if not specified the default autoscaling policy will be used.
-     */
-    private int|null $targetCPUUtilizationPercentage = null;
-
     public function __construct(int $maxReplicas, CrossVersionObjectReference $scaleTargetRef)
     {
+        $this->behavior = new HorizontalPodAutoscalerBehavior();
         $this->maxReplicas = $maxReplicas;
+        $this->metrics = new MetricSpecList();
         $this->scaleTargetRef = $scaleTargetRef;
+    }
+
+    public function behavior(): HorizontalPodAutoscalerBehavior
+    {
+        return $this->behavior;
     }
 
     public function getMaxReplicas(): int
@@ -60,9 +82,9 @@ class HorizontalPodAutoscalerSpec implements JsonSerializable
         return $this->scaleTargetRef;
     }
 
-    public function getTargetCPUUtilizationPercentage(): int|null
+    public function metrics(): MetricSpecList
     {
-        return $this->targetCPUUtilizationPercentage;
+        return $this->metrics;
     }
 
     public function setMaxReplicas(int $maxReplicas): self
@@ -86,20 +108,14 @@ class HorizontalPodAutoscalerSpec implements JsonSerializable
         return $this;
     }
 
-    public function setTargetCPUUtilizationPercentage(int $targetCPUUtilizationPercentage): self
-    {
-        $this->targetCPUUtilizationPercentage = $targetCPUUtilizationPercentage;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         return [
+            'behavior' => $this->behavior,
             'maxReplicas' => $this->maxReplicas,
+            'metrics' => $this->metrics,
             'minReplicas' => $this->minReplicas,
             'scaleTargetRef' => $this->scaleTargetRef,
-            'targetCPUUtilizationPercentage' => $this->targetCPUUtilizationPercentage,
         ];
     }
 }

@@ -44,8 +44,8 @@ class PolicyRule implements JsonSerializable
     private StringList $resources;
 
     /**
-     * Verbs is a list of Verbs that apply to ALL the ResourceKinds and
-     * AttributeRestrictions contained in this rule. '*' represents all verbs.
+     * Verbs is a list of Verbs that apply to ALL the ResourceKinds contained in this
+     * rule. '*' represents all verbs.
      */
     private StringList $verbs;
 

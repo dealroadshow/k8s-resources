@@ -26,7 +26,7 @@ class PodSecurityContext implements JsonSerializable
      * with rw-rw----
      *
      * If unset, the Kubelet will not modify the ownership and permissions of any
-     * volume.
+     * volume. Note that this field cannot be set when spec.os.name is windows.
      */
     private int|null $fsGroup = null;
 
@@ -36,6 +36,7 @@ class PodSecurityContext implements JsonSerializable
      * types which support fsGroup based ownership(and permissions). It will have no
      * effect on ephemeral volume types such as: secret, configmaps and emptydir. Valid
      * values are "OnRootMismatch" and "Always". If not specified, "Always" is used.
+     * Note that this field cannot be set when spec.os.name is windows.
      */
     private string|null $fsGroupChangePolicy = null;
 
@@ -43,7 +44,7 @@ class PodSecurityContext implements JsonSerializable
      * The GID to run the entrypoint of the container process. Uses runtime default if
      * unset. May also be set in SecurityContext.  If set in both SecurityContext and
      * PodSecurityContext, the value specified in SecurityContext takes precedence for
-     * that container.
+     * that container. Note that this field cannot be set when spec.os.name is windows.
      */
     private int|null $runAsGroup = null;
 
@@ -61,7 +62,8 @@ class PodSecurityContext implements JsonSerializable
      * The UID to run the entrypoint of the container process. Defaults to user
      * specified in image metadata if unspecified. May also be set in SecurityContext.
      * If set in both SecurityContext and PodSecurityContext, the value specified in
-     * SecurityContext takes precedence for that container.
+     * SecurityContext takes precedence for that container. Note that this field cannot
+     * be set when spec.os.name is windows.
      */
     private int|null $runAsUser = null;
 
@@ -70,25 +72,27 @@ class PodSecurityContext implements JsonSerializable
      * container runtime will allocate a random SELinux context for each container.
      * May also be set in SecurityContext.  If set in both SecurityContext and
      * PodSecurityContext, the value specified in SecurityContext takes precedence for
-     * that container.
+     * that container. Note that this field cannot be set when spec.os.name is windows.
      */
     private SELinuxOptions $seLinuxOptions;
 
     /**
-     * The seccomp options to use by the containers in this pod.
+     * The seccomp options to use by the containers in this pod. Note that this field
+     * cannot be set when spec.os.name is windows.
      */
     private SeccompProfile|null $seccompProfile = null;
 
     /**
      * A list of groups applied to the first process run in each container, in addition
      * to the container's primary GID.  If unspecified, no groups will be added to any
-     * container.
+     * container. Note that this field cannot be set when spec.os.name is windows.
      */
     private IntList $supplementalGroups;
 
     /**
      * Sysctls hold a list of namespaced sysctls used for the pod. Pods with
-     * unsupported sysctls (by the container runtime) might fail to launch.
+     * unsupported sysctls (by the container runtime) might fail to launch. Note that
+     * this field cannot be set when spec.os.name is windows.
      */
     private SysctlList $sysctls;
 
@@ -96,7 +100,7 @@ class PodSecurityContext implements JsonSerializable
      * The Windows specific settings applied to all containers. If unspecified, the
      * options within a container's SecurityContext will be used. If set in both
      * SecurityContext and PodSecurityContext, the value specified in SecurityContext
-     * takes precedence.
+     * takes precedence. Note that this field cannot be set when spec.os.name is linux.
      */
     private WindowsSecurityContextOptions $windowsOptions;
 

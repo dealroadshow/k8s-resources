@@ -17,6 +17,12 @@ class CronJobSpec implements JsonSerializable
      * "Allow" (default): allows CronJobs to run concurrently; - "Forbid": forbids
      * concurrent runs, skipping next run if previous run hasn't finished yet; -
      * "Replace": cancels currently running job and replaces it with a new one
+     *
+     * Possible enum values:
+     *  - `"Allow"` allows CronJobs to run concurrently.
+     *  - `"Forbid"` forbids concurrent runs, skipping next run if previous hasn't
+     * finished yet.
+     *  - `"Replace"` cancels currently running job and replaces it with a new one.
      */
     private string|null $concurrencyPolicy = null;
 

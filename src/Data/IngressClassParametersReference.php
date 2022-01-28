@@ -38,8 +38,7 @@ class IngressClassParametersReference implements JsonSerializable
 
     /**
      * Scope represents if this refers to a cluster or namespace scoped resource. This
-     * may be set to "Cluster" (default) or "Namespace". Field can be enabled with
-     * IngressClassNamespacedParams feature gate.
+     * may be set to "Cluster" (default) or "Namespace".
      */
     private string|null $scope = null;
 

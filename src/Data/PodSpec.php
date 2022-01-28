@@ -57,6 +57,18 @@ class PodSpec implements JsonSerializable
      * given in DNSConfig will be merged with the policy selected with DNSPolicy. To
      * have DNS options set along with hostNetwork, you have to specify DNS policy
      * explicitly to 'ClusterFirstWithHostNet'.
+     *
+     * Possible enum values:
+     *  - `"ClusterFirst"` indicates that the pod should use cluster DNS first unless
+     * hostNetwork is true, if it is available, then fall back on the default (as
+     * determined by kubelet) DNS settings.
+     *  - `"ClusterFirstWithHostNet"` indicates that the pod should use cluster DNS
+     * first, if it is available, then fall back on the default (as determined by
+     * kubelet) DNS settings.
+     *  - `"Default"` indicates that the pod should use the default (as determined by
+     * kubelet) DNS settings.
+     *  - `"None"` indicates that the pod should use empty DNS settings. DNS parameters
+     * such as nameservers and search paths should be defined via DNSConfig.
      */
     private string|null $dnsPolicy = null;
 
@@ -72,8 +84,8 @@ class PodSpec implements JsonSerializable
      * an existing pod to perform user-initiated actions such as debugging. This list
      * cannot be specified when creating a pod, and it cannot be modified by updating
      * the pod spec. In order to add an ephemeral container to an existing pod, use the
-     * pod's ephemeralcontainers subresource. This field is alpha-level and is only
-     * honored by servers that enable the EphemeralContainers feature.
+     * pod's ephemeralcontainers subresource. This field is beta-level and available on
+     * clusters that haven't disabled the EphemeralContainers feature gate.
      */
     private EphemeralContainerList $ephemeralContainers;
 
@@ -148,6 +160,32 @@ class PodSpec implements JsonSerializable
     private StringMap $nodeSelector;
 
     /**
+     * Specifies the OS of the containers in the pod. Some pod and container fields are
+     * restricted if this is set.
+     *
+     * If the OS field is set to linux, the following fields must be unset:
+     * -securityContext.windowsOptions
+     *
+     * If the OS field is set to windows, following fields must be unset: -
+     * spec.hostPID - spec.hostIPC - spec.securityContext.seLinuxOptions -
+     * spec.securityContext.seccompProfile - spec.securityContext.fsGroup -
+     * spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls -
+     * spec.shareProcessNamespace - spec.securityContext.runAsUser -
+     * spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups -
+     * spec.containers[*].securityContext.seLinuxOptions -
+     * spec.containers[*].securityContext.seccompProfile -
+     * spec.containers[*].securityContext.capabilities -
+     * spec.containers[*].securityContext.readOnlyRootFilesystem -
+     * spec.containers[*].securityContext.privileged -
+     * spec.containers[*].securityContext.allowPrivilegeEscalation -
+     * spec.containers[*].securityContext.procMount -
+     * spec.containers[*].securityContext.runAsUser -
+     * spec.containers[*].securityContext.runAsGroup This is an alpha field and
+     * requires the IdentifyPodOS feature
+     */
+    private PodOS|null $os = null;
+
+    /**
      * Overhead represents the resource overhead associated with running a pod for a
      * given RuntimeClass. This field will be autopopulated at admission time by the
      * RuntimeClass admission controller. If the RuntimeClass admission controller is
@@ -198,6 +236,11 @@ class PodSpec implements JsonSerializable
      * Restart policy for all containers within the pod. One of Always, OnFailure,
      * Never. Default to Always. More info:
      * https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
+     *
+     * Possible enum values:
+     *  - `"Always"`
+     *  - `"Never"`
+     *  - `"OnFailure"`
      */
     private string|null $restartPolicy = null;
 
@@ -377,6 +420,11 @@ class PodSpec implements JsonSerializable
         return $this->nodeName;
     }
 
+    public function getOs(): PodOS|null
+    {
+        return $this->os;
+    }
+
     public function getPreemptionPolicy(): string|null
     {
         return $this->preemptionPolicy;
@@ -535,6 +583,13 @@ class PodSpec implements JsonSerializable
         return $this;
     }
 
+    public function setOs(PodOS $os): self
+    {
+        $this->os = $os;
+
+        return $this;
+    }
+
     public function setPreemptionPolicy(string $preemptionPolicy): self
     {
         $this->preemptionPolicy = $preemptionPolicy;
@@ -654,6 +709,7 @@ class PodSpec implements JsonSerializable
             'initContainers' => $this->initContainers,
             'nodeName' => $this->nodeName,
             'nodeSelector' => $this->nodeSelector,
+            'os' => $this->os,
             'overhead' => $this->overhead,
             'preemptionPolicy' => $this->preemptionPolicy,
             'priority' => $this->priority,

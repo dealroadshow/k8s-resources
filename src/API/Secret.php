@@ -47,7 +47,8 @@ class Secret implements APIResourceInterface
     private StringMap $stringData;
 
     /**
-     * Used to facilitate programmatic handling of secret data.
+     * Used to facilitate programmatic handling of secret data. More info:
+     * https://kubernetes.io/docs/concepts/configuration/secret/#secret-types
      */
     private string|null $type = null;
 

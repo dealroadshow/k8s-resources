@@ -15,7 +15,7 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class FlowSchema implements APIResourceInterface
 {
-    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta1';
+    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta2';
     public const KIND = 'FlowSchema';
 
     /**

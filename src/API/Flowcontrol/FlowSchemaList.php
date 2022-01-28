@@ -12,7 +12,7 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class FlowSchemaList implements APIResourceListInterface
 {
-    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta1';
+    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta2';
     public const KIND = 'FlowSchemaList';
 
     /**

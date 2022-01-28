@@ -62,11 +62,9 @@ class ServiceSpec implements JsonSerializable
      * If this field is specified, clients must ensure that clusterIPs[0] and clusterIP
      * have the same value.
      *
-     * Unless the "IPv6DualStack" feature gate is enabled, this field is limited to one
-     * value, which must be the same as the clusterIP field.  If the feature gate is
-     * enabled, this field may hold a maximum of two entries (dual-stack IPs, in either
-     * order).  These IPs must correspond to the values of the ipFamilies field. Both
-     * clusterIPs and ipFamilies are governed by the ipFamilyPolicy field. More info:
+     * This field may hold a maximum of two entries (dual-stack IPs, in either order).
+     * These IPs must correspond to the values of the ipFamilies field. Both clusterIPs
+     * and ipFamilies are governed by the ipFamilyPolicy field. More info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
      */
     private StringList $clusterIPs;
@@ -95,6 +93,10 @@ class ServiceSpec implements JsonSerializable
      * potentially imbalanced traffic spreading. "Cluster" obscures the client source
      * IP and may cause a second hop to another node, but should have good overall
      * load-spreading.
+     *
+     * Possible enum values:
+     *  - `"Cluster"` specifies node-global (legacy) behavior.
+     *  - `"Local"` specifies node-local endpoints behavior.
      */
     private string|null $externalTrafficPolicy = null;
 
@@ -120,17 +122,16 @@ class ServiceSpec implements JsonSerializable
     private string|null $internalTrafficPolicy = null;
 
     /**
-     * IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this service,
-     * and is gated by the "IPv6DualStack" feature gate.  This field is usually
-     * assigned automatically based on cluster configuration and the ipFamilyPolicy
-     * field. If this field is specified manually, the requested family is available in
-     * the cluster, and ipFamilyPolicy allows it, it will be used; otherwise creation
-     * of the service will fail.  This field is conditionally mutable: it allows for
-     * adding or removing a secondary IP family, but it does not allow changing the
-     * primary IP family of the Service.  Valid values are "IPv4" and "IPv6".  This
-     * field only applies to Services of types ClusterIP, NodePort, and LoadBalancer,
-     * and does apply to "headless" services.  This field will be wiped when updating a
-     * Service to type ExternalName.
+     * IPFamilies is a list of IP families (e.g. IPv4, IPv6) assigned to this service.
+     * This field is usually assigned automatically based on cluster configuration and
+     * the ipFamilyPolicy field. If this field is specified manually, the requested
+     * family is available in the cluster, and ipFamilyPolicy allows it, it will be
+     * used; otherwise creation of the service will fail. This field is conditionally
+     * mutable: it allows for adding or removing a secondary IP family, but it does not
+     * allow changing the primary IP family of the Service. Valid values are "IPv4" and
+     * "IPv6".  This field only applies to Services of types ClusterIP, NodePort, and
+     * LoadBalancer, and does apply to "headless" services. This field will be wiped
+     * when updating a Service to type ExternalName.
      *
      * This field may hold a maximum of two entries (dual-stack families, in either
      * order).  These families must correspond to the values of the clusterIPs field,
@@ -141,14 +142,13 @@ class ServiceSpec implements JsonSerializable
 
     /**
      * IPFamilyPolicy represents the dual-stack-ness requested or required by this
-     * Service, and is gated by the "IPv6DualStack" feature gate.  If there is no value
-     * provided, then this field will be set to SingleStack. Services can be
-     * "SingleStack" (a single IP family), "PreferDualStack" (two IP families on
-     * dual-stack configured clusters or a single IP family on single-stack clusters),
-     * or "RequireDualStack" (two IP families on dual-stack configured clusters,
-     * otherwise fail). The ipFamilies and clusterIPs fields depend on the value of
-     * this field.  This field will be wiped when updating a service to type
-     * ExternalName.
+     * Service. If there is no value provided, then this field will be set to
+     * SingleStack. Services can be "SingleStack" (a single IP family),
+     * "PreferDualStack" (two IP families on dual-stack configured clusters or a single
+     * IP family on single-stack clusters), or "RequireDualStack" (two IP families on
+     * dual-stack configured clusters, otherwise fail). The ipFamilies and clusterIPs
+     * fields depend on the value of this field. This field will be wiped when updating
+     * a service to type ExternalName.
      */
     private string|null $ipFamilyPolicy = null;
 
@@ -220,6 +220,10 @@ class ServiceSpec implements JsonSerializable
      * IP based session affinity. Must be ClientIP or None. Defaults to None. More
      * info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#virtual-ips-and-service-proxies
+     *
+     * Possible enum values:
+     *  - `"ClientIP"` is the Client IP based.
+     *  - `"None"` - no session affinity.
      */
     private string|null $sessionAffinity = null;
 
@@ -242,6 +246,17 @@ class ServiceSpec implements JsonSerializable
      * "ExternalName" aliases this service to the specified externalName. Several other
      * fields do not apply to ExternalName services. More info:
      * https://kubernetes.io/docs/concepts/services-networking/service/#publishing-services-service-types
+     *
+     * Possible enum values:
+     *  - `"ClusterIP"` means a service will only be accessible inside the cluster, via
+     * the cluster IP.
+     *  - `"ExternalName"` means a service consists of only a reference to an external
+     * name that kubedns or equivalent will return as a CNAME record, with no exposing
+     * or proxying of any pods involved.
+     *  - `"LoadBalancer"` means a service will be exposed via an external load
+     * balancer (if the cloud provider supports it), in addition to 'NodePort' type.
+     *  - `"NodePort"` means a service will be exposed on one port of every node, in
+     * addition to 'ClusterIP' type.
      */
     private string|null $type = null;
 

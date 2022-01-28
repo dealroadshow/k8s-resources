@@ -13,15 +13,17 @@ use Dealroadshow\K8S\Data\Collection\VolumeMountList;
 use JsonSerializable;
 
 /**
- * An EphemeralContainer is a container that may be added temporarily to an
- * existing pod for user-initiated activities such as debugging. Ephemeral
- * containers have no resource or scheduling guarantees, and they will not be
- * restarted when they exit or when a pod is removed or restarted. If an ephemeral
- * container causes a pod to exceed its resource allocation, the pod may be
- * evicted. Ephemeral containers may not be added by directly updating the pod
- * spec. They must be added via the pod's ephemeralcontainers subresource, and they
- * will appear in the pod spec once added. This is an alpha feature enabled by the
- * EphemeralContainers feature flag.
+ * An EphemeralContainer is a temporary container that you may add to an existing
+ * Pod for user-initiated activities such as debugging. Ephemeral containers have
+ * no resource or scheduling guarantees, and they will not be restarted when they
+ * exit or when a Pod is removed or restarted. The kubelet may evict a Pod if an
+ * ephemeral container causes the Pod to exceed its resource allocation.
+ *
+ * To add an ephemeral container, use the ephemeralcontainers subresource of an
+ * existing Pod. Ephemeral containers may not be removed or restarted.
+ *
+ * This is a beta feature available on clusters that haven't disabled the
+ * EphemeralContainers feature gate.
  */
 class EphemeralContainer implements JsonSerializable
 {
@@ -74,6 +76,14 @@ class EphemeralContainer implements JsonSerializable
      * Image pull policy. One of Always, Never, IfNotPresent. Defaults to Always if
      * :latest tag is specified, or IfNotPresent otherwise. Cannot be updated. More
      * info: https://kubernetes.io/docs/concepts/containers/images#updating-images
+     *
+     * Possible enum values:
+     *  - `"Always"` means that kubelet always attempts to pull the latest image.
+     * Container will fail If the pull fails.
+     *  - `"IfNotPresent"` means that kubelet pulls if the image isn't present on disk.
+     * Container will fail if the image isn't present and the pull fails.
+     *  - `"Never"` means that kubelet never pulls an image, but only uses a local
+     * image. Container will fail if the image isn't present
      */
     private string|null $imagePullPolicy = null;
 
@@ -143,9 +153,12 @@ class EphemeralContainer implements JsonSerializable
     /**
      * If set, the name of the container from PodSpec that this ephemeral container
      * targets. The ephemeral container will be run in the namespaces (IPC, PID, etc)
-     * of this container. If not set then the ephemeral container is run in whatever
-     * namespaces are shared for the pod. Note that the container runtime must support
-     * this feature.
+     * of this container. If not set then the ephemeral container uses the namespaces
+     * configured in the Pod spec.
+     *
+     * The container runtime must implement support for this feature. If the runtime
+     * does not support namespace targeting then the result of setting this field is
+     * undefined.
      */
     private string|null $targetContainerName = null;
 
@@ -166,6 +179,13 @@ class EphemeralContainer implements JsonSerializable
      * container log output if the termination message file is empty and the container
      * exited with an error. The log output is limited to 2048 bytes or 80 lines,
      * whichever is smaller. Defaults to File. Cannot be updated.
+     *
+     * Possible enum values:
+     *  - `"FallbackToLogsOnError"` will read the most recent contents of the container
+     * logs for the container status message when the container exits with an error and
+     * the terminationMessagePath has no contents.
+     *  - `"File"` is the default behavior and will set the container status message to
+     * the contents of the container's terminationMessagePath when the container exits.
      */
     private string|null $terminationMessagePolicy = null;
 
@@ -181,7 +201,8 @@ class EphemeralContainer implements JsonSerializable
     private VolumeDeviceList $volumeDevices;
 
     /**
-     * Pod volumes to mount into the container's filesystem. Cannot be updated.
+     * Pod volumes to mount into the container's filesystem. Subpath mounts are not
+     * allowed for ephemeral containers. Cannot be updated.
      */
     private VolumeMountList $volumeMounts;
 

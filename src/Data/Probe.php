@@ -13,8 +13,7 @@ use JsonSerializable;
 class Probe implements JsonSerializable
 {
     /**
-     * One and only one of the following should be specified. Exec specifies the action
-     * to take.
+     * Exec specifies the action to take.
      */
     private ExecAction $exec;
 
@@ -23,6 +22,12 @@ class Probe implements JsonSerializable
      * succeeded. Defaults to 3. Minimum value is 1.
      */
     private int|null $failureThreshold = null;
+
+    /**
+     * GRPC specifies an action involving a GRPC port. This is an alpha field and
+     * requires enabling GRPCContainerProbe feature gate.
+     */
+    private GRPCAction|null $grpc = null;
 
     /**
      * HTTPGet specifies the http request to perform.
@@ -50,7 +55,7 @@ class Probe implements JsonSerializable
     private int|null $successThreshold = null;
 
     /**
-     * TCPSocket specifies an action involving a TCP port. TCP hooks not yet supported
+     * TCPSocket specifies an action involving a TCP port.
      */
     private TCPSocketAction|null $tcpSocket = null;
 
@@ -91,6 +96,11 @@ class Probe implements JsonSerializable
         return $this->failureThreshold;
     }
 
+    public function getGrpc(): GRPCAction|null
+    {
+        return $this->grpc;
+    }
+
     public function getHttpGet(): HTTPGetAction|null
     {
         return $this->httpGet;
@@ -129,6 +139,13 @@ class Probe implements JsonSerializable
     public function setFailureThreshold(int $failureThreshold): self
     {
         $this->failureThreshold = $failureThreshold;
+
+        return $this;
+    }
+
+    public function setGrpc(GRPCAction $grpc): self
+    {
+        $this->grpc = $grpc;
 
         return $this;
     }
@@ -187,6 +204,7 @@ class Probe implements JsonSerializable
         return [
             'exec' => $this->exec,
             'failureThreshold' => $this->failureThreshold,
+            'grpc' => $this->grpc,
             'httpGet' => $this->httpGet,
             'initialDelaySeconds' => $this->initialDelaySeconds,
             'periodSeconds' => $this->periodSeconds,
