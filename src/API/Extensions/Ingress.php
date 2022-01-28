@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Extensions;
 
@@ -15,8 +17,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Ingress implements APIResourceInterface
 {
-    const API_VERSION = 'extensions/v1beta1';
-    const KIND = 'Ingress';
+    public const API_VERSION = 'extensions/v1beta1';
+    public const KIND = 'Ingress';
 
     /**
      * Standard object's metadata. More info:

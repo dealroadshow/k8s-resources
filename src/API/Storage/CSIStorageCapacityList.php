@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Storage;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class CSIStorageCapacityList implements APIResourceListInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1beta1';
-    const KIND = 'CSIStorageCapacityList';
+    public const API_VERSION = 'storage.k8s.io/v1beta1';
+    public const KIND = 'CSIStorageCapacityList';
 
     /**
      * @var CSIStorageCapacity[]

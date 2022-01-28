@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Apps;
 
@@ -12,8 +14,8 @@ use Dealroadshow\K8S\Data\ReplicaSetSpec;
  */
 class ReplicaSet implements APIResourceInterface
 {
-    const API_VERSION = 'apps/v1';
-    const KIND = 'ReplicaSet';
+    public const API_VERSION = 'apps/v1';
+    public const KIND = 'ReplicaSet';
 
     /**
      * If the Labels of a ReplicaSet are empty, they are defaulted to be the same as

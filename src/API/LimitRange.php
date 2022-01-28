@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API;
 
@@ -11,8 +13,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class LimitRange implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'LimitRange';
+    public const API_VERSION = 'v1';
+    public const KIND = 'LimitRange';
 
     /**
      * Standard object's metadata. More info:

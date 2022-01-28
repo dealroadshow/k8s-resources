@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Storage;
 
@@ -17,8 +19,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class StorageClass implements APIResourceInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1';
-    const KIND = 'StorageClass';
+    public const API_VERSION = 'storage.k8s.io/v1';
+    public const KIND = 'StorageClass';
 
     /**
      * AllowVolumeExpansion shows whether the storage class allow volume expand

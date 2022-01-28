@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Rbac;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class ClusterRoleBindingList implements APIResourceListInterface
 {
-    const API_VERSION = 'rbac.authorization.k8s.io/v1';
-    const KIND = 'ClusterRoleBindingList';
+    public const API_VERSION = 'rbac.authorization.k8s.io/v1';
+    public const KIND = 'ClusterRoleBindingList';
 
     /**
      * @var ClusterRoleBinding[]
@@ -43,7 +45,9 @@ class ClusterRoleBindingList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

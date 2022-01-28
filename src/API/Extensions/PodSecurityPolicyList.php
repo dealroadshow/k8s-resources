@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Extensions;
 
@@ -11,8 +13,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class PodSecurityPolicyList implements APIResourceListInterface
 {
-    const API_VERSION = 'extensions/v1beta1';
-    const KIND = 'PodSecurityPolicyList';
+    public const API_VERSION = 'extensions/v1beta1';
+    public const KIND = 'PodSecurityPolicyList';
 
     /**
      * @var PodSecurityPolicy[]
