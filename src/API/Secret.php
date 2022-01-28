@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API;
 
@@ -12,8 +14,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Secret implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Secret';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Secret';
 
     /**
      * Data contains the secret data. Each key must consist of alphanumeric characters,

@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API;
 
@@ -13,8 +15,8 @@ use Dealroadshow\K8S\Data\ServiceSpec;
  */
 class Service implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Service';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Service';
 
     /**
      * Standard object's metadata. More info:

@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API;
 
@@ -23,8 +25,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Endpoints implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Endpoints';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Endpoints';
 
     /**
      * Standard object's metadata. More info:

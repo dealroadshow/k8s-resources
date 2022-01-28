@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Node;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class RuntimeClassList implements APIResourceListInterface
 {
-    const API_VERSION = 'node.k8s.io/v1';
-    const KIND = 'RuntimeClassList';
+    public const API_VERSION = 'node.k8s.io/v1';
+    public const KIND = 'RuntimeClassList';
 
     /**
      * @var RuntimeClass[]
@@ -44,7 +46,9 @@ class RuntimeClassList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

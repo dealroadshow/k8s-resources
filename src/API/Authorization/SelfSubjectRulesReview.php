@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Authorization;
 
@@ -19,8 +21,8 @@ use Dealroadshow\K8S\Data\SelfSubjectRulesReviewSpec;
  */
 class SelfSubjectRulesReview implements APIResourceInterface
 {
-    const API_VERSION = 'authorization.k8s.io/v1';
-    const KIND = 'SelfSubjectRulesReview';
+    public const API_VERSION = 'authorization.k8s.io/v1';
+    public const KIND = 'SelfSubjectRulesReview';
 
     /**
      * Standard list metadata. More info:

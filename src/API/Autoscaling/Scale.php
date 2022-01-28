@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Autoscaling;
 
@@ -11,8 +13,8 @@ use Dealroadshow\K8S\Data\ScaleSpec;
  */
 class Scale implements APIResourceInterface
 {
-    const API_VERSION = 'autoscaling/v1';
-    const KIND = 'Scale';
+    public const API_VERSION = 'autoscaling/v1';
+    public const KIND = 'Scale';
 
     /**
      * Standard object metadata; More info:

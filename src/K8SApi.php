@@ -1,8 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Dealroadshow\K8S;
 
 class K8SApi
 {
-    const VERSION = 'v1.22.0';
+    public const VERSION = 'v1.22.0';
 }

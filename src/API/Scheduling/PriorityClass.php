@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Scheduling;
 
@@ -11,8 +13,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class PriorityClass implements APIResourceInterface
 {
-    const API_VERSION = 'scheduling.k8s.io/v1';
-    const KIND = 'PriorityClass';
+    public const API_VERSION = 'scheduling.k8s.io/v1';
+    public const KIND = 'PriorityClass';
 
     /**
      * description is an arbitrary string that usually provides guidelines on when this

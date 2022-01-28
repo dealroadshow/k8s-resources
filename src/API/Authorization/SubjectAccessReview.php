@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Authorization;
 
@@ -11,8 +13,8 @@ use Dealroadshow\K8S\Data\SubjectAccessReviewSpec;
  */
 class SubjectAccessReview implements APIResourceInterface
 {
-    const API_VERSION = 'authorization.k8s.io/v1';
-    const KIND = 'SubjectAccessReview';
+    public const API_VERSION = 'authorization.k8s.io/v1';
+    public const KIND = 'SubjectAccessReview';
 
     /**
      * Standard list metadata. More info:

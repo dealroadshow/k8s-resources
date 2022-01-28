@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Auditregistration;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class AuditSinkList implements APIResourceListInterface
 {
-    const API_VERSION = 'auditregistration.k8s.io/v1alpha1';
-    const KIND = 'AuditSinkList';
+    public const API_VERSION = 'auditregistration.k8s.io/v1alpha1';
+    public const KIND = 'AuditSinkList';
 
     /**
      * @var AuditSink[]

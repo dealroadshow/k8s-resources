@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class ResourceQuotaList implements APIResourceListInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'ResourceQuotaList';
+    public const API_VERSION = 'v1';
+    public const KIND = 'ResourceQuotaList';
 
     /**
      * @var ResourceQuota[]
@@ -44,7 +46,9 @@ class ResourceQuotaList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

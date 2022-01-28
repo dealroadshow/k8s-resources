@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Extensions;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class IngressList implements APIResourceListInterface
 {
-    const API_VERSION = 'extensions/v1beta1';
-    const KIND = 'IngressList';
+    public const API_VERSION = 'extensions/v1beta1';
+    public const KIND = 'IngressList';
 
     /**
      * @var Ingress[]

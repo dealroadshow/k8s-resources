@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Policy;
 
@@ -12,8 +14,8 @@ use Dealroadshow\K8S\Data\PodDisruptionBudgetSpec;
  */
 class PodDisruptionBudget implements APIResourceInterface
 {
-    const API_VERSION = 'policy/v1';
-    const KIND = 'PodDisruptionBudget';
+    public const API_VERSION = 'policy/v1';
+    public const KIND = 'PodDisruptionBudget';
 
     /**
      * Standard object's metadata. More info:

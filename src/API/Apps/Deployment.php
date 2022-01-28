@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Apps;
 
@@ -11,8 +13,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Deployment implements APIResourceInterface
 {
-    const API_VERSION = 'apps/v1';
-    const KIND = 'Deployment';
+    public const API_VERSION = 'apps/v1';
+    public const KIND = 'Deployment';
 
     /**
      * Standard object's metadata. More info:
