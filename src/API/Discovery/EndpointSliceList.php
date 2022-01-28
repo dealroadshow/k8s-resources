@@ -10,7 +10,7 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class EndpointSliceList implements APIResourceListInterface
 {
-    const API_VERSION = 'discovery.k8s.io/v1alpha1';
+    const API_VERSION = 'discovery.k8s.io/v1beta1';
     const KIND = 'EndpointSliceList';
 
     /**

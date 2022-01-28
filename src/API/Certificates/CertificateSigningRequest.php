@@ -7,17 +7,31 @@ use Dealroadshow\K8S\Data\CertificateSigningRequestSpec;
 use Dealroadshow\K8S\Data\ObjectMeta;
 
 /**
- * Describes a certificate signing request
+ * CertificateSigningRequest objects provide a mechanism to obtain x509
+ * certificates by submitting a certificate signing request, and having it
+ * asynchronously approved and issued.
+ *
+ * Kubelets use this API to obtain:
+ *  1. client certificates to authenticate to kube-apiserver (with the
+ * "kubernetes.io/kube-apiserver-client-kubelet" signerName).
+ *  2. serving certificates for TLS endpoints kube-apiserver can connect to
+ * securely (with the "kubernetes.io/kubelet-serving" signerName).
+ *
+ * This API can be used to request client certificates to authenticate to
+ * kube-apiserver (with the "kubernetes.io/kube-apiserver-client" signerName), or
+ * to obtain certificates from custom non-Kubernetes signers.
  */
 class CertificateSigningRequest implements APIResourceInterface
 {
-    const API_VERSION = 'certificates.k8s.io/v1beta1';
+    const API_VERSION = 'certificates.k8s.io/v1';
     const KIND = 'CertificateSigningRequest';
 
     private ObjectMeta $metadata;
 
     /**
-     * The certificate request itself and any additional information.
+     * spec contains the certificate request, and is immutable after creation. Only the
+     * request, signerName, and usages fields can be set on creation. Other fields are
+     * derived by Kubernetes and cannot be modified by users.
      */
     private CertificateSigningRequestSpec $spec;
 

@@ -46,8 +46,8 @@ class Volume implements JsonSerializable
     private ConfigMapVolumeSource $configMap;
 
     /**
-     * CSI (Container Storage Interface) represents storage that is handled by an
-     * external CSI driver (Alpha feature).
+     * CSI (Container Storage Interface) represents ephemeral storage that is handled
+     * by certain external CSI drivers (Beta feature).
      */
     private CSIVolumeSource|null $csi = null;
 
@@ -62,6 +62,31 @@ class Volume implements JsonSerializable
      * info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
      */
     private EmptyDirVolumeSource $emptyDir;
+
+    /**
+     * Ephemeral represents a volume that is handled by a cluster storage driver (Alpha
+     * feature). The volume's lifecycle is tied to the pod that defines it - it will be
+     * created before the pod starts, and deleted when the pod is removed.
+     *
+     * Use this if: a) the volume is only needed while the pod runs, b) features of
+     * normal volumes like restoring from snapshot or capacity
+     *    tracking are needed,
+     * c) the storage driver is specified through a storage class, and d) the storage
+     * driver supports dynamic volume provisioning through
+     *    a PersistentVolumeClaim (see EphemeralVolumeSource for more
+     *    information on the connection between this volume type
+     *    and PersistentVolumeClaim).
+     *
+     * Use PersistentVolumeClaim or one of the vendor-specific APIs for volumes that
+     * persist for longer than the lifecycle of an individual pod.
+     *
+     * Use CSI for light-weight local ephemeral volumes if the CSI driver is meant to
+     * be used that way - see the documentation of the driver for more information.
+     *
+     * A pod can use both types of ephemeral volumes and persistent volumes at the same
+     * time.
+     */
+    private EphemeralVolumeSource $ephemeral;
 
     /**
      * FC represents a Fibre Channel resource that is attached to a kubelet's host
@@ -195,6 +220,7 @@ class Volume implements JsonSerializable
         $this->configMap = new ConfigMapVolumeSource();
         $this->downwardAPI = new DownwardAPIVolumeSource();
         $this->emptyDir = new EmptyDirVolumeSource();
+        $this->ephemeral = new EphemeralVolumeSource();
         $this->fc = new FCVolumeSource();
         $this->flocker = new FlockerVolumeSource();
         $this->name = $name;
@@ -221,6 +247,11 @@ class Volume implements JsonSerializable
     public function emptyDir(): EmptyDirVolumeSource
     {
         return $this->emptyDir;
+    }
+
+    public function ephemeral(): EphemeralVolumeSource
+    {
+        return $this->ephemeral;
     }
 
     public function fc(): FCVolumeSource
@@ -500,6 +531,7 @@ class Volume implements JsonSerializable
             'csi' => $this->csi,
             'downwardAPI' => $this->downwardAPI,
             'emptyDir' => $this->emptyDir,
+            'ephemeral' => $this->ephemeral,
             'fc' => $this->fc,
             'flexVolume' => $this->flexVolume,
             'flocker' => $this->flocker,

@@ -13,7 +13,7 @@ class CSINodeDriver implements JsonSerializable
 {
     /**
      * allocatable represents the volume resources of a node that are available for
-     * scheduling.
+     * scheduling. This field is beta.
      */
     private VolumeNodeResources $allocatable;
 

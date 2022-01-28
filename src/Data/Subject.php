@@ -5,47 +5,29 @@ namespace Dealroadshow\K8S\Data;
 use JsonSerializable;
 
 /**
- * Subject contains a reference to the object or user identities a role binding
- * applies to.  This can either hold a direct API object reference, or a value for
- * non-objects such as user and group names.
+ * Subject matches the originator of a request, as identified by the request
+ * authentication system. There are three ways of matching an originator; by user,
+ * group, or service account.
  */
 class Subject implements JsonSerializable
 {
-    /**
-     * APIGroup holds the API group of the referenced subject. Defaults to "" for
-     * ServiceAccount subjects. Defaults to "rbac.authorization.k8s.io" for User and
-     * Group subjects.
-     */
-    private string|null $apiGroup = null;
+    private GroupSubject|null $group = null;
 
     /**
-     * Kind of object being referenced. Values defined by this API group are "User",
-     * "Group", and "ServiceAccount". If the Authorizer does not recognized the kind
-     * value, the Authorizer should report an error.
+     * Required
      */
     private string $kind;
+    private ServiceAccountSubject|null $serviceAccount = null;
+    private UserSubject|null $user = null;
 
-    /**
-     * Name of the object being referenced.
-     */
-    private string $name;
-
-    /**
-     * Namespace of the referenced object.  If the object kind is non-namespace, such
-     * as "User" or "Group", and this value is not empty the Authorizer should report
-     * an error.
-     */
-    private string|null $namespace = null;
-
-    public function __construct(string $kind, string $name)
+    public function __construct(string $kind)
     {
         $this->kind = $kind;
-        $this->name = $name;
     }
 
-    public function getApiGroup(): string|null
+    public function getGroup(): GroupSubject|null
     {
-        return $this->apiGroup;
+        return $this->group;
     }
 
     public function getKind(): string
@@ -53,19 +35,19 @@ class Subject implements JsonSerializable
         return $this->kind;
     }
 
-    public function getName(): string
+    public function getServiceAccount(): ServiceAccountSubject|null
     {
-        return $this->name;
+        return $this->serviceAccount;
     }
 
-    public function getNamespace(): string|null
+    public function getUser(): UserSubject|null
     {
-        return $this->namespace;
+        return $this->user;
     }
 
-    public function setApiGroup(string $apiGroup): self
+    public function setGroup(GroupSubject $group): self
     {
-        $this->apiGroup = $apiGroup;
+        $this->group = $group;
 
         return $this;
     }
@@ -77,16 +59,16 @@ class Subject implements JsonSerializable
         return $this;
     }
 
-    public function setName(string $name): self
+    public function setServiceAccount(ServiceAccountSubject $serviceAccount): self
     {
-        $this->name = $name;
+        $this->serviceAccount = $serviceAccount;
 
         return $this;
     }
 
-    public function setNamespace(string $namespace): self
+    public function setUser(UserSubject $user): self
     {
-        $this->namespace = $namespace;
+        $this->user = $user;
 
         return $this;
     }
@@ -94,10 +76,10 @@ class Subject implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'apiGroup' => $this->apiGroup,
+            'group' => $this->group,
             'kind' => $this->kind,
-            'name' => $this->name,
-            'namespace' => $this->namespace,
+            'serviceAccount' => $this->serviceAccount,
+            'user' => $this->user,
         ];
     }
 }

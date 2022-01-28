@@ -20,11 +20,6 @@ class EventSeries implements JsonSerializable
      */
     private DateTimeInterface|null $lastObservedTime = null;
 
-    /**
-     * State of this Series: Ongoing or Finished Deprecated. Planned removal for 1.18
-     */
-    private string|null $state = null;
-
     public function __construct()
     {
     }
@@ -37,11 +32,6 @@ class EventSeries implements JsonSerializable
     public function getLastObservedTime(): DateTimeInterface|null
     {
         return $this->lastObservedTime;
-    }
-
-    public function getState(): string|null
-    {
-        return $this->state;
     }
 
     public function setCount(int $count): self
@@ -58,19 +48,11 @@ class EventSeries implements JsonSerializable
         return $this;
     }
 
-    public function setState(string $state): self
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
     public function jsonSerialize(): array
     {
         return [
             'count' => $this->count,
             'lastObservedTime' => $this->lastObservedTime,
-            'state' => $this->state,
         ];
     }
 }

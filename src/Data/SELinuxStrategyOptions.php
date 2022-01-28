@@ -6,8 +6,7 @@ use JsonSerializable;
 
 /**
  * SELinuxStrategyOptions defines the strategy type and any options used to create
- * the strategy. Deprecated: use SELinuxStrategyOptions from policy API Group
- * instead.
+ * the strategy.
  */
 class SELinuxStrategyOptions implements JsonSerializable
 {

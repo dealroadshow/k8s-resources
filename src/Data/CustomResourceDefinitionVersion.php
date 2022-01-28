@@ -20,6 +20,21 @@ class CustomResourceDefinitionVersion implements JsonSerializable
     private CustomResourceColumnDefinitionList $additionalPrinterColumns;
 
     /**
+     * deprecated indicates this version of the custom resource API is deprecated. When
+     * set to true, API requests to this version receive a warning header in the server
+     * response. Defaults to false.
+     */
+    private bool|null $deprecated = null;
+
+    /**
+     * deprecationWarning overrides the default warning returned to API clients. May
+     * only be set when `deprecated` is true. The default warning indicates this
+     * version is deprecated and recommends use of the newest served version of equal
+     * or greater stability, if one exists.
+     */
+    private string|null $deprecationWarning = null;
+
+    /**
      * name is the version name, e.g. “v1”, “v2beta1”, etc. The custom
      * resources are served under this version at `/apis/<group>/<version>/...` if
      * `served` is true.
@@ -64,6 +79,16 @@ class CustomResourceDefinitionVersion implements JsonSerializable
         return $this->additionalPrinterColumns;
     }
 
+    public function getDeprecated(): bool|null
+    {
+        return $this->deprecated;
+    }
+
+    public function getDeprecationWarning(): string|null
+    {
+        return $this->deprecationWarning;
+    }
+
     public function getName(): string
     {
         return $this->name;
@@ -82,6 +107,20 @@ class CustomResourceDefinitionVersion implements JsonSerializable
     public function schema(): CustomResourceValidation
     {
         return $this->schema;
+    }
+
+    public function setDeprecated(bool $deprecated): self
+    {
+        $this->deprecated = $deprecated;
+
+        return $this;
+    }
+
+    public function setDeprecationWarning(string $deprecationWarning): self
+    {
+        $this->deprecationWarning = $deprecationWarning;
+
+        return $this;
     }
 
     public function setName(string $name): self
@@ -114,6 +153,8 @@ class CustomResourceDefinitionVersion implements JsonSerializable
     {
         return [
             'additionalPrinterColumns' => $this->additionalPrinterColumns,
+            'deprecated' => $this->deprecated,
+            'deprecationWarning' => $this->deprecationWarning,
             'name' => $this->name,
             'schema' => $this->schema,
             'served' => $this->served,

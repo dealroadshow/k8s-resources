@@ -78,6 +78,12 @@ class SecurityContext implements JsonSerializable
     private SELinuxOptions $seLinuxOptions;
 
     /**
+     * The seccomp options to use by this container. If seccomp options are provided at
+     * both the pod & container level, the container options override the pod options.
+     */
+    private SeccompProfile|null $seccompProfile = null;
+
+    /**
      * The Windows specific settings applied to all containers. If unspecified, the
      * options from the PodSecurityContext will be used. If set in both SecurityContext
      * and PodSecurityContext, the value specified in SecurityContext takes precedence.
@@ -129,6 +135,11 @@ class SecurityContext implements JsonSerializable
     public function getRunAsUser(): int|null
     {
         return $this->runAsUser;
+    }
+
+    public function getSeccompProfile(): SeccompProfile|null
+    {
+        return $this->seccompProfile;
     }
 
     public function seLinuxOptions(): SELinuxOptions
@@ -185,6 +196,13 @@ class SecurityContext implements JsonSerializable
         return $this;
     }
 
+    public function setSeccompProfile(SeccompProfile $seccompProfile): self
+    {
+        $this->seccompProfile = $seccompProfile;
+
+        return $this;
+    }
+
     public function windowsOptions(): WindowsSecurityContextOptions
     {
         return $this->windowsOptions;
@@ -202,6 +220,7 @@ class SecurityContext implements JsonSerializable
             'runAsNonRoot' => $this->runAsNonRoot,
             'runAsUser' => $this->runAsUser,
             'seLinuxOptions' => $this->seLinuxOptions,
+            'seccompProfile' => $this->seccompProfile,
             'windowsOptions' => $this->windowsOptions,
         ];
     }

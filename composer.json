@@ -3,7 +3,7 @@
     "description": "PHP definitions of Kubernetes API resources",
     "type": "library",
     "require": {
-        "php": "^8.0",
+        "php": ">=8.0",
         "ext-json": "*"
     },
     "license": "MIT",

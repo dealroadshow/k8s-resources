@@ -24,6 +24,14 @@ class CSIDriverSpec implements JsonSerializable
     private bool|null $attachRequired = null;
 
     /**
+     * Defines if the underlying volume supports changing ownership and permission of
+     * the volume before being mounted. Refer to the specific FSGroupPolicy values for
+     * additional details. This field is alpha-level, and is only honored by servers
+     * that enable the CSIVolumeFSGroupPolicy feature gate.
+     */
+    private string|null $fsGroupPolicy = null;
+
+    /**
      * If set to true, podInfoOnMount indicates this CSI volume driver requires
      * additional pod information (like podName, podUID, etc.) during mount operations.
      * If set to false, pod information will not be passed on mount. Default is false.
@@ -48,7 +56,24 @@ class CSIDriverSpec implements JsonSerializable
     private bool|null $podInfoOnMount = null;
 
     /**
-     * VolumeLifecycleModes defines what kind of volumes this CSI volume driver
+     * If set to true, storageCapacity indicates that the CSI volume driver wants pod
+     * scheduling to consider the storage capacity that the driver deployment will
+     * report by creating CSIStorageCapacity objects with capacity information.
+     *
+     * The check can be enabled immediately when deploying a driver. In that case,
+     * provisioning new volumes with late binding will pause until the driver
+     * deployment has published some suitable CSIStorageCapacity object.
+     *
+     * Alternatively, the driver can be deployed with the field unset or false and it
+     * can be flipped later when storage capacity information has been published.
+     *
+     * This is an alpha field and only available when the CSIStorageCapacity feature is
+     * enabled. The default is false.
+     */
+    private bool|null $storageCapacity = null;
+
+    /**
+     * volumeLifecycleModes defines what kind of volumes this CSI volume driver
      * supports. The default if the list is empty is "Persistent", which is the usage
      * defined by the CSI specification and implemented in Kubernetes via the usual
      * PV/PVC mechanism. The other mode is "Ephemeral". In this mode, volumes are
@@ -58,6 +83,7 @@ class CSIDriverSpec implements JsonSerializable
      * information about implementing this mode, see
      * https://kubernetes-csi.github.io/docs/ephemeral-local-volumes.html A driver can
      * support one or more of these modes and more modes may be added in the future.
+     * This field is beta.
      */
     private StringList $volumeLifecycleModes;
 
@@ -71,9 +97,19 @@ class CSIDriverSpec implements JsonSerializable
         return $this->attachRequired;
     }
 
+    public function getFsGroupPolicy(): string|null
+    {
+        return $this->fsGroupPolicy;
+    }
+
     public function getPodInfoOnMount(): bool|null
     {
         return $this->podInfoOnMount;
+    }
+
+    public function getStorageCapacity(): bool|null
+    {
+        return $this->storageCapacity;
     }
 
     public function setAttachRequired(bool $attachRequired): self
@@ -83,9 +119,23 @@ class CSIDriverSpec implements JsonSerializable
         return $this;
     }
 
+    public function setFsGroupPolicy(string $fsGroupPolicy): self
+    {
+        $this->fsGroupPolicy = $fsGroupPolicy;
+
+        return $this;
+    }
+
     public function setPodInfoOnMount(bool $podInfoOnMount): self
     {
         $this->podInfoOnMount = $podInfoOnMount;
+
+        return $this;
+    }
+
+    public function setStorageCapacity(bool $storageCapacity): self
+    {
+        $this->storageCapacity = $storageCapacity;
 
         return $this;
     }
@@ -99,7 +149,9 @@ class CSIDriverSpec implements JsonSerializable
     {
         return [
             'attachRequired' => $this->attachRequired,
+            'fsGroupPolicy' => $this->fsGroupPolicy,
             'podInfoOnMount' => $this->podInfoOnMount,
+            'storageCapacity' => $this->storageCapacity,
             'volumeLifecycleModes' => $this->volumeLifecycleModes,
         ];
     }

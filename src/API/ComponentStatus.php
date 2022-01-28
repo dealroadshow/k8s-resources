@@ -8,6 +8,7 @@ use Dealroadshow\K8S\Data\ObjectMeta;
 
 /**
  * ComponentStatus (and ComponentStatusList) holds the cluster validation info.
+ * Deprecated: This API is deprecated in v1.19+
  */
 class ComponentStatus implements APIResourceInterface
 {

@@ -14,14 +14,17 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class EndpointSlice implements APIResourceInterface
 {
-    const API_VERSION = 'discovery.k8s.io/v1alpha1';
+    const API_VERSION = 'discovery.k8s.io/v1beta1';
     const KIND = 'EndpointSlice';
 
     /**
      * addressType specifies the type of address carried by this EndpointSlice. All
-     * addresses in this slice must be the same type. Default is IP
+     * addresses in this slice must be the same type. This field is immutable after
+     * creation. The following address types are currently supported: * IPv4:
+     * Represents an IPv4 Address. * IPv6: Represents an IPv6 Address. * FQDN:
+     * Represents a Fully Qualified Domain Name.
      */
-    private string|null $addressType = null;
+    private string $addressType;
 
     /**
      * endpoints is a list of unique endpoints in this slice. Each slice may include a
@@ -42,8 +45,9 @@ class EndpointSlice implements APIResourceInterface
      */
     private EndpointPortList $ports;
 
-    public function __construct()
+    public function __construct(string $addressType)
     {
+        $this->addressType = $addressType;
         $this->endpoints = new EndpointList();
         $this->metadata = new ObjectMeta();
         $this->ports = new EndpointPortList();
@@ -54,7 +58,7 @@ class EndpointSlice implements APIResourceInterface
         return $this->endpoints;
     }
 
-    public function getAddressType(): string|null
+    public function getAddressType(): string
     {
         return $this->addressType;
     }

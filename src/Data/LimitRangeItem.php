@@ -44,15 +44,16 @@ class LimitRangeItem implements JsonSerializable
     /**
      * Type of resource that this limit applies to.
      */
-    private string|null $type = null;
+    private string $type;
 
-    public function __construct()
+    public function __construct(string $type)
     {
         $this->default = new StringOrFloatMap();
         $this->defaultRequest = new StringOrFloatMap();
         $this->max = new StringOrFloatMap();
         $this->maxLimitRequestRatio = new StringOrFloatMap();
         $this->min = new StringOrFloatMap();
+        $this->type = $type;
     }
 
     public function default(): StringOrFloatMap
@@ -65,7 +66,7 @@ class LimitRangeItem implements JsonSerializable
         return $this->defaultRequest;
     }
 
-    public function getType(): string|null
+    public function getType(): string
     {
         return $this->type;
     }

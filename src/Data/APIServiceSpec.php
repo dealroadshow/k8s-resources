@@ -45,11 +45,11 @@ class APIServiceSpec implements JsonSerializable
 
     /**
      * Service is a reference to the service for this API server.  It must communicate
-     * on port 443 If the Service is nil, that means the handling for the API
+     * on port 443. If the Service is nil, that means the handling for the API
      * groupversion is handled locally on this server. The call will simply delegate to
      * the normal handler chain to be fulfilled.
      */
-    private ServiceReference $service;
+    private ServiceReference|null $service = null;
 
     /**
      * Version is the API version this server hosts.  For example, "v1"
@@ -73,10 +73,9 @@ class APIServiceSpec implements JsonSerializable
      */
     private int $versionPriority;
 
-    public function __construct(int $groupPriorityMinimum, ServiceReference $service, int $versionPriority)
+    public function __construct(int $groupPriorityMinimum, int $versionPriority)
     {
         $this->groupPriorityMinimum = $groupPriorityMinimum;
-        $this->service = $service;
         $this->versionPriority = $versionPriority;
     }
 
@@ -100,7 +99,7 @@ class APIServiceSpec implements JsonSerializable
         return $this->insecureSkipTLSVerify;
     }
 
-    public function getService(): ServiceReference
+    public function getService(): ServiceReference|null
     {
         return $this->service;
     }

@@ -10,6 +10,16 @@ use JsonSerializable;
 class ServicePort implements JsonSerializable
 {
     /**
+     * The application protocol for this port. This field follows standard Kubernetes
+     * label syntax. Un-prefixed names are reserved for IANA standard service names (as
+     * per RFC-6335 and http://www.iana.org/assignments/service-names). Non-standard
+     * protocols should use prefixed names such as mycompany.com/my-custom-protocol.
+     * This is a beta field that is guarded by the ServiceAppProtocol feature gate and
+     * enabled by default.
+     */
+    private string|null $appProtocol = null;
+
+    /**
      * The name of this port within the service. This must be a DNS_LABEL. All ports
      * within a ServiceSpec must have unique names. When considering the endpoints for
      * a Service, this must match the 'name' field in the EndpointPort. Optional if
@@ -54,6 +64,11 @@ class ServicePort implements JsonSerializable
         $this->port = $port;
     }
 
+    public function getAppProtocol(): string|null
+    {
+        return $this->appProtocol;
+    }
+
     public function getName(): string|null
     {
         return $this->name;
@@ -77,6 +92,13 @@ class ServicePort implements JsonSerializable
     public function getTargetPort(): string|int|null
     {
         return $this->targetPort;
+    }
+
+    public function setAppProtocol(string $appProtocol): self
+    {
+        $this->appProtocol = $appProtocol;
+
+        return $this;
     }
 
     public function setName(string $name): self
@@ -117,6 +139,7 @@ class ServicePort implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'appProtocol' => $this->appProtocol,
             'name' => $this->name,
             'nodePort' => $this->nodePort,
             'port' => $this->port,

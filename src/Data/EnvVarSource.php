@@ -16,8 +16,8 @@ class EnvVarSource implements JsonSerializable
 
     /**
      * Selects a field of the pod: supports metadata.name, metadata.namespace,
-     * metadata.labels, metadata.annotations, spec.nodeName, spec.serviceAccountName,
-     * status.hostIP, status.podIP.
+     * `metadata.labels['<KEY>']`, `metadata.annotations['<KEY>']`, spec.nodeName,
+     * spec.serviceAccountName, status.hostIP, status.podIP, status.podIPs.
      */
     private ObjectFieldSelector|null $fieldRef = null;
 

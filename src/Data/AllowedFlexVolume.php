@@ -6,7 +6,6 @@ use JsonSerializable;
 
 /**
  * AllowedFlexVolume represents a single Flexvolume that is allowed to be used.
- * Deprecated: use AllowedFlexVolume from policy API Group instead.
  */
 class AllowedFlexVolume implements JsonSerializable
 {

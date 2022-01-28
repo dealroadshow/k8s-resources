@@ -13,8 +13,7 @@ class Endpoint implements JsonSerializable
 {
     /**
      * addresses of this endpoint. The contents of this field are interpreted according
-     * to the corresponding EndpointSlice addressType field. This allows for cases like
-     * dual-stack (IPv4 and IPv6) networking. Consumers (e.g. kube-proxy) must handle
+     * to the corresponding EndpointSlice addressType field. Consumers must handle
      * different types of addresses in the context of their own capabilities. This must
      * contain at least one address but no more than 100.
      */

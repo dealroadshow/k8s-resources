@@ -10,7 +10,7 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class CSINodeList implements APIResourceListInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1beta1';
+    const API_VERSION = 'storage.k8s.io/v1';
     const KIND = 'CSINodeList';
 
     /**
