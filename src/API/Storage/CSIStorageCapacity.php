@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Storage;
 
@@ -29,8 +31,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class CSIStorageCapacity implements APIResourceInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1beta1';
-    const KIND = 'CSIStorageCapacity';
+    public const API_VERSION = 'storage.k8s.io/v1beta1';
+    public const KIND = 'CSIStorageCapacity';
 
     /**
      * Capacity is the value reported by the CSI driver in its GetCapacityResponse for

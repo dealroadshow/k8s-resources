@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API;
 
@@ -12,8 +14,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class EphemeralContainers implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'EphemeralContainers';
+    public const API_VERSION = 'v1';
+    public const KIND = 'EphemeralContainers';
 
     /**
      * A list of ephemeral containers associated with this pod. New ephemeral

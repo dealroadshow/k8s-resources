@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Rbac;
 
@@ -13,8 +15,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class ClusterRole implements APIResourceInterface
 {
-    const API_VERSION = 'rbac.authorization.k8s.io/v1';
-    const KIND = 'ClusterRole';
+    public const API_VERSION = 'rbac.authorization.k8s.io/v1';
+    public const KIND = 'ClusterRole';
 
     /**
      * AggregationRule is an optional field that describes how to build the Rules for

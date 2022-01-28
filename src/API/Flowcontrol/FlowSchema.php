@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Flowcontrol;
 
@@ -13,8 +15,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class FlowSchema implements APIResourceInterface
 {
-    const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta1';
-    const KIND = 'FlowSchema';
+    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta1';
+    public const KIND = 'FlowSchema';
 
     /**
      * `metadata` is the standard object's metadata. More info:

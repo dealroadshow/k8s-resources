@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Storage;
 
@@ -15,8 +17,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class CSIDriver implements APIResourceInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1';
-    const KIND = 'CSIDriver';
+    public const API_VERSION = 'storage.k8s.io/v1';
+    public const KIND = 'CSIDriver';
 
     /**
      * Standard object metadata. metadata.Name indicates the name of the CSI driver

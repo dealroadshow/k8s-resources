@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Storage;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class VolumeAttachmentList implements APIResourceListInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1';
-    const KIND = 'VolumeAttachmentList';
+    public const API_VERSION = 'storage.k8s.io/v1';
+    public const KIND = 'VolumeAttachmentList';
 
     /**
      * @var VolumeAttachment[]
@@ -44,7 +46,9 @@ class VolumeAttachmentList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

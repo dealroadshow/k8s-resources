@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Settings;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class PodPresetList implements APIResourceListInterface
 {
-    const API_VERSION = 'settings.k8s.io/v1alpha1';
-    const KIND = 'PodPresetList';
+    public const API_VERSION = 'settings.k8s.io/v1alpha1';
+    public const KIND = 'PodPresetList';
 
     /**
      * @var PodPreset[]

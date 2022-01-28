@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Policy;
 
@@ -10,8 +12,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class PodSecurityPolicyList implements APIResourceListInterface
 {
-    const API_VERSION = 'policy/v1beta1';
-    const KIND = 'PodSecurityPolicyList';
+    public const API_VERSION = 'policy/v1beta1';
+    public const KIND = 'PodSecurityPolicyList';
 
     /**
      * @var PodSecurityPolicy[]
@@ -44,7 +46,9 @@ class PodSecurityPolicyList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

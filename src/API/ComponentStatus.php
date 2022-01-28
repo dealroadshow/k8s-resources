@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API;
 
@@ -12,8 +14,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class ComponentStatus implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'ComponentStatus';
+    public const API_VERSION = 'v1';
+    public const KIND = 'ComponentStatus';
 
     /**
      * List of component conditions observed

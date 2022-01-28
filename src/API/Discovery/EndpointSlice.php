@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Discovery;
 
@@ -14,8 +16,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class EndpointSlice implements APIResourceInterface
 {
-    const API_VERSION = 'discovery.k8s.io/v1';
-    const KIND = 'EndpointSlice';
+    public const API_VERSION = 'discovery.k8s.io/v1';
+    public const KIND = 'EndpointSlice';
 
     /**
      * addressType specifies the type of address carried by this EndpointSlice. All
