@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ReplicationControllerSpec;
  */
 class ReplicationController implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'ReplicationController';
+    public const API_VERSION = 'v1';
+    public const KIND = 'ReplicationController';
 
     /**
      * If the Labels of a ReplicationController are empty, they are defaulted to be the

@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class ValidatingWebhookConfigurationList implements APIResourceListInterface
 {
-    const API_VERSION = 'admissionregistration.k8s.io/v1';
-    const KIND = 'ValidatingWebhookConfigurationList';
+    public const API_VERSION = 'admissionregistration.k8s.io/v1';
+    public const KIND = 'ValidatingWebhookConfigurationList';
 
     /**
      * @var ValidatingWebhookConfiguration[]
@@ -44,7 +44,9 @@ class ValidatingWebhookConfigurationList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

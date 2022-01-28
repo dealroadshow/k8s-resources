@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class NetworkPolicy implements APIResourceInterface
 {
-    const API_VERSION = 'networking.k8s.io/v1';
-    const KIND = 'NetworkPolicy';
+    public const API_VERSION = 'networking.k8s.io/v1';
+    public const KIND = 'NetworkPolicy';
 
     /**
      * Standard object's metadata. More info:

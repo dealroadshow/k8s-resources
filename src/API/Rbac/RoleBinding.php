@@ -15,8 +15,8 @@ use Dealroadshow\K8S\Data\RoleRef;
  */
 class RoleBinding implements APIResourceInterface
 {
-    const API_VERSION = 'rbac.authorization.k8s.io/v1';
-    const KIND = 'RoleBinding';
+    public const API_VERSION = 'rbac.authorization.k8s.io/v1';
+    public const KIND = 'RoleBinding';
 
     /**
      * Standard object's metadata.

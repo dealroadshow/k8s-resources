@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class CustomResourceDefinition implements APIResourceInterface
 {
-    const API_VERSION = 'apiextensions.k8s.io/v1';
-    const KIND = 'CustomResourceDefinition';
+    public const API_VERSION = 'apiextensions.k8s.io/v1';
+    public const KIND = 'CustomResourceDefinition';
 
     private ObjectMeta $metadata;
 

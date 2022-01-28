@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Role implements APIResourceInterface
 {
-    const API_VERSION = 'rbac.authorization.k8s.io/v1';
-    const KIND = 'Role';
+    public const API_VERSION = 'rbac.authorization.k8s.io/v1';
+    public const KIND = 'Role';
 
     /**
      * Standard object's metadata.

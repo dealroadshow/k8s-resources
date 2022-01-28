@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\PriorityLevelConfigurationSpec;
  */
 class PriorityLevelConfiguration implements APIResourceInterface
 {
-    const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1alpha1';
-    const KIND = 'PriorityLevelConfiguration';
+    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1alpha1';
+    public const KIND = 'PriorityLevelConfiguration';
 
     /**
      * `metadata` is the standard object's metadata. More info:

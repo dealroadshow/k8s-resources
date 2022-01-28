@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class ConfigMap implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'ConfigMap';
+    public const API_VERSION = 'v1';
+    public const KIND = 'ConfigMap';
 
     /**
      * BinaryData contains the binary data. Each key must consist of alphanumeric

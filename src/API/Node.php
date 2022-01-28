@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Node implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Node';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Node';
 
     /**
      * Standard object's metadata. More info:

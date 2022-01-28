@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class PriorityLevelConfigurationList implements APIResourceListInterface
 {
-    const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1alpha1';
-    const KIND = 'PriorityLevelConfigurationList';
+    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1alpha1';
+    public const KIND = 'PriorityLevelConfigurationList';
 
     /**
      * @var PriorityLevelConfiguration[]
@@ -44,7 +44,9 @@ class PriorityLevelConfigurationList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

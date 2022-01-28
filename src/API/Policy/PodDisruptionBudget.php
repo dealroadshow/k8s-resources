@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\PodDisruptionBudgetSpec;
  */
 class PodDisruptionBudget implements APIResourceInterface
 {
-    const API_VERSION = 'policy/v1beta1';
-    const KIND = 'PodDisruptionBudget';
+    public const API_VERSION = 'policy/v1beta1';
+    public const KIND = 'PodDisruptionBudget';
 
     private ObjectMeta $metadata;
 

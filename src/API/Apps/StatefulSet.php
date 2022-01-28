@@ -16,8 +16,8 @@ use Dealroadshow\K8S\Data\StatefulSetSpec;
  */
 class StatefulSet implements APIResourceInterface
 {
-    const API_VERSION = 'apps/v1';
-    const KIND = 'StatefulSet';
+    public const API_VERSION = 'apps/v1';
+    public const KIND = 'StatefulSet';
 
     private ObjectMeta $metadata;
 

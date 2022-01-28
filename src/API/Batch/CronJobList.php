@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class CronJobList implements APIResourceListInterface
 {
-    const API_VERSION = 'batch/v1beta1';
-    const KIND = 'CronJobList';
+    public const API_VERSION = 'batch/v1beta1';
+    public const KIND = 'CronJobList';
 
     /**
      * @var CronJob[]
@@ -44,7 +44,9 @@ class CronJobList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

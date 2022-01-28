@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class DaemonSet implements APIResourceInterface
 {
-    const API_VERSION = 'apps/v1';
-    const KIND = 'DaemonSet';
+    public const API_VERSION = 'apps/v1';
+    public const KIND = 'DaemonSet';
 
     /**
      * Standard object's metadata. More info:

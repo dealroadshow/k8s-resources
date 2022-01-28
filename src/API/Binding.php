@@ -13,8 +13,8 @@ use Dealroadshow\K8S\Data\ObjectReference;
  */
 class Binding implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Binding';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Binding';
 
     /**
      * Standard object's metadata. More info:

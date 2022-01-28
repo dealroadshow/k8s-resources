@@ -15,8 +15,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class IngressClass implements APIResourceInterface
 {
-    const API_VERSION = 'networking.k8s.io/v1';
-    const KIND = 'IngressClass';
+    public const API_VERSION = 'networking.k8s.io/v1';
+    public const KIND = 'IngressClass';
 
     /**
      * Standard object's metadata. More info:

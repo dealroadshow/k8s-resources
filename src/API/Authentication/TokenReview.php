@@ -13,8 +13,8 @@ use Dealroadshow\K8S\Data\TokenReviewSpec;
  */
 class TokenReview implements APIResourceInterface
 {
-    const API_VERSION = 'authentication.k8s.io/v1';
-    const KIND = 'TokenReview';
+    public const API_VERSION = 'authentication.k8s.io/v1';
+    public const KIND = 'TokenReview';
 
     private ObjectMeta $metadata;
 

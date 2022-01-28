@@ -31,7 +31,9 @@ class HTTPHeaderList implements JsonSerializable
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

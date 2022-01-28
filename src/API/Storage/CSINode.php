@@ -18,8 +18,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class CSINode implements APIResourceInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1';
-    const KIND = 'CSINode';
+    public const API_VERSION = 'storage.k8s.io/v1';
+    public const KIND = 'CSINode';
 
     /**
      * metadata.name must be the Kubernetes node name.

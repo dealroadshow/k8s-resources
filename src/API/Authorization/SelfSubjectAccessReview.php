@@ -14,8 +14,8 @@ use Dealroadshow\K8S\Data\SelfSubjectAccessReviewSpec;
  */
 class SelfSubjectAccessReview implements APIResourceInterface
 {
-    const API_VERSION = 'authorization.k8s.io/v1';
-    const KIND = 'SelfSubjectAccessReview';
+    public const API_VERSION = 'authorization.k8s.io/v1';
+    public const KIND = 'SelfSubjectAccessReview';
 
     private ObjectMeta $metadata;
 

@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\PodSpec;
  */
 class Pod implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Pod';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Pod';
 
     /**
      * Standard object's metadata. More info:

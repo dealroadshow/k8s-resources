@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class ComponentStatusList implements APIResourceListInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'ComponentStatusList';
+    public const API_VERSION = 'v1';
+    public const KIND = 'ComponentStatusList';
 
     /**
      * @var ComponentStatus[]
@@ -45,7 +45,9 @@ class ComponentStatusList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Job implements APIResourceInterface
 {
-    const API_VERSION = 'batch/v1';
-    const KIND = 'Job';
+    public const API_VERSION = 'batch/v1';
+    public const KIND = 'Job';
 
     /**
      * Standard object's metadata. More info:

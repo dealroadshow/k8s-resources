@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\PodSecurityPolicySpec;
  */
 class PodSecurityPolicy implements APIResourceInterface
 {
-    const API_VERSION = 'policy/v1beta1';
-    const KIND = 'PodSecurityPolicy';
+    public const API_VERSION = 'policy/v1beta1';
+    public const KIND = 'PodSecurityPolicy';
 
     /**
      * Standard object's metadata. More info:

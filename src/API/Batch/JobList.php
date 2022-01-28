@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class JobList implements APIResourceListInterface
 {
-    const API_VERSION = 'batch/v1';
-    const KIND = 'JobList';
+    public const API_VERSION = 'batch/v1';
+    public const KIND = 'JobList';
 
     /**
      * @var Job[]
@@ -44,7 +44,9 @@ class JobList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

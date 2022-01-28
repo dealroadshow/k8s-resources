@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\PodPresetSpec;
  */
 class PodPreset implements APIResourceInterface
 {
-    const API_VERSION = 'settings.k8s.io/v1alpha1';
-    const KIND = 'PodPreset';
+    public const API_VERSION = 'settings.k8s.io/v1alpha1';
+    public const KIND = 'PodPreset';
 
     private ObjectMeta $metadata;
     private PodPresetSpec $spec;

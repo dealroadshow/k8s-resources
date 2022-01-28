@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\TokenRequestSpec;
  */
 class TokenRequest implements APIResourceInterface
 {
-    const API_VERSION = 'authentication.k8s.io/v1';
-    const KIND = 'TokenRequest';
+    public const API_VERSION = 'authentication.k8s.io/v1';
+    public const KIND = 'TokenRequest';
 
     private ObjectMeta $metadata;
     private TokenRequestSpec $spec;

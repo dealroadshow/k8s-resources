@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class HorizontalPodAutoscaler implements APIResourceInterface
 {
-    const API_VERSION = 'autoscaling/v1';
-    const KIND = 'HorizontalPodAutoscaler';
+    public const API_VERSION = 'autoscaling/v1';
+    public const KIND = 'HorizontalPodAutoscaler';
 
     /**
      * Standard object metadata. More info:

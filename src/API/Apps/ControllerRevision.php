@@ -19,8 +19,8 @@ use Dealroadshow\K8S\Data\RawExtension;
  */
 class ControllerRevision implements APIResourceInterface
 {
-    const API_VERSION = 'apps/v1';
-    const KIND = 'ControllerRevision';
+    public const API_VERSION = 'apps/v1';
+    public const KIND = 'ControllerRevision';
 
     /**
      * Data is the serialized representation of the state.

@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class MutatingWebhookConfiguration implements APIResourceInterface
 {
-    const API_VERSION = 'admissionregistration.k8s.io/v1';
-    const KIND = 'MutatingWebhookConfiguration';
+    public const API_VERSION = 'admissionregistration.k8s.io/v1';
+    public const KIND = 'MutatingWebhookConfiguration';
 
     /**
      * Standard object metadata; More info:

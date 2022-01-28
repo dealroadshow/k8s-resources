@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\StatusDetails;
  */
 class Status implements APIResourceListInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Status';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Status';
 
     /**
      * Suggested HTTP return code for this status, 0 if not set.

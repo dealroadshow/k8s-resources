@@ -12,8 +12,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class APIService implements APIResourceInterface
 {
-    const API_VERSION = 'apiregistration.k8s.io/v1';
-    const KIND = 'APIService';
+    public const API_VERSION = 'apiregistration.k8s.io/v1';
+    public const KIND = 'APIService';
 
     private ObjectMeta $metadata;
 

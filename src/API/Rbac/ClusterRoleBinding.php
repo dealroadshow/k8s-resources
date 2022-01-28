@@ -14,8 +14,8 @@ use Dealroadshow\K8S\Data\RoleRef;
  */
 class ClusterRoleBinding implements APIResourceInterface
 {
-    const API_VERSION = 'rbac.authorization.k8s.io/v1';
-    const KIND = 'ClusterRoleBinding';
+    public const API_VERSION = 'rbac.authorization.k8s.io/v1';
+    public const KIND = 'ClusterRoleBinding';
 
     /**
      * Standard object's metadata.

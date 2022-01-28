@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class Lease implements APIResourceInterface
 {
-    const API_VERSION = 'coordination.k8s.io/v1';
-    const KIND = 'Lease';
+    public const API_VERSION = 'coordination.k8s.io/v1';
+    public const KIND = 'Lease';
 
     /**
      * More info:

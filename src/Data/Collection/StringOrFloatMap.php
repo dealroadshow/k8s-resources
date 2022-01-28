@@ -30,7 +30,9 @@ class StringOrFloatMap implements JsonSerializable
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $key => $value) {
+            $this->add($key, $value);
+        }
 
         return $this;
     }

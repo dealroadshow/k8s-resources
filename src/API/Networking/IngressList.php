@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class IngressList implements APIResourceListInterface
 {
-    const API_VERSION = 'networking.k8s.io/v1';
-    const KIND = 'IngressList';
+    public const API_VERSION = 'networking.k8s.io/v1';
+    public const KIND = 'IngressList';
 
     /**
      * @var Ingress[]
@@ -44,7 +44,9 @@ class IngressList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

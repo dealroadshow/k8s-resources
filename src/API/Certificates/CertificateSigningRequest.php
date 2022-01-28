@@ -23,8 +23,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class CertificateSigningRequest implements APIResourceInterface
 {
-    const API_VERSION = 'certificates.k8s.io/v1';
-    const KIND = 'CertificateSigningRequest';
+    public const API_VERSION = 'certificates.k8s.io/v1';
+    public const KIND = 'CertificateSigningRequest';
 
     private ObjectMeta $metadata;
 

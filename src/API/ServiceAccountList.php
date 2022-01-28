@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class ServiceAccountList implements APIResourceListInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'ServiceAccountList';
+    public const API_VERSION = 'v1';
+    public const KIND = 'ServiceAccountList';
 
     /**
      * @var ServiceAccount[]
@@ -44,7 +44,9 @@ class ServiceAccountList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

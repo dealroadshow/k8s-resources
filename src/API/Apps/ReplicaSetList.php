@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class ReplicaSetList implements APIResourceListInterface
 {
-    const API_VERSION = 'apps/v1';
-    const KIND = 'ReplicaSetList';
+    public const API_VERSION = 'apps/v1';
+    public const KIND = 'ReplicaSetList';
 
     /**
      * @var ReplicaSet[]
@@ -44,7 +44,9 @@ class ReplicaSetList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

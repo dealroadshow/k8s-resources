@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class DeploymentList implements APIResourceListInterface
 {
-    const API_VERSION = 'apps/v1';
-    const KIND = 'DeploymentList';
+    public const API_VERSION = 'apps/v1';
+    public const KIND = 'DeploymentList';
 
     /**
      * @var Deployment[]
@@ -43,7 +43,9 @@ class DeploymentList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

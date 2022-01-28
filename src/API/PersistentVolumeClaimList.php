@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class PersistentVolumeClaimList implements APIResourceListInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'PersistentVolumeClaimList';
+    public const API_VERSION = 'v1';
+    public const KIND = 'PersistentVolumeClaimList';
 
     /**
      * @var PersistentVolumeClaim[]
@@ -44,7 +44,9 @@ class PersistentVolumeClaimList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

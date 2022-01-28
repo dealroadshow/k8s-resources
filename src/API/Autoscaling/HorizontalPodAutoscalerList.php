@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class HorizontalPodAutoscalerList implements APIResourceListInterface
 {
-    const API_VERSION = 'autoscaling/v1';
-    const KIND = 'HorizontalPodAutoscalerList';
+    public const API_VERSION = 'autoscaling/v1';
+    public const KIND = 'HorizontalPodAutoscalerList';
 
     /**
      * @var HorizontalPodAutoscaler[]
@@ -43,7 +43,9 @@ class HorizontalPodAutoscalerList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

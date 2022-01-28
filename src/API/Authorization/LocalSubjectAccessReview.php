@@ -13,8 +13,8 @@ use Dealroadshow\K8S\Data\SubjectAccessReviewSpec;
  */
 class LocalSubjectAccessReview implements APIResourceInterface
 {
-    const API_VERSION = 'authorization.k8s.io/v1';
-    const KIND = 'LocalSubjectAccessReview';
+    public const API_VERSION = 'authorization.k8s.io/v1';
+    public const KIND = 'LocalSubjectAccessReview';
 
     private ObjectMeta $metadata;
 

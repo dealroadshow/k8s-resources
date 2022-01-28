@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class LimitRangeList implements APIResourceListInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'LimitRangeList';
+    public const API_VERSION = 'v1';
+    public const KIND = 'LimitRangeList';
 
     /**
      * @var LimitRange[]
@@ -44,7 +44,9 @@ class LimitRangeList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

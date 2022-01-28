@@ -36,7 +36,7 @@ class RuleWithOperations implements JsonSerializable
      *
      * For example: 'pods' means pods. 'pods/log' means the log subresource of pods.
      * '*' means all resources, but not subresources. 'pods/*' means all subresources
-     * of pods. '*/scale' means all scale subresources. '*/*' means all resources and
+     * of pods. '* /scale' means all scale subresources. '* /*' means all resources and
      * their subresources.
      *
      * If wildcard is present, the validation rule will ensure resources do not overlap

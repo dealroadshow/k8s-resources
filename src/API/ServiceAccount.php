@@ -14,8 +14,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class ServiceAccount implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'ServiceAccount';
+    public const API_VERSION = 'v1';
+    public const KIND = 'ServiceAccount';
 
     /**
      * AutomountServiceAccountToken indicates whether pods running as this service

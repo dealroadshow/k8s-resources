@@ -13,8 +13,8 @@ use Dealroadshow\K8S\Data\ServiceSpec;
  */
 class Service implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Service';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Service';
 
     /**
      * Standard object's metadata. More info:

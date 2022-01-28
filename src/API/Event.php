@@ -14,8 +14,8 @@ use Dealroadshow\K8S\Data\ObjectReference;
  */
 class Event implements APIResourceInterface
 {
-    const API_VERSION = 'v1';
-    const KIND = 'Event';
+    public const API_VERSION = 'v1';
+    public const KIND = 'Event';
 
     /**
      * What action was taken/failed regarding to the Regarding object.

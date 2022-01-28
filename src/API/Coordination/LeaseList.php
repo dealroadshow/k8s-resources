@@ -10,8 +10,8 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class LeaseList implements APIResourceListInterface
 {
-    const API_VERSION = 'coordination.k8s.io/v1';
-    const KIND = 'LeaseList';
+    public const API_VERSION = 'coordination.k8s.io/v1';
+    public const KIND = 'LeaseList';
 
     /**
      * @var Lease[]
@@ -44,7 +44,9 @@ class LeaseList implements APIResourceListInterface
      */
     public function addAll(array $items): self
     {
-        $this->items = array_merge($this->items, $items);
+        foreach ($items as $value) {
+            $this->add($value);
+        }
 
         return $this;
     }

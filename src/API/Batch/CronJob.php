@@ -11,8 +11,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class CronJob implements APIResourceInterface
 {
-    const API_VERSION = 'batch/v1beta1';
-    const KIND = 'CronJob';
+    public const API_VERSION = 'batch/v1beta1';
+    public const KIND = 'CronJob';
 
     /**
      * Standard object's metadata. More info:

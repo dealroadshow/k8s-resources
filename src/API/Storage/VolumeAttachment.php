@@ -14,8 +14,8 @@ use Dealroadshow\K8S\Data\VolumeAttachmentSpec;
  */
 class VolumeAttachment implements APIResourceInterface
 {
-    const API_VERSION = 'storage.k8s.io/v1';
-    const KIND = 'VolumeAttachment';
+    public const API_VERSION = 'storage.k8s.io/v1';
+    public const KIND = 'VolumeAttachment';
 
     /**
      * Standard object metadata. More info:

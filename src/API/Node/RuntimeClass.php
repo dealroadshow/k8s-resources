@@ -18,8 +18,8 @@ use Dealroadshow\K8S\Data\Scheduling;
  */
 class RuntimeClass implements APIResourceInterface
 {
-    const API_VERSION = 'node.k8s.io/v1beta1';
-    const KIND = 'RuntimeClass';
+    public const API_VERSION = 'node.k8s.io/v1beta1';
+    public const KIND = 'RuntimeClass';
 
     /**
      * Handler specifies the underlying runtime and configuration that the CRI
