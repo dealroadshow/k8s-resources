@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Internal;
 
@@ -11,8 +13,8 @@ use Dealroadshow\K8S\Data\StorageVersionSpec;
  */
 class StorageVersion implements APIResourceInterface
 {
-    const API_VERSION = 'internal.apiserver.k8s.io/v1alpha1';
-    const KIND = 'StorageVersion';
+    public const API_VERSION = 'internal.apiserver.k8s.io/v1alpha1';
+    public const KIND = 'StorageVersion';
 
     /**
      * The name is <group>.<resource>.

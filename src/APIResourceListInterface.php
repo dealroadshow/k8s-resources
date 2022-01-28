@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S;
 
@@ -7,5 +9,5 @@ use JsonSerializable;
 
 interface APIResourceListInterface extends JsonSerializable
 {
-    function metadata(): ListMeta;
+    public function metadata(): ListMeta;
 }

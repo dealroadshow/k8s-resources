@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+declare(strict_types=1);
 
 namespace Dealroadshow\K8S\API\Auditregistration;
 
@@ -11,8 +13,8 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  */
 class AuditSink implements APIResourceInterface
 {
-    const API_VERSION = 'auditregistration.k8s.io/v1alpha1';
-    const KIND = 'AuditSink';
+    public const API_VERSION = 'auditregistration.k8s.io/v1alpha1';
+    public const KIND = 'AuditSink';
 
     private ObjectMeta $metadata;
 
