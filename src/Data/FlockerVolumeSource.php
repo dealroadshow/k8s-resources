@@ -14,13 +14,14 @@ use JsonSerializable;
 class FlockerVolumeSource implements JsonSerializable
 {
     /**
-     * Name of the dataset stored as metadata -> name on the dataset for Flocker should
-     * be considered as deprecated
+     * datasetName is Name of the dataset stored as metadata -> name on the dataset for
+     * Flocker should be considered as deprecated
      */
     private string|null $datasetName = null;
 
     /**
-     * UUID of the dataset. This is unique identifier of a Flocker dataset
+     * datasetUUID is the UUID of the dataset. This is unique identifier of a Flocker
+     * dataset
      */
     private string|null $datasetUUID = null;
 

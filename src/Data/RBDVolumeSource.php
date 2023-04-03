@@ -14,52 +14,52 @@ use JsonSerializable;
 class RBDVolumeSource implements JsonSerializable
 {
     /**
-     * Filesystem type of the volume that you want to mount. Tip: Ensure that the
-     * filesystem type is supported by the host operating system. Examples: "ext4",
-     * "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info:
-     * https://kubernetes.io/docs/concepts/storage/volumes#rbd
+     * fsType is the filesystem type of the volume that you want to mount. Tip: Ensure
+     * that the filesystem type is supported by the host operating system. Examples:
+     * "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More
+     * info: https://kubernetes.io/docs/concepts/storage/volumes#rbd
      */
     private string|null $fsType = null;
 
     /**
-     * The rados image name. More info:
+     * image is the rados image name. More info:
      * https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
      */
     private string $image;
 
     /**
-     * Keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More
+     * keyring is the path to key ring for RBDUser. Default is /etc/ceph/keyring. More
      * info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
      */
     private string|null $keyring = null;
 
     /**
-     * A collection of Ceph monitors. More info:
+     * monitors is a collection of Ceph monitors. More info:
      * https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
      */
     private StringList $monitors;
 
     /**
-     * The rados pool name. Default is rbd. More info:
+     * pool is the rados pool name. Default is rbd. More info:
      * https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
      */
     private string|null $pool = null;
 
     /**
-     * ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
+     * readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
      * false. More info: https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
      */
     private bool|null $readOnly = null;
 
     /**
-     * SecretRef is name of the authentication secret for RBDUser. If provided
+     * secretRef is name of the authentication secret for RBDUser. If provided
      * overrides keyring. Default is nil. More info:
      * https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
      */
     private LocalObjectReference $secretRef;
 
     /**
-     * The rados user name. Default is admin. More info:
+     * user is the rados user name. Default is admin. More info:
      * https://examples.k8s.io/volumes/rbd/README.md#how-to-use-it
      */
     private string|null $user = null;

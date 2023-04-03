@@ -13,60 +13,60 @@ use JsonSerializable;
 class Volume implements JsonSerializable
 {
     /**
-     * AWSElasticBlockStore represents an AWS Disk resource that is attached to a
+     * awsElasticBlockStore represents an AWS Disk resource that is attached to a
      * kubelet's host machine and then exposed to the pod. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
      */
     private AWSElasticBlockStoreVolumeSource|null $awsElasticBlockStore = null;
 
     /**
-     * AzureDisk represents an Azure Data Disk mount on the host and bind mount to the
+     * azureDisk represents an Azure Data Disk mount on the host and bind mount to the
      * pod.
      */
     private AzureDiskVolumeSource|null $azureDisk = null;
 
     /**
-     * AzureFile represents an Azure File Service mount on the host and bind mount to
+     * azureFile represents an Azure File Service mount on the host and bind mount to
      * the pod.
      */
     private AzureFileVolumeSource|null $azureFile = null;
 
     /**
-     * CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+     * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
      */
     private CephFSVolumeSource $cephfs;
 
     /**
-     * Cinder represents a cinder volume attached and mounted on kubelets host machine.
+     * cinder represents a cinder volume attached and mounted on kubelets host machine.
      * More info: https://examples.k8s.io/mysql-cinder-pd/README.md
      */
     private CinderVolumeSource|null $cinder = null;
 
     /**
-     * ConfigMap represents a configMap that should populate this volume
+     * configMap represents a configMap that should populate this volume
      */
     private ConfigMapVolumeSource $configMap;
 
     /**
-     * CSI (Container Storage Interface) represents ephemeral storage that is handled
+     * csi (Container Storage Interface) represents ephemeral storage that is handled
      * by certain external CSI drivers (Beta feature).
      */
     private CSIVolumeSource|null $csi = null;
 
     /**
-     * DownwardAPI represents downward API about the pod that should populate this
+     * downwardAPI represents downward API about the pod that should populate this
      * volume
      */
     private DownwardAPIVolumeSource $downwardAPI;
 
     /**
-     * EmptyDir represents a temporary directory that shares a pod's lifetime. More
+     * emptyDir represents a temporary directory that shares a pod's lifetime. More
      * info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
      */
     private EmptyDirVolumeSource $emptyDir;
 
     /**
-     * Ephemeral represents a volume that is handled by a cluster storage driver. The
+     * ephemeral represents a volume that is handled by a cluster storage driver. The
      * volume's lifecycle is tied to the pod that defines it - it will be created
      * before the pod starts, and deleted when the pod is removed.
      *
@@ -91,32 +91,32 @@ class Volume implements JsonSerializable
     private EphemeralVolumeSource $ephemeral;
 
     /**
-     * FC represents a Fibre Channel resource that is attached to a kubelet's host
+     * fc represents a Fibre Channel resource that is attached to a kubelet's host
      * machine and then exposed to the pod.
      */
     private FCVolumeSource $fc;
 
     /**
-     * FlexVolume represents a generic volume resource that is provisioned/attached
+     * flexVolume represents a generic volume resource that is provisioned/attached
      * using an exec based plugin.
      */
     private FlexVolumeSource|null $flexVolume = null;
 
     /**
-     * Flocker represents a Flocker volume attached to a kubelet's host machine. This
+     * flocker represents a Flocker volume attached to a kubelet's host machine. This
      * depends on the Flocker control service being running
      */
     private FlockerVolumeSource $flocker;
 
     /**
-     * GCEPersistentDisk represents a GCE Disk resource that is attached to a kubelet's
+     * gcePersistentDisk represents a GCE Disk resource that is attached to a kubelet's
      * host machine and then exposed to the pod. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
      */
     private GCEPersistentDiskVolumeSource|null $gcePersistentDisk = null;
 
     /**
-     * GitRepo represents a git repository at a particular revision. DEPRECATED:
+     * gitRepo represents a git repository at a particular revision. DEPRECATED:
      * GitRepo is deprecated. To provision a container with a git repo, mount an
      * EmptyDir into an InitContainer that clones the repo using git, then mount the
      * EmptyDir into the Pod's container.
@@ -124,13 +124,13 @@ class Volume implements JsonSerializable
     private GitRepoVolumeSource|null $gitRepo = null;
 
     /**
-     * Glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
+     * glusterfs represents a Glusterfs mount on the host that shares a pod's lifetime.
      * More info: https://examples.k8s.io/volumes/glusterfs/README.md
      */
     private GlusterfsVolumeSource|null $glusterfs = null;
 
     /**
-     * HostPath represents a pre-existing file or directory on the host machine that is
+     * hostPath represents a pre-existing file or directory on the host machine that is
      * directly exposed to the container. This is generally used for system agents or
      * other privileged things that are allowed to see the host machine. Most
      * containers will NOT need this. More info:
@@ -139,79 +139,79 @@ class Volume implements JsonSerializable
     private HostPathVolumeSource|null $hostPath = null;
 
     /**
-     * ISCSI represents an ISCSI Disk resource that is attached to a kubelet's host
+     * iscsi represents an ISCSI Disk resource that is attached to a kubelet's host
      * machine and then exposed to the pod. More info:
      * https://examples.k8s.io/volumes/iscsi/README.md
      */
     private ISCSIVolumeSource|null $iscsi = null;
 
     /**
-     * Volume's name. Must be a DNS_LABEL and unique within the pod. More info:
+     * name of the volume. Must be a DNS_LABEL and unique within the pod. More info:
      * https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
      */
     private string $name;
 
     /**
-     * NFS represents an NFS mount on the host that shares a pod's lifetime More info:
+     * nfs represents an NFS mount on the host that shares a pod's lifetime More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#nfs
      */
     private NFSVolumeSource|null $nfs = null;
 
     /**
-     * PersistentVolumeClaimVolumeSource represents a reference to a
+     * persistentVolumeClaimVolumeSource represents a reference to a
      * PersistentVolumeClaim in the same namespace. More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
      */
     private PersistentVolumeClaimVolumeSource|null $persistentVolumeClaim = null;
 
     /**
-     * PhotonPersistentDisk represents a PhotonController persistent disk attached and
+     * photonPersistentDisk represents a PhotonController persistent disk attached and
      * mounted on kubelets host machine
      */
     private PhotonPersistentDiskVolumeSource|null $photonPersistentDisk = null;
 
     /**
-     * PortworxVolume represents a portworx volume attached and mounted on kubelets
+     * portworxVolume represents a portworx volume attached and mounted on kubelets
      * host machine
      */
     private PortworxVolumeSource|null $portworxVolume = null;
 
     /**
-     * Items for all in one resources secrets, configmaps, and downward API
+     * projected items for all in one resources secrets, configmaps, and downward API
      */
     private ProjectedVolumeSource $projected;
 
     /**
-     * Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+     * quobyte represents a Quobyte mount on the host that shares a pod's lifetime
      */
     private QuobyteVolumeSource|null $quobyte = null;
 
     /**
-     * RBD represents a Rados Block Device mount on the host that shares a pod's
+     * rbd represents a Rados Block Device mount on the host that shares a pod's
      * lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md
      */
     private RBDVolumeSource|null $rbd = null;
 
     /**
-     * ScaleIO represents a ScaleIO persistent volume attached and mounted on
+     * scaleIO represents a ScaleIO persistent volume attached and mounted on
      * Kubernetes nodes.
      */
     private ScaleIOVolumeSource|null $scaleIO = null;
 
     /**
-     * Secret represents a secret that should populate this volume. More info:
+     * secret represents a secret that should populate this volume. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#secret
      */
     private SecretVolumeSource $secret;
 
     /**
-     * StorageOS represents a StorageOS volume attached and mounted on Kubernetes
+     * storageOS represents a StorageOS volume attached and mounted on Kubernetes
      * nodes.
      */
     private StorageOSVolumeSource $storageos;
 
     /**
-     * VsphereVolume represents a vSphere volume attached and mounted on kubelets host
+     * vsphereVolume represents a vSphere volume attached and mounted on kubelets host
      * machine
      */
     private VsphereVirtualDiskVolumeSource|null $vsphereVolume = null;

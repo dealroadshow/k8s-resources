@@ -19,7 +19,7 @@ use JsonSerializable;
 class ConfigMapProjection implements JsonSerializable
 {
     /**
-     * If unspecified, each key-value pair in the Data field of the referenced
+     * items if unspecified, each key-value pair in the Data field of the referenced
      * ConfigMap will be projected into the volume as a file whose name is the key and
      * content is the value. If specified, the listed keys will be projected into the
      * specified paths, and unlisted keys will not be present. If a key is specified
@@ -36,7 +36,7 @@ class ConfigMapProjection implements JsonSerializable
     private string|null $name = null;
 
     /**
-     * Specify whether the ConfigMap or its keys must be defined
+     * optional specify whether the ConfigMap or its keys must be defined
      */
     private bool|null $optional = null;
 

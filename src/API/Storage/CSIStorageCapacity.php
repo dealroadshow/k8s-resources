@@ -25,13 +25,16 @@ use Dealroadshow\K8S\Data\ObjectMeta;
  *
  * The producer of these objects can decide which approach is more suitable.
  *
- * They are consumed by the kube-scheduler if the CSIStorageCapacity beta feature
- * gate is enabled there and a CSI driver opts into capacity-aware scheduling with
- * CSIDriver.StorageCapacity.
+ * They are consumed by the kube-scheduler when a CSI driver opts into
+ * capacity-aware scheduling with CSIDriverSpec.StorageCapacity. The scheduler
+ * compares the MaximumVolumeSize against the requested size of pending volumes to
+ * filter out unsuitable nodes. If MaximumVolumeSize is unset, it falls back to a
+ * comparison against the less precise Capacity. If that is also unset, the
+ * scheduler assumes that capacity is insufficient and tries some other node.
  */
 class CSIStorageCapacity implements APIResourceInterface
 {
-    public const API_VERSION = 'storage.k8s.io/v1beta1';
+    public const API_VERSION = 'storage.k8s.io/v1';
     public const KIND = 'CSIStorageCapacity';
 
     /**
@@ -41,7 +44,7 @@ class CSIStorageCapacity implements APIResourceInterface
      *
      * The semantic is currently (CSI spec 1.2) defined as: The available capacity, in
      * bytes, of the storage that can be used to provision volumes. If not set, that
-     * information is currently unavailable and treated like zero capacity.
+     * information is currently unavailable.
      */
     private string|float|null $capacity = null;
 

@@ -23,7 +23,7 @@ class PersistentVolumeClaim implements APIResourceInterface
     private ObjectMeta $metadata;
 
     /**
-     * Spec defines the desired characteristics of a volume requested by a pod author.
+     * spec defines the desired characteristics of a volume requested by a pod author.
      * More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistentvolumeclaims
      */

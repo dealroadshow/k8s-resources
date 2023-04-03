@@ -25,7 +25,7 @@ class PersistentVolume implements APIResourceInterface
     private ObjectMeta $metadata;
 
     /**
-     * Spec defines a specification of a persistent volume owned by the cluster.
+     * spec defines a specification of a persistent volume owned by the cluster.
      * Provisioned by an administrator. More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes#persistent-volumes
      */

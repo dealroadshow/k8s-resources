@@ -14,65 +14,67 @@ use JsonSerializable;
 class ISCSIVolumeSource implements JsonSerializable
 {
     /**
-     * whether support iSCSI Discovery CHAP authentication
+     * chapAuthDiscovery defines whether support iSCSI Discovery CHAP authentication
      */
     private bool|null $chapAuthDiscovery = null;
 
     /**
-     * whether support iSCSI Session CHAP authentication
+     * chapAuthSession defines whether support iSCSI Session CHAP authentication
      */
     private bool|null $chapAuthSession = null;
 
     /**
-     * Filesystem type of the volume that you want to mount. Tip: Ensure that the
-     * filesystem type is supported by the host operating system. Examples: "ext4",
-     * "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More info:
-     * https://kubernetes.io/docs/concepts/storage/volumes#iscsi
+     * fsType is the filesystem type of the volume that you want to mount. Tip: Ensure
+     * that the filesystem type is supported by the host operating system. Examples:
+     * "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if unspecified. More
+     * info: https://kubernetes.io/docs/concepts/storage/volumes#iscsi
      */
     private string|null $fsType = null;
 
     /**
-     * Custom iSCSI Initiator Name. If initiatorName is specified with iscsiInterface
-     * simultaneously, new iSCSI interface <target portal>:<volume name> will be
-     * created for the connection.
+     * initiatorName is the custom iSCSI Initiator Name. If initiatorName is specified
+     * with iscsiInterface simultaneously, new iSCSI interface <target portal>:<volume
+     * name> will be created for the connection.
      */
     private string|null $initiatorName = null;
 
     /**
-     * Target iSCSI Qualified Name.
+     * iqn is the target iSCSI Qualified Name.
      */
     private string $iqn;
 
     /**
-     * iSCSI Interface Name that uses an iSCSI transport. Defaults to 'default' (tcp).
+     * iscsiInterface is the interface Name that uses an iSCSI transport. Defaults to
+     * 'default' (tcp).
      */
     private string|null $iscsiInterface = null;
 
     /**
-     * iSCSI Target Lun number.
+     * lun represents iSCSI Target Lun number.
      */
     private int $lun;
 
     /**
-     * iSCSI Target Portal List. The portal is either an IP or ip_addr:port if the port
-     * is other than default (typically TCP ports 860 and 3260).
+     * portals is the iSCSI Target Portal List. The portal is either an IP or
+     * ip_addr:port if the port is other than default (typically TCP ports 860 and
+     * 3260).
      */
     private StringList $portals;
 
     /**
-     * ReadOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
+     * readOnly here will force the ReadOnly setting in VolumeMounts. Defaults to
      * false.
      */
     private bool|null $readOnly = null;
 
     /**
-     * CHAP Secret for iSCSI target and initiator authentication
+     * secretRef is the CHAP Secret for iSCSI target and initiator authentication
      */
     private LocalObjectReference $secretRef;
 
     /**
-     * iSCSI Target Portal. The Portal is either an IP or ip_addr:port if the port is
-     * other than default (typically TCP ports 860 and 3260).
+     * targetPortal is iSCSI Target Portal. The Portal is either an IP or ip_addr:port
+     * if the port is other than default (typically TCP ports 860 and 3260).
      */
     private string $targetPortal;
 

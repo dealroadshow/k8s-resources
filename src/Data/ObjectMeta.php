@@ -25,14 +25,6 @@ class ObjectMeta implements JsonSerializable
     private StringMap $annotations;
 
     /**
-     * The name of the cluster which the object belongs to. This is used to distinguish
-     * resources with same name and namespace in different clusters. This field is not
-     * set anywhere right now and apiserver is going to ignore it if set in create or
-     * update request.
-     */
-    private string|null $clusterName = null;
-
-    /**
      * Number of seconds allowed for this object to gracefully terminate before it will
      * be removed from the system. Only set when deletionTimestamp is also set. May
      * only be shortened. Read-only.
@@ -63,11 +55,8 @@ class ObjectMeta implements JsonSerializable
      * validation rules as the Name field, and may be truncated by the length of the
      * suffix required to make the value unique on the server.
      *
-     * If this field is specified and the generated name exists, the server will NOT
-     * return a 409 - instead, it will either return 201 Created or 500 with Reason
-     * ServerTimeout indicating a unique name could not be found in the time allotted,
-     * and the client should retry (optionally after the time indicated in the
-     * Retry-After header).
+     * If this field is specified and the generated name exists, the server will return
+     * a 409.
      *
      * Applied only if Name is not specified. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#idempotency
@@ -138,11 +127,6 @@ class ObjectMeta implements JsonSerializable
         return $this->finalizers;
     }
 
-    public function getClusterName(): string|null
-    {
-        return $this->clusterName;
-    }
-
     public function getDeletionGracePeriodSeconds(): int|null
     {
         return $this->deletionGracePeriodSeconds;
@@ -178,13 +162,6 @@ class ObjectMeta implements JsonSerializable
         return $this->ownerReferences;
     }
 
-    public function setClusterName(string $clusterName): self
-    {
-        $this->clusterName = $clusterName;
-
-        return $this;
-    }
-
     public function setDeletionGracePeriodSeconds(int $deletionGracePeriodSeconds): self
     {
         $this->deletionGracePeriodSeconds = $deletionGracePeriodSeconds;
@@ -217,7 +194,6 @@ class ObjectMeta implements JsonSerializable
     {
         return [
             'annotations' => $this->annotations,
-            'clusterName' => $this->clusterName,
             'deletionGracePeriodSeconds' => $this->deletionGracePeriodSeconds,
             'finalizers' => $this->finalizers,
             'generateName' => $this->generateName,

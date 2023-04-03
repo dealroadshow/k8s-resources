@@ -15,8 +15,7 @@ class StatefulSetSpec implements JsonSerializable
     /**
      * Minimum number of seconds for which a newly created pod should be ready without
      * any of its container crashing for it to be considered available. Defaults to 0
-     * (pod will be considered available as soon as it is ready) This is an alpha field
-     * and requires enabling StatefulSetMinReadySeconds feature gate.
+     * (pod will be considered available as soon as it is ready)
      */
     private int|null $minReadySeconds = null;
 
@@ -39,14 +38,6 @@ class StatefulSetSpec implements JsonSerializable
      * When scaling down, the pods are removed in the opposite order. The alternative
      * policy is `Parallel` which will create pods in parallel to match the desired
      * scale without waiting, and on scale down will delete all pods at once.
-     *
-     * Possible enum values:
-     *  - `"OrderedReady"` will create pods in strictly increasing order on scale up
-     * and strictly decreasing order on scale down, progressing only when the previous
-     * pod is ready or terminated. At most one pod will be changed at any time.
-     *  - `"Parallel"` will create and delete pods as soon as the stateful set replica
-     * count is changed, and will not wait for pods to be ready or complete
-     * termination.
      */
     private string|null $podManagementPolicy = null;
 

@@ -57,18 +57,6 @@ class PodSpec implements JsonSerializable
      * given in DNSConfig will be merged with the policy selected with DNSPolicy. To
      * have DNS options set along with hostNetwork, you have to specify DNS policy
      * explicitly to 'ClusterFirstWithHostNet'.
-     *
-     * Possible enum values:
-     *  - `"ClusterFirst"` indicates that the pod should use cluster DNS first unless
-     * hostNetwork is true, if it is available, then fall back on the default (as
-     * determined by kubelet) DNS settings.
-     *  - `"ClusterFirstWithHostNet"` indicates that the pod should use cluster DNS
-     * first, if it is available, then fall back on the default (as determined by
-     * kubelet) DNS settings.
-     *  - `"Default"` indicates that the pod should use the default (as determined by
-     * kubelet) DNS settings.
-     *  - `"None"` indicates that the pod should use empty DNS settings. DNS parameters
-     * such as nameservers and search paths should be defined via DNSConfig.
      */
     private string|null $dnsPolicy = null;
 
@@ -84,8 +72,7 @@ class PodSpec implements JsonSerializable
      * an existing pod to perform user-initiated actions such as debugging. This list
      * cannot be specified when creating a pod, and it cannot be modified by updating
      * the pod spec. In order to add an ephemeral container to an existing pod, use the
-     * pod's ephemeralcontainers subresource. This field is beta-level and available on
-     * clusters that haven't disabled the EphemeralContainers feature gate.
+     * pod's ephemeralcontainers subresource.
      */
     private EphemeralContainerList $ephemeralContainers;
 
@@ -113,6 +100,18 @@ class PodSpec implements JsonSerializable
     private bool|null $hostPID = null;
 
     /**
+     * Use the host's user namespace. Optional: Default to true. If set to true or not
+     * present, the pod will be run in the host user namespace, useful for when the pod
+     * needs a feature only available to the host user namespace, such as loading a
+     * kernel module with CAP_SYS_MODULE. When set to false, a new userns is created
+     * for the pod. Setting false is useful for mitigating container breakout
+     * vulnerabilities even allowing users to run their containers as root without
+     * actually having root privileges on the host. This field is alpha-level and is
+     * only honored by servers that enable the UserNamespacesSupport feature.
+     */
+    private bool|null $hostUsers = null;
+
+    /**
      * Specifies the hostname of the Pod If not specified, the pod's hostname will be
      * set to a system-defined value.
      */
@@ -122,8 +121,7 @@ class PodSpec implements JsonSerializable
      * ImagePullSecrets is an optional list of references to secrets in the same
      * namespace to use for pulling any of the images used by this PodSpec. If
      * specified, these secrets will be passed to individual puller implementations for
-     * them to use. For example, in the case of docker, only DockerConfig type secrets
-     * are honored. More info:
+     * them to use. More info:
      * https://kubernetes.io/docs/concepts/containers/images#specifying-imagepullsecrets-on-a-pod
      */
     private LocalObjectReferenceList $imagePullSecrets;
@@ -167,11 +165,12 @@ class PodSpec implements JsonSerializable
      * -securityContext.windowsOptions
      *
      * If the OS field is set to windows, following fields must be unset: -
-     * spec.hostPID - spec.hostIPC - spec.securityContext.seLinuxOptions -
-     * spec.securityContext.seccompProfile - spec.securityContext.fsGroup -
-     * spec.securityContext.fsGroupChangePolicy - spec.securityContext.sysctls -
-     * spec.shareProcessNamespace - spec.securityContext.runAsUser -
-     * spec.securityContext.runAsGroup - spec.securityContext.supplementalGroups -
+     * spec.hostPID - spec.hostIPC - spec.hostUsers -
+     * spec.securityContext.seLinuxOptions - spec.securityContext.seccompProfile -
+     * spec.securityContext.fsGroup - spec.securityContext.fsGroupChangePolicy -
+     * spec.securityContext.sysctls - spec.shareProcessNamespace -
+     * spec.securityContext.runAsUser - spec.securityContext.runAsGroup -
+     * spec.securityContext.supplementalGroups -
      * spec.containers[*].securityContext.seLinuxOptions -
      * spec.containers[*].securityContext.seccompProfile -
      * spec.containers[*].securityContext.capabilities -
@@ -180,8 +179,7 @@ class PodSpec implements JsonSerializable
      * spec.containers[*].securityContext.allowPrivilegeEscalation -
      * spec.containers[*].securityContext.procMount -
      * spec.containers[*].securityContext.runAsUser -
-     * spec.containers[*].securityContext.runAsGroup This is an alpha field and
-     * requires the IdentifyPodOS feature
+     * spec.containers[*].securityContext.runAsGroup
      */
     private PodOS|null $os = null;
 
@@ -194,16 +192,13 @@ class PodSpec implements JsonSerializable
      * already set. If RuntimeClass is configured and selected in the PodSpec, Overhead
      * will be set to the value defined in the corresponding RuntimeClass, otherwise it
      * will remain unset and treated as zero. More info:
-     * https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md This
-     * field is beta-level as of Kubernetes v1.18, and is only honored by servers that
-     * enable the PodOverhead feature.
+     * https://git.k8s.io/enhancements/keps/sig-node/688-pod-overhead/README.md
      */
     private StringOrFloatMap $overhead;
 
     /**
      * PreemptionPolicy is the Policy for preempting pods with lower priority. One of
-     * Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. This
-     * field is beta-level, gated by the NonPreemptingPriority feature-gate.
+     * Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.
      */
     private string|null $preemptionPolicy = null;
 
@@ -236,11 +231,6 @@ class PodSpec implements JsonSerializable
      * Restart policy for all containers within the pod. One of Always, OnFailure,
      * Never. Default to Always. More info:
      * https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
-     *
-     * Possible enum values:
-     *  - `"Always"`
-     *  - `"Never"`
-     *  - `"OnFailure"`
      */
     private string|null $restartPolicy = null;
 
@@ -250,8 +240,7 @@ class PodSpec implements JsonSerializable
      * class, the pod will not be run. If unset or empty, the "legacy" RuntimeClass
      * will be used, which is an implicit class with an empty definition that uses the
      * default runtime handler. More info:
-     * https://git.k8s.io/enhancements/keps/sig-node/585-runtime-class This is a beta
-     * feature as of Kubernetes v1.14.
+     * https://git.k8s.io/enhancements/keps/sig-node/585-runtime-class
      */
     private string|null $runtimeClassName = null;
 
@@ -408,6 +397,11 @@ class PodSpec implements JsonSerializable
     public function getHostPID(): bool|null
     {
         return $this->hostPID;
+    }
+
+    public function getHostUsers(): bool|null
+    {
+        return $this->hostUsers;
     }
 
     public function getHostname(): string|null
@@ -569,6 +563,13 @@ class PodSpec implements JsonSerializable
         return $this;
     }
 
+    public function setHostUsers(bool $hostUsers): self
+    {
+        $this->hostUsers = $hostUsers;
+
+        return $this;
+    }
+
     public function setHostname(string $hostname): self
     {
         $this->hostname = $hostname;
@@ -704,6 +705,7 @@ class PodSpec implements JsonSerializable
             'hostIPC' => $this->hostIPC,
             'hostNetwork' => $this->hostNetwork,
             'hostPID' => $this->hostPID,
+            'hostUsers' => $this->hostUsers,
             'hostname' => $this->hostname,
             'imagePullSecrets' => $this->imagePullSecrets,
             'initContainers' => $this->initContainers,

@@ -27,8 +27,7 @@ class RollingUpdateDaemonSet implements JsonSerializable
      * surge limits. Allowing surge implies the possibility that the resources consumed
      * by the daemonset on any given node can double if the readiness check fails, and
      * so resource intensive daemonsets should take into account that they may cause
-     * evictions during disruption. This is beta field and enabled/disabled by
-     * DaemonSetUpdateSurge feature gate.
+     * evictions during disruption.
      */
     private string|int|null $maxSurge = null;
 

@@ -40,8 +40,7 @@ class PriorityClass implements APIResourceInterface
 
     /**
      * PreemptionPolicy is the Policy for preempting pods with lower priority. One of
-     * Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset. This
-     * field is beta-level, gated by the NonPreemptingPriority feature-gate.
+     * Never, PreemptLowerPriority. Defaults to PreemptLowerPriority if unset.
      */
     private string|null $preemptionPolicy = null;
 

@@ -14,49 +14,50 @@ use JsonSerializable;
 class PersistentVolumeSpec implements JsonSerializable
 {
     /**
-     * AccessModes contains all ways the volume can be mounted. More info:
+     * accessModes contains all ways the volume can be mounted. More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes
      */
     private StringList $accessModes;
 
     /**
-     * AWSElasticBlockStore represents an AWS Disk resource that is attached to a
+     * awsElasticBlockStore represents an AWS Disk resource that is attached to a
      * kubelet's host machine and then exposed to the pod. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#awselasticblockstore
      */
     private AWSElasticBlockStoreVolumeSource|null $awsElasticBlockStore = null;
 
     /**
-     * AzureDisk represents an Azure Data Disk mount on the host and bind mount to the
+     * azureDisk represents an Azure Data Disk mount on the host and bind mount to the
      * pod.
      */
     private AzureDiskVolumeSource|null $azureDisk = null;
 
     /**
-     * AzureFile represents an Azure File Service mount on the host and bind mount to
+     * azureFile represents an Azure File Service mount on the host and bind mount to
      * the pod.
      */
     private AzureFilePersistentVolumeSource|null $azureFile = null;
 
     /**
-     * A description of the persistent volume's resources and capacity. More info:
+     * capacity is the description of the persistent volume's resources and capacity.
+     * More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
      */
     private StringOrFloatMap $capacity;
 
     /**
-     * CephFS represents a Ceph FS mount on the host that shares a pod's lifetime
+     * cephFS represents a Ceph FS mount on the host that shares a pod's lifetime
      */
     private CephFSPersistentVolumeSource $cephfs;
 
     /**
-     * Cinder represents a cinder volume attached and mounted on kubelets host machine.
+     * cinder represents a cinder volume attached and mounted on kubelets host machine.
      * More info: https://examples.k8s.io/mysql-cinder-pd/README.md
      */
     private CinderPersistentVolumeSource|null $cinder = null;
 
     /**
-     * ClaimRef is part of a bi-directional binding between PersistentVolume and
+     * claimRef is part of a bi-directional binding between PersistentVolume and
      * PersistentVolumeClaim. Expected to be non-nil when bound. claim.VolumeName is
      * the authoritative bind between PV and PVC. More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes#binding
@@ -64,45 +65,45 @@ class PersistentVolumeSpec implements JsonSerializable
     private ObjectReference $claimRef;
 
     /**
-     * CSI represents storage that is handled by an external CSI driver (Beta feature).
+     * csi represents storage that is handled by an external CSI driver (Beta feature).
      */
     private CSIPersistentVolumeSource|null $csi = null;
 
     /**
-     * FC represents a Fibre Channel resource that is attached to a kubelet's host
+     * fc represents a Fibre Channel resource that is attached to a kubelet's host
      * machine and then exposed to the pod.
      */
     private FCVolumeSource $fc;
 
     /**
-     * FlexVolume represents a generic volume resource that is provisioned/attached
+     * flexVolume represents a generic volume resource that is provisioned/attached
      * using an exec based plugin.
      */
     private FlexPersistentVolumeSource|null $flexVolume = null;
 
     /**
-     * Flocker represents a Flocker volume attached to a kubelet's host machine and
+     * flocker represents a Flocker volume attached to a kubelet's host machine and
      * exposed to the pod for its usage. This depends on the Flocker control service
      * being running
      */
     private FlockerVolumeSource $flocker;
 
     /**
-     * GCEPersistentDisk represents a GCE Disk resource that is attached to a kubelet's
+     * gcePersistentDisk represents a GCE Disk resource that is attached to a kubelet's
      * host machine and then exposed to the pod. Provisioned by an admin. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#gcepersistentdisk
      */
     private GCEPersistentDiskVolumeSource|null $gcePersistentDisk = null;
 
     /**
-     * Glusterfs represents a Glusterfs volume that is attached to a host and exposed
+     * glusterfs represents a Glusterfs volume that is attached to a host and exposed
      * to the pod. Provisioned by an admin. More info:
      * https://examples.k8s.io/volumes/glusterfs/README.md
      */
     private GlusterfsPersistentVolumeSource|null $glusterfs = null;
 
     /**
-     * HostPath represents a directory on the host. Provisioned by a developer or
+     * hostPath represents a directory on the host. Provisioned by a developer or
      * tester. This is useful for single-node development and testing only! On-host
      * storage is not supported in any way and WILL NOT WORK in a multi-node cluster.
      * More info: https://kubernetes.io/docs/concepts/storage/volumes#hostpath
@@ -110,91 +111,83 @@ class PersistentVolumeSpec implements JsonSerializable
     private HostPathVolumeSource|null $hostPath = null;
 
     /**
-     * ISCSI represents an ISCSI Disk resource that is attached to a kubelet's host
+     * iscsi represents an ISCSI Disk resource that is attached to a kubelet's host
      * machine and then exposed to the pod. Provisioned by an admin.
      */
     private ISCSIPersistentVolumeSource|null $iscsi = null;
 
     /**
-     * Local represents directly-attached storage with node affinity
+     * local represents directly-attached storage with node affinity
      */
     private LocalVolumeSource|null $local = null;
 
     /**
-     * A list of mount options, e.g. ["ro", "soft"]. Not validated - mount will simply
-     * fail if one is invalid. More info:
+     * mountOptions is the list of mount options, e.g. ["ro", "soft"]. Not validated -
+     * mount will simply fail if one is invalid. More info:
      * https://kubernetes.io/docs/concepts/storage/persistent-volumes/#mount-options
      */
     private StringList $mountOptions;
 
     /**
-     * NFS represents an NFS mount on the host. Provisioned by an admin. More info:
+     * nfs represents an NFS mount on the host. Provisioned by an admin. More info:
      * https://kubernetes.io/docs/concepts/storage/volumes#nfs
      */
     private NFSVolumeSource|null $nfs = null;
 
     /**
-     * NodeAffinity defines constraints that limit what nodes this volume can be
+     * nodeAffinity defines constraints that limit what nodes this volume can be
      * accessed from. This field influences the scheduling of pods that use this
      * volume.
      */
     private VolumeNodeAffinity $nodeAffinity;
 
     /**
-     * What happens to a persistent volume when released from its claim. Valid options
-     * are Retain (default for manually created PersistentVolumes), Delete (default for
-     * dynamically provisioned PersistentVolumes), and Recycle (deprecated). Recycle
-     * must be supported by the volume plugin underlying this PersistentVolume. More
-     * info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming
-     *
-     * Possible enum values:
-     *  - `"Delete"` means the volume will be deleted from Kubernetes on release from
-     * its claim. The volume plugin must support Deletion.
-     *  - `"Recycle"` means the volume will be recycled back into the pool of unbound
-     * persistent volumes on release from its claim. The volume plugin must support
-     * Recycling.
-     *  - `"Retain"` means the volume will be left in its current phase (Released) for
-     * manual reclamation by the administrator. The default policy is Retain.
+     * persistentVolumeReclaimPolicy defines what happens to a persistent volume when
+     * released from its claim. Valid options are Retain (default for manually created
+     * PersistentVolumes), Delete (default for dynamically provisioned
+     * PersistentVolumes), and Recycle (deprecated). Recycle must be supported by the
+     * volume plugin underlying this PersistentVolume. More info:
+     * https://kubernetes.io/docs/concepts/storage/persistent-volumes#reclaiming
      */
     private string|null $persistentVolumeReclaimPolicy = null;
 
     /**
-     * PhotonPersistentDisk represents a PhotonController persistent disk attached and
+     * photonPersistentDisk represents a PhotonController persistent disk attached and
      * mounted on kubelets host machine
      */
     private PhotonPersistentDiskVolumeSource|null $photonPersistentDisk = null;
 
     /**
-     * PortworxVolume represents a portworx volume attached and mounted on kubelets
+     * portworxVolume represents a portworx volume attached and mounted on kubelets
      * host machine
      */
     private PortworxVolumeSource|null $portworxVolume = null;
 
     /**
-     * Quobyte represents a Quobyte mount on the host that shares a pod's lifetime
+     * quobyte represents a Quobyte mount on the host that shares a pod's lifetime
      */
     private QuobyteVolumeSource|null $quobyte = null;
 
     /**
-     * RBD represents a Rados Block Device mount on the host that shares a pod's
+     * rbd represents a Rados Block Device mount on the host that shares a pod's
      * lifetime. More info: https://examples.k8s.io/volumes/rbd/README.md
      */
     private RBDPersistentVolumeSource|null $rbd = null;
 
     /**
-     * ScaleIO represents a ScaleIO persistent volume attached and mounted on
+     * scaleIO represents a ScaleIO persistent volume attached and mounted on
      * Kubernetes nodes.
      */
     private ScaleIOPersistentVolumeSource|null $scaleIO = null;
 
     /**
-     * Name of StorageClass to which this persistent volume belongs. Empty value means
-     * that this volume does not belong to any StorageClass.
+     * storageClassName is the name of StorageClass to which this persistent volume
+     * belongs. Empty value means that this volume does not belong to any StorageClass.
      */
     private string|null $storageClassName = null;
 
     /**
-     * StorageOS represents a StorageOS volume that is attached to the kubelet's host
+     * storageOS represents a StorageOS volume that is attached to the kubelet's host
      * machine and mounted into the pod More info:
      * https://examples.k8s.io/volumes/storageos/README.md
      */
@@ -208,7 +201,7 @@ class PersistentVolumeSpec implements JsonSerializable
     private string|null $volumeMode = null;
 
     /**
-     * VsphereVolume represents a vSphere volume attached and mounted on kubelets host
+     * vsphereVolume represents a vSphere volume attached and mounted on kubelets host
      * machine
      */
     private VsphereVirtualDiskVolumeSource|null $vsphereVolume = null;

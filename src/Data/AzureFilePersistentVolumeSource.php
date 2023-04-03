@@ -13,24 +13,25 @@ use JsonSerializable;
 class AzureFilePersistentVolumeSource implements JsonSerializable
 {
     /**
-     * Defaults to false (read/write). ReadOnly here will force the ReadOnly setting in
-     * VolumeMounts.
+     * readOnly defaults to false (read/write). ReadOnly here will force the ReadOnly
+     * setting in VolumeMounts.
      */
     private bool|null $readOnly = null;
 
     /**
-     * the name of secret that contains Azure Storage Account Name and Key
+     * secretName is the name of secret that contains Azure Storage Account Name and
+     * Key
      */
     private string $secretName;
 
     /**
-     * the namespace of the secret that contains Azure Storage Account Name and Key
-     * default is the same as the Pod
+     * secretNamespace is the namespace of the secret that contains Azure Storage
+     * Account Name and Key default is the same as the Pod
      */
     private string|null $secretNamespace = null;
 
     /**
-     * Share Name
+     * shareName is the azure Share Name
      */
     private string $shareName;
 

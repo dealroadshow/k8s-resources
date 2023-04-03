@@ -15,31 +15,31 @@ use JsonSerializable;
 class FCVolumeSource implements JsonSerializable
 {
     /**
-     * Filesystem type to mount. Must be a filesystem type supported by the host
-     * operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if
-     * unspecified.
+     * fsType is the filesystem type to mount. Must be a filesystem type supported by
+     * the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
+     * "ext4" if unspecified.
      */
     private string|null $fsType = null;
 
     /**
-     * Optional: FC target lun number
+     * lun is Optional: FC target lun number
      */
     private int|null $lun = null;
 
     /**
-     * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly
-     * setting in VolumeMounts.
+     * readOnly is Optional: Defaults to false (read/write). ReadOnly here will force
+     * the ReadOnly setting in VolumeMounts.
      */
     private bool|null $readOnly = null;
 
     /**
-     * Optional: FC target worldwide names (WWNs)
+     * targetWWNs is Optional: FC target worldwide names (WWNs)
      */
     private StringList $targetWWNs;
 
     /**
-     * Optional: FC volume world wide identifiers (wwids) Either wwids or combination
-     * of targetWWNs and lun must be set, but not both simultaneously.
+     * wwids Optional: FC volume world wide identifiers (wwids) Either wwids or
+     * combination of targetWWNs and lun must be set, but not both simultaneously.
      */
     private StringList $wwids;
 

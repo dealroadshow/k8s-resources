@@ -12,22 +12,22 @@ use JsonSerializable;
 class VolumeProjection implements JsonSerializable
 {
     /**
-     * information about the configMap data to project
+     * configMap information about the configMap data to project
      */
     private ConfigMapProjection $configMap;
 
     /**
-     * information about the downwardAPI data to project
+     * downwardAPI information about the downwardAPI data to project
      */
     private DownwardAPIProjection $downwardAPI;
 
     /**
-     * information about the secret data to project
+     * secret information about the secret data to project
      */
     private SecretProjection $secret;
 
     /**
-     * information about the serviceAccountToken data to project
+     * serviceAccountToken is information about the serviceAccountToken data to project
      */
     private ServiceAccountTokenProjection|null $serviceAccountToken = null;
 

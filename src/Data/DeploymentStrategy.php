@@ -20,11 +20,6 @@ class DeploymentStrategy implements JsonSerializable
     /**
      * Type of deployment. Can be "Recreate" or "RollingUpdate". Default is
      * RollingUpdate.
-     *
-     * Possible enum values:
-     *  - `"Recreate"` Kill all existing pods before creating new ones.
-     *  - `"RollingUpdate"` Replace the old ReplicaSets by new one using rolling update
-     * i.e gradually scale down the old ReplicaSets and scale up the new one.
      */
     private string|null $type = null;
 

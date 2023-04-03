@@ -14,33 +14,33 @@ use JsonSerializable;
 class FlexVolumeSource implements JsonSerializable
 {
     /**
-     * Driver is the name of the driver to use for this volume.
+     * driver is the name of the driver to use for this volume.
      */
     private string $driver;
 
     /**
-     * Filesystem type to mount. Must be a filesystem type supported by the host
-     * operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem depends on
-     * FlexVolume script.
+     * fsType is the filesystem type to mount. Must be a filesystem type supported by
+     * the host operating system. Ex. "ext4", "xfs", "ntfs". The default filesystem
+     * depends on FlexVolume script.
      */
     private string|null $fsType = null;
 
     /**
-     * Optional: Extra command options if any.
+     * options is Optional: this field holds extra command options if any.
      */
     private StringMap $options;
 
     /**
-     * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly
-     * setting in VolumeMounts.
+     * readOnly is Optional: defaults to false (read/write). ReadOnly here will force
+     * the ReadOnly setting in VolumeMounts.
      */
     private bool|null $readOnly = null;
 
     /**
-     * Optional: SecretRef is reference to the secret object containing sensitive
-     * information to pass to the plugin scripts. This may be empty if no secret object
-     * is specified. If the secret object contains more than one secret, all secrets
-     * are passed to the plugin scripts.
+     * secretRef is Optional: secretRef is reference to the secret object containing
+     * sensitive information to pass to the plugin scripts. This may be empty if no
+     * secret object is specified. If the secret object contains more than one secret,
+     * all secrets are passed to the plugin scripts.
      */
     private LocalObjectReference $secretRef;
 

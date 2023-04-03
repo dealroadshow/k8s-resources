@@ -12,14 +12,14 @@ use JsonSerializable;
 class PhotonPersistentDiskVolumeSource implements JsonSerializable
 {
     /**
-     * Filesystem type to mount. Must be a filesystem type supported by the host
-     * operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if
-     * unspecified.
+     * fsType is the filesystem type to mount. Must be a filesystem type supported by
+     * the host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
+     * "ext4" if unspecified.
      */
     private string|null $fsType = null;
 
     /**
-     * ID that identifies Photon Controller persistent disk
+     * pdID is the ID that identifies Photon Controller persistent disk
      */
     private string $pdID;
 

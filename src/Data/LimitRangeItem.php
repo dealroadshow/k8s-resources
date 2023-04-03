@@ -45,12 +45,6 @@ class LimitRangeItem implements JsonSerializable
 
     /**
      * Type of resource that this limit applies to.
-     *
-     * Possible enum values:
-     *  - `"Container"` Limit that applies to all containers in a namespace
-     *  - `"PersistentVolumeClaim"` Limit that applies to all persistent volume claims
-     * in a namespace
-     *  - `"Pod"` Limit that applies to all pods in a namespace
      */
     private string $type;
 

@@ -14,9 +14,9 @@ use JsonSerializable;
 class CSIPersistentVolumeSource implements JsonSerializable
 {
     /**
-     * ControllerExpandSecretRef is a reference to the secret object containing
+     * controllerExpandSecretRef is a reference to the secret object containing
      * sensitive information to pass to the CSI driver to complete the CSI
-     * ControllerExpandVolume call. This is an alpha field and requires enabling
+     * ControllerExpandVolume call. This is an beta field and requires enabling
      * ExpandCSIVolumes feature gate. This field is optional, and may be empty if no
      * secret is required. If the secret object contains more than one secret, all
      * secrets are passed.
@@ -24,7 +24,7 @@ class CSIPersistentVolumeSource implements JsonSerializable
     private SecretReference $controllerExpandSecretRef;
 
     /**
-     * ControllerPublishSecretRef is a reference to the secret object containing
+     * controllerPublishSecretRef is a reference to the secret object containing
      * sensitive information to pass to the CSI driver to complete the CSI
      * ControllerPublishVolume and ControllerUnpublishVolume calls. This field is
      * optional, and may be empty if no secret is required. If the secret object
@@ -33,18 +33,27 @@ class CSIPersistentVolumeSource implements JsonSerializable
     private SecretReference $controllerPublishSecretRef;
 
     /**
-     * Driver is the name of the driver to use for this volume. Required.
+     * driver is the name of the driver to use for this volume. Required.
      */
     private string $driver;
 
     /**
-     * Filesystem type to mount. Must be a filesystem type supported by the host
-     * operating system. Ex. "ext4", "xfs", "ntfs".
+     * fsType to mount. Must be a filesystem type supported by the host operating
+     * system. Ex. "ext4", "xfs", "ntfs".
      */
     private string|null $fsType = null;
 
     /**
-     * NodePublishSecretRef is a reference to the secret object containing sensitive
+     * nodeExpandSecretRef is a reference to the secret object containing sensitive
+     * information to pass to the CSI driver to complete the CSI NodeExpandVolume call.
+     * This is an alpha field and requires enabling CSINodeExpandSecret feature gate.
+     * This field is optional, may be omitted if no secret is required. If the secret
+     * object contains more than one secret, all secrets are passed.
+     */
+    private SecretReference $nodeExpandSecretRef;
+
+    /**
+     * nodePublishSecretRef is a reference to the secret object containing sensitive
      * information to pass to the CSI driver to complete the CSI NodePublishVolume and
      * NodeUnpublishVolume calls. This field is optional, and may be empty if no secret
      * is required. If the secret object contains more than one secret, all secrets are
@@ -53,7 +62,7 @@ class CSIPersistentVolumeSource implements JsonSerializable
     private SecretReference $nodePublishSecretRef;
 
     /**
-     * NodeStageSecretRef is a reference to the secret object containing sensitive
+     * nodeStageSecretRef is a reference to the secret object containing sensitive
      * information to pass to the CSI driver to complete the CSI NodeStageVolume and
      * NodeStageVolume and NodeUnstageVolume calls. This field is optional, and may be
      * empty if no secret is required. If the secret object contains more than one
@@ -62,18 +71,18 @@ class CSIPersistentVolumeSource implements JsonSerializable
     private SecretReference $nodeStageSecretRef;
 
     /**
-     * Optional: The value to pass to ControllerPublishVolumeRequest. Defaults to false
+     * readOnly value to pass to ControllerPublishVolumeRequest. Defaults to false
      * (read/write).
      */
     private bool|null $readOnly = null;
 
     /**
-     * Attributes of the volume to publish.
+     * volumeAttributes of the volume to publish.
      */
     private StringMap $volumeAttributes;
 
     /**
-     * VolumeHandle is the unique volume name returned by the CSI volume plugin’s
+     * volumeHandle is the unique volume name returned by the CSI volume plugin’s
      * CreateVolume to refer to the volume on all subsequent calls. Required.
      */
     private string $volumeHandle;
@@ -83,6 +92,7 @@ class CSIPersistentVolumeSource implements JsonSerializable
         $this->controllerExpandSecretRef = new SecretReference();
         $this->controllerPublishSecretRef = new SecretReference();
         $this->driver = $driver;
+        $this->nodeExpandSecretRef = new SecretReference();
         $this->nodePublishSecretRef = new SecretReference();
         $this->nodeStageSecretRef = new SecretReference();
         $this->volumeAttributes = new StringMap();
@@ -117,6 +127,11 @@ class CSIPersistentVolumeSource implements JsonSerializable
     public function getVolumeHandle(): string
     {
         return $this->volumeHandle;
+    }
+
+    public function nodeExpandSecretRef(): SecretReference
+    {
+        return $this->nodeExpandSecretRef;
     }
 
     public function nodePublishSecretRef(): SecretReference
@@ -169,6 +184,7 @@ class CSIPersistentVolumeSource implements JsonSerializable
             'controllerPublishSecretRef' => $this->controllerPublishSecretRef,
             'driver' => $this->driver,
             'fsType' => $this->fsType,
+            'nodeExpandSecretRef' => $this->nodeExpandSecretRef,
             'nodePublishSecretRef' => $this->nodePublishSecretRef,
             'nodeStageSecretRef' => $this->nodeStageSecretRef,
             'readOnly' => $this->readOnly,

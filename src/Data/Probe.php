@@ -24,7 +24,7 @@ class Probe implements JsonSerializable
     private int|null $failureThreshold = null;
 
     /**
-     * GRPC specifies an action involving a GRPC port. This is an alpha field and
+     * GRPC specifies an action involving a GRPC port. This is a beta field and
      * requires enabling GRPCContainerProbe feature gate.
      */
     private GRPCAction|null $grpc = null;

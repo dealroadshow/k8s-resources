@@ -41,9 +41,9 @@ class JobSpec implements JsonSerializable
      * `$(job-name)-$(index)-$(random-string)`, the Pod hostname takes the form
      * `$(job-name)-$(index)`.
      *
-     * This field is beta-level. More completion modes can be added in the future. If
-     * the Job controller observes a mode that it doesn't recognize, the controller
-     * skips updates for the Job.
+     * More completion modes can be added in the future. If the Job controller observes
+     * a mode that it doesn't recognize, which is possible during upgrades due to
+     * version skew, the controller skips updates for the Job.
      */
     private string|null $completionMode = null;
 
@@ -80,6 +80,19 @@ class JobSpec implements JsonSerializable
     private int|null $parallelism = null;
 
     /**
+     * Specifies the policy of handling failed pods. In particular, it allows to
+     * specify the set of actions and conditions which need to be satisfied to take the
+     * associated action. If empty, the default behaviour applies - the counter of
+     * failed pods, represented by the jobs's .status.failed field, is incremented and
+     * it is checked against the backoffLimit. This field cannot be used in combination
+     * with restartPolicy=OnFailure.
+     *
+     * This field is alpha-level. To use this field, you must enable the
+     * `JobPodFailurePolicy` feature gate (disabled by default).
+     */
+    private PodFailurePolicy $podFailurePolicy;
+
+    /**
      * A label query over pods that should match the pod count. Normally, the system
      * sets this field for you. More info:
      * https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/#label-selectors
@@ -94,8 +107,6 @@ class JobSpec implements JsonSerializable
      * must design their workload to gracefully handle this. Suspending a Job will
      * reset the StartTime field of the Job, effectively resetting the
      * ActiveDeadlineSeconds timer too. Defaults to false.
-     *
-     * This field is beta-level, gated by SuspendJob feature flag (enabled by default).
      */
     private bool|null $suspend = null;
 
@@ -118,6 +129,7 @@ class JobSpec implements JsonSerializable
 
     public function __construct()
     {
+        $this->podFailurePolicy = new PodFailurePolicy();
         $this->selector = new LabelSelector();
         $this->template = new PodTemplateSpec();
     }
@@ -160,6 +172,11 @@ class JobSpec implements JsonSerializable
     public function getTtlSecondsAfterFinished(): int|null
     {
         return $this->ttlSecondsAfterFinished;
+    }
+
+    public function podFailurePolicy(): PodFailurePolicy
+    {
+        return $this->podFailurePolicy;
     }
 
     public function selector(): LabelSelector
@@ -237,6 +254,7 @@ class JobSpec implements JsonSerializable
             'completions' => $this->completions,
             'manualSelector' => $this->manualSelector,
             'parallelism' => $this->parallelism,
+            'podFailurePolicy' => $this->podFailurePolicy,
             'selector' => $this->selector,
             'suspend' => $this->suspend,
             'template' => $this->template,

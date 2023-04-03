@@ -17,12 +17,13 @@ use JsonSerializable;
 class SecretProjection implements JsonSerializable
 {
     /**
-     * If unspecified, each key-value pair in the Data field of the referenced Secret
-     * will be projected into the volume as a file whose name is the key and content is
-     * the value. If specified, the listed keys will be projected into the specified
-     * paths, and unlisted keys will not be present. If a key is specified which is not
-     * present in the Secret, the volume setup will error unless it is marked optional.
-     * Paths must be relative and may not contain the '..' path or start with '..'.
+     * items if unspecified, each key-value pair in the Data field of the referenced
+     * Secret will be projected into the volume as a file whose name is the key and
+     * content is the value. If specified, the listed keys will be projected into the
+     * specified paths, and unlisted keys will not be present. If a key is specified
+     * which is not present in the Secret, the volume setup will error unless it is
+     * marked optional. Paths must be relative and may not contain the '..' path or
+     * start with '..'.
      */
     private KeyToPathList $items;
 
@@ -33,7 +34,7 @@ class SecretProjection implements JsonSerializable
     private string|null $name = null;
 
     /**
-     * Specify whether the Secret or its key must be defined
+     * optional field specify whether the Secret or its key must be defined
      */
     private bool|null $optional = null;
 

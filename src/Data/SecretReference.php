@@ -13,12 +13,12 @@ use JsonSerializable;
 class SecretReference implements JsonSerializable
 {
     /**
-     * Name is unique within a namespace to reference a secret resource.
+     * name is unique within a namespace to reference a secret resource.
      */
     private string|null $name = null;
 
     /**
-     * Namespace defines the space within which the secret name must be unique.
+     * namespace defines the space within which the secret name must be unique.
      */
     private string|null $namespace = null;
 

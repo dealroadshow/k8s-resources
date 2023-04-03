@@ -13,36 +13,36 @@ use JsonSerializable;
 class QuobyteVolumeSource implements JsonSerializable
 {
     /**
-     * Group to map volume access to Default is no group
+     * group to map volume access to Default is no group
      */
     private string|null $group = null;
 
     /**
-     * ReadOnly here will force the Quobyte volume to be mounted with read-only
+     * readOnly here will force the Quobyte volume to be mounted with read-only
      * permissions. Defaults to false.
      */
     private bool|null $readOnly = null;
 
     /**
-     * Registry represents a single or multiple Quobyte Registry services specified as
+     * registry represents a single or multiple Quobyte Registry services specified as
      * a string as host:port pair (multiple entries are separated with commas) which
      * acts as the central registry for volumes
      */
     private string $registry;
 
     /**
-     * Tenant owning the given Quobyte volume in the Backend Used with dynamically
+     * tenant owning the given Quobyte volume in the Backend Used with dynamically
      * provisioned Quobyte volumes, value is set by the plugin
      */
     private string|null $tenant = null;
 
     /**
-     * User to map volume access to Defaults to serivceaccount user
+     * user to map volume access to Defaults to serivceaccount user
      */
     private string|null $user = null;
 
     /**
-     * Volume is a string that references an already created Quobyte volume by name.
+     * volume is a string that references an already created Quobyte volume by name.
      */
     private string $volume;
 

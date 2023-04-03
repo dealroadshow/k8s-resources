@@ -25,11 +25,6 @@ class EndpointSlice implements APIResourceInterface
      * creation. The following address types are currently supported: * IPv4:
      * Represents an IPv4 Address. * IPv6: Represents an IPv6 Address. * FQDN:
      * Represents a Fully Qualified Domain Name.
-     *
-     * Possible enum values:
-     *  - `"FQDN"` represents a FQDN.
-     *  - `"IPv4"` represents an IPv4 Address.
-     *  - `"IPv6"` represents an IPv6 Address.
      */
     private string $addressType;
 

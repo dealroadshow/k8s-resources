@@ -12,25 +12,25 @@ use JsonSerializable;
 class VsphereVirtualDiskVolumeSource implements JsonSerializable
 {
     /**
-     * Filesystem type to mount. Must be a filesystem type supported by the host
-     * operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be "ext4" if
-     * unspecified.
+     * fsType is filesystem type to mount. Must be a filesystem type supported by the
+     * host operating system. Ex. "ext4", "xfs", "ntfs". Implicitly inferred to be
+     * "ext4" if unspecified.
      */
     private string|null $fsType = null;
 
     /**
-     * Storage Policy Based Management (SPBM) profile ID associated with the
-     * StoragePolicyName.
+     * storagePolicyID is the storage Policy Based Management (SPBM) profile ID
+     * associated with the StoragePolicyName.
      */
     private string|null $storagePolicyID = null;
 
     /**
-     * Storage Policy Based Management (SPBM) profile name.
+     * storagePolicyName is the storage Policy Based Management (SPBM) profile name.
      */
     private string|null $storagePolicyName = null;
 
     /**
-     * Path that identifies vSphere volume vmdk
+     * volumePath is the path that identifies vSphere volume vmdk
      */
     private string $volumePath;
 

@@ -13,19 +13,19 @@ use JsonSerializable;
 class GlusterfsVolumeSource implements JsonSerializable
 {
     /**
-     * EndpointsName is the endpoint name that details Glusterfs topology. More info:
+     * endpoints is the endpoint name that details Glusterfs topology. More info:
      * https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
      */
     private string $endpoints;
 
     /**
-     * Path is the Glusterfs volume path. More info:
+     * path is the Glusterfs volume path. More info:
      * https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
      */
     private string $path;
 
     /**
-     * ReadOnly here will force the Glusterfs volume to be mounted with read-only
+     * readOnly here will force the Glusterfs volume to be mounted with read-only
      * permissions. Defaults to false. More info:
      * https://examples.k8s.io/volumes/glusterfs/README.md#create-a-pod
      */

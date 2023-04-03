@@ -13,7 +13,7 @@ use JsonSerializable;
 class VolumeNodeAffinity implements JsonSerializable
 {
     /**
-     * Required specifies hard node constraints that must be met.
+     * required specifies hard node constraints that must be met.
      */
     private NodeSelector $required;
 

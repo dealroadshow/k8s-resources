@@ -14,39 +14,40 @@ use JsonSerializable;
 class CephFSVolumeSource implements JsonSerializable
 {
     /**
-     * Required: Monitors is a collection of Ceph monitors More info:
+     * monitors is Required: Monitors is a collection of Ceph monitors More info:
      * https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
      */
     private StringList $monitors;
 
     /**
-     * Optional: Used as the mounted root, rather than the full Ceph tree, default is /
+     * path is Optional: Used as the mounted root, rather than the full Ceph tree,
+     * default is /
      */
     private string|null $path = null;
 
     /**
-     * Optional: Defaults to false (read/write). ReadOnly here will force the ReadOnly
-     * setting in VolumeMounts. More info:
+     * readOnly is Optional: Defaults to false (read/write). ReadOnly here will force
+     * the ReadOnly setting in VolumeMounts. More info:
      * https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
      */
     private bool|null $readOnly = null;
 
     /**
-     * Optional: SecretFile is the path to key ring for User, default is
+     * secretFile is Optional: SecretFile is the path to key ring for User, default is
      * /etc/ceph/user.secret More info:
      * https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
      */
     private string|null $secretFile = null;
 
     /**
-     * Optional: SecretRef is reference to the authentication secret for User, default
-     * is empty. More info:
+     * secretRef is Optional: SecretRef is reference to the authentication secret for
+     * User, default is empty. More info:
      * https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
      */
     private LocalObjectReference $secretRef;
 
     /**
-     * Optional: User is the rados user name, default is admin More info:
+     * user is optional: User is the rados user name, default is admin More info:
      * https://examples.k8s.io/volumes/cephfs/README.md#how-to-use-it
      */
     private string|null $user = null;

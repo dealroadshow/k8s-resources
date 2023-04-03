@@ -54,8 +54,10 @@ class ManagedFieldsEntry implements JsonSerializable
     private string|null $subresource = null;
 
     /**
-     * Time is timestamp of when these fields were set. It should always be empty if
-     * Operation is 'Apply'
+     * Time is the timestamp of when the ManagedFields entry was added. The timestamp
+     * will also be updated if a field is added, the manager changes any of the owned
+     * fields value or removes a field. The timestamp does not update when a field is
+     * removed from the entry because another manager took it over.
      */
     private DateTimeInterface|null $time = null;
 

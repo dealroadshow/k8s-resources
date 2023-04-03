@@ -2,26 +2,26 @@
 
 declare(strict_types=1);
 
-namespace Dealroadshow\K8S\API\Storage;
+namespace Dealroadshow\K8S\API\Networking;
 
 use Dealroadshow\K8S\APIResourceListInterface;
 use Dealroadshow\K8S\Data\ListMeta;
 
 /**
- * CSIStorageCapacityList is a collection of CSIStorageCapacity objects.
+ * ClusterCIDRList contains a list of ClusterCIDR.
  */
-class CSIStorageCapacityList implements APIResourceListInterface
+class ClusterCIDRList implements APIResourceListInterface
 {
-    public const API_VERSION = 'storage.k8s.io/v1';
-    public const KIND = 'CSIStorageCapacityList';
+    public const API_VERSION = 'networking.k8s.io/v1alpha1';
+    public const KIND = 'ClusterCIDRList';
 
     /**
-     * @var CSIStorageCapacity[]
+     * @var ClusterCIDR[]
      */
     private array $items = [];
 
     /**
-     * Standard list metadata More info:
+     * Standard object's metadata. More info:
      * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
      */
     private ListMeta $metadata;
@@ -32,7 +32,7 @@ class CSIStorageCapacityList implements APIResourceListInterface
         $this->metadata = new ListMeta();
     }
 
-    public function add(CSIStorageCapacity $value): self
+    public function add(ClusterCIDR $value): self
     {
         $this->items[] = $value;
 
@@ -40,7 +40,7 @@ class CSIStorageCapacityList implements APIResourceListInterface
     }
 
     /**
-     * @var CSIStorageCapacity[] $items
+     * @var ClusterCIDR[] $items
      *
      * @return self
      */
@@ -54,7 +54,7 @@ class CSIStorageCapacityList implements APIResourceListInterface
     }
 
     /**
-     * @return CSIStorageCapacity[]
+     * @return ClusterCIDR[]
      */
     public function all(): array
     {
