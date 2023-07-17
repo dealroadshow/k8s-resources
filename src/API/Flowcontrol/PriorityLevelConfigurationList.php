@@ -12,7 +12,7 @@ use Dealroadshow\K8S\Data\ListMeta;
  */
 class PriorityLevelConfigurationList implements APIResourceListInterface
 {
-    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta2';
+    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta3';
     public const KIND = 'PriorityLevelConfigurationList';
 
     /**

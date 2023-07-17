@@ -35,7 +35,7 @@ class CustomResourceDefinitionSpec implements JsonSerializable
      * kind, metadata and known fields inside metadata are always preserved. This field
      * is deprecated in favor of setting `x-preserve-unknown-fields` to true in
      * `spec.versions[*].schema.openAPIV3Schema`. See
-     * https://kubernetes.io/docs/tasks/access-kubernetes-api/custom-resources/custom-resource-definitions/#pruning-versus-preserving-unknown-fields
+     * https://kubernetes.io/docs/tasks/extend-kubernetes/custom-resources/custom-resource-definitions/#field-pruning
      * for details.
      */
     private bool|null $preserveUnknownFields = null;

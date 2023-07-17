@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dealroadshow\K8S\Data;
 
+use Dealroadshow\K8S\Data\Collection\ResourceClaimList;
 use Dealroadshow\K8S\Data\Collection\StringOrFloatMap;
 use JsonSerializable;
 
@@ -12,6 +13,17 @@ use JsonSerializable;
  */
 class ResourceRequirements implements JsonSerializable
 {
+    /**
+     * Claims lists the names of resources, defined in spec.resourceClaims, that are
+     * used by this container.
+     *
+     * This is an alpha field and requires enabling the DynamicResourceAllocation
+     * feature gate.
+     *
+     * This field is immutable. It can only be set for containers.
+     */
+    private ResourceClaimList $claims;
+
     /**
      * Limits describes the maximum amount of compute resources allowed. More info:
      * https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
@@ -28,8 +40,14 @@ class ResourceRequirements implements JsonSerializable
 
     public function __construct()
     {
+        $this->claims = new ResourceClaimList();
         $this->limits = new StringOrFloatMap();
         $this->requests = new StringOrFloatMap();
+    }
+
+    public function claims(): ResourceClaimList
+    {
+        return $this->claims;
     }
 
     public function limits(): StringOrFloatMap
@@ -45,6 +63,7 @@ class ResourceRequirements implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
+            'claims' => $this->claims,
             'limits' => $this->limits,
             'requests' => $this->requests,
         ];

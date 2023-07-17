@@ -7,25 +7,27 @@ namespace Dealroadshow\K8S\Data;
 use JsonSerializable;
 
 /**
- * CrossVersionObjectReference contains enough information to let you identify the
- * referred resource.
+ * ResourceClaimParametersReference contains enough information to let you locate
+ * the parameters for a ResourceClaim. The object must be in the same namespace as
+ * the ResourceClaim.
  */
-class CrossVersionObjectReference implements JsonSerializable
+class ResourceClaimParametersReference implements JsonSerializable
 {
     /**
-     * API version of the referent
+     * APIGroup is the group for the resource being referenced. It is empty for the
+     * core API. This matches the group in the APIVersion that is used when creating
+     * the resources.
      */
-    private string|null $apiVersion = null;
+    private string|null $apiGroup = null;
 
     /**
-     * Kind of the referent; More info:
-     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+     * Kind is the type of resource being referenced. This is the same value as in the
+     * parameter object's metadata, for example "ConfigMap".
      */
     private string $kind;
 
     /**
-     * Name of the referent; More info:
-     * http://kubernetes.io/docs/user-guide/identifiers#names
+     * Name is the name of resource being referenced.
      */
     private string $name;
 
@@ -35,9 +37,9 @@ class CrossVersionObjectReference implements JsonSerializable
         $this->name = $name;
     }
 
-    public function getApiVersion(): string|null
+    public function getApiGroup(): string|null
     {
-        return $this->apiVersion;
+        return $this->apiGroup;
     }
 
     public function getKind(): string
@@ -50,9 +52,9 @@ class CrossVersionObjectReference implements JsonSerializable
         return $this->name;
     }
 
-    public function setApiVersion(string $apiVersion): self
+    public function setApiGroup(string $apiGroup): self
     {
-        $this->apiVersion = $apiVersion;
+        $this->apiGroup = $apiGroup;
 
         return $this;
     }
@@ -74,7 +76,7 @@ class CrossVersionObjectReference implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'apiVersion' => $this->apiVersion,
+            'apiGroup' => $this->apiGroup,
             'kind' => $this->kind,
             'name' => $this->name,
         ];

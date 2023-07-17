@@ -2,27 +2,28 @@
 
 declare(strict_types=1);
 
-namespace Dealroadshow\K8S\API\Flowcontrol;
+namespace Dealroadshow\K8S\API\Admissionregistration;
 
 use Dealroadshow\K8S\APIResourceListInterface;
 use Dealroadshow\K8S\Data\ListMeta;
 
 /**
- * FlowSchemaList is a list of FlowSchema objects.
+ * ValidatingAdmissionPolicyBindingList is a list of
+ * ValidatingAdmissionPolicyBinding.
  */
-class FlowSchemaList implements APIResourceListInterface
+class ValidatingAdmissionPolicyBindingList implements APIResourceListInterface
 {
-    public const API_VERSION = 'flowcontrol.apiserver.k8s.io/v1beta3';
-    public const KIND = 'FlowSchemaList';
+    public const API_VERSION = 'admissionregistration.k8s.io/v1alpha1';
+    public const KIND = 'ValidatingAdmissionPolicyBindingList';
 
     /**
-     * @var FlowSchema[]
+     * @var ValidatingAdmissionPolicyBinding[]
      */
     private array $items = [];
 
     /**
-     * `metadata` is the standard list metadata. More info:
-     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#metadata
+     * Standard list metadata. More info:
+     * https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
      */
     private ListMeta $metadata;
 
@@ -32,7 +33,7 @@ class FlowSchemaList implements APIResourceListInterface
         $this->metadata = new ListMeta();
     }
 
-    public function add(FlowSchema $value): self
+    public function add(ValidatingAdmissionPolicyBinding $value): self
     {
         $this->items[] = $value;
 
@@ -40,7 +41,7 @@ class FlowSchemaList implements APIResourceListInterface
     }
 
     /**
-     * @var FlowSchema[] $items
+     * @var ValidatingAdmissionPolicyBinding[] $items
      *
      * @return self
      */
@@ -54,7 +55,7 @@ class FlowSchemaList implements APIResourceListInterface
     }
 
     /**
-     * @return FlowSchema[]
+     * @return ValidatingAdmissionPolicyBinding[]
      */
     public function all(): array
     {

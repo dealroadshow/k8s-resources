@@ -6,5 +6,5 @@ namespace Dealroadshow\K8S;
 
 class K8SApi
 {
-    public const VERSION = 'v1.25.8';
+    public const VERSION = 'v1.26.6';
 }

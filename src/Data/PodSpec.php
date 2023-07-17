@@ -9,6 +9,8 @@ use Dealroadshow\K8S\Data\Collection\EphemeralContainerList;
 use Dealroadshow\K8S\Data\Collection\HostAliasList;
 use Dealroadshow\K8S\Data\Collection\LocalObjectReferenceList;
 use Dealroadshow\K8S\Data\Collection\PodReadinessGateList;
+use Dealroadshow\K8S\Data\Collection\PodResourceClaimList;
+use Dealroadshow\K8S\Data\Collection\PodSchedulingGateList;
 use Dealroadshow\K8S\Data\Collection\StringMap;
 use Dealroadshow\K8S\Data\Collection\StringOrFloatMap;
 use Dealroadshow\K8S\Data\Collection\TolerationList;
@@ -228,6 +230,18 @@ class PodSpec implements JsonSerializable
     private PodReadinessGateList $readinessGates;
 
     /**
+     * ResourceClaims defines which ResourceClaims must be allocated and reserved
+     * before the Pod is allowed to start. The resources will be made available to
+     * those containers which consume them by name.
+     *
+     * This is an alpha field and requires enabling the DynamicResourceAllocation
+     * feature gate.
+     *
+     * This field is immutable.
+     */
+    private PodResourceClaimList $resourceClaims;
+
+    /**
      * Restart policy for all containers within the pod. One of Always, OnFailure,
      * Never. Default to Always. More info:
      * https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy
@@ -249,6 +263,15 @@ class PodSpec implements JsonSerializable
      * specified, the pod will be dispatched by default scheduler.
      */
     private string|null $schedulerName = null;
+
+    /**
+     * SchedulingGates is an opaque list of values that if specified will block
+     * scheduling the pod. More info:
+     * https://git.k8s.io/enhancements/keps/sig-scheduling/3521-pod-scheduling-readiness.
+     *
+     * This is an alpha-level feature enabled by PodSchedulingReadiness feature gate.
+     */
+    private PodSchedulingGateList $schedulingGates;
 
     /**
      * SecurityContext holds pod-level security attributes and common container
@@ -338,6 +361,8 @@ class PodSpec implements JsonSerializable
         $this->nodeSelector = new StringMap();
         $this->overhead = new StringOrFloatMap();
         $this->readinessGates = new PodReadinessGateList();
+        $this->resourceClaims = new PodResourceClaimList();
+        $this->schedulingGates = new PodSchedulingGateList();
         $this->securityContext = new PodSecurityContext();
         $this->tolerations = new TolerationList();
         $this->topologySpreadConstraints = new TopologySpreadConstraintList();
@@ -507,6 +532,16 @@ class PodSpec implements JsonSerializable
     public function readinessGates(): PodReadinessGateList
     {
         return $this->readinessGates;
+    }
+
+    public function resourceClaims(): PodResourceClaimList
+    {
+        return $this->resourceClaims;
+    }
+
+    public function schedulingGates(): PodSchedulingGateList
+    {
+        return $this->schedulingGates;
     }
 
     public function securityContext(): PodSecurityContext
@@ -717,9 +752,11 @@ class PodSpec implements JsonSerializable
             'priority' => $this->priority,
             'priorityClassName' => $this->priorityClassName,
             'readinessGates' => $this->readinessGates,
+            'resourceClaims' => $this->resourceClaims,
             'restartPolicy' => $this->restartPolicy,
             'runtimeClassName' => $this->runtimeClassName,
             'schedulerName' => $this->schedulerName,
+            'schedulingGates' => $this->schedulingGates,
             'securityContext' => $this->securityContext,
             'serviceAccount' => $this->serviceAccount,
             'serviceAccountName' => $this->serviceAccountName,

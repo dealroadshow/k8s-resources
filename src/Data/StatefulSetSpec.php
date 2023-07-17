@@ -20,6 +20,14 @@ class StatefulSetSpec implements JsonSerializable
     private int|null $minReadySeconds = null;
 
     /**
+     * ordinals controls the numbering of replica indices in a StatefulSet. The default
+     * ordinals behavior assigns a "0" index to the first replica and increments the
+     * index by one for each additional replica requested. Using the ordinals field
+     * requires the StatefulSetStartOrdinal feature gate to be enabled, which is alpha.
+     */
+    private StatefulSetOrdinals $ordinals;
+
+    /**
      * persistentVolumeClaimRetentionPolicy describes the lifecycle of persistent
      * volume claims created from volumeClaimTemplates. By default, all persistent
      * volume claims are created as needed and retained until manually deleted. This
@@ -77,7 +85,9 @@ class StatefulSetSpec implements JsonSerializable
      * template is the object that describes the pod that will be created if
      * insufficient replicas are detected. Each pod stamped out by the StatefulSet will
      * fulfill this Template, but have a unique identity from the rest of the
-     * StatefulSet.
+     * StatefulSet. Each pod will be named with the format
+     * <statefulsetname>-<podindex>. For example, a pod in a StatefulSet named "web"
+     * with index number "3" would be named "web-3".
      */
     private PodTemplateSpec $template;
 
@@ -99,6 +109,7 @@ class StatefulSetSpec implements JsonSerializable
 
     public function __construct(string $serviceName)
     {
+        $this->ordinals = new StatefulSetOrdinals();
         $this->persistentVolumeClaimRetentionPolicy = new StatefulSetPersistentVolumeClaimRetentionPolicy();
         $this->selector = new LabelSelector();
         $this->serviceName = $serviceName;
@@ -130,6 +141,11 @@ class StatefulSetSpec implements JsonSerializable
     public function getServiceName(): string
     {
         return $this->serviceName;
+    }
+
+    public function ordinals(): StatefulSetOrdinals
+    {
+        return $this->ordinals;
     }
 
     public function persistentVolumeClaimRetentionPolicy(): StatefulSetPersistentVolumeClaimRetentionPolicy
@@ -196,6 +212,7 @@ class StatefulSetSpec implements JsonSerializable
     {
         return [
             'minReadySeconds' => $this->minReadySeconds,
+            'ordinals' => $this->ordinals,
             'persistentVolumeClaimRetentionPolicy' => $this->persistentVolumeClaimRetentionPolicy,
             'podManagementPolicy' => $this->podManagementPolicy,
             'replicas' => $this->replicas,
